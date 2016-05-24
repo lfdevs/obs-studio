@@ -1,0 +1,16 @@
+Description: Update checks do not make sense for a distribution
+Author: Sebastian Ramacher <sramacher@debian.org>
+Forwarded: not-needed
+Last-Update: 2016-02-24
+
+--- obs-studio-0.13.2+dfsg1.orig/obs/window-basic-main.cpp
++++ obs-studio-0.13.2+dfsg1/obs/window-basic-main.cpp
+@@ -1729,7 +1729,7 @@ void OBSBasic::TimedCheckForUpdates()
+ #ifdef UPDATE_SPARKLE
+ 	init_sparkle_updater(config_get_bool(App()->GlobalConfig(), "General",
+ 				"UpdateToUndeployed"));
+-#else
++#elif 0
+ 	long long lastUpdate = config_get_int(App()->GlobalConfig(), "General",
+ 			"LastUpdateCheck");
+ 	uint32_t lastVersion = config_get_int(App()->GlobalConfig(), "General",

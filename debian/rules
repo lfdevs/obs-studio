@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed
+export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/ffmpeg-mux\"
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH) \
+		-DUNIX_STRUCTURE=1
+
+override_dh_install:
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg
+	mv debian/tmp/usr/share/obs/obs-plugins/obs-ffmpeg/ffmpeg-mux \
+		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/ffmpeg-mux
+	dh_install
+	rm -rf debian/obs-studio/usr/share/obs/obs-studio/license

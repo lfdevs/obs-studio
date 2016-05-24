@@ -1,0 +1,25 @@
+From: =?utf-8?q?Carl_F=C3=BCrstenberg?= <azatoth@gmail.com>
+Date: Tue, 6 Jan 2015 23:12:30 +0100
+Subject: Use common license
+
+use common license at /usr/share/common-licenses instead of the shipped
+copy
+---
+ obs/window-license-agreement.cpp | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/obs/window-license-agreement.cpp b/obs/window-license-agreement.cpp
+index a7a5f3b..60cad40 100644
+--- a/obs/window-license-agreement.cpp
++++ b/obs/window-license-agreement.cpp
+@@ -13,9 +13,7 @@ OBSLicenseAgreement::OBSLicenseAgreement(QWidget *parent)
+ {
+ 	ui->setupUi(this);
+ 
+-	string path;
+-	if (!GetDataFilePath("license/gplv2.txt", path))
+-		throw "Could not find license file";
++	string path("/usr/share/common-licenses/GPL-2");
+ 
+ 	BPtr<char> licenseText = os_quick_read_utf8_file(path.c_str());
+ 	if (!licenseText || !*licenseText || strlen(licenseText) < 1000)
