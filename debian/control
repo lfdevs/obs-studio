@@ -40,7 +40,7 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-multimedia/obs-studio.git
 Vcs-Git: https://anonscm.debian.org/git/pkg-multimedia/obs-studio.git
 
 Package: obs-studio
-Architecture: any
+Architecture: any-amd64
 Depends: obs-plugins (>= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content
  OBS Studio is designed for efficiently recording and streaming live video
@@ -68,7 +68,7 @@ Description: recorder and streamer for live video content (plugins)
 Package: libobs0
 Multi-Arch: same
 Section: libs
-Architecture: any
+Architecture: any-amd64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content (shared library)
  OBS Studio is designed for efficiently recording and streaming live video
@@ -78,7 +78,7 @@ Description: recorder and streamer for live video content (shared library)
 
 Package: libobs-dev
 Section: libdevel
-Architecture: any
+Architecture: any-amd64
 Depends:
  libobs0 (= ${binary:Version}),
  ${misc:Depends}

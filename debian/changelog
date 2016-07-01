@@ -1,3 +1,10 @@
+obs-studio (0.14.2+dfsg1-2) unstable; urgency=medium
+
+  * debian/control: Restrict Architecture to any-amd64.
+  * debian/copyright: Document Blackmagic Design copyright.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Fri, 01 Jul 2016 19:23:10 +0200
+
 obs-studio (0.14.2+dfsg1-1) unstable; urgency=medium
 
   * New upstream release.
