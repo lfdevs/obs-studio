@@ -1,3 +1,9 @@
+obs-studio (0.14.2+dfsg1-3) unstable; urgency=medium
+
+  * debian/control. Also restrict obs-plugins to any-amd64.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 02 Jul 2016 08:39:10 +0200
+
 obs-studio (0.14.2+dfsg1-2) unstable; urgency=medium
 
   * debian/control: Restrict Architecture to any-amd64.

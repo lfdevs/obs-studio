@@ -57,7 +57,7 @@ Description: recorder and streamer for live video content
 
 Package: obs-plugins
 Multi-Arch: same
-Architecture: any
+Architecture: any-amd64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content (plugins)
  OBS is designed for efficiently recording and streaming live video content. It
