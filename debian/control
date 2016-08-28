@@ -23,6 +23,7 @@ Build-Depends:
  libjansson-dev (>= 2.5),
  libpulse-dev,
  libqt5x11extras5-dev,
+ libspeexdsp-dev,
  libswresample-dev,
  libswscale-dev,
  libudev-dev,
@@ -33,7 +34,9 @@ Build-Depends:
  libxcb-xinerama0-dev,
  libxcomposite-dev,
  libxinerama-dev,
- qtbase5-dev
+ libvlc-dev,
+ qtbase5-dev,
+ python-docutils (>= 0.6)
 Standards-Version: 3.9.8
 Homepage: https://obsproject.com
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-multimedia/obs-studio.git
@@ -41,7 +44,7 @@ Vcs-Git: https://anonscm.debian.org/git/pkg-multimedia/obs-studio.git
 
 Package: obs-studio
 Architecture: any-amd64
-Depends: obs-plugins (>= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Depends: obs-plugins (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content
  OBS Studio is designed for efficiently recording and streaming live video
  content. It supports live RTP streaming to various streaming sites.
@@ -59,6 +62,7 @@ Package: obs-plugins
 Multi-Arch: same
 Architecture: any-amd64
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: vlc
 Description: recorder and streamer for live video content (plugins)
  OBS is designed for efficiently recording and streaming live video content. It
  supports live RTP streaming to various streaming sites.

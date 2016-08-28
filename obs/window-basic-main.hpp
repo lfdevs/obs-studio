@@ -81,6 +81,7 @@ class OBSBasic : public OBSMainWindow {
 
 	friend class OBSBasicPreview;
 	friend class OBSBasicStatusBar;
+	friend class OBSBasicSourceSelect;
 
 	enum class MoveDir {
 		Up,
@@ -203,6 +204,7 @@ private:
 	void AddSceneCollection(bool create_new);
 	void RefreshSceneCollections();
 	void ChangeSceneCollection();
+	void LogScenes();
 
 	void LoadProfile();
 	void ResetProfileData();
@@ -289,12 +291,14 @@ public slots:
 	void StreamDelayStopping(int sec);
 
 	void StreamingStart();
+	void StreamStopping();
 	void StreamingStop(int errorcode);
 
 	void StartRecording();
 	void StopRecording();
 
 	void RecordingStart();
+	void RecordStopping();
 	void RecordingStop(int code);
 
 	void SaveProjectDeferred();
@@ -331,6 +335,8 @@ private slots:
 	void SetDeinterlacingMode();
 	void SetDeinterlacingOrder();
 
+	void SetScaleFilter();
+
 private:
 	/* OBS Callbacks */
 	static void SceneReordered(void *data, calldata_t *params);
@@ -366,7 +372,8 @@ public:
 	obs_service_t *GetService();
 	void          SetService(obs_service_t *service);
 
-	bool StreamingActive();
+	bool StreamingActive() const;
+	bool Active() const;
 
 	int  ResetVideo();
 	bool ResetAudio();
@@ -398,6 +405,7 @@ public:
 	void ReorderSceneItem(obs_sceneitem_t *item, size_t idx);
 
 	QMenu *AddDeinterlacingMenu(obs_source_t *source);
+	QMenu *AddScaleFilteringMenu(obs_sceneitem_t *item);
 	void CreateSourcePopupMenu(QListWidgetItem *item, bool preview);
 
 	void UpdateTitleBar();
@@ -453,6 +461,8 @@ private slots:
 	void on_actionMoveToTop_triggered();
 	void on_actionMoveToBottom_triggered();
 
+	void on_actionLockPreview_triggered();
+
 	void on_streamButton_clicked();
 	void on_recordButton_clicked();
 	void on_settingsButton_clicked();
@@ -477,6 +487,10 @@ private slots:
 	void on_actionShowProfileFolder_triggered();
 
 	void on_actionAlwaysOnTop_triggered();
+
+	void on_toggleSceneTransitions_toggled(bool visible);
+	void on_toggleListboxToolbars_toggled(bool visible);
+	void on_toggleStatusBar_toggled(bool visible);
 
 	void on_transitions_currentIndexChanged(int index);
 	void on_transitionAdd_clicked();

@@ -102,6 +102,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gs_shader_set_int@Base 0.13.2
  gs_shader_set_matrix3@Base 0.13.2
  gs_shader_set_matrix4@Base 0.13.2
+ gs_shader_set_next_sampler@Base 0.15.4
  gs_shader_set_texture@Base 0.13.2
  gs_shader_set_val@Base 0.13.2
  gs_shader_set_vec2@Base 0.13.2
@@ -318,6 +319,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_effect_set_float@Base 0.13.2
  gs_effect_set_int@Base 0.13.2
  gs_effect_set_matrix4@Base 0.13.2
+ gs_effect_set_next_sampler@Base 0.15.4
  gs_effect_set_texture@Base 0.13.2
  gs_effect_set_val@Base 0.13.2
  gs_effect_set_vec2@Base 0.13.2
@@ -420,6 +422,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_shader_set_int@Base 0.13.2
  gs_shader_set_matrix3@Base 0.13.2
  gs_shader_set_matrix4@Base 0.13.2
+ gs_shader_set_next_sampler@Base 0.15.4
  gs_shader_set_texture@Base 0.13.2
  gs_shader_set_val@Base 0.13.2
  gs_shader_set_vec2@Base 0.13.2
@@ -594,6 +597,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_data_item_get_double@Base 0.13.2
  obs_data_item_get_frames_per_second@Base 0.13.2
  obs_data_item_get_int@Base 0.13.2
+ obs_data_item_get_name@Base 0.15.4
  obs_data_item_get_obj@Base 0.13.2
  obs_data_item_get_string@Base 0.13.2
  obs_data_item_gettype@Base 0.13.2
@@ -824,6 +828,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_load_all_modules@Base 0.13.2
  obs_load_source@Base 0.13.2
  obs_load_sources@Base 0.13.2
+ obs_log_loaded_modules@Base 0.15.4
  obs_module_get_config_path@Base 0.13.2
  obs_module_load_locale@Base 0.13.2
  obs_obj_get_id@Base 0.14.2
@@ -906,9 +911,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_properties_set_param@Base 0.13.2
  obs_property_button_clicked@Base 0.13.2
  obs_property_description@Base 0.13.2
- obs_property_editable_list_allow_files@Base 0.13.2
  obs_property_editable_list_default_path@Base 0.13.2
  obs_property_editable_list_filter@Base 0.13.2
+ obs_property_editable_list_type@Base 0.15.4
  obs_property_enabled@Base 0.13.2
  obs_property_float_max@Base 0.13.2
  obs_property_float_min@Base 0.13.2
@@ -949,6 +954,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_list_item_remove@Base 0.13.2
  obs_property_list_item_string@Base 0.13.2
  obs_property_list_type@Base 0.13.2
+ obs_property_long_description@Base 0.15.4
  obs_property_modified@Base 0.13.2
  obs_property_name@Base 0.13.2
  obs_property_next@Base 0.13.2
@@ -957,6 +963,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_path_type@Base 0.13.2
  obs_property_set_description@Base 0.13.2
  obs_property_set_enabled@Base 0.13.2
+ obs_property_set_long_description@Base 0.15.4
  obs_property_set_modified_callback@Base 0.13.2
  obs_property_set_visible@Base 0.13.2
  obs_property_visible@Base 0.13.2
@@ -997,6 +1004,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_get_pos@Base 0.13.2
  obs_sceneitem_get_rot@Base 0.13.2
  obs_sceneitem_get_scale@Base 0.13.2
+ obs_sceneitem_get_scale_filter@Base 0.15.4
  obs_sceneitem_get_scene@Base 0.13.2
  obs_sceneitem_get_source@Base 0.13.2
  obs_sceneitem_release@Base 0.13.2
@@ -1014,6 +1022,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_set_pos@Base 0.13.2
  obs_sceneitem_set_rot@Base 0.13.2
  obs_sceneitem_set_scale@Base 0.13.2
+ obs_sceneitem_set_scale_filter@Base 0.15.4
  obs_sceneitem_set_visible@Base 0.13.2
  obs_sceneitem_visible@Base 0.13.2
  obs_service_addref@Base 0.13.2
@@ -1209,6 +1218,9 @@ libobs.so.0 libobs0 #MINVER#
  os_get_config_path_ptr@Base 0.13.2
  os_get_file_size@Base 0.13.2
  os_get_free_space@Base 0.13.2
+ os_get_path_extension@Base 0.15.4
+ os_get_program_data_path@Base 0.15.4
+ os_get_program_data_path_ptr@Base 0.15.4
  os_getcwd@Base 0.13.2
  os_gettime_ns@Base 0.13.2
  os_glob@Base 0.13.2

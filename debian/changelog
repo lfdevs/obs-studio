@@ -1,3 +1,16 @@
+obs-studio (0.15.4+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/control:
+    - Add libspeexdsp-dev and libvlc-dev to B-D.
+    - Add vlc to obs-plugin's Recommends.
+  * debian/libobs0.symbols: Update symbols.
+  * debian/copyright: Update copyright information
+  * debian/{rules,obs.rst}: Add manpage.
+  * debian/{rules,control}: Tighten inter-package dependencies.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 28 Aug 2016 16:07:28 +0200
+
 obs-studio (0.14.2+dfsg1-3) unstable; urgency=medium
 
   * debian/control. Also restrict obs-plugins to any-amd64.
