@@ -1,3 +1,16 @@
+obs-studio (18.0.1+dfsg1-1) experimental; urgency=medium
+
+  * New upstream release. (Closes: #854055)
+  * debian/copyright:
+    - Update using decopy.
+    - Exclude unused embedded code copies.
+  * debian/{control,compat,rules}: Bump debhelper compat to 10.
+  * debian/libobs0.symbol: Add new symbols.
+  * debian/patches: Refresh.
+  * debian/rules: Disable update and libcaption.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 19 Apr 2017 23:59:37 +0200
+
 obs-studio (0.15.4+dfsg1-1) unstable; urgency=medium
 
   * New upstream release.

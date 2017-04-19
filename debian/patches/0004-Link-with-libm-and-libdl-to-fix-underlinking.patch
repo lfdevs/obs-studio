@@ -1,0 +1,24 @@
+From: Sebastian Ramacher <sramacher@debian.org>
+Date: Wed, 19 Apr 2017 22:44:48 +0200
+Subject: Link with libm and libdl to fix underlinking
+
+---
+ libobs/CMakeLists.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
+index ef5b9bc..d1b62c5 100644
+--- a/libobs/CMakeLists.txt
++++ b/libobs/CMakeLists.txt
+@@ -168,6 +168,11 @@ elseif(UNIX)
+ 		${libobs_PLATFORM_DEPS}
+ 		${X11_XCB_LIBRARIES})
+ 
++	set(libobs_PLATFORM_DEPS
++		${libobs_PLATFORM_DEPS}
++		m
++		dl)
++
+ 	if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+ 		# use the sysinfo compatibility library on bsd
+ 		find_package(Libsysinfo REQUIRED)

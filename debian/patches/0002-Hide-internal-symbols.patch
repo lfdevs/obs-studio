@@ -1,0 +1,37 @@
+From: Sebastian Ramacher <sramacher@debian.org>
+Date: Wed, 19 Apr 2017 21:45:40 +0200
+Subject: Hide internal symbols
+
+---
+ libobs/CMakeLists.txt | 4 ++++
+ libobs/util/c99defs.h | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
+index cd2b80e..ef5b9bc 100644
+--- a/libobs/CMakeLists.txt
++++ b/libobs/CMakeLists.txt
+@@ -409,6 +409,10 @@ if(NOT MSVC)
+ 			-msse2)
+ endif()
+ 
++if(UNIX)
++	set_source_files_properties(${libobs_SOURCES} PROPERTIES
++			COMPILE_FLAGS "-fvisibility=hidden")
++endif()
+ 
+ target_compile_options(libobs
+ 	PUBLIC
+diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
+index 43d52c8..4890858 100644
+--- a/libobs/util/c99defs.h
++++ b/libobs/util/c99defs.h
+@@ -46,7 +46,7 @@
+ 
+ #define EXPORT __declspec(dllexport)
+ #else
+-#define EXPORT
++#define EXPORT __attribute__((visibility("default")))
+ #endif
+ 
+ #if _MSC_VER && _MSC_VER < 0x0708

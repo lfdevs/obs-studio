@@ -1,4 +1,5 @@
 0001-Use-common-license.patch
-0002-Buildsystem.patch
-0003-override-path.patch
-0004-no-update-check.patch
+0002-Hide-internal-symbols.patch
+0003-Use-path-in-usr-lib.patch
+0004-Link-with-libm-and-libdl-to-fix-underlinking.patch
+0005-Link-with-xcb-and-X-libraries-to-fix-underlinking.patch

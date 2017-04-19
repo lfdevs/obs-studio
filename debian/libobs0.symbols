@@ -1,3 +1,45 @@
+libobs-frontend-api.so.0 libobs0 #MINVER#
+ (c++|regex|optional)".*obs_frontend_set_callbacks_internal.*" 18.0.1
+ (c++|regex|optional)".*obs_frontend_callbacks.*" 18.0.1
+ (c++|regex|optional)".*std::vector.*" 18.0.1
+ obs_frontend_add_event_callback@Base 18.0.1
+ obs_frontend_add_save_callback@Base 18.0.1
+ obs_frontend_add_tools_menu_item@Base 18.0.1
+ obs_frontend_add_tools_menu_qaction@Base 18.0.1
+ obs_frontend_get_current_profile@Base 18.0.1
+ obs_frontend_get_current_scene@Base 18.0.1
+ obs_frontend_get_current_scene_collection@Base 18.0.1
+ obs_frontend_get_current_transition@Base 18.0.1
+ obs_frontend_get_global_config@Base 18.0.1
+ obs_frontend_get_main_window@Base 18.0.1
+ obs_frontend_get_main_window_handle@Base 18.0.1
+ obs_frontend_get_profile_config@Base 18.0.1
+ obs_frontend_get_profiles@Base 18.0.1
+ obs_frontend_get_recording_output@Base 18.0.1
+ obs_frontend_get_replay_buffer_output@Base 18.0.1
+ obs_frontend_get_scene_collections@Base 18.0.1
+ obs_frontend_get_scene_names@Base 18.0.1
+ obs_frontend_get_scenes@Base 18.0.1
+ obs_frontend_get_streaming_output@Base 18.0.1
+ obs_frontend_get_transitions@Base 18.0.1
+ obs_frontend_pop_ui_translation@Base 18.0.1
+ obs_frontend_push_ui_translation@Base 18.0.1
+ obs_frontend_recording_active@Base 18.0.1
+ obs_frontend_recording_start@Base 18.0.1
+ obs_frontend_recording_stop@Base 18.0.1
+ obs_frontend_remove_event_callback@Base 18.0.1
+ obs_frontend_remove_save_callback@Base 18.0.1
+ obs_frontend_replay_buffer_active@Base 18.0.1
+ obs_frontend_replay_buffer_start@Base 18.0.1
+ obs_frontend_replay_buffer_stop@Base 18.0.1
+ obs_frontend_save@Base 18.0.1
+ obs_frontend_set_current_profile@Base 18.0.1
+ obs_frontend_set_current_scene@Base 18.0.1
+ obs_frontend_set_current_scene_collection@Base 18.0.1
+ obs_frontend_set_current_transition@Base 18.0.1
+ obs_frontend_streaming_active@Base 18.0.1
+ obs_frontend_streaming_start@Base 18.0.1
+ obs_frontend_streaming_stop@Base 18.0.1
 libobs-opengl.so.0 libobs0 #MINVER#
  convert_sampler_info@Base 0.13.2
  device_begin_scene@Base 0.13.2
@@ -142,6 +184,9 @@ libobs.so.0 libobs0 #MINVER#
  astrcmpi@Base 0.13.2
  astrcmpi_n@Base 0.13.2
  astrstri@Base 0.13.2
+ audio_monitor_create@Base 18.0.1
+ audio_monitor_destroy@Base 18.0.1
+ audio_monitor_reset@Base 18.0.1
  audio_output_active@Base 0.13.2
  audio_output_close@Base 0.13.2
  audio_output_connect@Base 0.13.2
@@ -302,6 +347,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_draw@Base 0.13.2
  gs_draw_cube_backdrop@Base 0.13.2
  gs_draw_sprite@Base 0.13.2
+ gs_draw_sprite_subregion@Base 0.16.2
  gs_effect_create@Base 0.13.2
  gs_effect_create_from_file@Base 0.13.2
  gs_effect_destroy@Base 0.13.2
@@ -696,6 +742,8 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_get_type_data@Base 0.13.2
  obs_encoder_get_weak_encoder@Base 0.13.2
  obs_encoder_get_width@Base 0.13.2
+ obs_encoder_packet_ref@Base 18.0.1
+ obs_encoder_packet_release@Base 18.0.1
  obs_encoder_properties@Base 0.13.2
  obs_encoder_release@Base 0.13.2
  obs_encoder_set_audio@Base 0.13.2
@@ -706,6 +754,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_update@Base 0.13.2
  obs_encoder_video@Base 0.13.2
  obs_enter_graphics@Base 0.13.2
+ obs_enum_audio_monitoring_devices@Base 18.0.1
  obs_enum_encoder_types@Base 0.13.2
  obs_enum_encoders@Base 0.13.2
  obs_enum_filter_types@Base 0.13.2
@@ -739,8 +788,10 @@ libobs.so.0 libobs0 #MINVER#
  obs_find_module_file@Base 0.13.2
  obs_find_modules@Base 0.13.2
  obs_free_encoder_packet@Base 0.13.2
+ obs_get_active_fps@Base 0.16.2
  obs_get_audio@Base 0.13.2
  obs_get_audio_info@Base 0.13.2
+ obs_get_audio_monitoring_device@Base 18.0.1
  obs_get_base_effect@Base 0.13.2
  obs_get_default_rect_effect@Base 0.13.2
  obs_get_encoder_by_name@Base 0.13.2
@@ -847,6 +898,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_force_stop@Base 0.13.2
  obs_output_get_active_delay@Base 0.13.2
  obs_output_get_audio_encoder@Base 0.13.2
+ obs_output_get_congestion@Base 18.0.1
  obs_output_get_delay@Base 0.13.2
  obs_output_get_display_name@Base 0.13.2
  obs_output_get_frames_dropped@Base 0.13.2
@@ -917,6 +969,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_enabled@Base 0.13.2
  obs_property_float_max@Base 0.13.2
  obs_property_float_min@Base 0.13.2
+ obs_property_float_set_limits@Base 0.16.2
  obs_property_float_step@Base 0.13.2
  obs_property_float_type@Base 0.13.2
  obs_property_frame_rate_clear@Base 0.13.2
@@ -935,6 +988,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_get_type@Base 0.13.2
  obs_property_int_max@Base 0.13.2
  obs_property_int_min@Base 0.13.2
+ obs_property_int_set_limits@Base 0.16.2
  obs_property_int_step@Base 0.13.2
  obs_property_int_type@Base 0.13.2
  obs_property_list_add_float@Base 0.13.2
@@ -1045,6 +1099,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_service_properties@Base 0.13.2
  obs_service_release@Base 0.13.2
  obs_service_update@Base 0.13.2
+ obs_set_audio_monitoring_device@Base 18.0.1
  obs_set_locale@Base 0.13.2
  obs_set_master_volume@Base 0.13.2
  obs_set_output_source@Base 0.13.2
@@ -1084,6 +1139,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_frame@Base 0.13.2
  obs_source_get_height@Base 0.13.2
  obs_source_get_id@Base 0.13.2
+ obs_source_get_monitoring_type@Base 18.0.1
  obs_source_get_name@Base 0.13.2
  obs_source_get_output_flags@Base 0.13.2
  obs_source_get_proc_handler@Base 0.13.2
@@ -1125,6 +1181,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_set_deinterlace_mode@Base 0.14.2
  obs_source_set_enabled@Base 0.13.2
  obs_source_set_flags@Base 0.13.2
+ obs_source_set_monitoring_type@Base 18.0.1
  obs_source_set_muted@Base 0.13.2
  obs_source_set_name@Base 0.13.2
  obs_source_set_push_to_mute_delay@Base 0.13.2
@@ -1212,6 +1269,7 @@ libobs.so.0 libobs0 #MINVER#
  os_fread_utf8@Base 0.13.2
  os_fseeki64@Base 0.13.2
  os_ftelli64@Base 0.13.2
+ os_generate_formatted_filename@Base 18.0.1
  os_get_abs_path@Base 0.13.2
  os_get_abs_path_ptr@Base 0.13.2
  os_get_config_path@Base 0.13.2

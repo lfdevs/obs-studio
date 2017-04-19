@@ -7,7 +7,7 @@ Uploaders:
  Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
  cmake,
- debhelper (>= 9),
+ debhelper (>= 10),
  libasound2-dev,
  libavcodec-dev,
  libavdevice-dev,
@@ -19,7 +19,7 @@ Build-Depends:
  libfontconfig-dev,
  libfreetype6-dev,
  libgl1-mesa-dev | libgl-dev,
- libjack-dev | libjack-jackd2-dev,
+ libjack-jackd2-dev,
  libjansson-dev (>= 2.5),
  libpulse-dev,
  libqt5x11extras5-dev,

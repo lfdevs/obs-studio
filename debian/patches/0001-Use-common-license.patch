@@ -5,13 +5,13 @@ Subject: Use common license
 use common license at /usr/share/common-licenses instead of the shipped
 copy
 ---
- obs/window-license-agreement.cpp | 4 +---
+ UI/window-license-agreement.cpp | 4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/obs/window-license-agreement.cpp b/obs/window-license-agreement.cpp
+diff --git a/UI/window-license-agreement.cpp b/UI/window-license-agreement.cpp
 index a7a5f3b..60cad40 100644
---- a/obs/window-license-agreement.cpp
-+++ b/obs/window-license-agreement.cpp
+--- a/UI/window-license-agreement.cpp
++++ b/UI/window-license-agreement.cpp
 @@ -13,9 +13,7 @@ OBSLicenseAgreement::OBSLicenseAgreement(QWidget *parent)
  {
  	ui->setupUi(this);
