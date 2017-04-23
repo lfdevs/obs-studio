@@ -1,3 +1,9 @@
+obs-studio (18.0.1+dfsg1-2) experimental; urgency=medium
+
+  * debian/rules: Add B-C for Qt >= 5.8 to work around #858762.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 23 Apr 2017 15:51:32 +0200
+
 obs-studio (18.0.1+dfsg1-1) experimental; urgency=medium
 
   * New upstream release. (Closes: #854055)
