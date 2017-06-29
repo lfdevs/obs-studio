@@ -1,3 +1,15 @@
+obs-studio (19.0.3+dfsg1-1) unstable; urgency=medium
+
+  * Upload to unstable.
+  * New upstream release.
+  * debian/control:
+    - Remove Build-Conflicts. No longer needed.
+    - Bump Standards-Version.
+  * debian/libobs0.symbols: Add new symbols.
+  * debian/copyright: Update using decopy.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 29 Jun 2017 21:18:29 +0200
+
 obs-studio (18.0.1+dfsg1-2) experimental; urgency=medium
 
   * debian/rules: Add B-C for Qt >= 5.8 to work around #858762.

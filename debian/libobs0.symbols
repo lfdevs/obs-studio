@@ -21,6 +21,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_scene_names@Base 18.0.1
  obs_frontend_get_scenes@Base 18.0.1
  obs_frontend_get_streaming_output@Base 18.0.1
+ obs_frontend_get_streaming_service@Base 19.0.3
  obs_frontend_get_transitions@Base 18.0.1
  obs_frontend_pop_ui_translation@Base 18.0.1
  obs_frontend_push_ui_translation@Base 18.0.1
@@ -33,10 +34,12 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_replay_buffer_start@Base 18.0.1
  obs_frontend_replay_buffer_stop@Base 18.0.1
  obs_frontend_save@Base 18.0.1
+ obs_frontend_save_streaming_service@Base 19.0.3
  obs_frontend_set_current_profile@Base 18.0.1
  obs_frontend_set_current_scene@Base 18.0.1
  obs_frontend_set_current_scene_collection@Base 18.0.1
  obs_frontend_set_current_transition@Base 18.0.1
+ obs_frontend_set_streaming_service@Base 19.0.3
  obs_frontend_streaming_active@Base 18.0.1
  obs_frontend_streaming_start@Base 18.0.1
  obs_frontend_streaming_stop@Base 18.0.1
@@ -564,6 +567,7 @@ libobs.so.0 libobs0 #MINVER#
  media_remux_job_destroy@Base 0.13.2
  media_remux_job_process@Base 0.13.2
  norm_to_polar@Base 0.13.2
+ obs_add_main_render_callback@Base 19.0.3
  obs_add_module_path@Base 0.13.2
  obs_audio_encoder_create@Base 0.13.2
  obs_avc_find_startcode@Base 0.13.2
@@ -792,6 +796,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_audio@Base 0.13.2
  obs_get_audio_info@Base 0.13.2
  obs_get_audio_monitoring_device@Base 18.0.1
+ obs_get_average_frame_time_ns@Base 19.0.3
  obs_get_base_effect@Base 0.13.2
  obs_get_default_rect_effect@Base 0.13.2
  obs_get_encoder_by_name@Base 0.13.2
@@ -799,6 +804,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_encoder_codec@Base 0.13.2
  obs_get_encoder_properties@Base 0.13.2
  obs_get_encoder_type@Base 0.13.2
+ obs_get_lagged_frames@Base 19.0.3
  obs_get_locale@Base 0.13.2
  obs_get_master_volume@Base 0.13.2
  obs_get_module_author@Base 0.13.2
@@ -819,6 +825,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_source_defaults@Base 0.13.2
  obs_get_source_output_flags@Base 0.13.2
  obs_get_source_properties@Base 0.13.2
+ obs_get_total_frames@Base 19.0.3
  obs_get_version@Base 0.13.2
  obs_get_video@Base 0.13.2
  obs_get_video_frame_time@Base 0.13.2
@@ -899,6 +906,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_get_active_delay@Base 0.13.2
  obs_output_get_audio_encoder@Base 0.13.2
  obs_output_get_congestion@Base 18.0.1
+ obs_output_get_connect_time_ms@Base 19.0.3
  obs_output_get_delay@Base 0.13.2
  obs_output_get_display_name@Base 0.13.2
  obs_output_get_frames_dropped@Base 0.13.2
@@ -920,10 +928,12 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_initialize_encoders@Base 0.13.2
  obs_output_pause@Base 0.13.2
  obs_output_properties@Base 0.13.2
+ obs_output_reconnecting@Base 19.0.3
  obs_output_release@Base 0.13.2
  obs_output_set_audio_conversion@Base 0.13.2
  obs_output_set_audio_encoder@Base 0.13.2
  obs_output_set_delay@Base 0.13.2
+ obs_output_set_last_error@Base 19.0.3
  obs_output_set_media@Base 0.13.2
  obs_output_set_mixer@Base 0.13.2
  obs_output_set_preferred_size@Base 0.13.2
@@ -1026,6 +1036,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_register_output_s@Base 0.13.2
  obs_register_service_s@Base 0.13.2
  obs_register_source_s@Base 0.13.2
+ obs_remove_main_render_callback@Base 19.0.3
  obs_render_main_view@Base 0.13.2
  obs_reset_audio@Base 0.13.2
  obs_reset_video@Base 0.13.2
@@ -1039,6 +1050,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_scene_create_private@Base 0.13.2
  obs_scene_duplicate@Base 0.13.2
  obs_scene_enum_items@Base 0.13.2
+ obs_scene_find_sceneitem_by_id@Base 19.0.3
  obs_scene_find_source@Base 0.13.2
  obs_scene_from_source@Base 0.13.2
  obs_scene_get_source@Base 0.13.2
@@ -1054,6 +1066,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_get_box_transform@Base 0.13.2
  obs_sceneitem_get_crop@Base 0.14.2
  obs_sceneitem_get_draw_transform@Base 0.13.2
+ obs_sceneitem_get_id@Base 19.0.3
  obs_sceneitem_get_info@Base 0.13.2
  obs_sceneitem_get_pos@Base 0.13.2
  obs_sceneitem_get_rot@Base 0.13.2
@@ -1108,11 +1121,14 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_add_active_child@Base 0.13.2
  obs_source_add_audio_capture_callback@Base 0.13.2
  obs_source_addref@Base 0.13.2
+ obs_source_async_unbuffered@Base 19.0.3
  obs_source_audio_pending@Base 0.13.2
  obs_source_configurable@Base 0.13.2
+ obs_source_copy_filters@Base 19.0.3
  obs_source_create@Base 0.13.2
  obs_source_create_private@Base 0.13.2
  obs_source_dec_showing@Base 0.13.2
+ obs_source_default_render@Base 19.0.3
  obs_source_draw@Base 0.13.2
  obs_source_draw_set_color_matrix@Base 0.13.2
  obs_source_duplicate@Base 0.13.2
@@ -1158,6 +1174,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_muted@Base 0.13.2
  obs_source_output_audio@Base 0.13.2
  obs_source_output_video@Base 0.13.2
+ obs_source_preload_video@Base 19.0.3
  obs_source_process_filter_begin@Base 0.13.2
  obs_source_process_filter_end@Base 0.13.2
  obs_source_process_filter_tech_end@Base 0.14.2
@@ -1175,6 +1192,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_send_mouse_click@Base 0.13.2
  obs_source_send_mouse_move@Base 0.13.2
  obs_source_send_mouse_wheel@Base 0.13.2
+ obs_source_set_async_unbuffered@Base 19.0.3
  obs_source_set_audio_mixers@Base 0.13.2
  obs_source_set_default_flags@Base 0.13.2
  obs_source_set_deinterlace_field_order@Base 0.14.2
@@ -1188,6 +1206,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_set_push_to_talk_delay@Base 0.13.2
  obs_source_set_sync_offset@Base 0.13.2
  obs_source_set_volume@Base 0.13.2
+ obs_source_show_preloaded_video@Base 19.0.3
  obs_source_showing@Base 0.13.2
  obs_source_skip_video_filter@Base 0.13.2
  obs_source_update@Base 0.13.2
@@ -1275,8 +1294,11 @@ libobs.so.0 libobs0 #MINVER#
  os_get_config_path@Base 0.13.2
  os_get_config_path_ptr@Base 0.13.2
  os_get_file_size@Base 0.13.2
+ os_get_free_disk_space@Base 19.0.3
  os_get_free_space@Base 0.13.2
+ os_get_logical_cores@Base 19.0.3
  os_get_path_extension@Base 0.15.4
+ os_get_physical_cores@Base 19.0.3
  os_get_program_data_path@Base 0.15.4
  os_get_program_data_path_ptr@Base 0.15.4
  os_getcwd@Base 0.13.2
@@ -1305,6 +1327,7 @@ libobs.so.0 libobs0 #MINVER#
  os_rename@Base 0.13.2
  os_request_high_performance@Base 0.13.2
  os_rmdir@Base 0.13.2
+ os_safe_replace@Base 19.0.3
  os_sem_destroy@Base 0.13.2
  os_sem_init@Base 0.13.2
  os_sem_post@Base 0.13.2

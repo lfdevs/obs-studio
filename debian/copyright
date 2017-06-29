@@ -14,16 +14,43 @@ Files: *
 Copyright: 2013-2016, Hugh Bailey <obs.jim@gmail.com>
 License: GPL-2+
 
+Files: deps/ipc-util/ipc-util/*
+       deps/libff/*
+       deps/media-playback/media-playback/*
+       libobs/callback/*
+       libobs/data/deinterlace_base.effect
+       libobs/data/deinterlace_blend.effect
+       libobs/data/deinterlace_blend_2x.effect
+       libobs/data/deinterlace_discard.effect
+       libobs/data/deinterlace_discard_2x.effect
+       libobs/data/deinterlace_linear.effect
+       libobs/data/deinterlace_linear_2x.effect
+       libobs/data/deinterlace_yadif.effect
+       libobs/data/deinterlace_yadif_2x.effect
+       libobs/util/*
+       plugins/obs-ffmpeg/ffmpeg-mux/ffmpeg-mux.c
+       plugins/obs-ffmpeg/ffmpeg-mux/ffmpeg-mux.h
+       plugins/obs-ffmpeg/obs-ffmpeg-source.c
+Copyright: 2007, Alexey Vatchenko <av@bsdua.org>
+           1986, Gary S. Brown
+           2013-2017, Hugh Bailey <obs.jim@gmail.com>
+           2015, John R. Bradley <jrb@turrettech.com>
+           2013-2016, Ruwen Hahn <palana@stunned.de>
+License: ISC
+
 Files: cmake/Modules/FindJack.cmake
        cmake/Modules/FindThreads.cmake
        cmake/Modules/FindX11_XCB.cmake
        cmake/Modules/FindXCB.cmake
-       libobs/util/*
-Copyright: 2002-2014, Kitware, Inc
-           2006, Alexander Chemeris
+       libobs/util/profiler.c
+       libobs/util/profiler.h
+       libobs/util/profiler.hpp
+       libobs/util/vc/*
+Copyright: 2006, Alexander Chemeris
            2008, Andreas Schneider <mail@cynapses.org>
            2011, Fredrik Höglund <fredrik@kde.org>
            2008, Helio Chissini de Castro <helio@kde.org>
+           2002-2014, Kitware, Inc
            2013, Martin Gräßlin <mgraesslin@kde.org>
            2007, Matthias Kretz <kretz@kde.org>
 License: BSD-3-clause
@@ -36,11 +63,6 @@ License: GPL-2+
 Files: deps/glad/include/KHR/*
 Copyright: 2008-2009, The Khronos Group Inc
 License: Expat
-
-Files: deps/libff/*
-Copyright: 2014-2016, Hugh Bailey <obs.jim@gmail.com>
-           2015, John R. Bradley <jrb@turrettech.com>
-License: ISC
 
 Files: deps/w32-pthreads/*
 Copyright: 1998, Ben Elliston
