@@ -8,10 +8,10 @@ Subject: Hide internal symbols
  2 files changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index cd2b80e..ef5b9bc 100644
+index 00c0ebc..c82d94e 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -409,6 +409,10 @@ if(NOT MSVC)
+@@ -447,6 +447,10 @@ if(NOT MSVC)
  			-msse2)
  endif()
  
@@ -23,7 +23,7 @@ index cd2b80e..ef5b9bc 100644
  target_compile_options(libobs
  	PUBLIC
 diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
-index 43d52c8..4890858 100644
+index c4ee627..d26b3dd 100644
 --- a/libobs/util/c99defs.h
 +++ b/libobs/util/c99defs.h
 @@ -46,7 +46,7 @@

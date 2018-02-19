@@ -3,3 +3,4 @@
 0003-Use-path-in-usr-lib.patch
 0004-Link-with-libm-and-libdl-to-fix-underlinking.patch
 0005-Link-with-xcb-and-X-libraries-to-fix-underlinking.patch
+0006-Do-not-display-license-on-first-startup.patch

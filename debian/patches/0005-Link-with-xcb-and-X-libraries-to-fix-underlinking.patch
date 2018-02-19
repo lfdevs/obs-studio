@@ -7,11 +7,11 @@ Subject: Link with xcb and X libraries to fix underlinking
  1 file changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index d1b62c5..d36afa1 100644
+index 83dcb75..56401fe 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -14,7 +14,8 @@ endif()
- if(UNIX)
+@@ -25,7 +25,8 @@ if(UNIX)
+ 	endif()
  	find_package(DBus QUIET)
  	if (NOT APPLE)
 -		find_package(X11_XCB REQUIRED)
@@ -20,7 +20,7 @@ index d1b62c5..d36afa1 100644
  	endif()
  else()
  	set(HAVE_DBUS "0")
-@@ -161,12 +162,17 @@ elseif(UNIX)
+@@ -192,12 +193,17 @@ elseif(UNIX)
  	endif()
  
  	include_directories(
@@ -38,5 +38,5 @@ index d1b62c5..d36afa1 100644
 +		${X11_XCB_LIBRARIES}
 +		${X11_X11_LIB})
  
- 	set(libobs_PLATFORM_DEPS
- 		${libobs_PLATFORM_DEPS}
+ 	if(HAVE_PULSEAUDIO)
+ 		set(libobs_PLATFORM_DEPS

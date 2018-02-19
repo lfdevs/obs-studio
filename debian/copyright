@@ -1,4 +1,4 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: obs-studio
 Source: https://obsproject.com
 Files-Excluded:
@@ -11,7 +11,12 @@ Files-Excluded:
  plugins/obs-qsv11/*
 
 Files: *
-Copyright: 2013-2016, Hugh Bailey <obs.jim@gmail.com>
+Copyright: 2013-2017, Hugh Bailey <obs.jim@gmail.com>
+           2017, Joel Bethke <joel.bethke@gmail.com>
+           2015, Andrew Skinner <obs@theandyroid.com>
+           2014, Leonhard Oelke <leonhard@in-verted.de>
+           2017, Fabio Madia <admshao@gmail.com>
+           2017, Quinn Damerell <qdamere@microsoft.com>
 License: GPL-2+
 
 Files: deps/ipc-util/ipc-util/*
@@ -36,6 +41,7 @@ Copyright: 2007, Alexey Vatchenko <av@bsdua.org>
            2013-2017, Hugh Bailey <obs.jim@gmail.com>
            2015, John R. Bradley <jrb@turrettech.com>
            2013-2016, Ruwen Hahn <palana@stunned.de>
+           2017, Ryan Foster <RytoEX@gmail.com>
 License: ISC
 
 Files: cmake/Modules/FindJack.cmake
@@ -57,7 +63,7 @@ License: BSD-3-clause
 
 Files: debian/*
 Copyright: 2015, Carl Fürstenberg <azatoth@gmail.com>
-           2016-2017, Sebastian Ramacher <sramacher@debian.org>
+           2016-2018, Sebastian Ramacher <sramacher@debian.org>
 License: GPL-2+
 
 Files: deps/glad/include/KHR/*
@@ -122,6 +128,10 @@ License: public-domain
  modification, are permitted.
  .
  There's ABSOLUTELY NO WARRANTY, express or implied.
+
+Files: plugins/obs-ffmpeg/nvEncodeAPI.h
+Copyright: 2010-2017, NVIDIA Corporation
+License: Expat
 
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without

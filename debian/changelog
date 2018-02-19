@@ -1,3 +1,21 @@
+obs-studio (21.0.2+dfsg1-1) unstable; urgency=medium
+
+  [ Sebastian Ramacher ]
+  * New upstream release.
+    - Fix building with ffmpeg 3.5. (Closes: #888361)
+  * debian/patches:
+    - Refresh patches.
+    - Do not display license on first startup. (Closes: #867756)
+  * debian/control: Bump Standards-Version.
+  * debian/: Bump debhelper compat to 11.
+  * debian/libobs0.symbols: Update symbols.
+
+  [ Ondřej Nový ]
+  * d/control: Set Vcs-* to salsa.debian.org.
+  * d/copyright: Use https protocol in Format field.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 19 Feb 2018 22:35:33 +0100
+
 obs-studio (19.0.3+dfsg1-1) unstable; urgency=medium
 
   * Upload to unstable.

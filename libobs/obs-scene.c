@@ -486,7 +486,10 @@ static inline void render_item(struct obs_scene_item *item)
 					-(float)item->crop.top,
 					0.0f);
 
+			gs_blend_state_push();
+			gs_blend_function(GS_BLEND_ONE, GS_BLEND_ZERO);
 			obs_source_video_render(item->source);
+			gs_blend_state_pop();
 			gs_texrender_end(item->item_render);
 		}
 	}
@@ -590,6 +593,7 @@ static void scene_load_item(struct obs_scene *scene, obs_data_t *item_data)
 	const char            *scale_filter_str;
 	struct obs_scene_item *item;
 	bool visible;
+	bool lock;
 
 	if (!source) {
 		blog(LOG_WARNING, "[scene_load_item] Source %s not found!",
@@ -616,10 +620,18 @@ static void scene_load_item(struct obs_scene *scene, obs_data_t *item_data)
 	item->rot     = (float)obs_data_get_double(item_data, "rot");
 	item->align   = (uint32_t)obs_data_get_int(item_data, "align");
 	visible = obs_data_get_bool(item_data, "visible");
+	lock = obs_data_get_bool(item_data, "locked");
 	obs_data_get_vec2(item_data, "pos",    &item->pos);
 	obs_data_get_vec2(item_data, "scale",  &item->scale);
 
+	obs_data_release(item->private_settings);
+	item->private_settings =
+		obs_data_get_obj(item_data, "private_settings");
+	if (!item->private_settings)
+		item->private_settings = obs_data_create();
+
 	set_visibility(item, visible);
+	obs_sceneitem_set_locked(item, lock);
 
 	item->bounds_type =
 		(enum obs_bounds_type)obs_data_get_int(item_data,
@@ -697,6 +709,7 @@ static void scene_save_item(obs_data_array_t *array,
 
 	obs_data_set_string(item_data, "name",         name);
 	obs_data_set_bool  (item_data, "visible",      item->user_visible);
+	obs_data_set_bool  (item_data, "locked",       item->locked);
 	obs_data_set_double(item_data, "rot",          item->rot);
 	obs_data_set_vec2 (item_data, "pos",          &item->pos);
 	obs_data_set_vec2 (item_data, "scale",        &item->scale);
@@ -722,6 +735,9 @@ static void scene_save_item(obs_data_array_t *array,
 		scale_filter = "disable";
 
 	obs_data_set_string(item_data, "scale_filter", scale_filter);
+
+	obs_data_set_obj(item_data, "private_settings",
+			item->private_settings);
 
 	obs_data_array_push_back(array, item_data);
 	obs_data_release(item_data);
@@ -891,7 +907,7 @@ static bool scene_audio_render(void *data, uint64_t *ts_out,
 
 	item = scene->first_item;
 	while (item) {
-		if (!obs_source_audio_pending(item->source)) {
+		if (!obs_source_audio_pending(item->source) && item->visible) {
 			uint64_t source_ts =
 				obs_source_get_audio_timestamp(item->source);
 
@@ -1079,6 +1095,11 @@ obs_scene_t *obs_scene_duplicate(obs_scene_t *scene, const char *name,
 	new_scene = make_private ?
 		obs_scene_create_private(name) : obs_scene_create(name);
 
+	obs_source_copy_filters(new_scene->source, scene->source);
+
+	obs_data_apply(new_scene->source->private_settings,
+			scene->source->private_settings);
+
 	for (size_t i = 0; i < items.num; i++) {
 		item = items.array[i];
 		source = make_unique ?
@@ -1112,7 +1133,18 @@ obs_scene_t *obs_scene_duplicate(obs_scene_t *scene, const char *name,
 			new_item->bounds_align = item->bounds_align;
 			new_item->bounds = item->bounds;
 
+			new_item->toggle_visibility =
+					OBS_INVALID_HOTKEY_PAIR_ID;
+
 			obs_sceneitem_set_crop(new_item, &item->crop);
+
+			if (!new_item->item_render &&
+			    item_texture_enabled(new_item)) {
+				obs_enter_graphics();
+				new_item->item_render = gs_texrender_create(
+						GS_RGBA, GS_ZS_NONE);
+				obs_leave_graphics();
+			}
 
 			obs_source_release(source);
 		}
@@ -1347,6 +1379,8 @@ obs_sceneitem_t *obs_scene_add(obs_scene_t *scene, obs_source_t *source)
 	item->align   = OBS_ALIGN_TOP | OBS_ALIGN_LEFT;
 	item->actions_mutex = mutex;
 	item->user_visible = true;
+	item->locked = false;
+	item->private_settings = obs_data_create();
 	os_atomic_set_long(&item->active_refs, 1);
 	vec2_set(&item->scale, 1.0f, 1.0f);
 	matrix4_identity(&item->draw_transform);
@@ -1402,6 +1436,7 @@ static void obs_sceneitem_destroy(obs_sceneitem_t *item)
 			gs_texrender_destroy(item->item_render);
 			obs_leave_graphics();
 		}
+		obs_data_release(item->private_settings);
 		obs_hotkey_pair_unregister(item->toggle_visibility);
 		pthread_mutex_destroy(&item->actions_mutex);
 		if (item->source)
@@ -1773,6 +1808,27 @@ bool obs_sceneitem_set_visible(obs_sceneitem_t *item, bool visible)
 	return true;
 }
 
+bool obs_sceneitem_locked(const obs_sceneitem_t *item)
+{
+	return item ? item->locked : false;
+}
+
+bool obs_sceneitem_set_locked(obs_sceneitem_t *item, bool lock)
+{
+	if (!item)
+		return false;
+
+	if (item->locked == lock)
+		return false;
+
+	if (!item->parent)
+		return false;
+
+	item->locked = lock;
+
+	return true;
+}
+
 static bool sceneitems_match(obs_scene_t *scene, obs_sceneitem_t * const *items,
 		size_t size, bool *order_matches)
 {
@@ -1961,4 +2017,13 @@ int64_t obs_sceneitem_get_id(const obs_sceneitem_t *item)
 		return 0;
 
 	return item->id;
+}
+
+obs_data_t *obs_sceneitem_get_private_settings(obs_sceneitem_t *item)
+{
+	if (!obs_ptr_valid(item, "obs_sceneitem_get_private_settings"))
+		return NULL;
+
+	obs_data_addref(item->private_settings);
+	return item->private_settings;
 }

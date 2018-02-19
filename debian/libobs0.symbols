@@ -3,9 +3,11 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  (c++|regex|optional)".*obs_frontend_callbacks.*" 18.0.1
  (c++|regex|optional)".*std::vector.*" 18.0.1
  obs_frontend_add_event_callback@Base 18.0.1
+ obs_frontend_add_preload_callback@Base 21.0.2
  obs_frontend_add_save_callback@Base 18.0.1
  obs_frontend_add_tools_menu_item@Base 18.0.1
  obs_frontend_add_tools_menu_qaction@Base 18.0.1
+ obs_frontend_get_current_preview_scene@Base 21.0.2
  obs_frontend_get_current_profile@Base 18.0.1
  obs_frontend_get_current_scene@Base 18.0.1
  obs_frontend_get_current_scene_collection@Base 18.0.1
@@ -24,21 +26,28 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_streaming_service@Base 19.0.3
  obs_frontend_get_transitions@Base 18.0.1
  obs_frontend_pop_ui_translation@Base 18.0.1
+ obs_frontend_preview_enabled@Base 21.0.2
+ obs_frontend_preview_program_mode_active@Base 21.0.2
  obs_frontend_push_ui_translation@Base 18.0.1
  obs_frontend_recording_active@Base 18.0.1
  obs_frontend_recording_start@Base 18.0.1
  obs_frontend_recording_stop@Base 18.0.1
  obs_frontend_remove_event_callback@Base 18.0.1
+ obs_frontend_remove_preload_callback@Base 21.0.2
  obs_frontend_remove_save_callback@Base 18.0.1
  obs_frontend_replay_buffer_active@Base 18.0.1
+ obs_frontend_replay_buffer_save@Base 21.0.2
  obs_frontend_replay_buffer_start@Base 18.0.1
  obs_frontend_replay_buffer_stop@Base 18.0.1
  obs_frontend_save@Base 18.0.1
  obs_frontend_save_streaming_service@Base 19.0.3
+ obs_frontend_set_current_preview_scene@Base 21.0.2
  obs_frontend_set_current_profile@Base 18.0.1
  obs_frontend_set_current_scene@Base 18.0.1
  obs_frontend_set_current_scene_collection@Base 18.0.1
  obs_frontend_set_current_transition@Base 18.0.1
+ obs_frontend_set_preview_enabled@Base 21.0.2
+ obs_frontend_set_preview_program_mode@Base 21.0.2
  obs_frontend_set_streaming_service@Base 19.0.3
  obs_frontend_streaming_active@Base 18.0.1
  obs_frontend_streaming_start@Base 18.0.1
@@ -128,6 +137,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gs_cubetexture_get_size@Base 0.13.2
  gs_indexbuffer_destroy@Base 0.13.2
  gs_indexbuffer_flush@Base 0.13.2
+ gs_indexbuffer_flush_direct@Base 21.0.2
  gs_indexbuffer_get_data@Base 0.13.2
  gs_indexbuffer_get_num_indices@Base 0.13.2
  gs_indexbuffer_get_type@Base 0.13.2
@@ -170,6 +180,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gs_texture_unmap@Base 0.13.2
  gs_vertexbuffer_destroy@Base 0.13.2
  gs_vertexbuffer_flush@Base 0.13.2
+ gs_vertexbuffer_flush_direct@Base 21.0.2
  gs_vertexbuffer_get_data@Base 0.13.2
  gs_voltexture_destroy@Base 0.13.2
  gs_voltexture_get_color_format@Base 0.13.2
@@ -187,9 +198,6 @@ libobs.so.0 libobs0 #MINVER#
  astrcmpi@Base 0.13.2
  astrcmpi_n@Base 0.13.2
  astrstri@Base 0.13.2
- audio_monitor_create@Base 18.0.1
- audio_monitor_destroy@Base 18.0.1
- audio_monitor_reset@Base 18.0.1
  audio_output_active@Base 0.13.2
  audio_output_close@Base 0.13.2
  audio_output_connect@Base 0.13.2
@@ -364,6 +372,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_effect_get_world_matrix@Base 0.13.2
  gs_effect_loop@Base 0.13.2
  gs_effect_set_bool@Base 0.13.2
+ gs_effect_set_color@Base 21.0.2
  gs_effect_set_default@Base 0.13.2
  gs_effect_set_float@Base 0.13.2
  gs_effect_set_int@Base 0.13.2
@@ -408,6 +417,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_indexbuffer_create@Base 0.13.2
  gs_indexbuffer_destroy@Base 0.13.2
  gs_indexbuffer_flush@Base 0.13.2
+ gs_indexbuffer_flush_direct@Base 21.0.2
  gs_indexbuffer_get_data@Base 0.13.2
  gs_indexbuffer_get_num_indices@Base 0.13.2
  gs_indexbuffer_get_type@Base 0.13.2
@@ -520,6 +530,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_vertexbuffer_create@Base 0.13.2
  gs_vertexbuffer_destroy@Base 0.13.2
  gs_vertexbuffer_flush@Base 0.13.2
+ gs_vertexbuffer_flush_direct@Base 21.0.2
  gs_vertexbuffer_get_data@Base 0.13.2
  gs_vertexshader_create@Base 0.13.2
  gs_vertexshader_create_from_file@Base 0.13.2
@@ -569,6 +580,7 @@ libobs.so.0 libobs0 #MINVER#
  norm_to_polar@Base 0.13.2
  obs_add_main_render_callback@Base 19.0.3
  obs_add_module_path@Base 0.13.2
+ obs_add_tick_callback@Base 21.0.2
  obs_audio_encoder_create@Base 0.13.2
  obs_avc_find_startcode@Base 0.13.2
  obs_avc_keyframe@Base 0.13.2
@@ -728,6 +740,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_display_set_background_color@Base 0.13.2
  obs_display_set_enabled@Base 0.13.2
  obs_duplicate_encoder_packet@Base 0.13.2
+ obs_enable_source_type@Base 21.0.2
  obs_encoder_active@Base 0.13.2
  obs_encoder_addref@Base 0.13.2
  obs_encoder_audio@Base 0.13.2
@@ -827,6 +840,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_source_properties@Base 0.13.2
  obs_get_total_frames@Base 19.0.3
  obs_get_version@Base 0.13.2
+ obs_get_version_string@Base 21.0.2
  obs_get_video@Base 0.13.2
  obs_get_video_frame_time@Base 0.13.2
  obs_get_video_info@Base 0.13.2
@@ -912,6 +926,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_get_frames_dropped@Base 0.13.2
  obs_output_get_height@Base 0.13.2
  obs_output_get_id@Base 0.13.2
+ obs_output_get_last_error@Base 21.0.2
  obs_output_get_mixer@Base 0.13.2
  obs_output_get_name@Base 0.13.2
  obs_output_get_proc_handler@Base 0.13.2
@@ -919,6 +934,8 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_get_service@Base 0.13.2
  obs_output_get_settings@Base 0.13.2
  obs_output_get_signal_handler@Base 0.13.2
+ obs_output_get_supported_audio_codecs@Base 21.0.2
+ obs_output_get_supported_video_codecs@Base 21.0.2
  obs_output_get_total_bytes@Base 0.13.2
  obs_output_get_total_frames@Base 0.13.2
  obs_output_get_type_data@Base 0.13.2
@@ -948,7 +965,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_video@Base 0.13.2
  obs_parse_avc_header@Base 0.13.2
  obs_parse_avc_packet@Base 0.13.2
+ obs_post_load_modules@Base 21.0.2
  obs_properties_add_bool@Base 0.13.2
+ obs_properties_add_button2@Base 21.0.2
  obs_properties_add_button@Base 0.13.2
  obs_properties_add_color@Base 0.13.2
  obs_properties_add_editable_list@Base 0.13.2
@@ -1028,6 +1047,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_set_description@Base 0.13.2
  obs_property_set_enabled@Base 0.13.2
  obs_property_set_long_description@Base 0.15.4
+ obs_property_set_modified_callback2@Base 21.0.2
  obs_property_set_modified_callback@Base 0.13.2
  obs_property_set_visible@Base 0.13.2
  obs_property_visible@Base 0.13.2
@@ -1037,6 +1057,8 @@ libobs.so.0 libobs0 #MINVER#
  obs_register_service_s@Base 0.13.2
  obs_register_source_s@Base 0.13.2
  obs_remove_main_render_callback@Base 19.0.3
+ obs_remove_tick_callback@Base 21.0.2
+ obs_render_main_texture@Base 21.0.2
  obs_render_main_view@Base 0.13.2
  obs_reset_audio@Base 0.13.2
  obs_reset_video@Base 0.13.2
@@ -1069,11 +1091,13 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_get_id@Base 19.0.3
  obs_sceneitem_get_info@Base 0.13.2
  obs_sceneitem_get_pos@Base 0.13.2
+ obs_sceneitem_get_private_settings@Base 21.0.2
  obs_sceneitem_get_rot@Base 0.13.2
  obs_sceneitem_get_scale@Base 0.13.2
  obs_sceneitem_get_scale_filter@Base 0.15.4
  obs_sceneitem_get_scene@Base 0.13.2
  obs_sceneitem_get_source@Base 0.13.2
+ obs_sceneitem_locked@Base 21.0.2
  obs_sceneitem_release@Base 0.13.2
  obs_sceneitem_remove@Base 0.13.2
  obs_sceneitem_select@Base 0.13.2
@@ -1084,6 +1108,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_set_bounds_type@Base 0.13.2
  obs_sceneitem_set_crop@Base 0.14.2
  obs_sceneitem_set_info@Base 0.13.2
+ obs_sceneitem_set_locked@Base 21.0.2
  obs_sceneitem_set_order@Base 0.13.2
  obs_sceneitem_set_order_position@Base 0.13.2
  obs_sceneitem_set_pos@Base 0.13.2
@@ -1101,6 +1126,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_service_get_id@Base 0.13.2
  obs_service_get_key@Base 0.13.2
  obs_service_get_name@Base 0.13.2
+ obs_service_get_output_type@Base 21.0.2
  obs_service_get_password@Base 0.13.2
  obs_service_get_ref@Base 0.13.2
  obs_service_get_settings@Base 0.13.2
@@ -1121,6 +1147,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_add_active_child@Base 0.13.2
  obs_source_add_audio_capture_callback@Base 0.13.2
  obs_source_addref@Base 0.13.2
+ obs_source_async_decoupled@Base 21.0.2
  obs_source_async_unbuffered@Base 19.0.3
  obs_source_audio_pending@Base 0.13.2
  obs_source_configurable@Base 0.13.2
@@ -1158,6 +1185,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_monitoring_type@Base 18.0.1
  obs_source_get_name@Base 0.13.2
  obs_source_get_output_flags@Base 0.13.2
+ obs_source_get_private_settings@Base 21.0.2
  obs_source_get_proc_handler@Base 0.13.2
  obs_source_get_push_to_mute_delay@Base 0.13.2
  obs_source_get_push_to_talk_delay@Base 0.13.2
@@ -1192,6 +1220,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_send_mouse_click@Base 0.13.2
  obs_source_send_mouse_move@Base 0.13.2
  obs_source_send_mouse_wheel@Base 0.13.2
+ obs_source_set_async_decoupled@Base 21.0.2
  obs_source_set_async_unbuffered@Base 19.0.3
  obs_source_set_audio_mixers@Base 0.13.2
  obs_source_set_default_flags@Base 0.13.2
@@ -1222,6 +1251,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_transition_get_scale_type@Base 0.13.2
  obs_transition_get_size@Base 0.13.2
  obs_transition_get_source@Base 0.13.2
+ obs_transition_get_time@Base 21.0.2
  obs_transition_set@Base 0.13.2
  obs_transition_set_alignment@Base 0.13.2
  obs_transition_set_scale_type@Base 0.13.2
@@ -1230,6 +1260,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_transition_swap_begin@Base 0.13.2
  obs_transition_swap_end@Base 0.13.2
  obs_transition_video_render@Base 0.13.2
+ obs_transition_video_render_direct@Base 21.0.2
  obs_video_encoder_create@Base 0.13.2
  obs_view_create@Base 0.13.2
  obs_view_destroy@Base 0.13.2
@@ -1241,10 +1272,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_volmeter_create@Base 0.13.2
  obs_volmeter_destroy@Base 0.13.2
  obs_volmeter_detach_source@Base 0.13.2
- obs_volmeter_get_peak_hold@Base 0.13.2
+ obs_volmeter_get_nr_channels@Base 21.0.2
  obs_volmeter_get_update_interval@Base 0.13.2
  obs_volmeter_remove_callback@Base 0.13.2
- obs_volmeter_set_peak_hold@Base 0.13.2
  obs_volmeter_set_update_interval@Base 0.13.2
  obs_weak_encoder_addref@Base 0.13.2
  obs_weak_encoder_get_encoder@Base 0.13.2
@@ -1299,8 +1329,12 @@ libobs.so.0 libobs0 #MINVER#
  os_get_logical_cores@Base 19.0.3
  os_get_path_extension@Base 0.15.4
  os_get_physical_cores@Base 19.0.3
+ os_get_proc_memory_usage@Base 21.0.2
+ os_get_proc_resident_size@Base 21.0.2
+ os_get_proc_virtual_size@Base 21.0.2
  os_get_program_data_path@Base 0.15.4
  os_get_program_data_path_ptr@Base 0.15.4
+ os_get_sys_free_size@Base 21.0.2
  os_getcwd@Base 0.13.2
  os_gettime_ns@Base 0.13.2
  os_glob@Base 0.13.2
@@ -1406,9 +1440,12 @@ libobs.so.0 libobs0 #MINVER#
  shader_sampler_convert@Base 0.13.2
  signal_handler_add@Base 0.13.2
  signal_handler_connect@Base 0.13.2
+ signal_handler_connect_global@Base 21.0.2
  signal_handler_create@Base 0.13.2
  signal_handler_destroy@Base 0.13.2
  signal_handler_disconnect@Base 0.13.2
+ signal_handler_disconnect_global@Base 21.0.2
+ signal_handler_remove_current@Base 21.0.2
  signal_handler_signal@Base 0.13.2
  strdepad@Base 0.13.2
  strlist_free@Base 0.13.2

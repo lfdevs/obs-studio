@@ -87,6 +87,16 @@ OBSBasicFilters::OBSBasicFilters(QWidget *parent, OBSSource source_)
 			SLOT(EffectFilterNameEdited(QWidget*,
 					QAbstractItemDelegate::EndEditHint)));
 
+	QPushButton *close = ui->buttonBox->button(QDialogButtonBox::Close);
+	connect(close, SIGNAL(clicked()), this, SLOT(close()));
+	close->setDefault(true);
+
+	ui->buttonBox->button(QDialogButtonBox::Reset)->setText(
+			QTStr("Defaults"));
+
+	connect(ui->buttonBox->button(QDialogButtonBox::Reset),
+		SIGNAL(clicked()), this, SLOT(ResetFilters()));
+
 	uint32_t flags = obs_source_get_output_flags(source);
 	bool audio     = (flags & OBS_SOURCE_AUDIO) != 0;
 	bool audioOnly = (flags & OBS_SOURCE_VIDEO) == 0;
@@ -148,6 +158,7 @@ inline OBSSource OBSBasicFilters::GetFilter(int row, bool async)
 void OBSBasicFilters::UpdatePropertiesView(int row, bool async)
 {
 	if (view) {
+		updatePropertiesSignal.Disconnect();
 		ui->rightLayout->removeWidget(view);
 		view->deleteLater();
 		view = nullptr;
@@ -163,12 +174,23 @@ void OBSBasicFilters::UpdatePropertiesView(int row, bool async)
 			(PropertiesReloadCallback)obs_source_properties,
 			(PropertiesUpdateCallback)obs_source_update);
 
+	updatePropertiesSignal.Connect(obs_source_get_signal_handler(filter),
+			"update_properties",
+			OBSBasicFilters::UpdateProperties,
+			this);
+
 	obs_data_release(settings);
 
 	view->setMaximumHeight(250);
 	view->setMinimumHeight(150);
 	ui->rightLayout->addWidget(view);
 	view->show();
+}
+
+void OBSBasicFilters::UpdateProperties(void *data, calldata_t *)
+{
+	QMetaObject::invokeMethod(static_cast<OBSBasicFilters*>(data)->view,
+			"ReloadProperties");
 }
 
 void OBSBasicFilters::AddFilter(OBSSource filter)
@@ -339,6 +361,12 @@ QMenu *OBSBasicFilters::CreateAddFilterPopupMenu(bool async)
 	vector<FilterInfo> types;
 	while (obs_enum_filter_types(idx++, &type_str)) {
 		const char *name = obs_source_get_display_name(type_str);
+		uint32_t caps = obs_get_source_output_flags(type_str);
+
+		if ((caps & OBS_SOURCE_DEPRECATED) != 0)
+			continue;
+		if ((caps & OBS_SOURCE_CAP_DISABLED) != 0)
+			continue;
 
 		auto it = types.begin();
 		for (; it != types.end(); ++it) {
@@ -573,6 +601,7 @@ void OBSBasicFilters::on_moveAsyncFilterDown_clicked()
 void OBSBasicFilters::on_asyncFilters_GotFocus()
 {
 	UpdatePropertiesView(ui->asyncFilters->currentRow(), true);
+	isAsync = true;
 }
 
 void OBSBasicFilters::on_asyncFilters_currentRowChanged(int row)
@@ -614,6 +643,7 @@ void OBSBasicFilters::on_moveEffectFilterDown_clicked()
 void OBSBasicFilters::on_effectFilters_GotFocus()
 {
 	UpdatePropertiesView(ui->effectFilters->currentRow(), false);
+	isAsync = false;
 }
 
 void OBSBasicFilters::on_effectFilters_currentRowChanged(int row)
@@ -738,4 +768,24 @@ void OBSBasicFilters::EffectFilterNameEdited(QWidget *editor,
 {
 	FilterNameEdited(editor, ui->effectFilters);
 	UNUSED_PARAMETER(endHint);
+}
+
+void OBSBasicFilters::ResetFilters()
+{
+	QListWidget *list = isAsync ? ui->asyncFilters : ui->effectFilters;
+	int row = list->currentRow();
+
+	OBSSource filter = GetFilter(row, isAsync);
+
+	if (!filter)
+		return;
+
+	obs_data_t *settings = obs_source_get_settings(filter);
+	obs_data_clear(settings);
+	obs_data_release(settings);
+
+	if (!view->DeferUpdate())
+		obs_source_update(filter, nullptr);
+
+	view->RefreshProperties();
 }

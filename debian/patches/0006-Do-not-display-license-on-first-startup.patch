@@ -1,0 +1,22 @@
+From: Chris Lamb <lamby@debian.org>
+Date: Mon, 19 Feb 2018 21:32:07 +0100
+Subject: Do not display license on first startup
+
+---
+ UI/obs-app.cpp | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/UI/obs-app.cpp b/UI/obs-app.cpp
+index d5fc09a..ad7563a 100644
+--- a/UI/obs-app.cpp
++++ b/UI/obs-app.cpp
+@@ -945,8 +945,7 @@ bool OBSApp::OBSInit()
+ {
+ 	ProfileScope("OBSApp::OBSInit");
+ 
+-	bool licenseAccepted = config_get_bool(globalConfig, "General",
+-			"LicenseAccepted");
++	bool licenseAccepted = true;
+ 	OBSLicenseAgreement agreement(nullptr);
+ 
+ 	if (licenseAccepted || agreement.exec() == QDialog::Accepted) {

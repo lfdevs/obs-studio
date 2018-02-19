@@ -1,5 +1,2 @@
-usr/lib/*/libobs.so.*
-usr/lib/*/libobs-opengl.so.*
-usr/lib/*/libobsglad.so.*
-usr/lib/*/libobs-frontend-api.so.*
+usr/lib/*/libobs*.so.*
 usr/share/obs/libobs/*
