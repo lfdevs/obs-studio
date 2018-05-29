@@ -1,3 +1,16 @@
+obs-studio (21.1.2+dfsg1-1) unstable; urgency=medium
+
+  [ Felipe Sateler ]
+  * Change maintainer address to debian-multimedia@lists.debian.org
+
+  [ Sebastian Ramacher ]
+  * New upstream release.
+  * debian/patches: Refresh patches.
+  * debian/control: Bump Standards-Version.
+  * debian/libobs0.symbols: Add new symbols.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 29 May 2018 21:19:37 +0200
+
 obs-studio (21.0.2+dfsg1-1) unstable; urgency=medium
 
   [ Sebastian Ramacher ]

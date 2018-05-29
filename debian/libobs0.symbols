@@ -1050,6 +1050,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_set_modified_callback2@Base 21.0.2
  obs_property_set_modified_callback@Base 0.13.2
  obs_property_set_visible@Base 0.13.2
+ obs_property_text_type@Base 21.1.2
  obs_property_visible@Base 0.13.2
  obs_proprety_text_type@Base 0.13.2
  obs_register_encoder_s@Base 0.13.2

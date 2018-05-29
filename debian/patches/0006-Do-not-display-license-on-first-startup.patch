@@ -7,10 +7,10 @@ Subject: Do not display license on first startup
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/UI/obs-app.cpp b/UI/obs-app.cpp
-index d5fc09a..ad7563a 100644
+index 503e5e1..258d6ca 100644
 --- a/UI/obs-app.cpp
 +++ b/UI/obs-app.cpp
-@@ -945,8 +945,7 @@ bool OBSApp::OBSInit()
+@@ -946,8 +946,7 @@ bool OBSApp::OBSInit()
  {
  	ProfileScope("OBSApp::OBSInit");
  
