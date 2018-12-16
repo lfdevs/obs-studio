@@ -56,7 +56,8 @@ OBSBasicFilters::OBSBasicFilters(QWidget *parent, OBSSource source_)
 	                                OBSBasicFilters::SourceRemoved, this),
 	  renameSourceSignal           (obs_source_get_signal_handler(source),
 	                                "rename",
-	                                OBSBasicFilters::SourceRenamed, this)
+	                                OBSBasicFilters::SourceRenamed, this),
+	  noPreviewMargin               (13)
 {
 	main = reinterpret_cast<OBSBasic*>(parent);
 
@@ -97,10 +98,10 @@ OBSBasicFilters::OBSBasicFilters(QWidget *parent, OBSSource source_)
 	connect(ui->buttonBox->button(QDialogButtonBox::Reset),
 		SIGNAL(clicked()), this, SLOT(ResetFilters()));
 
-	uint32_t flags = obs_source_get_output_flags(source);
-	bool audio     = (flags & OBS_SOURCE_AUDIO) != 0;
-	bool audioOnly = (flags & OBS_SOURCE_VIDEO) == 0;
-	bool async     = (flags & OBS_SOURCE_ASYNC) != 0;
+	uint32_t caps = obs_source_get_output_flags(source);
+	bool audio     = (caps & OBS_SOURCE_AUDIO) != 0;
+	bool audioOnly = (caps & OBS_SOURCE_VIDEO) == 0;
+	bool async     = (caps & OBS_SOURCE_ASYNC) != 0;
 
 	if (!async && !audio) {
 		ui->asyncWidget->setVisible(false);
@@ -121,13 +122,20 @@ OBSBasicFilters::OBSBasicFilters(QWidget *parent, OBSSource source_)
 	};
 
 	enum obs_source_type type = obs_source_get_type(source);
-	uint32_t caps = obs_source_get_output_flags(source);
 	bool drawable_type = type == OBS_SOURCE_TYPE_INPUT ||
 		type == OBS_SOURCE_TYPE_SCENE;
 
-	if (drawable_type && (caps & OBS_SOURCE_VIDEO) != 0)
-		connect(ui->preview, &OBSQTDisplay::DisplayCreated,
-				addDrawCallback);
+	if ((caps & OBS_SOURCE_VIDEO) != 0) {
+		ui->rightLayout->setContentsMargins(0, 0, 0, 0);
+		ui->preview->show();
+		if (drawable_type)
+			connect(ui->preview, &OBSQTDisplay::DisplayCreated,
+					addDrawCallback);
+	} else {
+		ui->rightLayout->setContentsMargins(0, noPreviewMargin, 0, 0);
+		ui->rightContainerLayout->insertStretch(1);
+		ui->preview->hide();
+	}
 }
 
 OBSBasicFilters::~OBSBasicFilters()
@@ -569,7 +577,7 @@ static bool QueryRemove(QWidget *parent, obs_source_t *source)
 
 void OBSBasicFilters::on_addAsyncFilter_clicked()
 {
-	QPointer<QMenu> popup = CreateAddFilterPopupMenu(true);
+	QScopedPointer<QMenu> popup(CreateAddFilterPopupMenu(true));
 	if (popup)
 		popup->exec(QCursor::pos());
 }
@@ -611,7 +619,7 @@ void OBSBasicFilters::on_asyncFilters_currentRowChanged(int row)
 
 void OBSBasicFilters::on_addEffectFilter_clicked()
 {
-	QPointer<QMenu> popup = CreateAddFilterPopupMenu(false);
+	QScopedPointer<QMenu> popup(CreateAddFilterPopupMenu(false));
 	if (popup)
 		popup->exec(QCursor::pos());
 }

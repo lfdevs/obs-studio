@@ -146,7 +146,7 @@
               <x>0</x>
               <y>0</y>
               <width>801</width>
-              <height>741</height>
+              <height>836</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -582,10 +582,74 @@
                      </property>
                     </widget>
                    </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGroupBox" name="groupBoxMultiview">
+                  <property name="title">
+                   <string>Basic.Settings.General.Multiview</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayoutMultiview">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <item row="0" column="0">
+                    <spacer name="horizontalSpacerMultiview">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>5</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QCheckBox" name="multiviewMouseSwitch">
+                     <property name="text">
+                      <string>Basic.Settings.General.Multiview.MouseSwitch</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QCheckBox" name="multiviewDrawNames">
+                     <property name="text">
+                      <string>Basic.Settings.General.Multiview.DrawSourceNames</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="2" column="1">
+                    <widget class="QCheckBox" name="multiviewDrawAreas">
+                     <property name="text">
+                      <string>Basic.Settings.General.Multiview.DrawSafeAreas</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
                     <widget class="QComboBox" name="multiviewLayout"/>
                    </item>
-                   <item row="2" column="0">
+                   <item row="3" column="0">
                     <widget class="QLabel" name="label_64">
                      <property name="text">
                       <string>Basic.Settings.General.MultiviewLayout</string>
@@ -3362,49 +3426,6 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0" colspan="2">
-          <widget class="QScrollArea" name="audioSourceScrollArea">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="audioSourceWidget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>800</width>
-              <height>69</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
-         </item>
-         <item row="9" column="1">
-          <widget class="QLabel" name="audioMsg">
-           <property name="styleSheet">
-            <string notr="true">color: rgb(255, 0, 4);</string>
-           </property>
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QLabel" name="audioMsg_2">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-           <property name="themeID" stdset="0">
-            <string notr="true">warning</string>
-           </property>
-          </widget>
-         </item>
          <item row="7" column="0">
           <widget class="QLabel" name="label_65">
            <property name="text">
@@ -3439,6 +3460,86 @@
             </property>
            </item>
           </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_66">
+           <property name="text">
+            <string>Basic.Settings.Audio.PeakMeterType</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QComboBox" name="peakMeterType">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>Basic.Settings.Audio.PeakMeterType.SamplePeak</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Basic.Settings.Audio.PeakMeterType.TruePeak</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="9" column="0" colspan="2">
+          <widget class="QScrollArea" name="audioSourceScrollArea">
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="audioSourceWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>800</width>
+              <height>69</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QLabel" name="audioMsg">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="themeID" stdset="0">
+            <string>error</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="1">
+          <widget class="QLabel" name="audioMsg_2">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="themeID" stdset="0">
+            <string notr="true">warning</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="1">
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -3744,8 +3845,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>98</width>
-           <height>28</height>
+           <width>818</width>
+           <height>697</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="hotkeyLayout">
@@ -3762,7 +3863,7 @@
         </widget>
        </widget>
        <widget class="QWidget" name="advancedPage">
-        <layout class="QHBoxLayout" name="horizontalLayout_11">
+        <layout class="QVBoxLayout" name="verticalLayout_16">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -3791,11 +3892,11 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>593</width>
-              <height>761</height>
+              <width>803</width>
+              <height>807</height>
              </rect>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_16">
+            <layout class="QVBoxLayout" name="verticalLayout_23">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -3808,9 +3909,9 @@
              <property name="bottomMargin">
               <number>9</number>
              </property>
-             <item alignment="Qt::AlignTop">
+             <item>
               <widget class="QWidget" name="widget_11" native="true">
-               <layout class="QVBoxLayout" name="verticalLayout_17">
+               <layout class="QVBoxLayout" name="verticalLayout_24">
                 <item>
                  <widget class="QGroupBox" name="advancedGeneralGroupBox">
                   <property name="title">
@@ -3819,6 +3920,12 @@
                   <layout class="QFormLayout" name="formLayout_22">
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="processPriorityLabel">
@@ -3832,6 +3939,19 @@
                    </item>
                    <item row="0" column="1">
                     <widget class="QComboBox" name="processPriority"/>
+                   </item>
+                   <item row="1" column="0">
+                    <spacer name="horizontalSpacer_13">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </widget>
@@ -3847,6 +3967,9 @@
                    </property>
                    <property name="labelAlignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="rendererLabel">
@@ -4020,6 +4143,19 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="4" column="0">
+                    <spacer name="horizontalSpacer_12">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -4031,6 +4167,12 @@
                   <layout class="QFormLayout" name="formLayout_27">
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="monitoringDeviceLabel">
@@ -4052,6 +4194,19 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="0">
+                    <spacer name="horizontalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -4066,6 +4221,9 @@
                    </property>
                    <property name="labelAlignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
                    </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_7">
@@ -4129,6 +4287,19 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="0">
+                    <spacer name="horizontalSpacer_10">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -4140,6 +4311,9 @@
                   <layout class="QFormLayout" name="formLayout_18">
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="topMargin">
                     <number>2</number>
@@ -4230,6 +4404,19 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="2" column="0">
+                    <spacer name="horizontalSpacer_9">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -4241,6 +4428,12 @@
                   <layout class="QFormLayout" name="formLayout_19">
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
                    </property>
                    <item row="0" column="1">
                     <widget class="QCheckBox" name="reconnectEnable">
@@ -4311,6 +4504,19 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="0" column="0">
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -4323,9 +4529,12 @@
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                    </property>
-                   <item row="0" column="1">
-                    <widget class="QComboBox" name="bindToIP"/>
-                   </item>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
                    <item row="0" column="0">
                     <widget class="QLabel" name="label_27">
                      <property name="text">
@@ -4335,6 +4544,9 @@
                       <cstring>bindToIP</cstring>
                      </property>
                     </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="bindToIP"/>
                    </item>
                    <item row="1" column="1">
                     <widget class="QCheckBox" name="enableNewSocketLoop">
@@ -4353,33 +4565,84 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="1" column="0">
+                    <spacer name="horizontalSpacer_7">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="advancedMsg">
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(255, 0, 4);</string>
+                 <widget class="QGroupBox" name="sourcesGroup">
+                  <property name="title">
+                   <string>Basic.Main.Sources</string>
                   </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
+                  <layout class="QFormLayout" name="formLayout_34">
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <item row="0" column="0">
+                    <spacer name="horizontalSpacer_15">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QCheckBox" name="browserHWAccel">
+                     <property name="text">
+                      <string>BrowserSource.EnableHardwareAcceleration</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="advancedMsg2">
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(255, 0, 4);</string>
+                 <widget class="QGroupBox" name="groupBox_17">
+                  <property name="title">
+                   <string>Basic.Settings.Hotkeys</string>
                   </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
+                  <layout class="QFormLayout" name="formLayout_33">
+                   <property name="topMargin">
+                    <number>2</number>
+                   </property>
+                   <item row="0" column="1">
+                    <widget class="QCheckBox" name="disableFocusHotkeys">
+                     <property name="text">
+                      <string>Basic.Settings.Advanced.Hotkeys.DisableHotkeysInFocus</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <spacer name="horizontalSpacer_14">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>170</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -4388,6 +4651,48 @@
             </layout>
            </widget>
           </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_17">
+           <property name="leftMargin">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="rightMargin">
+            <number>10</number>
+           </property>
+           <property name="bottomMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="advancedMsg">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 0, 4);</string>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="advancedMsg2">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 0, 4);</string>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>

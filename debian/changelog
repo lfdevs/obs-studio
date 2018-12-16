@@ -1,3 +1,14 @@
+obs-studio (22.0.3+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches: Refresh patches.
+  * debian/control: Update Standards-Version.
+  * debian/rules: Disable updater with the correct flag.
+  * debian/: Enable scripting support. (Closes: #904480)
+  * debian/libobs0.symbols: Update symbols.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 16 Dec 2018 18:14:30 +0100
+
 obs-studio (21.1.2+dfsg1-1) unstable; urgency=medium
 
   [ Felipe Sateler ]

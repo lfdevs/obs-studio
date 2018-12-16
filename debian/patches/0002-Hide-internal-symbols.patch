@@ -3,15 +3,39 @@ Date: Wed, 19 Apr 2017 21:45:40 +0200
 Subject: Hide internal symbols
 
 ---
- libobs/CMakeLists.txt | 4 ++++
- libobs/util/c99defs.h | 2 +-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ deps/obs-scripting/CMakeLists.txt | 12 ++++++++++++
+ libobs/CMakeLists.txt             |  4 ++++
+ libobs/util/c99defs.h             |  2 +-
+ 3 files changed, 17 insertions(+), 1 deletion(-)
 
+diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
+index 835c1b3..dff5370 100644
+--- a/deps/obs-scripting/CMakeLists.txt
++++ b/deps/obs-scripting/CMakeLists.txt
+@@ -160,6 +160,18 @@ add_library(obs-scripting SHARED
+ 	${SWIG_LUA_RUNTIME}
+ 	)
+ 
++if(UNIX)
++	set_source_files_properties(${obs-scripting_SOURCES}
++	${obs-scripting_HEADERS}
++	${obs-scripting-python_SOURCES}
++	${obs-scripting-python_HEADERS}
++	${obs-scripting-lua_SOURCES}
++	${obs-scripting-lua_HEADERS}
++	${SWIG_PY_RUNTIME}
++	${SWIG_LUA_RUNTIME}
++	PROPERTIES COMPILE_FLAGS "-fvisibility=hidden")
++endif()
++
+ target_link_libraries(obs-scripting
+ 	libobs
+ 	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 00c0ebc..c82d94e 100644
+index bddfa5c..41ed749 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -447,6 +447,10 @@ if(NOT MSVC)
+@@ -463,6 +463,10 @@ if(NOT MSVC)
  			-msse2)
  endif()
  

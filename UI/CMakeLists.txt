@@ -55,6 +55,8 @@ include_directories(${FFMPEG_INCLUDE_DIRS})
 include_directories(SYSTEM "obs-frontend-api")
 include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/libobs")
 include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/deps/libff")
+include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/deps/json11")
+include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/plugins/obs-browser/panel")
 
 find_package(Libcurl REQUIRED)
 include_directories(${LIBCURL_INCLUDE_DIRS})
@@ -127,6 +129,7 @@ endif()
 set(obs_SOURCES
 	${obs_PLATFORM_SOURCES}
 	${obs_libffutil_SOURCES}
+	../deps/json11/json11.cpp
 	obs-app.cpp
 	api-interface.cpp
 	window-basic-main.cpp
@@ -152,6 +155,7 @@ set(obs_SOURCES
 	window-log-reply.cpp
 	window-projector.cpp
 	window-remux.cpp
+	source-tree.cpp
 	properties-view.cpp
 	focus-list.cpp
 	menu-button.cpp
@@ -161,6 +165,7 @@ set(obs_SOURCES
 	item-widget-helpers.cpp
 	visibility-checkbox.cpp
 	locked-checkbox.cpp
+	horizontal-scroll-area.cpp
 	vertical-scroll-area.cpp
 	visibility-item-widget.cpp
 	slider-absoluteset-style.cpp
@@ -176,6 +181,7 @@ set(obs_SOURCES
 set(obs_HEADERS
 	${obs_PLATFORM_HEADERS}
 	${obs_libffutil_HEADERS}
+	../deps/json11/json11.hpp
 	obs-app.hpp
 	platform.hpp
 	window-main.hpp
@@ -197,6 +203,7 @@ set(obs_HEADERS
 	window-log-reply.hpp
 	window-projector.hpp
 	window-remux.hpp
+	source-tree.hpp
 	properties-view.hpp
 	properties-view.moc.hpp
 	display-helpers.hpp
@@ -209,6 +216,8 @@ set(obs_HEADERS
 	item-widget-helpers.hpp
 	visibility-checkbox.hpp
 	locked-checkbox.hpp
+	horizontal-scroll-area.hpp
+	expand-checkbox.hpp
 	vertical-scroll-area.hpp
 	visibility-item-widget.hpp
 	slider-absoluteset-style.hpp
@@ -227,6 +236,7 @@ set(obs_UI
 	forms/AutoConfigVideoPage.ui
 	forms/AutoConfigStreamPage.ui
 	forms/AutoConfigTestPage.ui
+	forms/ColorSelect.ui
 	forms/OBSLicenseAgreement.ui
 	forms/OBSLogReply.ui
 	forms/OBSBasic.ui

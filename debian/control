@@ -21,6 +21,7 @@ Build-Depends:
  libgl1-mesa-dev | libgl-dev,
  libjack-jackd2-dev,
  libjansson-dev (>= 2.5),
+ libluajit-5.1-dev,
  libpulse-dev,
  libqt5x11extras5-dev,
  libspeexdsp-dev,
@@ -28,16 +29,19 @@ Build-Depends:
  libswscale-dev,
  libudev-dev,
  libv4l-dev,
+ libvlc-dev,
  libx11-dev,
  libx264-dev,
  libxcb-shm0-dev,
  libxcb-xinerama0-dev,
+ libxcb-xinput-dev,
  libxcomposite-dev,
  libxinerama-dev,
- libvlc-dev,
+ python-docutils (>= 0.6),
+ python3-dev,
  qtbase5-dev,
- python-docutils (>= 0.6)
-Standards-Version: 4.1.4
+ swig
+Standards-Version: 4.2.1
 Homepage: https://obsproject.com
 Vcs-Browser: https://salsa.debian.org/multimedia-team/obs-studio
 Vcs-Git: https://salsa.debian.org/multimedia-team/obs-studio.git
