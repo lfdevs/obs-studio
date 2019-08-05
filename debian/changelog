@@ -1,3 +1,23 @@
+obs-studio (23.2.1+dfsg1-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Use debhelper-compat instead of debian/compat
+
+  [ Simon Chopin ]
+  * New upstream version 23.2.1+dfsg1
+  * Refresh the license display patches
+  * Refresh the use-path-in-usr-lib patch and the exec name and location
+  * Add libqt5svg5-dev as new build dep
+
+  [ Sebastian Ramacher ]
+  * debian/control:
+    - Bump Standards-Version.
+    - Bump debhelper compat to 12.
+    - B-D on libmbedtls-dev to support rmtps. (LP: #1832127)
+  * debian/libobs0.symbols: Update symbols.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 06 Aug 2019 00:05:57 +0200
+
 obs-studio (22.0.3+dfsg1-1) unstable; urgency=medium
 
   * New upstream release.

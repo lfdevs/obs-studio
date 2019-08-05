@@ -39,7 +39,6 @@
 #include "obs-app.hpp"
 #include "window-basic-main.hpp"
 #include "window-basic-settings.hpp"
-#include "window-license-agreement.hpp"
 #include "crash-report.hpp"
 #include "platform.hpp"
 
@@ -51,9 +50,12 @@
 #include <windows.h>
 #else
 #include <signal.h>
+#include <pthread.h>
 #endif
 
 #include <iostream>
+
+#include "ui-config.h"
 
 using namespace std;
 
@@ -77,6 +79,9 @@ bool opt_always_on_top = false;
 string opt_starting_collection;
 string opt_starting_profile;
 string opt_starting_scene;
+
+bool remuxAfterRecord = false;
+string remuxFilename;
 
 // GPU hint exports for AMD/NVIDIA laptops
 #ifdef _MSC_VER
@@ -416,10 +421,12 @@ bool OBSApp::InitGlobalConfigDefaults()
 			"ShowListboxToolbars", true);
 	config_set_default_bool(globalConfig, "BasicWindow",
 			"ShowStatusBar", true);
+	config_set_default_bool(globalConfig, "BasicWindow",
+			"StudioModeLabels", true);
 
 	if (!config_get_bool(globalConfig, "General", "Pre21Defaults")) {
 		config_set_default_string(globalConfig, "General",
-				"CurrentTheme", "Dark");
+				"CurrentTheme", DEFAULT_THEME);
 	}
 
 	config_set_default_bool(globalConfig, "BasicWindow",
@@ -705,6 +712,17 @@ bool OBSApp::InitGlobalConfig()
 		    lastVersion < MAKE_SEMANTIC_VERSION(21, 0, 0);
 
 		config_set_bool(globalConfig, "General", "Pre21Defaults",
+				useOldDefaults);
+		changed = true;
+	}
+
+	if (!config_has_user_value(globalConfig, "General", "Pre23Defaults")) {
+		uint32_t lastVersion = config_get_int(globalConfig, "General",
+				"LastVersion");
+		bool useOldDefaults = lastVersion &&
+		    lastVersion < MAKE_SEMANTIC_VERSION(23, 0, 0);
+
+		config_set_bool(globalConfig, "General", "Pre23Defaults",
 				useOldDefaults);
 		changed = true;
 	}
@@ -1011,18 +1029,21 @@ bool OBSApp::InitTheme()
 
 	const char *themeName = config_get_string(globalConfig, "General",
 			"CurrentTheme");
+
 	if (!themeName) {
 		/* Use deprecated "Theme" value if available */
 		themeName = config_get_string(globalConfig,
 				"General", "Theme");
 		if (!themeName)
-			themeName = "Default";
+			themeName = DEFAULT_THEME;
+		if (!themeName)
+			themeName = "Dark";
 	}
 
-	if (strcmp(themeName, "Default") != 0 && SetTheme(themeName))
-		return true;
+	if (strcmp(themeName, "Default") == 0)
+		themeName = "System";
 
-	return SetTheme("Default");
+	return SetTheme(themeName);
 }
 
 OBSApp::OBSApp(int &argc, char **argv, profiler_name_store_t *store)
@@ -1030,6 +1051,8 @@ OBSApp::OBSApp(int &argc, char **argv, profiler_name_store_t *store)
 	  profilerNameStore(store)
 {
 	sleepInhibitor = os_inhibit_sleep_create("OBS Video/audio");
+
+	setWindowIcon(QIcon::fromTheme("obs", QIcon(":/res/images/obs.png")));
 }
 
 OBSApp::~OBSApp()
@@ -1159,6 +1182,20 @@ void OBSApp::AppInit()
 	config_set_default_string(globalConfig, "Basic", "SceneCollectionFile",
 			Str("Untitled"));
 
+	if (!config_has_user_value(globalConfig, "Basic", "Profile")) {
+		config_set_string(globalConfig, "Basic", "Profile",
+				Str("Untitled"));
+		config_set_string(globalConfig, "Basic", "ProfileDir",
+				Str("Untitled"));
+	}
+
+	if (!config_has_user_value(globalConfig, "Basic", "SceneCollection")) {
+		config_set_string(globalConfig, "Basic",
+				"SceneCollection", Str("Untitled"));
+		config_set_string(globalConfig, "Basic",
+				"SceneCollectionFile", Str("Untitled"));
+	}
+
 #ifdef _WIN32
 	bool disableAudioDucking = config_get_bool(globalConfig, "Audio",
 			"DisableAudioDucking");
@@ -1212,60 +1249,59 @@ void OBSApp::EnableInFocusHotkeys(bool enable)
 	ResetHotkeyState(applicationState() != Qt::ApplicationActive);
 }
 
+Q_DECLARE_METATYPE(VoidFunc)
+
+void OBSApp::Exec(VoidFunc func)
+{
+	func();
+}
+
 bool OBSApp::OBSInit()
 {
 	ProfileScope("OBSApp::OBSInit");
 
-	bool licenseAccepted = config_get_bool(globalConfig, "General",
-			"LicenseAccepted");
-	OBSLicenseAgreement agreement(nullptr);
+	setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-	if (licenseAccepted || agreement.exec() == QDialog::Accepted) {
-		if (!licenseAccepted) {
-			config_set_bool(globalConfig, "General",
-					"LicenseAccepted", true);
-			config_save(globalConfig);
-		}
+	qRegisterMetaType<VoidFunc>();
 
-		if (!StartupOBS(locale.c_str(), GetProfilerNameStore()))
-			return false;
+	if (!StartupOBS(locale.c_str(), GetProfilerNameStore()))
+		return false;
 
 #ifdef _WIN32
-		bool browserHWAccel = config_get_bool(globalConfig, "General",
-				"BrowserHWAccel");
+	bool browserHWAccel = config_get_bool(globalConfig, "General",
+			"BrowserHWAccel");
 
-		obs_data_t *settings = obs_data_create();
-		obs_data_set_bool(settings, "BrowserHWAccel", browserHWAccel);
-		obs_apply_private_data(settings);
-		obs_data_release(settings);
+	obs_data_t *settings = obs_data_create();
+	obs_data_set_bool(settings, "BrowserHWAccel", browserHWAccel);
+	obs_apply_private_data(settings);
+	obs_data_release(settings);
 
-		blog(LOG_INFO, "Browser Hardware Acceleration: %s",
-				browserHWAccel ? "true" : "false");
+	blog(LOG_INFO, "Current Date/Time: %s", CurrentDateTimeString().c_str());
+
+	blog(LOG_INFO, "Browser Hardware Acceleration: %s",
+			browserHWAccel ? "true" : "false");
 #endif
 
-		blog(LOG_INFO, "Portable mode: %s",
-				portable_mode ? "true" : "false");
+	blog(LOG_INFO, "Portable mode: %s",
+			portable_mode ? "true" : "false");
 
-		setQuitOnLastWindowClosed(false);
+	setQuitOnLastWindowClosed(false);
 
-		mainWindow = new OBSBasic();
+	mainWindow = new OBSBasic();
 
-		mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
-		connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));
+	mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+	connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));
 
-		mainWindow->OBSInit();
+	mainWindow->OBSInit();
 
-		connect(this, &QGuiApplication::applicationStateChanged,
-				[this](Qt::ApplicationState state)
-				{
-					ResetHotkeyState(
-						state != Qt::ApplicationActive);
-				});
-		ResetHotkeyState(applicationState() != Qt::ApplicationActive);
-		return true;
-	} else {
-		return false;
-	}
+	connect(this, &QGuiApplication::applicationStateChanged,
+			[this](Qt::ApplicationState state)
+			{
+				ResetHotkeyState(
+					state != Qt::ApplicationActive);
+			});
+	ResetHotkeyState(applicationState() != Qt::ApplicationActive);
+	return true;
 }
 
 string OBSApp::GetVersionString() const
@@ -1506,8 +1542,18 @@ string GenerateTimeDateFilename(const char *extension, bool noSpace)
 string GenerateSpecifiedFilename(const char *extension, bool noSpace,
 		const char *format)
 {
+	OBSBasic *main = reinterpret_cast<OBSBasic*>(App()->GetMainWindow());
+	bool autoRemux = config_get_bool(main->Config(), "Video", "AutoRemux");
+
+	if ((strcmp(extension, "mp4") == 0) && autoRemux)
+		extension = "mkv";
+
 	BPtr<char> filename = os_generate_formatted_filename(extension,
 			!noSpace, format);
+
+	remuxFilename = string(filename);
+	remuxAfterRecord = autoRemux;
+
 	return string(filename);
 }
 
@@ -1645,6 +1691,10 @@ static int run_program(fstream &logFile, int argc, char *argv[])
 	profile_register_root(run_program_init, 0);
 
 	ScopeProfiler prof{run_program_init};
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 
 	QCoreApplication::addLibraryPath(".");
 
@@ -2177,10 +2227,37 @@ static void upgrade_settings(void)
 	os_closedir(dir);
 }
 
+void ctrlc_handler (int s) {
+	UNUSED_PARAMETER(s);
+
+	OBSBasic *main = reinterpret_cast<OBSBasic*>(App()->GetMainWindow());
+	main->close();
+}
+
 int main(int argc, char *argv[])
 {
 #ifndef _WIN32
 	signal(SIGPIPE, SIG_IGN);
+
+	struct sigaction sig_handler;
+
+	sig_handler.sa_handler = ctrlc_handler;
+	sigemptyset(&sig_handler.sa_mask);
+	sig_handler.sa_flags = 0;
+
+	sigaction(SIGINT, &sig_handler, NULL);
+
+
+	/* Block SIGPIPE in all threads, this can happen if a thread calls write on
+	a closed pipe. */
+	sigset_t sigpipe_mask;
+	sigemptyset(&sigpipe_mask);
+	sigaddset(&sigpipe_mask, SIGPIPE);
+	sigset_t saved_mask;
+	if (pthread_sigmask(SIG_BLOCK, &sigpipe_mask, &saved_mask) == -1) {
+		perror("pthread_sigmask");
+		exit(1);
+	}
 #endif
 
 #ifdef _WIN32
@@ -2195,6 +2272,8 @@ int main(int argc, char *argv[])
 #if defined(USE_XDG) && defined(IS_UNIX)
 	move_to_xdg();
 #endif
+
+	obs_set_cmdline_args(argc, argv);
 
 	for (int i = 1; i < argc; i++) {
 		if (arg_is(argv[i], "--portable", "-p")) {

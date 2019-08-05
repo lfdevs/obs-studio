@@ -26,6 +26,7 @@
 #include <util/util.hpp>
 #include <util/platform.h>
 #include <obs-frontend-api.h>
+#include <functional>
 #include <string>
 #include <memory>
 #include <vector>
@@ -57,6 +58,8 @@ public:
 	virtual QString translate(const char *context, const char *sourceText,
 			const char *disambiguation, int n) const override;
 };
+
+typedef std::function<void ()> VoidFunc;
 
 class OBSApp : public QApplication {
 	Q_OBJECT
@@ -166,6 +169,9 @@ public:
 		translatorHooks.pop_front();
 	}
 
+public slots:
+	void Exec(VoidFunc func);
+
 signals:
 	void StyleChanged();
 };
@@ -197,6 +203,10 @@ static inline int GetProfilePath(char *path, size_t size, const char *file)
 }
 
 extern bool portable_mode;
+
+extern bool remuxAfterRecord;
+extern std::string remuxFilename;
+
 extern bool opt_start_streaming;
 extern bool opt_start_recording;
 extern bool opt_start_replaybuffer;

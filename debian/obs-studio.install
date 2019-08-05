@@ -2,4 +2,5 @@ usr/bin/obs
 usr/lib/*/obs-scripting
 usr/share/applications
 usr/share/icons
+usr/share/metainfo
 usr/share/obs/obs-studio

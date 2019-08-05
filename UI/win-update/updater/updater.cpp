@@ -576,10 +576,18 @@ static inline bool FileExists(const wchar_t *path)
 
 static bool NonCorePackageInstalled(const char *name)
 {
-	if (strcmp(name, "obs-browser") == 0) {
-		return FileExists(L"obs-plugins\\32bit\\obs-browser.dll");
-	} else if (strcmp(name, "realsense") == 0) {
-		return FileExists(L"obs-plugins\\32bit\\win-ivcam.dll");
+	if (is32bit) {
+		if (strcmp(name, "obs-browser") == 0) {
+			return FileExists(L"obs-plugins\\32bit\\obs-browser.dll");
+		} else if (strcmp(name, "realsense") == 0) {
+			return FileExists(L"obs-plugins\\32bit\\win-ivcam.dll");
+		}
+	} else {
+		if (strcmp(name, "obs-browser") == 0) {
+			return FileExists(L"obs-plugins\\64bit\\obs-browser.dll");
+		} else if (strcmp(name, "realsense") == 0) {
+			return FileExists(L"obs-plugins\\64bit\\win-ivcam.dll");
+		}
 	}
 
 	return false;
@@ -1133,6 +1141,12 @@ static bool Update(wchar_t *cmdLine)
 	SetDlgItemTextW(hwndMain, IDC_STATUS,
 			L"Searching for available updates...");
 
+	HWND hProgress = GetDlgItem(hwndMain, IDC_PROGRESS);
+	LONG_PTR style = GetWindowLongPtr(hProgress, GWL_STYLE);
+	SetWindowLongPtr(hProgress, GWL_STYLE, style | PBS_MARQUEE);
+
+	SendDlgItemMessage(hwndMain, IDC_PROGRESS, PBM_SETMARQUEE, 1, 0);
+
 	/* ------------------------------------- *
 	 * Check if updating portable build      */
 
@@ -1237,16 +1251,20 @@ static bool Update(wchar_t *cmdLine)
 
 	for (size_t i = 0; i < packageCount; i++) {
 		if (!AddPackageUpdateFiles(packages, i, tempPath)) {
-			Status(L"Failed to process update packages");
+			Status(L"Update failed: Failed to process update packages");
 			return false;
 		}
 	}
+
+	SendDlgItemMessage(hwndMain, IDC_PROGRESS, PBM_SETMARQUEE, 0, 0);
+	SetWindowLongPtr(hProgress, GWL_STYLE, style);
 
 	/* ------------------------------------- *
 	 * Exit if updates already installed     */
 
 	if (!updates.size()) {
 		Status(L"All available updates are already installed.");
+		SetDlgItemText(hwndMain, IDC_BUTTON, L"Launch OBS");
 		return true;
 	}
 
@@ -1452,8 +1470,10 @@ static DWORD WINAPI UpdateThread(void *arg)
 		if (WaitForSingleObject(cancelRequested, 0) == WAIT_OBJECT_0)
 			Status(L"Update aborted.");
 
-		SendDlgItemMessage(hwndMain, IDC_PROGRESS, PBM_SETSTATE,
-				PBST_ERROR, 0);
+		HWND hProgress = GetDlgItem(hwndMain, IDC_PROGRESS);
+		LONG_PTR style = GetWindowLongPtr(hProgress, GWL_STYLE);
+		SetWindowLongPtr(hProgress, GWL_STYLE, style & ~PBS_MARQUEE);
+		SendMessage(hProgress, PBM_SETSTATE, PBST_ERROR, 0);
 
 		SetDlgItemText(hwndMain, IDC_BUTTON, L"Exit");
 		EnableWindow(GetDlgItem(hwndMain, IDC_BUTTON), true);

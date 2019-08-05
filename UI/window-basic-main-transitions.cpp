@@ -254,6 +254,12 @@ void OBSBasic::TransitionStopped()
 		OBSSource scene = OBSGetStrongRef(swapScene);
 		if (scene)
 			SetCurrentScene(scene);
+
+		// Make sure we re-enable the transition button
+		if (transitionButton)
+			transitionButton->setEnabled(true);
+
+		EnableQuickTransitionWidgets();
 	}
 
 	if (api) {
@@ -294,7 +300,7 @@ void OBSBasic::TransitionToScene(OBSSource source, bool force, bool direct,
 		return;
 
 	OBSWeakSource lastProgramScene;
-	
+
 	if (usingPreviewProgram) {
 		lastProgramScene = programScene;
 		programScene = OBSGetWeakRef(source);
@@ -320,6 +326,12 @@ void OBSBasic::TransitionToScene(OBSSource source, bool force, bool direct,
 
 	OBSSource transition = obs_get_output_source(0);
 	obs_source_release(transition);
+
+	bool stillTransitioning = obs_transition_get_time(transition) < 1.0f;
+
+	// If actively transitioning, block new transitions from starting
+	if (usingPreviewProgram && stillTransitioning)
+		goto cleanup;
 
 	if (force) {
 		obs_transition_set(transition, source);
@@ -355,6 +367,15 @@ void OBSBasic::TransitionToScene(OBSSource source, bool force, bool direct,
 			TransitionFullyStopped();
 	}
 
+	// If transition has begun, disable Transition button
+	if (usingPreviewProgram && stillTransitioning) {
+		if (transitionButton)
+			transitionButton->setEnabled(false);
+
+		DisableQuickTransitionWidgets();
+	}
+
+cleanup:
 	if (usingPreviewProgram && sceneDuplicationMode)
 		obs_scene_release(scene);
 }
@@ -432,7 +453,7 @@ void OBSBasic::AddTransition()
 
 	if (accepted) {
 		if (name.empty()) {
-			OBSMessageBox::information(this,
+			OBSMessageBox::warning(this,
 					QTStr("NoNameEntered.Title"),
 					QTStr("NoNameEntered.Text"));
 			AddTransition();
@@ -441,7 +462,7 @@ void OBSBasic::AddTransition()
 
 		source = FindTransition(name.c_str());
 		if (source) {
-			OBSMessageBox::information(this,
+			OBSMessageBox::warning(this,
 					QTStr("NameExists.Title"),
 					QTStr("NameExists.Text"));
 
@@ -538,7 +559,7 @@ void OBSBasic::RenameTransition()
 
 	if (accepted) {
 		if (name.empty()) {
-			OBSMessageBox::information(this,
+			OBSMessageBox::warning(this,
 					QTStr("NoNameEntered.Title"),
 					QTStr("NoNameEntered.Text"));
 			RenameTransition();
@@ -547,7 +568,7 @@ void OBSBasic::RenameTransition()
 
 		source = FindTransition(name.c_str());
 		if (source) {
-			OBSMessageBox::information(this,
+			OBSMessageBox::warning(this,
 					QTStr("NameExists.Title"),
 					QTStr("NameExists.Text"));
 
@@ -675,6 +696,7 @@ void OBSBasic::SetCurrentScene(OBSSource scene, bool force, bool direct)
 void OBSBasic::CreateProgramDisplay()
 {
 	program = new OBSQTDisplay();
+
 	program->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(program.data(), &QWidget::customContextMenuRequested,
 			this, &OBSBasic::on_program_customContextMenuRequested);
@@ -725,7 +747,7 @@ void OBSBasic::CreateProgramOptions()
 	QHBoxLayout *mainButtonLayout = new QHBoxLayout();
 	mainButtonLayout->setSpacing(2);
 
-	QPushButton *transitionButton = new QPushButton(QTStr("Transition"));
+	transitionButton = new QPushButton(QTStr("Transition"));
 	QHBoxLayout *quickTransitions = new QHBoxLayout();
 	quickTransitions->setSpacing(2);
 
@@ -809,7 +831,7 @@ void OBSBasic::CreateProgramOptions()
 		menu.exec(QCursor::pos());
 	};
 
-	connect(transitionButton, &QAbstractButton::clicked,
+	connect(transitionButton.data(), &QAbstractButton::clicked,
 			this, &OBSBasic::TransitionClicked);
 	connect(addQuickTransition, &QAbstractButton::clicked, onAdd);
 	connect(configTransitions, &QAbstractButton::clicked, onConfig);
@@ -1124,10 +1146,54 @@ void OBSBasic::RefreshQuickTransitions()
 		AddQuickTransitionId(qt.id);
 }
 
+void OBSBasic::DisableQuickTransitionWidgets()
+{
+	if (!IsPreviewProgramMode())
+		return;
+
+	QVBoxLayout *programLayout =
+		reinterpret_cast<QVBoxLayout*>(programOptions->layout());
+
+	for (int idx = 0;; idx++) {
+		QLayoutItem *item = programLayout->itemAt(idx);
+		if (!item)
+			break;
+
+		QWidget *widget = item->widget();
+		if (!widget)
+			continue;
+
+		widget->setEnabled(false);
+	}
+}
+
+void OBSBasic::EnableQuickTransitionWidgets()
+{
+	if (!IsPreviewProgramMode())
+		return;
+
+	QVBoxLayout *programLayout =
+		reinterpret_cast<QVBoxLayout*>(programOptions->layout());
+
+	for (int idx = 0;; idx++) {
+		QLayoutItem *item = programLayout->itemAt(idx);
+		if (!item)
+			break;
+
+		QWidget *widget = item->widget();
+		if (!widget)
+			continue;
+
+		widget->setEnabled(true);
+	}
+}
+
 void OBSBasic::SetPreviewProgramMode(bool enabled)
 {
 	if (IsPreviewProgramMode() == enabled)
 		return;
+
+	ui->previewLabel->setHidden(!enabled);
 
 	ui->modeSwitch->setChecked(enabled);
 	os_atomic_set_bool(&previewProgramMode, enabled);
@@ -1167,10 +1233,31 @@ void OBSBasic::SetPreviewProgramMode(bool enabled)
 
 		RefreshQuickTransitions();
 
+		programLabel = new QLabel(QTStr("StudioMode.Program"));
+		programLabel->setSizePolicy(QSizePolicy::Preferred,
+				QSizePolicy::Preferred);
+		programLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
+		programLabel->setProperty("themeID", "previewProgramLabels");
+
+		programWidget = new QWidget();
+		programLayout = new QVBoxLayout();
+
+		programLayout->setContentsMargins(0, 0, 0, 0);
+		programLayout->setSpacing(0);
+
+		programLayout->addWidget(programLabel);
+		programLayout->addWidget(program);
+
+		bool labels = config_get_bool(GetGlobalConfig(),
+			"BasicWindow", "StudioModeLabels");
+
+		programLabel->setHidden(!labels);
+
+		programWidget->setLayout(programLayout);
+
 		ui->previewLayout->addWidget(programOptions);
-		ui->previewLayout->addWidget(program);
+		ui->previewLayout->addWidget(programWidget);
 		ui->previewLayout->setAlignment(programOptions, Qt::AlignCenter);
-		program->show();
 
 		if (api)
 			api->on_event(OBS_FRONTEND_EVENT_STUDIO_MODE_ENABLED);
@@ -1188,6 +1275,8 @@ void OBSBasic::SetPreviewProgramMode(bool enabled)
 
 		delete programOptions;
 		delete program;
+		delete programLabel;
+		delete programWidget;
 
 		if (lastScene) {
 			OBSSource actualLastScene = OBSGetStrongRef(lastScene);
@@ -1219,6 +1308,8 @@ void OBSBasic::SetPreviewProgramMode(bool enabled)
 
 void OBSBasic::RenderProgram(void *data, uint32_t cx, uint32_t cy)
 {
+	GS_DEBUG_MARKER_BEGIN(GS_DEBUG_COLOR_DEFAULT, "RenderProgram");
+
 	OBSBasic *window = static_cast<OBSBasic*>(data);
 	obs_video_info ovi;
 
@@ -1246,6 +1337,8 @@ void OBSBasic::RenderProgram(void *data, uint32_t cx, uint32_t cy)
 
 	gs_projection_pop();
 	gs_viewport_pop();
+
+	GS_DEBUG_MARKER_END();
 
 	UNUSED_PARAMETER(cx);
 	UNUSED_PARAMETER(cy);
