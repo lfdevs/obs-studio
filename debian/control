@@ -39,7 +39,7 @@ Build-Depends:
  libxcb-xinput-dev,
  libxcomposite-dev,
  libxinerama-dev,
- python-docutils (>= 0.6),
+ python3-docutils (>= 0.6),
  python3-dev,
  qtbase5-dev,
  swig

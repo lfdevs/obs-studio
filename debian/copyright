@@ -129,7 +129,7 @@ License: public-domain
  .
  There's ABSOLUTELY NO WARRANTY, express or implied.
 
-Files: plugins/obs-ffmpeg/nvEncodeAPI.h
+Files: plugins/obs-ffmpeg/external/nvEncodeAPI.h
 Copyright: 2010-2017, NVIDIA Corporation
 License: Expat
 

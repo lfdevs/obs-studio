@@ -5,12 +5,14 @@ Subject: Use common license
 use common license at /usr/share/common-licenses instead of the shipped
 copy
 ---
- UI/window-license-agreement.cpp | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ UI/window-basic-about.cpp | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
+diff --git a/UI/window-basic-about.cpp b/UI/window-basic-about.cpp
+index 73d9bdb..b3e135a 100644
 --- a/UI/window-basic-about.cpp
 +++ b/UI/window-basic-about.cpp
-@@ -149,15 +149,10 @@
+@@ -150,15 +150,10 @@ void OBSAbout::ShowAuthors()
  
  void OBSAbout::ShowLicense()
  {

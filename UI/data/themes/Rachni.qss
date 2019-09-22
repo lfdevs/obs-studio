@@ -507,6 +507,10 @@ QToolButton:pressed {
 	qproperty-icon: url(./Dark/down.svg);
 }
 
+* [themeID="pauseIconSmall"] {
+	qproperty-icon: url(./Dark/media-pause.svg);
+}
+
 /***********************/
 /* --- Combo boxes --- */
 /***********************/
@@ -952,7 +956,8 @@ QPushButton:checked#recordButton,
 QPushButton:checked[themeID="replayBufferButton"],
 QPushButton:checked#modeSwitch,
 QPushButton:checked#settingsButton,
-QPushButton:checked#exitButton {
+QPushButton:checked#exitButton,
+QPushButton:checked[themeID="pauseIconSmall"] {
 	background-color: rgba(240, 98, 146, 0.5); /* Pink (Secondary) */
 	border: 1px solid rgba(240, 98, 146, 0.5); /* Pink (Secondary) */
 }
@@ -1322,4 +1327,16 @@ VisibilityCheckBox::indicator:unchecked:hover {
 
 * [themeID="revertIcon"] {
     qproperty-icon: url(./Dark/revert.svg);
+}
+
+QPushButton#extraPanelDelete {
+    background-color: rgb(35, 38, 41);
+}
+
+QPushButton#extraPanelDelete:hover {
+     background-color: rgba(145, 76, 103);
+}
+
+QPushButton#extraPanelDelete:pressed {
+     background-color: rgb(240, 98, 146);
 }

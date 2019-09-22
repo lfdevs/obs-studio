@@ -9,10 +9,10 @@ Subject: Hide internal symbols
  3 files changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
-index 835c1b3..dff5370 100644
+index 92fb1b9..b324251 100644
 --- a/deps/obs-scripting/CMakeLists.txt
 +++ b/deps/obs-scripting/CMakeLists.txt
-@@ -160,6 +160,18 @@ add_library(obs-scripting SHARED
+@@ -183,6 +183,18 @@ add_library(obs-scripting SHARED
  	${SWIG_LUA_RUNTIME}
  	)
  
@@ -32,10 +32,10 @@ index 835c1b3..dff5370 100644
  	libobs
  	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index bddfa5c..41ed749 100644
+index 8681148..49fffcd 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -463,6 +463,10 @@ if(NOT MSVC)
+@@ -478,6 +478,10 @@ elseif(NOT MSVC)
  			-msse2)
  endif()
  
@@ -47,7 +47,7 @@ index bddfa5c..41ed749 100644
  target_compile_options(libobs
  	PUBLIC
 diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
-index c4ee627..d26b3dd 100644
+index 6ea3534..6a99b13 100644
 --- a/libobs/util/c99defs.h
 +++ b/libobs/util/c99defs.h
 @@ -46,7 +46,7 @@

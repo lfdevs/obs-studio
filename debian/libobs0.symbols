@@ -37,6 +37,8 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_preview_program_trigger_transition@Base 23.2.1
  obs_frontend_push_ui_translation@Base 18.0.1
  obs_frontend_recording_active@Base 18.0.1
+ obs_frontend_recording_pause@Base 24.0.1
+ obs_frontend_recording_paused@Base 24.0.1
  obs_frontend_recording_start@Base 18.0.1
  obs_frontend_recording_stop@Base 18.0.1
  obs_frontend_remove_event_callback@Base 18.0.1
@@ -85,6 +87,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_flush@Base 0.13.2
  device_frustum@Base 0.13.2
  device_get_cull_mode@Base 0.13.2
+ device_get_device_obj@Base 24.0.1
  device_get_height@Base 0.13.2
  device_get_name@Base 0.13.2
  device_get_pixel_shader@Base 0.13.2
@@ -125,6 +128,8 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_stencil_op@Base 0.13.2
  device_swapchain_create@Base 0.13.2
  device_texture_create@Base 0.13.2
+ device_timer_create@Base 24.0.1
+ device_timer_range_create@Base 24.0.1
  device_vertexbuffer_create@Base 0.13.2
  device_vertexshader_create@Base 0.13.2
  device_voltexture_create@Base 0.13.2
@@ -188,6 +193,14 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gs_texture_is_rect@Base 0.13.2
  gs_texture_map@Base 0.13.2
  gs_texture_unmap@Base 0.13.2
+ gs_timer_begin@Base 24.0.1
+ gs_timer_destroy@Base 24.0.1
+ gs_timer_end@Base 24.0.1
+ gs_timer_get_data@Base 24.0.1
+ gs_timer_range_begin@Base 24.0.1
+ gs_timer_range_destroy@Base 24.0.1
+ gs_timer_range_end@Base 24.0.1
+ gs_timer_range_get_data@Base 24.0.1
  gs_vertexbuffer_destroy@Base 0.13.2
  gs_vertexbuffer_flush@Base 0.13.2
  gs_vertexbuffer_flush_direct@Base 21.0.2
@@ -435,6 +448,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_get_context@Base 0.13.2
  gs_get_cull_mode@Base 0.13.2
  gs_get_device_name@Base 0.13.2
+ gs_get_device_obj@Base 24.0.1
  gs_get_device_type@Base 0.13.2
  gs_get_effect@Base 0.13.2
  gs_get_height@Base 0.13.2
@@ -568,6 +582,16 @@ libobs.so.0 libobs0 #MINVER#
  gs_texture_map@Base 0.13.2
  gs_texture_set_image@Base 0.13.2
  gs_texture_unmap@Base 0.13.2
+ gs_timer_begin@Base 24.0.1
+ gs_timer_create@Base 24.0.1
+ gs_timer_destroy@Base 24.0.1
+ gs_timer_end@Base 24.0.1
+ gs_timer_get_data@Base 24.0.1
+ gs_timer_range_begin@Base 24.0.1
+ gs_timer_range_create@Base 24.0.1
+ gs_timer_range_destroy@Base 24.0.1
+ gs_timer_range_end@Base 24.0.1
+ gs_timer_range_get_data@Base 24.0.1
  gs_vertex2f@Base 0.13.2
  gs_vertex2v@Base 0.13.2
  gs_vertex3f@Base 0.13.2
@@ -815,6 +839,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_get_width@Base 0.13.2
  obs_encoder_packet_ref@Base 18.0.1
  obs_encoder_packet_release@Base 18.0.1
+ obs_encoder_paused@Base 24.0.1
  obs_encoder_properties@Base 0.13.2
  obs_encoder_release@Base 0.13.2
  obs_encoder_set_audio@Base 0.13.2
@@ -874,6 +899,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_encoder_codec@Base 0.13.2
  obs_get_encoder_properties@Base 0.13.2
  obs_get_encoder_type@Base 0.13.2
+ obs_get_frame_interval_ns@Base 24.0.1
  obs_get_lagged_frames@Base 19.0.3
  obs_get_locale@Base 0.13.2
  obs_get_main_texture@Base 22.0.3
@@ -999,6 +1025,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_get_mixer@Base 0.13.2
  obs_output_get_mixers@Base 23.2.1
  obs_output_get_name@Base 0.13.2
+ obs_output_get_pause_offset@Base 24.0.1
  obs_output_get_proc_handler@Base 0.13.2
  obs_output_get_ref@Base 0.13.2
  obs_output_get_service@Base 0.13.2
@@ -1014,6 +1041,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_get_width@Base 0.13.2
  obs_output_initialize_encoders@Base 0.13.2
  obs_output_pause@Base 0.13.2
+ obs_output_paused@Base 24.0.1
  obs_output_properties@Base 0.13.2
  obs_output_reconnecting@Base 19.0.3
  obs_output_release@Base 0.13.2
@@ -1142,6 +1170,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_remove_raw_video_callback@Base 22.0.3
  obs_remove_tick_callback@Base 21.0.2
  obs_render_main_texture@Base 21.0.2
+ obs_render_main_texture_src_color_only@Base 24.0.1
  obs_render_main_view@Base 0.13.2
  obs_reset_audio@Base 0.13.2
  obs_reset_video@Base 0.13.2
@@ -1250,6 +1279,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_addref@Base 0.13.2
  obs_source_async_decoupled@Base 21.0.2
  obs_source_async_unbuffered@Base 19.0.3
+ obs_source_audio_active@Base 24.0.1
  obs_source_audio_pending@Base 0.13.2
  obs_source_configurable@Base 0.13.2
  obs_source_copy_filters@Base 19.0.3
@@ -1286,6 +1316,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_frame@Base 0.13.2
  obs_source_get_height@Base 0.13.2
  obs_source_get_id@Base 0.13.2
+ obs_source_get_last_obs_version@Base 24.0.1
  obs_source_get_monitoring_type@Base 18.0.1
  obs_source_get_name@Base 0.13.2
  obs_source_get_output_flags@Base 0.13.2
@@ -1333,6 +1364,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_send_mouse_wheel@Base 0.13.2
  obs_source_set_async_decoupled@Base 21.0.2
  obs_source_set_async_unbuffered@Base 19.0.3
+ obs_source_set_audio_active@Base 24.0.1
  obs_source_set_audio_mixers@Base 0.13.2
  obs_source_set_balance_value@Base 23.2.1
  obs_source_set_default_flags@Base 0.13.2
