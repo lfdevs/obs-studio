@@ -7,14 +7,15 @@ export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed
 export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux\"
 
 %:
-	dh $@
+	dh $@ --with python3,scour
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		-DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH) \
 		-DUNIX_STRUCTURE=1 \
 		-DDISABLE_UPDATE_MODULE=TRUE \
-		-DBUILD_CAPTIONS=0
+		-DBUILD_CAPTIONS=0 \
+		-DOBS_VERSION_OVERRIDE=${DEB_VERSION}
 
 override_dh_auto_build:
 	dh_auto_build
@@ -30,3 +31,6 @@ override_dh_install:
 override_dh_shlibdeps:
 	echo "libobs 0 libobs0 (= ${DEB_VERSION})" > debian/shlibs.local
 	dh_shlibdeps
+
+override_dh_python3:
+	dh_python3 -p obs-plugins usr/share/obs/obs-plugins/frontend-tools/scripts

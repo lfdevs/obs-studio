@@ -1,3 +1,19 @@
+obs-studio (24.0.3+dfsg1-2) unstable; urgency=medium
+
+  [ Olivier Humbert ]
+  * Update copyright (http -> https)
+
+  [ Sebastian Ramacher ]
+  * debian/control: Set RRR: no
+  * debian/:
+    - Byte-compile Python scripts (Closes: #943858)
+    - Compress SVGs with scour
+
+  [ Kurt Kartaltepe ]
+  * Set version number (Closes: #940712)
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 18 Nov 2019 20:45:56 +0100
+
 obs-studio (24.0.3+dfsg1-1) unstable; urgency=medium
 
   * New upstream release
