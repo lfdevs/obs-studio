@@ -1,3 +1,10 @@
+obs-studio (24.0.5+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules: Also byte-compile Python scripts in obs-studio
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 10 Dec 2019 20:38:14 +0100
+
 obs-studio (24.0.3+dfsg1-2) unstable; urgency=medium
 
   [ Olivier Humbert ]
