@@ -1,3 +1,10 @@
+obs-studio (24.0.6+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control: Add missing B-Ds after changes in mesa
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 24 Dec 2019 10:21:01 +0100
+
 obs-studio (24.0.5+dfsg1-1) unstable; urgency=medium
 
   * New upstream release
