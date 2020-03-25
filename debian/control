@@ -50,14 +50,14 @@ Build-Depends:
  python3-gi-cairo,
  qtbase5-dev,
  swig
-Standards-Version: 4.4.1
+Standards-Version: 4.5.0
 Homepage: https://obsproject.com
 Vcs-Browser: https://salsa.debian.org/multimedia-team/obs-studio
 Vcs-Git: https://salsa.debian.org/multimedia-team/obs-studio.git
 Rules-Requires-Root: no
 
 Package: obs-studio
-Architecture: any-amd64
+Architecture: any
 Depends: obs-plugins (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
 Description: recorder and streamer for live video content
  OBS Studio is designed for efficiently recording and streaming live video
@@ -73,7 +73,7 @@ Description: recorder and streamer for live video content
  Note that OBS Studio requires an OpenGL 3.2 compatible video card.
 
 Package: obs-plugins
-Architecture: any-amd64
+Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
 Recommends: vlc
 Description: recorder and streamer for live video content (plugins)
@@ -85,7 +85,7 @@ Description: recorder and streamer for live video content (plugins)
 Package: libobs0
 Multi-Arch: same
 Section: libs
-Architecture: any-amd64
+Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content (shared library)
  OBS Studio is designed for efficiently recording and streaming live video
@@ -95,7 +95,7 @@ Description: recorder and streamer for live video content (shared library)
 
 Package: libobs-dev
 Section: libdevel
-Architecture: any-amd64
+Architecture: any
 Depends:
  libobs0 (= ${binary:Version}),
  ${misc:Depends}

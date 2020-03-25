@@ -4,15 +4,15 @@ Subject: Hide internal symbols
 
 ---
  deps/obs-scripting/CMakeLists.txt | 12 ++++++++++++
- libobs/CMakeLists.txt             |  4 ++++
+ libobs/CMakeLists.txt             |  5 +++++
  libobs/util/c99defs.h             |  2 +-
- 3 files changed, 17 insertions(+), 1 deletion(-)
+ 3 files changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
-index 92fb1b9..b324251 100644
+index 0421ec9..165b2d9 100644
 --- a/deps/obs-scripting/CMakeLists.txt
 +++ b/deps/obs-scripting/CMakeLists.txt
-@@ -183,6 +183,18 @@ add_library(obs-scripting SHARED
+@@ -193,6 +193,18 @@ add_library(obs-scripting SHARED
  	${SWIG_LUA_RUNTIME}
  	)
  
@@ -32,30 +32,31 @@ index 92fb1b9..b324251 100644
  	libobs
  	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 8681148..49fffcd 100644
+index 84889e6..5ebd1eb 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -478,6 +478,10 @@ elseif(NOT MSVC)
- 			-msse2)
- endif()
+@@ -481,6 +481,11 @@ target_compile_options(libobs
+ 	PUBLIC
+ 	${ARCH_SIMD_FLAGS})
  
 +if(UNIX)
 +	set_source_files_properties(${libobs_SOURCES} PROPERTIES
 +			COMPILE_FLAGS "-fvisibility=hidden")
 +endif()
- 
++
  target_compile_options(libobs
  	PUBLIC
+ 		"${THREADS_DEFINITIONS}")
 diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
-index 6ea3534..6a99b13 100644
+index f84432a..1fb4821 100644
 --- a/libobs/util/c99defs.h
 +++ b/libobs/util/c99defs.h
-@@ -46,7 +46,7 @@
- 
+@@ -34,7 +34,7 @@
+ #ifdef _MSC_VER
  #define EXPORT __declspec(dllexport)
  #else
 -#define EXPORT
 +#define EXPORT __attribute__((visibility("default")))
  #endif
  
- #if _MSC_VER && _MSC_VER < 0x0708
+ #include <stddef.h>

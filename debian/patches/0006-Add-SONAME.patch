@@ -7,10 +7,10 @@ Subject: Add SONAME
  1 file changed, 5 insertions(+)
 
 diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
-index b324251..21023ea 100644
+index 165b2d9..506abf2 100644
 --- a/deps/obs-scripting/CMakeLists.txt
 +++ b/deps/obs-scripting/CMakeLists.txt
-@@ -195,6 +195,11 @@ if(UNIX)
+@@ -205,6 +205,11 @@ if(UNIX)
  	PROPERTIES COMPILE_FLAGS "-fvisibility=hidden")
  endif()
  

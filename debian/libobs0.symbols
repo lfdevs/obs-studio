@@ -31,6 +31,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_system_tray@Base 23.2.1
  obs_frontend_get_transition_duration@Base 23.2.1
  obs_frontend_get_transitions@Base 18.0.1
+ obs_frontend_open_projector@Base 25.0.3+dfsg1
  obs_frontend_pop_ui_translation@Base 18.0.1
  obs_frontend_preview_enabled@Base 21.0.2
  obs_frontend_preview_program_mode_active@Base 21.0.2
@@ -64,6 +65,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_streaming_stop@Base 18.0.1
 libobs-opengl.so.0 libobs0 #MINVER#
  convert_sampler_info@Base 0.13.2
+ device_begin_frame@Base 25.0.3+dfsg1
  device_begin_scene@Base 0.13.2
  device_blend_function@Base 0.13.2
  device_blend_function_separate@Base 0.13.2
@@ -135,6 +137,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_voltexture_create@Base 0.13.2
  device_zstencil_create@Base 0.13.2
  get_fbo@Base 0.13.2
+ gl_clear_context@Base 25.0.3+dfsg1
  gl_copy_texture@Base 0.13.2
  gl_create_buffer@Base 0.13.2
  gl_getclientsize@Base 0.13.2
@@ -380,6 +383,7 @@ libobs.so.0 libobs0 #MINVER#
  get_address_mode@Base 0.13.2
  get_sample_filter@Base 0.13.2
  get_shader_param_type@Base 0.13.2
+ gs_begin_frame@Base 25.0.3+dfsg1
  gs_begin_scene@Base 0.13.2
  gs_blend_function@Base 0.13.2
  gs_blend_function_separate@Base 0.13.2
@@ -842,6 +846,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_paused@Base 24.0.1
  obs_encoder_properties@Base 0.13.2
  obs_encoder_release@Base 0.13.2
+ obs_encoder_scaling_enabled@Base 25.0.3+dfsg1
  obs_encoder_set_audio@Base 0.13.2
  obs_encoder_set_name@Base 0.13.2
  obs_encoder_set_preferred_video_format@Base 0.13.2
@@ -856,6 +861,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_enum_filter_types@Base 0.13.2
  obs_enum_hotkey_bindings@Base 0.13.2
  obs_enum_hotkeys@Base 0.13.2
+ obs_enum_input_types2@Base 25.0.3+dfsg1
  obs_enum_input_types@Base 0.13.2
  obs_enum_modules@Base 0.13.2
  obs_enum_output_types@Base 0.13.2
@@ -901,6 +907,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_encoder_type@Base 0.13.2
  obs_get_frame_interval_ns@Base 24.0.1
  obs_get_lagged_frames@Base 19.0.3
+ obs_get_latest_input_type_id@Base 25.0.3+dfsg1
  obs_get_locale@Base 0.13.2
  obs_get_main_texture@Base 22.0.3
  obs_get_master_volume@Base 0.13.2
@@ -930,6 +937,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_video@Base 0.13.2
  obs_get_video_frame_time@Base 0.13.2
  obs_get_video_info@Base 0.13.2
+ obs_group_from_source@Base 25.0.3+dfsg1
  obs_hotkey_binding_get_hotkey@Base 0.13.2
  obs_hotkey_binding_get_hotkey_id@Base 0.13.2
  obs_hotkey_binding_get_key_combination@Base 0.13.2
@@ -1158,9 +1166,12 @@ libobs.so.0 libobs0 #MINVER#
  obs_property_set_modified_callback2@Base 21.0.2
  obs_property_set_modified_callback@Base 0.13.2
  obs_property_set_visible@Base 0.13.2
+ obs_property_text_monospace@Base 25.0.3+dfsg1
+ obs_property_text_set_monospace@Base 25.0.3+dfsg1
  obs_property_text_type@Base 21.1.2
  obs_property_visible@Base 0.13.2
  obs_proprety_text_type@Base 0.13.2
+ obs_queue_task@Base 25.0.3+dfsg1
  obs_register_encoder_s@Base 0.13.2
  obs_register_output_s@Base 0.13.2
  obs_register_service_s@Base 0.13.2
@@ -1178,6 +1189,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_save_sources@Base 0.13.2
  obs_save_sources_filtered@Base 0.13.2
  obs_scene_add@Base 0.13.2
+ obs_scene_add_group2@Base 25.0.3+dfsg1
  obs_scene_add_group@Base 22.0.3
  obs_scene_addref@Base 0.13.2
  obs_scene_atomic_update@Base 0.13.2
@@ -1187,9 +1199,11 @@ libobs.so.0 libobs0 #MINVER#
  obs_scene_enum_items@Base 0.13.2
  obs_scene_find_sceneitem_by_id@Base 19.0.3
  obs_scene_find_source@Base 0.13.2
+ obs_scene_find_source_recursive@Base 25.0.3+dfsg1
  obs_scene_from_source@Base 0.13.2
  obs_scene_get_group@Base 22.0.3
  obs_scene_get_source@Base 0.13.2
+ obs_scene_insert_group2@Base 25.0.3+dfsg1
  obs_scene_insert_group@Base 22.0.3
  obs_scene_is_group@Base 22.0.3
  obs_scene_release@Base 0.13.2
@@ -1223,6 +1237,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_group_enum_items@Base 22.0.3
  obs_sceneitem_group_get_scene@Base 22.0.3
  obs_sceneitem_group_remove_item@Base 22.0.3
+ obs_sceneitem_group_ungroup2@Base 25.0.3+dfsg1
  obs_sceneitem_group_ungroup@Base 22.0.3
  obs_sceneitem_is_group@Base 22.0.3
  obs_sceneitem_locked@Base 21.0.2
@@ -1272,6 +1287,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_set_master_volume@Base 0.13.2
  obs_set_output_source@Base 0.13.2
  obs_set_private_data@Base 22.0.3
+ obs_set_ui_task_handler@Base 25.0.3+dfsg1
  obs_shutdown@Base 0.13.2
  obs_source_active@Base 0.13.2
  obs_source_add_active_child@Base 0.13.2
@@ -1315,6 +1331,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_flags@Base 0.13.2
  obs_source_get_frame@Base 0.13.2
  obs_source_get_height@Base 0.13.2
+ obs_source_get_icon_type@Base 25.0.3+dfsg1
  obs_source_get_id@Base 0.13.2
  obs_source_get_last_obs_version@Base 24.0.1
  obs_source_get_monitoring_type@Base 18.0.1
@@ -1331,6 +1348,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_sync_offset@Base 0.13.2
  obs_source_get_type@Base 0.13.2
  obs_source_get_type_data@Base 0.13.2
+ obs_source_get_unversioned_id@Base 25.0.3+dfsg1
  obs_source_get_volume@Base 0.13.2
  obs_source_get_weak_source@Base 0.13.2
  obs_source_get_width@Base 0.13.2
@@ -1338,6 +1356,17 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_inc_showing@Base 0.13.2
  obs_source_is_group@Base 22.0.3
  obs_source_load@Base 22.0.3
+ obs_source_media_ended@Base 25.0.3+dfsg1
+ obs_source_media_get_duration@Base 25.0.3+dfsg1
+ obs_source_media_get_state@Base 25.0.3+dfsg1
+ obs_source_media_get_time@Base 25.0.3+dfsg1
+ obs_source_media_next@Base 25.0.3+dfsg1
+ obs_source_media_play_pause@Base 25.0.3+dfsg1
+ obs_source_media_previous@Base 25.0.3+dfsg1
+ obs_source_media_restart@Base 25.0.3+dfsg1
+ obs_source_media_set_time@Base 25.0.3+dfsg1
+ obs_source_media_started@Base 25.0.3+dfsg1
+ obs_source_media_stop@Base 25.0.3+dfsg1
  obs_source_muted@Base 0.13.2
  obs_source_output_audio@Base 0.13.2
  obs_source_output_video2@Base 23.2.1
@@ -1363,6 +1392,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_send_mouse_move@Base 0.13.2
  obs_source_send_mouse_wheel@Base 0.13.2
  obs_source_set_async_decoupled@Base 21.0.2
+ obs_source_set_async_rotation@Base 25.0.3+dfsg1
  obs_source_set_async_unbuffered@Base 19.0.3
  obs_source_set_audio_active@Base 24.0.1
  obs_source_set_audio_mixers@Base 0.13.2
@@ -1399,6 +1429,8 @@ libobs.so.0 libobs0 #MINVER#
  obs_transition_get_time@Base 21.0.2
  obs_transition_set@Base 0.13.2
  obs_transition_set_alignment@Base 0.13.2
+ obs_transition_set_manual_time@Base 25.0.3+dfsg1
+ obs_transition_set_manual_torque@Base 25.0.3+dfsg1
  obs_transition_set_scale_type@Base 0.13.2
  obs_transition_set_size@Base 0.13.2
  obs_transition_start@Base 0.13.2

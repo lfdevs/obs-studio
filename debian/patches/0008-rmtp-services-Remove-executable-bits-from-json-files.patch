@@ -1,0 +1,17 @@
+From: Sebastian Ramacher <sramacher@debian.org>
+Date: Wed, 25 Mar 2020 21:58:13 +0100
+Subject: rmtp-services: Remove executable bits from json files
+
+---
+ plugins/rtmp-services/data/package.json  | 0
+ plugins/rtmp-services/data/services.json | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ mode change 100755 => 100644 plugins/rtmp-services/data/package.json
+ mode change 100755 => 100644 plugins/rtmp-services/data/services.json
+
+diff --git a/plugins/rtmp-services/data/package.json b/plugins/rtmp-services/data/package.json
+old mode 100755
+new mode 100644
+diff --git a/plugins/rtmp-services/data/services.json b/plugins/rtmp-services/data/services.json
+old mode 100755
+new mode 100644

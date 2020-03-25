@@ -51,7 +51,6 @@ Files: cmake/Modules/FindJack.cmake
        libobs/util/profiler.c
        libobs/util/profiler.h
        libobs/util/profiler.hpp
-       libobs/util/vc/*
 Copyright: 2006, Alexander Chemeris
            2008, Andreas Schneider <mail@cynapses.org>
            2011, Fredrik Höglund <fredrik@kde.org>
@@ -88,16 +87,23 @@ Copyright: 1998, Ben Elliston
            1998-2001, Ross Johnson
 License: LGPL-2.1+
 
-Files: libobs/util/vc/vc_stdint.h
-Copyright: none
-License: public-domain
- This source code is offered for use in the public domain. You may
- use, modify or distribute it freely.
- .
- This code is distributed in the hope that it will be useful but
- WITHOUT ANY WARRANTY. ALL WARRANTIES, EXPRESS OR IMPLIED ARE HEREBY
- DISCLAIMED. This includes but is not limited to warranties of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Files: libobs/util/simde/*
+Copyright: 2017-2018, Evan Nemerson <evan@nemerson.com>
+           2015-2017, John W. Ratcliff <jratcliffscarab@gmail.com>
+           2015, Brandon Rowlett <browlett@nvidia.com>
+           2015, Ken Fast <kfast@gdeb.com>
+           2017, Hasindu Gamaarachchi <hasindu@unsw.edu.au>
+           2018, Jeff Daily <jeff.daily@amd.com>
+License: Expat
+
+Files: libobs/util/simde/check.h
+       libobs/util/simde/hedley.h
+       libobs/util/simde/simde-arch.h
+       libobs/util/simde/simde-common.h
+Copyright: 2017-2018, Evan Nemerson <evan@nemerson.com>
+License: CC0-1.0
+ On Debian systems, the complete text of the Creative Commons 1.0 Universal
+ License can be found in "/usr/share/common-licenses/CC0-1.0".
 
 Files: plugins/decklink/linux/decklink-sdk/*
        plugins/decklink/mac/decklink-sdk/*

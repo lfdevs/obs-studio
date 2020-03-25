@@ -7,7 +7,7 @@ Subject: Link with xcb and X libraries to fix underlinking
  1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 5f48eb2..3acb58c 100644
+index 21f3522..bfb74f3 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
 @@ -13,8 +13,8 @@ endif()
@@ -21,7 +21,7 @@ index 5f48eb2..3acb58c 100644
  		if (XCB_XINPUT_FOUND)
  			set(USE_XINPUT "1")
  		else()
-@@ -199,12 +199,17 @@ elseif(UNIX)
+@@ -211,12 +211,17 @@ elseif(UNIX)
  	endif()
  
  	include_directories(
