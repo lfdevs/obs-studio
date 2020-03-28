@@ -1,3 +1,9 @@
+obs-studio (25.0.3+dfsg1-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 28 Mar 2020 12:16:12 +0100
+
 obs-studio (25.0.3+dfsg1-1) experimental; urgency=medium
 
   * New upstream release
