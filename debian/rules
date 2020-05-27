@@ -5,6 +5,8 @@ include /usr/share/dpkg/pkg-info.mk
 
 export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed
 export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux\"
+export DEB_CFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
+export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 
 %:
 	dh $@
@@ -35,3 +37,6 @@ override_dh_shlibdeps:
 override_dh_python3:
 	dh_python3 -p obs-plugins usr/share/obs/obs-plugins/frontend-tools/scripts
 	dh_python3 -p obs-studio usr/lib/$(DEB_HOST_MULTIARCH)/obs-scripting
+
+override_dh_gencontrol:
+	dh_gencontrol -- -Vsimde:Built-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W "libsimde-dev")"

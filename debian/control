@@ -7,7 +7,7 @@ Uploaders:
  Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
  cmake,
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
  dh-sequence-python3,
  dh-sequence-scour,
  gir1.2-rsvg-2.0,
@@ -29,6 +29,7 @@ Build-Depends:
  libpulse-dev,
  libqt5svg5-dev,
  libqt5x11extras5-dev,
+ libsimde-dev,
  libspeexdsp-dev,
  libswresample-dev,
  libswscale-dev,
@@ -74,6 +75,7 @@ Description: recorder and streamer for live video content
 
 Package: obs-plugins
 Architecture: any
+Built-Using: ${simde:Built-Using}
 Depends: ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
 Recommends: vlc
 Description: recorder and streamer for live video content (plugins)
@@ -86,6 +88,7 @@ Package: libobs0
 Multi-Arch: same
 Section: libs
 Architecture: any
+Built-Using: ${simde:Built-Using}
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: recorder and streamer for live video content (shared library)
  OBS Studio is designed for efficiently recording and streaming live video

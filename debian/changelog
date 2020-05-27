@@ -1,3 +1,28 @@
+obs-studio (25.0.8+dfsg1-1) unstable; urgency=medium
+
+  [ Michael R. Crusoe ]
+  * debian/patches:
+     - Use the SIMD Everywhere headers from libsimde-dev, instead of upstream's
+       code copy
+  * debian/control
+     - Build-dep on libsimde-dev
+     - Add "Built-Using: ${simde:Built-Using}" to libobs0 & obs-plugins to
+       document the version of libsimde-dev used, as required to keep that
+       version in the Debian archive, which is needed to fulfill the GPL
+       (Closes: 959719)
+  * debian/copyright:
+     - exclude libobs/util/simde/* as we will use the files from libsimde-dev
+  * debian/rules:
+     - Include the recommended flags for SIMDe, especially important for
+       non-X86 architectures
+
+  [ Sebastian Ramacher ]
+  * New upstream version release
+  * debian/libobs0.symbols: Add new symbols
+  * debian/control: Bump debhelper compat to 13
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 27 May 2020 22:57:51 +0200
+
 obs-studio (25.0.3+dfsg1-2) unstable; urgency=medium
 
   * Upload to unstable

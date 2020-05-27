@@ -6,3 +6,4 @@
 0006-Add-SONAME.patch
 0007-Do-not-build-with-SSE2-enabled-on-i386.patch
 0008-rmtp-services-Remove-executable-bits-from-json-files.patch
+0009-use-libsimde-dev.patch

@@ -1,0 +1,13 @@
+Author: Michael R. Crusoe <michael.crusoe@gmail.com>
+Subject: Use the simd everywhere headers from libsimde-dev
+--- obs-studio.orig/libobs/util/sse-intrin.h
++++ obs-studio/libobs/util/sse-intrin.h
+@@ -19,7 +19,7 @@
+ 
+ #if NEEDS_SIMDE
+ 
+-#include "simde/sse2.h"
++#include <simde/x86/sse2.h>
+ 
+ #define __m128 simde__m128
+ #define _mm_setzero_ps simde_mm_setzero_ps
