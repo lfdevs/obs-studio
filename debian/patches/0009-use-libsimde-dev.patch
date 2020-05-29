@@ -11,3 +11,19 @@ Subject: Use the simd everywhere headers from libsimde-dev
  
  #define __m128 simde__m128
  #define _mm_setzero_ps simde_mm_setzero_ps
+--- obs-studio.orig/libobs/CMakeLists.txt
++++ obs-studio/libobs/CMakeLists.txt
+@@ -186,13 +186,6 @@
+ 
+ 	if(NEEDS_SIMDE)
+ 		set(libobs_PLATFORM_HEADERS
+-			util/simde/check.h
+-			util/simde/hedley.h
+-			util/simde/mmx.h
+-			util/simde/simde-arch.h
+-			util/simde/simde-common.h
+-			util/simde/sse.h
+-			util/simde/sse2.h
+ 			util/threading-posix.h)
+ 	else()
+ 		set(libobs_PLATFORM_HEADERS

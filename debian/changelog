@@ -1,3 +1,11 @@
+obs-studio (25.0.8+dfsg1-2) unstable; urgency=medium
+
+  [ Michael R. Crusoe ]
+  * debian/patches/0009-use-libsimde-dev.patch: update to remove last
+    references to the bundled simde paths (Closes: #961779)
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Fri, 29 May 2020 11:41:57 +0200
+
 obs-studio (25.0.8+dfsg1-1) unstable; urgency=medium
 
   [ Michael R. Crusoe ]
