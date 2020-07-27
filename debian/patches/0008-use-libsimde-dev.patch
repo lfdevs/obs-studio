@@ -1,0 +1,40 @@
+From: "Michael R. Crusoe" <michael.crusoe@gmail.com>
+Date: Mon, 27 Jul 2020 12:46:48 +0200
+Subject: Use the simd everywhere headers from libsimde-dev
+
+---
+ libobs/CMakeLists.txt    | 7 -------
+ libobs/util/sse-intrin.h | 2 +-
+ 2 files changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
+index 8f12482..d42702f 100644
+--- a/libobs/CMakeLists.txt
++++ b/libobs/CMakeLists.txt
+@@ -186,13 +186,6 @@ elseif(UNIX)
+ 
+ 	if(NEEDS_SIMDE)
+ 		set(libobs_PLATFORM_HEADERS
+-			util/simde/check.h
+-			util/simde/hedley.h
+-			util/simde/mmx.h
+-			util/simde/simde-arch.h
+-			util/simde/simde-common.h
+-			util/simde/sse.h
+-			util/simde/sse2.h
+ 			util/threading-posix.h)
+ 	else()
+ 		set(libobs_PLATFORM_HEADERS
+diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
+index 8136c92..bde2029 100644
+--- a/libobs/util/sse-intrin.h
++++ b/libobs/util/sse-intrin.h
+@@ -19,7 +19,7 @@
+ 
+ #if NEEDS_SIMDE
+ 
+-#include "simde/sse2.h"
++#include <simde/x86/sse2.h>
+ 
+ #define __m128 simde__m128
+ #define _mm_setzero_ps simde_mm_setzero_ps

@@ -5,5 +5,5 @@
 0005-Link-with-xcb-and-X-libraries-to-fix-underlinking.patch
 0006-Add-SONAME.patch
 0007-Do-not-build-with-SSE2-enabled-on-i386.patch
-0008-rmtp-services-Remove-executable-bits-from-json-files.patch
-0009-use-libsimde-dev.patch
+0008-use-libsimde-dev.patch
+0009-deps-glad-Fix-build-with-GCC-10.patch

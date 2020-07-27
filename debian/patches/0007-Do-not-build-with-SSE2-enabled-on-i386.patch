@@ -7,10 +7,10 @@ Subject: Do not build with SSE2 enabled on i386
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5ea2c5f..95b49b4 100644
+index b56c2bb..1dabd39 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -113,7 +113,7 @@ else ()
+@@ -118,7 +118,7 @@ else ()
      string(TOLOWER ${CMAKE_SYSTEM_PROCESSOR} LOWERCASE_CMAKE_SYSTEM_PROCESSOR)
  endif ()
  
