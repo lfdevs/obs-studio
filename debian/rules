@@ -3,7 +3,6 @@
 include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
 
-export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed
 export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux\"
 export DEB_CFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
@@ -14,13 +13,12 @@ export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		-DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH) \
-		-DUNIX_STRUCTURE=1 \
+		-DUNIX_STRUCTURE=TRUE \
 		-DDISABLE_UPDATE_MODULE=TRUE \
-		-DBUILD_CAPTIONS=0 \
+		-DBUILD_CAPTIONS=ON \
 		-DOBS_VERSION_OVERRIDE=${DEB_VERSION}
 
-override_dh_auto_build:
-	dh_auto_build
+execute_after_dh_auto_build:
 	rst2man debian/obs.rst > debian/obs.1
 
 override_dh_install:
@@ -30,12 +28,11 @@ override_dh_install:
 	dh_install
 	rm -rf debian/obs-studio/usr/share/obs/obs-studio/license
 
-override_dh_shlibdeps:
+execute_before_dh_shlibdeps:
 	echo "libobs 0 libobs0 (= ${DEB_VERSION})" > debian/shlibs.local
-	dh_shlibdeps
 
 override_dh_python3:
-	dh_python3 -p obs-plugins usr/share/obs/obs-plugins/frontend-tools/scripts
+	dh_python3 -p obs-studio usr/share/obs/obs-plugins/frontend-tools/scripts
 	dh_python3 -p obs-studio usr/lib/$(DEB_HOST_MULTIARCH)/obs-scripting
 
 override_dh_gencontrol:

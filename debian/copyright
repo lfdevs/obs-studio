@@ -2,14 +2,14 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: obs-studio
 Source: https://obsproject.com
 Files-Excluded:
- plugins/win-*
- deps/w32-pthreads/need_errno.h
- deps/jansson/*
+ CI/scripts/macos/app/*
  deps/blake2/*
+ deps/jansson/*
  deps/lzma/*
- deps/libcaption/*
- plugins/obs-qsv11/*
+ deps/w32-pthreads/need_errno.h
  libobs/util/simde/*
+ plugins/obs-qsv11/*
+ plugins/win-*
 
 Files: *
 Copyright: 2013-2017, Hugh Bailey <obs.jim@gmail.com>
@@ -68,6 +68,10 @@ License: GPL-2+
 
 Files: deps/glad/include/KHR/*
 Copyright: 2008-2009, The Khronos Group Inc
+License: Expat
+
+Files: deps/libcaption/*
+Copyright: 2016-2017, Twitch Interactive Inc. or its affiliates
 License: Expat
 
 Files: deps/w32-pthreads/*

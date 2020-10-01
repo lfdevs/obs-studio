@@ -3,37 +3,39 @@ Date: Wed, 19 Apr 2017 23:02:17 +0200
 Subject: Link with xcb and X libraries to fix underlinking
 
 ---
- libobs/CMakeLists.txt | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ libobs/CMakeLists.txt | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index a562a88..8f12482 100644
+index 22c5f9b..b010101 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -13,8 +13,8 @@ endif()
+@@ -13,9 +13,8 @@ endif()
  
  if(UNIX)
  	if (NOT APPLE)
++		find_package(XCB COMPONENTS XCB REQUIRED OPTIONAL_COMPONENTS XINPUT)
+ 		find_package(X11 REQUIRED)
 -		find_package(X11_XCB REQUIRED)
 -		find_package(XCB OPTIONAL_COMPONENTS XINPUT)
-+		find_package(XCB COMPONENTS XCB REQUIRED OPTIONAL_COMPONENTS XINPUT)
-+		find_package(X11 REQUIRED)
  		if (XCB_XINPUT_FOUND)
  			set(USE_XINPUT "1")
  		else()
-@@ -221,12 +221,17 @@ elseif(UNIX)
+@@ -222,14 +221,18 @@ elseif(UNIX)
  	endif()
  
  	include_directories(
--		${X11_XCB_INCLUDE_DIRS})
+-		${X11_X11_INCLUDE_PATH}
 +		${XCB_INCLUDE_DIRS}
-+		${X11_XCB_INCLUDE_DIRS}
-+		${X11_X11_INCLUDE_DIRS})
++		${X11_X11_INCLUDE_DIRS}
+ 		${X11_XCB_INCLUDE_DIRS})
++		
  	add_definitions(
 +		${XCB_DEFINITIONS}
  		${X11_XCB_DEFINITIONS})
  	set(libobs_PLATFORM_DEPS
  		${libobs_PLATFORM_DEPS}
+-		${X11_X11_LIB}
 -		${X11_XCB_LIBRARIES})
 +		${XCB_LIBRARIES}
 +		${X11_XCB_LIBRARIES}

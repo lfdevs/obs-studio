@@ -1,3 +1,17 @@
+obs-studio (26.0.0+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/copyright:
+    - Filter scripts for building the macOS app
+    - Don't strip libcaption
+    - Document libcaption license
+  * debian/rules: Build with caption support (Closes: #971405)
+  * debian/patches: Refresh
+  * debian/libobs0.symbols: Add new symbols
+  * debian/: Only keep extra plugins in obs-plugins
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 01 Oct 2020 23:28:53 +0200
+
 obs-studio (25.0.8+dfsg1-3) unstable; urgency=medium
 
   * debian/patches: Apply upstream patch to fix build with GCC 10

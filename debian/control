@@ -59,7 +59,10 @@ Rules-Requires-Root: no
 
 Package: obs-studio
 Architecture: any
-Depends: obs-plugins (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
+Recommends: obs-plugins (= ${binary:Version})
+Breaks: obs-plugins (<< 26.0.0+dfsg1-1)
+Replaces: obs-plugins (<< 26.0.0+dfsg1-1)
 Description: recorder and streamer for live video content
  OBS Studio is designed for efficiently recording and streaming live video
  content. It supports live RTP streaming to various streaming sites.
@@ -76,13 +79,13 @@ Description: recorder and streamer for live video content
 Package: obs-plugins
 Architecture: any
 Built-Using: ${simde:Built-Using}
-Depends: ${misc:Depends}, ${shlibs:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: vlc
 Description: recorder and streamer for live video content (plugins)
  OBS is designed for efficiently recording and streaming live video content. It
  supports live RTP streaming to various streaming sites.
  .
- This package contains the plugins.
+ This package contains some extra plugins (ALSA, jack, decklink, vlc).
 
 Package: libobs0
 Multi-Arch: same
