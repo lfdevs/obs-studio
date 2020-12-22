@@ -1,3 +1,15 @@
+obs-studio (26.1.0+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+    - Add virtual camera output (Closes: #960342)
+  * debian/control:
+    - Bump Standards-Version
+    - Suggest v4l2loopback-dkms for virtal camera output
+  * debian/obs-plugins.install: Install decklink-captions plugin
+  * debian/libobs0.symbols: Add new symbols
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 22 Dec 2020 19:14:16 +0100
+
 obs-studio (26.0.2+dfsg1-1) unstable; urgency=medium
 
   * New upstream release

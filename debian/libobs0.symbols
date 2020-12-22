@@ -279,6 +279,10 @@ libobs.so.0 libobs0 #MINVER#
  base_set_log_handler@Base 0.13.2
  bcrash@Base 0.13.2
  bfree@Base 0.13.2
+ bitstream_reader_init@Base 26.1.0
+ bitstream_reader_r16@Base 26.1.0
+ bitstream_reader_r8@Base 26.1.0
+ bitstream_reader_read_bits@Base 26.1.0
  blog@Base 0.13.2
  blogva@Base 0.13.2
  bmalloc@Base 0.13.2
@@ -1083,6 +1087,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_output_begin_data_capture@Base 0.13.2
  obs_output_can_begin_data_capture@Base 0.13.2
  obs_output_can_pause@Base 0.13.2
+ obs_output_caption@Base 26.1.0
  obs_output_create@Base 0.13.2
  obs_output_defaults@Base 0.13.2
  obs_output_end_data_capture@Base 0.13.2
@@ -1338,11 +1343,14 @@ libobs.so.0 libobs0 #MINVER#
  obs_service_get_display_name@Base 0.13.2
  obs_service_get_id@Base 0.13.2
  obs_service_get_key@Base 0.13.2
+ obs_service_get_max_bitrate@Base 26.1.0
+ obs_service_get_max_fps@Base 26.1.0
  obs_service_get_name@Base 0.13.2
  obs_service_get_output_type@Base 21.0.2
  obs_service_get_password@Base 0.13.2
  obs_service_get_ref@Base 0.13.2
  obs_service_get_settings@Base 0.13.2
+ obs_service_get_supported_resolutions@Base 26.1.0
  obs_service_get_type@Base 0.13.2
  obs_service_get_type_data@Base 0.13.2
  obs_service_get_url@Base 0.13.2
@@ -1362,6 +1370,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_active@Base 0.13.2
  obs_source_add_active_child@Base 0.13.2
  obs_source_add_audio_capture_callback@Base 0.13.2
+ obs_source_add_caption_callback@Base 26.1.0
  obs_source_addref@Base 0.13.2
  obs_source_async_decoupled@Base 21.0.2
  obs_source_async_unbuffered@Base 19.0.3
@@ -1369,6 +1378,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_audio_pending@Base 0.13.2
  obs_source_configurable@Base 0.13.2
  obs_source_copy_filters@Base 19.0.3
+ obs_source_copy_single_filter@Base 26.1.0
  obs_source_create@Base 0.13.2
  obs_source_create_private@Base 0.13.2
  obs_source_dec_active@Base 23.2.1
@@ -1439,6 +1449,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_media_stop@Base 25.0.3
  obs_source_muted@Base 0.13.2
  obs_source_output_audio@Base 0.13.2
+ obs_source_output_cea708@Base 26.1.0
  obs_source_output_video2@Base 23.2.1
  obs_source_output_video@Base 0.13.2
  obs_source_preload_video2@Base 23.2.1
@@ -1454,6 +1465,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_remove@Base 0.13.2
  obs_source_remove_active_child@Base 0.13.2
  obs_source_remove_audio_capture_callback@Base 0.13.2
+ obs_source_remove_caption_callback@Base 26.1.0
  obs_source_removed@Base 0.13.2
  obs_source_save@Base 22.0.3
  obs_source_send_focus@Base 0.13.2

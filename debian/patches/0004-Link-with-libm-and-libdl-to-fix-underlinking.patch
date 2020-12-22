@@ -7,10 +7,10 @@ Subject: Link with libm and libdl to fix underlinking
  1 file changed, 5 insertions(+)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 6e9a7d1..22c5f9b 100644
+index 633d879..a367759 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -247,6 +247,11 @@ elseif(UNIX)
+@@ -250,6 +250,11 @@ elseif(UNIX)
  			${PULSEAUDIO_LIBRARY})
  	endif()
  

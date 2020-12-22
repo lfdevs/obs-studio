@@ -1,8 +1,10 @@
+usr/lib/*/obs-plugins/decklink-captions.so
 usr/lib/*/obs-plugins/decklink-ouput-ui.so
 usr/lib/*/obs-plugins/linux-alsa.so
 usr/lib/*/obs-plugins/linux-decklink.so
 usr/lib/*/obs-plugins/linux-jack.so
 usr/lib/*/obs-plugins/vlc-video.so
+usr/share/obs/obs-plugins/decklink-captions
 usr/share/obs/obs-plugins/decklink-ouput-ui
 usr/share/obs/obs-plugins/linux-alsa
 usr/share/obs/obs-plugins/linux-decklink

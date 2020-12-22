@@ -8,10 +8,10 @@ Subject: Use the simd everywhere headers from libsimde-dev
  2 files changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index b010101..e583753 100644
+index 8dc3ce0..614b41a 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -186,13 +186,6 @@ elseif(UNIX)
+@@ -189,13 +189,6 @@ elseif(UNIX)
  
  	if(NEEDS_SIMDE)
  		set(libobs_PLATFORM_HEADERS
