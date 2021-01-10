@@ -32,10 +32,10 @@ index 42558be..e54f95c 100644
  	libobs
  	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 3d3733f..633d879 100644
+index c32a98b..bbfb85a 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -503,6 +503,11 @@ target_compile_options(libobs
+@@ -508,6 +508,11 @@ target_compile_options(libobs
  	PUBLIC
  	${ARCH_SIMD_FLAGS})
  

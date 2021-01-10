@@ -1,3 +1,16 @@
+obs-studio (26.1.2+dfsg1-1) unstable; urgency=medium
+
+  [ gregor herrmann ]
+  * debian/patches: Help finding modinfo, Closes: #977928
+  * debian/README.Debian: Describe options to configure Virtual Camera output.
+
+  [ Sebastian Ramacher ]
+  * New upstream version releases
+  * debian/patches: Refresh patches
+  * debian/control: Add policykit-1 to Suggests
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 10 Jan 2021 20:13:04 +0100
+
 obs-studio (26.1.0+dfsg1-1) unstable; urgency=medium
 
   * New upstream release

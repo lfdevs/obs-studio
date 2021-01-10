@@ -6,3 +6,4 @@
 0006-Add-SONAME.patch
 0007-Do-not-build-with-SSE2-enabled-on-i386.patch
 0008-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
+0009-v4l2loopback.patch

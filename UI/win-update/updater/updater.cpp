@@ -298,6 +298,8 @@ struct update_t {
 			} else {
 				DeleteFile(outputPath.c_str());
 			}
+			if (state == STATE_INSTALL_FAILED)
+				DeleteFile(tempPath.c_str());
 		} else if (state == STATE_DOWNLOADED) {
 			DeleteFile(tempPath.c_str());
 		}
@@ -337,7 +339,10 @@ static inline void CleanupPartialUpdates()
 
 bool DownloadWorkerThread()
 {
-	const DWORD tlsProtocols = WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2;
+	const DWORD tlsProtocols = WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2 |
+				   WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_3;
+
+	const DWORD enableHTTP2Flag = WINHTTP_PROTOCOL_FLAG_HTTP2;
 
 	HttpHandle hSession = WinHttpOpen(L"OBS Studio Updater/2.1",
 					  WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
@@ -351,6 +356,9 @@ bool DownloadWorkerThread()
 
 	WinHttpSetOption(hSession, WINHTTP_OPTION_SECURE_PROTOCOLS,
 			 (LPVOID)&tlsProtocols, sizeof(tlsProtocols));
+
+	WinHttpSetOption(hSession, WINHTTP_OPTION_ENABLE_HTTP_PROTOCOL,
+			 (LPVOID)&enableHTTP2Flag, sizeof(enableHTTP2Flag));
 
 	HttpHandle hConnect = WinHttpConnect(hSession,
 					     L"cdn-fastly.obsproject.com",
@@ -784,6 +792,41 @@ static void UpdateWithPatchIfAvailable(const char *name, const char *hash,
 	}
 }
 
+static bool MoveInUseFileAway(update_t &file)
+{
+	_TCHAR deleteMeName[MAX_PATH];
+	_TCHAR randomStr[MAX_PATH];
+
+	BYTE junk[40];
+	BYTE hash[BLAKE2_HASH_LENGTH];
+
+	CryptGenRandom(hProvider, sizeof(junk), junk);
+	blake2b(hash, sizeof(hash), junk, sizeof(junk), NULL, 0);
+	HashToString(hash, randomStr);
+	randomStr[8] = 0;
+
+	StringCbCopy(deleteMeName, sizeof(deleteMeName),
+		     file.outputPath.c_str());
+
+	StringCbCat(deleteMeName, sizeof(deleteMeName), L".");
+	StringCbCat(deleteMeName, sizeof(deleteMeName), randomStr);
+	StringCbCat(deleteMeName, sizeof(deleteMeName), L".deleteme");
+
+	if (MoveFile(file.outputPath.c_str(), deleteMeName)) {
+
+		if (MyCopyFile(deleteMeName, file.outputPath.c_str())) {
+			MoveFileEx(deleteMeName, NULL,
+				   MOVEFILE_DELAY_UNTIL_REBOOT);
+
+			return true;
+		} else {
+			MoveFile(deleteMeName, file.outputPath.c_str());
+		}
+	}
+
+	return false;
+}
+
 static bool UpdateFile(update_t &file)
 {
 	wchar_t oldFileRenamedPath[MAX_PATH];
@@ -836,6 +879,9 @@ static bool UpdateFile(update_t &file)
 
 		int error_code;
 		bool installed_ok;
+		bool already_tried_to_move = false;
+
+	retryAfterMovingFile:
 
 		if (file.patchable) {
 			error_code = ApplyPatch(file.tempPath.c_str(),
@@ -875,15 +921,23 @@ static bool UpdateFile(update_t &file)
 			int is_sharing_violation =
 				(error_code == ERROR_SHARING_VIOLATION);
 
-			if (is_sharing_violation)
+			if (is_sharing_violation) {
+				if (!already_tried_to_move) {
+					already_tried_to_move = true;
+
+					if (MoveInUseFileAway(file))
+						goto retryAfterMovingFile;
+				}
+
 				Status(L"Update failed: %s is still in use.  "
 				       L"Close all "
 				       L"programs and try again.",
 				       curFileName);
-			else
+			} else {
 				Status(L"Update failed: Couldn't update %s "
 				       L"(error %d)",
 				       curFileName, GetLastError());
+			}
 
 			file.state = STATE_INSTALL_FAILED;
 			return false;
@@ -1390,7 +1444,7 @@ static bool Update(wchar_t *cmdLine)
 	/* ------------------------------------- *
 	 * Download Updates                      */
 
-	if (!RunDownloadWorkers(2))
+	if (!RunDownloadWorkers(4))
 		return false;
 
 	if ((size_t)completedUpdates != updates.size()) {
