@@ -1,3 +1,9 @@
+obs-studio (26.1.2+dfsg1-2) unstable; urgency=medium
+
+  * debian/control: Make libobs-dev depend on libsimde-dev (Closes: #980171)
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 01 Jun 2021 22:05:24 +0200
+
 obs-studio (26.1.2+dfsg1-1) unstable; urgency=medium
 
   [ gregor herrmann ]
