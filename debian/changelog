@@ -1,3 +1,17 @@
+obs-studio (27.0.1+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/rules:
+    - Disable browser and vst
+    - Remove BUILD_CAPTIONS
+  * debian/control:
+    - Add new build dependencies libpipewire-0.3-dev,
+      libwayland-dev, and qtbase5-private-dev
+    - Remove obsolete Breaks+Replaces
+  * debian/libobs0.install: Add new symbols
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 08 Aug 2021 18:26:25 +0200
+
 obs-studio (26.1.2+dfsg1-2) unstable; urgency=medium
 
   * debian/control: Make libobs-dev depend on libsimde-dev (Closes: #980171)

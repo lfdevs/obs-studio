@@ -1,9 +1,6 @@
 0001-Use-common-license.patch
 0002-Hide-internal-symbols.patch
 0003-Use-path-in-usr-lib.patch
-0004-Link-with-libm-and-libdl-to-fix-underlinking.patch
-0005-Link-with-xcb-and-X-libraries-to-fix-underlinking.patch
-0006-Add-SONAME.patch
-0007-Do-not-build-with-SSE2-enabled-on-i386.patch
-0008-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
-0009-v4l2loopback.patch
+0004-Add-SONAME.patch
+0005-Do-not-build-with-SSE2-enabled-on-i386.patch
+0006-Use-the-simd-everywhere-headers-from-libsimde-dev.patch

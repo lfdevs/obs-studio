@@ -29,8 +29,10 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_streaming_output@Base 18.0.1
  obs_frontend_get_streaming_service@Base 19.0.3
  obs_frontend_get_system_tray@Base 23.2.1
+ obs_frontend_get_tbar_position@Base 27.0.1g
  obs_frontend_get_transition_duration@Base 23.2.1
  obs_frontend_get_transitions@Base 18.0.1
+ obs_frontend_get_virtualcam_output@Base 27.0.1g
  obs_frontend_open_projector@Base 25.0.3
  obs_frontend_pop_ui_translation@Base 18.0.1
  obs_frontend_preview_enabled@Base 21.0.2
@@ -50,6 +52,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_replay_buffer_save@Base 21.0.2
  obs_frontend_replay_buffer_start@Base 18.0.1
  obs_frontend_replay_buffer_stop@Base 18.0.1
+ obs_frontend_reset_video@Base 27.0.1g
  obs_frontend_save@Base 18.0.1
  obs_frontend_save_streaming_service@Base 19.0.3
  obs_frontend_set_current_preview_scene@Base 21.0.2
@@ -62,11 +65,14 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_set_streaming_service@Base 19.0.3
  obs_frontend_set_tbar_position@Base 26.0.0
  obs_frontend_set_transition_duration@Base 23.2.1
+ obs_frontend_start_virtualcam@Base 27.0.1g
+ obs_frontend_stop_virtualcam@Base 27.0.1g
  obs_frontend_streaming_active@Base 18.0.1
  obs_frontend_streaming_start@Base 18.0.1
  obs_frontend_streaming_stop@Base 18.0.1
  obs_frontend_take_screenshot@Base 26.0.0
  obs_frontend_take_source_screenshot@Base 26.0.0
+ obs_frontend_virtualcam_active@Base 27.0.1g
 libobs-opengl.so.0 libobs0 #MINVER#
  convert_sampler_info@Base 0.13.2
  device_begin_frame@Base 25.0.3
@@ -86,11 +92,13 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_enable_blending@Base 0.13.2
  device_enable_color@Base 0.13.2
  device_enable_depth_test@Base 0.13.2
+ device_enable_framebuffer_srgb@Base 27.0.1g
  device_enable_stencil_test@Base 0.13.2
  device_enable_stencil_write@Base 0.13.2
  device_end_scene@Base 0.13.2
  device_enter_context@Base 0.13.2
  device_flush@Base 0.13.2
+ device_framebuffer_srgb_enabled@Base 27.0.1g
  device_frustum@Base 0.13.2
  device_get_cull_mode@Base 0.13.2
  device_get_device_obj@Base 24.0.1
@@ -113,6 +121,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_load_samplerstate@Base 0.13.2
  device_load_swapchain@Base 0.13.2
  device_load_texture@Base 0.13.2
+ device_load_texture_srgb@Base 27.0.1g
  device_load_vertexbuffer@Base 0.13.2
  device_load_vertexshader@Base 0.13.2
  device_ortho@Base 0.13.2
@@ -134,6 +143,7 @@ libobs-opengl.so.0 libobs0 #MINVER#
  device_stencil_op@Base 0.13.2
  device_swapchain_create@Base 0.13.2
  device_texture_create@Base 0.13.2
+ device_texture_create_from_dmabuf@Base 27.0.1g
  device_timer_create@Base 24.0.1
  device_timer_range_create@Base 24.0.1
  device_vertexbuffer_create@Base 0.13.2
@@ -144,6 +154,8 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gl_clear_context@Base 25.0.3
  gl_copy_texture@Base 0.13.2
  gl_create_buffer@Base 0.13.2
+ gl_egl_create_dmabuf_image@Base 27.0.1g
+ gl_egl_error_to_string@Base 27.0.1g
  gl_getclientsize@Base 0.13.2
  gl_init_face@Base 0.13.2
  gl_platform_cleanup_swapchain@Base 0.13.2
@@ -152,8 +164,12 @@ libobs-opengl.so.0 libobs0 #MINVER#
  gl_platform_init_swapchain@Base 0.13.2
  gl_shader_parse@Base 0.13.2
  gl_update@Base 0.13.2
+ gl_wayland_egl_get_winsys_vtable@Base 27.0.1g
+ gl_wayland_egl_windowinfo_create@Base 27.0.1g
  gl_windowinfo_create@Base 0.13.2
  gl_windowinfo_destroy@Base 0.13.2
+ gl_x11_egl_get_winsys_vtable@Base 27.0.1g
+ gl_x11_glx_get_winsys_vtable@Base 27.0.1g
  gs_cubetexture_destroy@Base 0.13.2
  gs_cubetexture_get_color_format@Base 0.13.2
  gs_cubetexture_get_size@Base 0.13.2
@@ -458,6 +474,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_copy_texture@Base 0.13.2
  gs_copy_texture_region@Base 0.13.2
  gs_create@Base 0.13.2
+ gs_create_texture_file_data2@Base 27.0.1g
  gs_create_texture_file_data@Base 0.13.2
  gs_cubetexture_create@Base 0.13.2
  gs_cubetexture_destroy@Base 0.13.2
@@ -497,6 +514,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_effect_set_matrix4@Base 0.13.2
  gs_effect_set_next_sampler@Base 0.15.4
  gs_effect_set_texture@Base 0.13.2
+ gs_effect_set_texture_srgb@Base 27.0.1g
  gs_effect_set_val@Base 0.13.2
  gs_effect_set_vec2@Base 0.13.2
  gs_effect_set_vec3@Base 0.13.2
@@ -505,12 +523,14 @@ libobs.so.0 libobs0 #MINVER#
  gs_enable_blending@Base 0.13.2
  gs_enable_color@Base 0.13.2
  gs_enable_depth_test@Base 0.13.2
+ gs_enable_framebuffer_srgb@Base 27.0.1g
  gs_enable_stencil_test@Base 0.13.2
  gs_enable_stencil_write@Base 0.13.2
  gs_end_scene@Base 0.13.2
  gs_enter_context@Base 0.13.2
  gs_enum_adapters@Base 0.13.2
  gs_flush@Base 0.13.2
+ gs_framebuffer_srgb_enabled@Base 27.0.1g
  gs_frustum@Base 0.13.2
  gs_get_context@Base 0.13.2
  gs_get_cull_mode@Base 0.13.2
@@ -520,6 +540,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_get_effect@Base 0.13.2
  gs_get_height@Base 0.13.2
  gs_get_input@Base 0.13.2
+ gs_get_linear_srgb@Base 27.0.1g
  gs_get_pixel_shader@Base 0.13.2
  gs_get_render_target@Base 0.13.2
  gs_get_size@Base 0.13.2
@@ -529,6 +550,11 @@ libobs.so.0 libobs0 #MINVER#
  gs_get_width@Base 0.13.2
  gs_get_zstencil_target@Base 0.13.2
  gs_image_file2_init@Base 23.2.1
+ gs_image_file2_tick@Base 27.0.1g
+ gs_image_file2_update_texture@Base 27.0.1g
+ gs_image_file3_init@Base 27.0.1g
+ gs_image_file3_tick@Base 27.0.1g
+ gs_image_file3_update_texture@Base 27.0.1g
  gs_image_file_free@Base 0.13.2
  gs_image_file_init@Base 0.13.2
  gs_image_file_init_texture@Base 0.13.2
@@ -589,6 +615,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_set_3d_mode@Base 0.13.2
  gs_set_cube_render_target@Base 0.13.2
  gs_set_cull_mode@Base 0.13.2
+ gs_set_linear_srgb@Base 27.0.1g
  gs_set_render_target@Base 0.13.2
  gs_set_scissor_rect@Base 0.13.2
  gs_set_viewport@Base 0.13.2
@@ -639,6 +666,7 @@ libobs.so.0 libobs0 #MINVER#
  gs_texrender_get_texture@Base 0.13.2
  gs_texrender_reset@Base 0.13.2
  gs_texture_create@Base 0.13.2
+ gs_texture_create_from_dmabuf@Base 27.0.1g
  gs_texture_create_from_file@Base 0.13.2
  gs_texture_destroy@Base 0.13.2
  gs_texture_get_color_format@Base 0.13.2
@@ -733,6 +761,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_data_array_addref@Base 0.13.2
  obs_data_array_count@Base 0.13.2
  obs_data_array_create@Base 0.13.2
+ obs_data_array_enum@Base 27.0.1g
  obs_data_array_erase@Base 0.13.2
  obs_data_array_insert@Base 0.13.2
  obs_data_array_item@Base 0.13.2
@@ -770,10 +799,12 @@ libobs.so.0 libobs0 #MINVER#
  obs_data_get_default_vec2@Base 0.13.2
  obs_data_get_default_vec3@Base 0.13.2
  obs_data_get_default_vec4@Base 0.13.2
+ obs_data_get_defaults@Base 27.0.1g
  obs_data_get_double@Base 0.13.2
  obs_data_get_frames_per_second@Base 0.13.2
  obs_data_get_int@Base 0.13.2
  obs_data_get_json@Base 0.13.2
+ obs_data_get_last_json@Base 27.0.1g
  obs_data_get_obj@Base 0.13.2
  obs_data_get_quat@Base 0.13.2
  obs_data_get_string@Base 0.13.2
@@ -853,6 +884,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_data_set_autoselect_vec3@Base 0.13.2
  obs_data_set_autoselect_vec4@Base 0.13.2
  obs_data_set_bool@Base 0.13.2
+ obs_data_set_default_array@Base 27.0.1g
  obs_data_set_default_bool@Base 0.13.2
  obs_data_set_default_double@Base 0.13.2
  obs_data_set_default_frames_per_second@Base 0.13.2
@@ -986,7 +1018,10 @@ libobs.so.0 libobs0 #MINVER#
  obs_get_module_data_path@Base 0.13.2
  obs_get_module_description@Base 0.13.2
  obs_get_module_file_name@Base 0.13.2
+ obs_get_module_lib@Base 27.0.1g
  obs_get_module_name@Base 0.13.2
+ obs_get_nix_platform@Base 27.0.1g
+ obs_get_nix_platform_display@Base 27.0.1g
  obs_get_output_by_name@Base 0.13.2
  obs_get_output_flags@Base 22.0.3
  obs_get_output_properties@Base 0.13.2
@@ -1070,6 +1105,18 @@ libobs.so.0 libobs0 #MINVER#
  obs_load_source@Base 0.13.2
  obs_load_sources@Base 0.13.2
  obs_log_loaded_modules@Base 0.15.4
+ obs_missing_file_create@Base 27.0.1g
+ obs_missing_file_destroy@Base 27.0.1g
+ obs_missing_file_get_path@Base 27.0.1g
+ obs_missing_file_get_source_name@Base 27.0.1g
+ obs_missing_file_issue_callback@Base 27.0.1g
+ obs_missing_file_release@Base 27.0.1g
+ obs_missing_files_add_file@Base 27.0.1g
+ obs_missing_files_append@Base 27.0.1g
+ obs_missing_files_count@Base 27.0.1g
+ obs_missing_files_create@Base 27.0.1g
+ obs_missing_files_destroy@Base 27.0.1g
+ obs_missing_files_get_file@Base 27.0.1g
  obs_module_get_config_path@Base 0.13.2
  obs_module_get_locale_string@Base 26.0.0
  obs_module_get_locale_text@Base 26.0.0
@@ -1080,6 +1127,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_obj_get_id@Base 0.14.2
  obs_obj_get_type@Base 0.14.2
  obs_obj_invalid@Base 0.14.2
+ obs_obj_is_private@Base 27.0.1g
  obs_open_module@Base 0.13.2
  obs_output_active@Base 0.13.2
  obs_output_addref@Base 0.13.2
@@ -1152,6 +1200,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_properties_add_button2@Base 21.0.2
  obs_properties_add_button@Base 0.13.2
  obs_properties_add_color@Base 0.13.2
+ obs_properties_add_color_alpha@Base 27.0.1g
  obs_properties_add_editable_list@Base 0.13.2
  obs_properties_add_float@Base 0.13.2
  obs_properties_add_float_slider@Base 0.13.2
@@ -1281,14 +1330,18 @@ libobs.so.0 libobs0 #MINVER#
  obs_scene_insert_group2@Base 25.0.3
  obs_scene_insert_group@Base 22.0.3
  obs_scene_is_group@Base 22.0.3
+ obs_scene_load_transform_states@Base 27.0.1g
  obs_scene_release@Base 0.13.2
  obs_scene_reorder_items2@Base 22.0.3
  obs_scene_reorder_items@Base 0.13.2
+ obs_scene_save_transform_states@Base 27.0.1g
+ obs_scene_sceneitem_from_source@Base 27.0.1g
  obs_sceneitem_addref@Base 0.13.2
  obs_sceneitem_defer_group_resize_begin@Base 22.0.3
  obs_sceneitem_defer_group_resize_end@Base 22.0.3
  obs_sceneitem_defer_update_begin@Base 0.14.2
  obs_sceneitem_defer_update_end@Base 0.14.2
+ obs_sceneitem_do_transition@Base 27.0.1g
  obs_sceneitem_force_update_transform@Base 22.0.3
  obs_sceneitem_get_alignment@Base 0.13.2
  obs_sceneitem_get_bounds@Base 0.13.2
@@ -1299,14 +1352,19 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_get_crop@Base 0.14.2
  obs_sceneitem_get_draw_transform@Base 0.13.2
  obs_sceneitem_get_group@Base 22.0.3
+ obs_sceneitem_get_hide_transition@Base 27.0.1g
+ obs_sceneitem_get_hide_transition_duration@Base 27.0.1g
  obs_sceneitem_get_id@Base 19.0.3
  obs_sceneitem_get_info@Base 0.13.2
+ obs_sceneitem_get_order_position@Base 27.0.1g
  obs_sceneitem_get_pos@Base 0.13.2
  obs_sceneitem_get_private_settings@Base 21.0.2
  obs_sceneitem_get_rot@Base 0.13.2
  obs_sceneitem_get_scale@Base 0.13.2
  obs_sceneitem_get_scale_filter@Base 0.15.4
  obs_sceneitem_get_scene@Base 0.13.2
+ obs_sceneitem_get_show_transition@Base 27.0.1g
+ obs_sceneitem_get_show_transition_duration@Base 27.0.1g
  obs_sceneitem_get_source@Base 0.13.2
  obs_sceneitem_group_add_item@Base 22.0.3
  obs_sceneitem_group_enum_items@Base 22.0.3
@@ -1318,6 +1376,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_locked@Base 21.0.2
  obs_sceneitem_release@Base 0.13.2
  obs_sceneitem_remove@Base 0.13.2
+ obs_sceneitem_save@Base 27.0.1g
  obs_sceneitem_select@Base 0.13.2
  obs_sceneitem_selected@Base 0.13.2
  obs_sceneitem_set_alignment@Base 0.13.2
@@ -1325,6 +1384,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_set_bounds_alignment@Base 0.13.2
  obs_sceneitem_set_bounds_type@Base 0.13.2
  obs_sceneitem_set_crop@Base 0.14.2
+ obs_sceneitem_set_hide_transition@Base 27.0.1g
+ obs_sceneitem_set_hide_transition_duration@Base 27.0.1g
+ obs_sceneitem_set_id@Base 27.0.1g
  obs_sceneitem_set_info@Base 0.13.2
  obs_sceneitem_set_locked@Base 21.0.2
  obs_sceneitem_set_order@Base 0.13.2
@@ -1333,8 +1395,13 @@ libobs.so.0 libobs0 #MINVER#
  obs_sceneitem_set_rot@Base 0.13.2
  obs_sceneitem_set_scale@Base 0.13.2
  obs_sceneitem_set_scale_filter@Base 0.15.4
+ obs_sceneitem_set_show_transition@Base 27.0.1g
+ obs_sceneitem_set_show_transition_duration@Base 27.0.1g
  obs_sceneitem_set_visible@Base 0.13.2
+ obs_sceneitem_transition_load@Base 27.0.1g
+ obs_sceneitem_transition_save@Base 27.0.1g
  obs_sceneitem_visible@Base 0.13.2
+ obs_sceneitems_add@Base 27.0.1g
  obs_service_addref@Base 0.13.2
  obs_service_apply_encoder_settings@Base 0.13.2
  obs_service_create@Base 0.13.2
@@ -1363,6 +1430,8 @@ libobs.so.0 libobs0 #MINVER#
  obs_set_cmdline_args@Base 23.2.1
  obs_set_locale@Base 0.13.2
  obs_set_master_volume@Base 0.13.2
+ obs_set_nix_platform@Base 27.0.1g
+ obs_set_nix_platform_display@Base 27.0.1g
  obs_set_output_source@Base 0.13.2
  obs_set_private_data@Base 22.0.3
  obs_set_ui_task_handler@Base 25.0.3
@@ -1376,6 +1445,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_async_unbuffered@Base 19.0.3
  obs_source_audio_active@Base 24.0.1
  obs_source_audio_pending@Base 0.13.2
+ obs_source_backup_filters@Base 27.0.1g
  obs_source_configurable@Base 0.13.2
  obs_source_copy_filters@Base 19.0.3
  obs_source_copy_single_filter@Base 26.1.0
@@ -1393,7 +1463,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_enum_active_sources@Base 0.13.2
  obs_source_enum_active_tree@Base 0.13.2
  obs_source_enum_filters@Base 0.13.2
+ obs_source_enum_full_tree@Base 27.0.1g
  obs_source_filter_add@Base 0.13.2
+ obs_source_filter_count@Base 27.0.1g
  obs_source_filter_remove@Base 0.13.2
  obs_source_filter_set_order@Base 0.13.2
  obs_source_frame_copy@Base 22.0.3
@@ -1414,6 +1486,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_icon_type@Base 25.0.3
  obs_source_get_id@Base 0.13.2
  obs_source_get_last_obs_version@Base 24.0.1
+ obs_source_get_missing_files@Base 27.0.1g
  obs_source_get_monitoring_type@Base 18.0.1
  obs_source_get_name@Base 0.13.2
  obs_source_get_output_flags@Base 0.13.2
@@ -1435,6 +1508,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_inc_active@Base 23.2.1
  obs_source_inc_showing@Base 0.13.2
  obs_source_is_group@Base 22.0.3
+ obs_source_is_hidden@Base 27.0.1g
+ obs_source_is_scene@Base 27.0.1g
+ obs_source_load2@Base 27.0.1g
  obs_source_load@Base 22.0.3
  obs_source_media_ended@Base 25.0.3
  obs_source_media_get_duration@Base 25.0.3
@@ -1467,6 +1543,9 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_remove_audio_capture_callback@Base 0.13.2
  obs_source_remove_caption_callback@Base 26.1.0
  obs_source_removed@Base 0.13.2
+ obs_source_replace_missing_file@Base 27.0.1g
+ obs_source_reset_settings@Base 27.0.1g
+ obs_source_restore_filters@Base 27.0.1g
  obs_source_save@Base 22.0.3
  obs_source_send_focus@Base 0.13.2
  obs_source_send_key_click@Base 0.13.2
@@ -1484,6 +1563,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_set_deinterlace_mode@Base 0.14.2
  obs_source_set_enabled@Base 0.13.2
  obs_source_set_flags@Base 0.13.2
+ obs_source_set_hidden@Base 27.0.1g
  obs_source_set_monitoring_type@Base 18.0.1
  obs_source_set_muted@Base 0.13.2
  obs_source_set_name@Base 0.13.2
@@ -1606,6 +1686,7 @@ libobs.so.0 libobs0 #MINVER#
  os_inhibit_sleep_create@Base 0.13.2
  os_inhibit_sleep_destroy@Base 0.13.2
  os_inhibit_sleep_set_active@Base 0.13.2
+ os_is_obs_plugin@Base 27.0.1g
  os_mbs_to_utf8_ptr@Base 0.13.2
  os_mbs_to_wcs@Base 0.13.2
  os_mbs_to_wcs_ptr@Base 0.13.2
@@ -2368,10 +2449,16 @@ libobsglad.so.0 libobs0 #MINVER#
  GLAD_GL_VERSION_4_4@Base 0.13.2
  GLAD_GL_WIN_phong_shading@Base 0.13.2
  GLAD_GL_WIN_specular_fog@Base 0.13.2
+ gladLoadEGL@Base 27.0.1g
+ gladLoadEGLLoader@Base 27.0.1g
  gladLoadGL@Base 0.13.2
  gladLoadGLLoader@Base 0.13.2
  gladLoadGLX@Base 0.13.2
  gladLoadGLXLoader@Base 0.13.2
+ glad_eglExportDMABUFImageMESA@Base 27.0.1g
+ glad_eglExportDMABUFImageQueryMESA@Base 27.0.1g
+ glad_eglQueryDmaBufFormatsEXT@Base 27.0.1g
+ glad_eglQueryDmaBufModifiersEXT@Base 27.0.1g
  glad_glAccumxOES@Base 0.13.2
  glad_glActiveProgramEXT@Base 0.13.2
  glad_glActiveShaderProgram@Base 0.13.2

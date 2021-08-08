@@ -1,0 +1,45 @@
+From: "Michael R. Crusoe" <michael.crusoe@gmail.com>
+Date: Mon, 27 Jul 2020 12:46:48 +0200
+Subject: Use the simd everywhere headers from libsimde-dev
+
+---
+ libobs/CMakeLists.txt    | 14 --------------
+ libobs/util/sse-intrin.h |  2 +-
+ 2 files changed, 1 insertion(+), 15 deletions(-)
+
+diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
+index 9412487..15ad40b 100644
+--- a/libobs/CMakeLists.txt
++++ b/libobs/CMakeLists.txt
+@@ -434,20 +434,6 @@ set(libobs_libobs_SOURCES
+ 	obs-video-gpu-encode.c
+ 	obs-video.c)
+ set(libobs_libobs_HEADERS
+-	util/simde/check.h
+-	util/simde/debug-trap.h
+-	util/simde/hedley.h
+-	util/simde/simde-align.h
+-	util/simde/simde-arch.h
+-	util/simde/simde-common.h
+-	util/simde/simde-constify.h
+-	util/simde/simde-detect-clang.h
+-	util/simde/simde-diagnostic.h
+-	util/simde/simde-features.h
+-	util/simde/simde-math.h
+-	util/simde/x86/mmx.h
+-	util/simde/x86/sse2.h
+-	util/simde/x86/sse.h
+ 	${libobs_PLATFORM_HEADERS}
+ 	obs-audio-controls.h
+ 	obs-defs.h
+diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
+index 903139e..685b42d 100644
+--- a/libobs/util/sse-intrin.h
++++ b/libobs/util/sse-intrin.h
+@@ -21,5 +21,5 @@
+ #include <emmintrin.h>
+ #else
+ #define SIMDE_ENABLE_NATIVE_ALIASES
+-#include "simde/x86/sse2.h"
++#include <simde/x86/sse2.h>
+ #endif
