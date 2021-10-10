@@ -9,10 +9,14 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_add_scene_collection@Base 22.0.3
  obs_frontend_add_tools_menu_item@Base 18.0.1
  obs_frontend_add_tools_menu_qaction@Base 18.0.1
+ obs_frontend_create_profile@Base 27.1.1
  obs_frontend_defer_save_begin@Base 22.0.3
  obs_frontend_defer_save_end@Base 22.0.3
+ obs_frontend_delete_profile@Base 27.1.1
+ obs_frontend_duplicate_profile@Base 27.1.1
  obs_frontend_get_current_preview_scene@Base 21.0.2
  obs_frontend_get_current_profile@Base 18.0.1
+ obs_frontend_get_current_profile_path@Base 27.1.1
  obs_frontend_get_current_scene@Base 18.0.1
  obs_frontend_get_current_scene_collection@Base 18.0.1
  obs_frontend_get_current_transition@Base 18.0.1
@@ -34,6 +38,8 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_transitions@Base 18.0.1
  obs_frontend_get_virtualcam_output@Base 27.0.1g
  obs_frontend_open_projector@Base 25.0.3
+ obs_frontend_open_source_filters@Base 27.1.1
+ obs_frontend_open_source_properties@Base 27.1.1
  obs_frontend_pop_ui_translation@Base 18.0.1
  obs_frontend_preview_enabled@Base 21.0.2
  obs_frontend_preview_program_mode_active@Base 21.0.2
@@ -956,6 +962,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_update@Base 0.13.2
  obs_encoder_video@Base 0.13.2
  obs_enter_graphics@Base 0.13.2
+ obs_enum_all_sources@Base 27.1.1
  obs_enum_audio_monitoring_devices@Base 18.0.1
  obs_enum_encoder_types@Base 0.13.2
  obs_enum_encoders@Base 0.13.2
@@ -1225,6 +1232,10 @@ libobs.so.0 libobs0 #MINVER#
  obs_properties_set_flags@Base 0.13.2
  obs_properties_set_param@Base 0.13.2
  obs_property_button_clicked@Base 0.13.2
+ obs_property_button_set_type@Base 27.1.1
+ obs_property_button_set_url@Base 27.1.1
+ obs_property_button_type@Base 27.1.1
+ obs_property_button_url@Base 27.1.1
  obs_property_description@Base 0.13.2
  obs_property_editable_list_default_path@Base 0.13.2
  obs_property_editable_list_filter@Base 0.13.2
@@ -1499,6 +1510,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_source_get_signal_handler@Base 0.13.2
  obs_source_get_speaker_layout@Base 23.2.1
  obs_source_get_sync_offset@Base 0.13.2
+ obs_source_get_texcoords_centered@Base 27.1.1
  obs_source_get_type@Base 0.13.2
  obs_source_get_type_data@Base 0.13.2
  obs_source_get_unversioned_id@Base 25.0.3

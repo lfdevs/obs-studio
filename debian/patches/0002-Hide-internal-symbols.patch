@@ -32,12 +32,12 @@ index 41522f6..e772ebd 100644
  	libobs
  	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index d7832bc..9412487 100644
+index a7f8d04..510b5d1 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -537,6 +537,11 @@ target_compile_options(libobs
+@@ -535,6 +535,11 @@ target_compile_definitions(libobs
  	PUBLIC
- 	${ARCH_SIMD_FLAGS})
+ 	${ARCH_SIMD_DEFINES})
  
 +if(UNIX)
 +	set_source_files_properties(${libobs_SOURCES} PROPERTIES
@@ -46,7 +46,7 @@ index d7832bc..9412487 100644
 +
  target_compile_options(libobs
  	PUBLIC
- 		"${THREADS_DEFINITIONS}")
+ 	${ARCH_SIMD_FLAGS})
 diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
 index f84432a..1fb4821 100644
 --- a/libobs/util/c99defs.h

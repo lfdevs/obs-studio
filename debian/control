@@ -19,6 +19,7 @@ Build-Depends:
  libavutil-dev,
  libcurl4-gnutls-dev | libcurl-dev,
  libdbus-1-dev,
+ libdrm-dev,
  libfontconfig-dev,
  libfreetype6-dev,
  libgl1-mesa-dev | libgl-dev,
@@ -54,7 +55,7 @@ Build-Depends:
  qtbase5-dev,
  qtbase5-private-dev,
  swig
-Standards-Version: 4.5.1
+Standards-Version: 4.6.0
 Homepage: https://obsproject.com
 Vcs-Browser: https://salsa.debian.org/multimedia-team/obs-studio
 Vcs-Git: https://salsa.debian.org/multimedia-team/obs-studio.git
