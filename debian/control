@@ -110,6 +110,7 @@ Architecture: any
 Depends:
  libobs0 (= ${binary:Version}),
  libsimde-dev,
+ libx11-dev,
  ${misc:Depends}
 Description: recorder and streamer for live video content (development files)
  OBS Studio is designed for efficiently recording and streaming live video

@@ -7,7 +7,7 @@ Subject: Do not build with SSE2 enabled on i386
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a906bd1..7eb098c 100644
+index 7edf307..ab25e74 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -122,7 +122,8 @@ else ()

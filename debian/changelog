@@ -1,3 +1,11 @@
+obs-studio (27.1.3+dfsg1-2) unstable; urgency=medium
+
+  * debian/patches: Apply upstream patch to have Python symbols available
+    (Closes: #958966)
+  * debian/control: Add missing dependency on libx11-dev
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 23 Nov 2021 00:03:42 +0100
+
 obs-studio (27.1.3+dfsg1-1) unstable; urgency=medium
 
   [ Jenkins ]
