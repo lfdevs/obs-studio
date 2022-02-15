@@ -7,10 +7,10 @@ Subject: Use path in /usr/lib
  1 file changed, 4 insertions(+)
 
 diff --git a/plugins/obs-ffmpeg/obs-ffmpeg-mux.c b/plugins/obs-ffmpeg/obs-ffmpeg-mux.c
-index ee5c8f1..58d5003 100644
+index d82e2cd..ce14ba3 100644
 --- a/plugins/obs-ffmpeg/obs-ffmpeg-mux.c
 +++ b/plugins/obs-ffmpeg/obs-ffmpeg-mux.c
-@@ -249,7 +249,11 @@ static void build_command_line(struct ffmpeg_muxer *stream, struct dstr *cmd,
+@@ -252,7 +252,11 @@ static void build_command_line(struct ffmpeg_muxer *stream, struct dstr *cmd,
  		num_tracks++;
  	}
  

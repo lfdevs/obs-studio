@@ -27,6 +27,7 @@ Build-Depends:
  libjansson-dev (>= 2.5),
  libluajit-5.1-dev,
  libmbedtls-dev,
+ libpci-dev,
  libpipewire-0.3-dev,
  libpulse-dev,
  libqt5svg5-dev,

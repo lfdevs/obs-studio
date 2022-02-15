@@ -8,10 +8,10 @@ Subject: Use the simd everywhere headers from libsimde-dev
  2 files changed, 1 insertion(+), 15 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 510b5d1..ef65e42 100644
+index cf3de3a..c53dbfd 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -436,20 +436,6 @@ set(libobs_libobs_SOURCES
+@@ -446,20 +446,6 @@ set(libobs_libobs_SOURCES
  	obs-video-gpu-encode.c
  	obs-video.c)
  set(libobs_libobs_HEADERS
@@ -33,12 +33,12 @@ index 510b5d1..ef65e42 100644
  	obs-audio-controls.h
  	obs-defs.h
 diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
-index a972c07..fc63a40 100644
+index 6441e80..677a40c 100644
 --- a/libobs/util/sse-intrin.h
 +++ b/libobs/util/sse-intrin.h
-@@ -23,5 +23,5 @@
- #include <emmintrin.h>
- #else
+@@ -25,5 +25,5 @@
+ #define WIN32_LEAN_AND_MEAN
+ #endif
  #define SIMDE_ENABLE_NATIVE_ALIASES
 -#include "simde/x86/sse2.h"
 +#include <simde/x86/sse2.h>

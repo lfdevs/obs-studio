@@ -32,10 +32,10 @@ index 41522f6..e772ebd 100644
  	libobs
  	${LUAJIT_LIBRARIES}
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index a7f8d04..510b5d1 100644
+index 2f1150b..cf3de3a 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -535,6 +535,11 @@ target_compile_definitions(libobs
+@@ -568,6 +568,11 @@ target_compile_definitions(libobs
  	PUBLIC
  	${ARCH_SIMD_DEFINES})
  
@@ -48,10 +48,10 @@ index a7f8d04..510b5d1 100644
  	PUBLIC
  	${ARCH_SIMD_FLAGS})
 diff --git a/libobs/util/c99defs.h b/libobs/util/c99defs.h
-index f84432a..1fb4821 100644
+index 5208bf0..9154f7f 100644
 --- a/libobs/util/c99defs.h
 +++ b/libobs/util/c99defs.h
-@@ -34,7 +34,7 @@
+@@ -42,7 +42,7 @@
  #ifdef _MSC_VER
  #define EXPORT __declspec(dllexport)
  #else

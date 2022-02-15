@@ -4,4 +4,3 @@
 0004-Add-SONAME.patch
 0005-Do-not-build-with-SSE2-enabled-on-i386.patch
 0006-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
-0007-UI-Link-python-when-obs-scripting-python-is-enabled.patch
