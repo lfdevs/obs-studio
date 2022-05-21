@@ -1,3 +1,13 @@
+obs-studio (27.2.4+dfsg1-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster
+
+  [ Sebastian Ramacher ]
+  * debian/control: Disable luajit on ppc64el (Closes: #1011304)
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 21 May 2022 17:27:16 +0200
+
 obs-studio (27.2.4+dfsg1-1) unstable; urgency=medium
 
   * New upstream version 27.2.4+dfsg1
