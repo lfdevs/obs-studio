@@ -1,0 +1,118 @@
+Description: Fix spelling mistakes
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: no
+Last-Update: 2022-09-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- obs-studio.orig/cmake/Modules/FindLibVLC.cmake
++++ obs-studio/cmake/Modules/FindLibVLC.cmake
+@@ -43,7 +43,7 @@
+     ../bin)
+ 
+ include(FindPackageHandleStandardArgs)
+-# OBS doesnt depend on linking, so we dont include VLC_LIB here as required.
++# OBS doesn't depend on linking, so we dont include VLC_LIB here as required.
+ find_package_handle_standard_args(LibVLC DEFAULT_MSG VLC_INCLUDE_DIR)
+ mark_as_advanced(VLC_INCLUDE_DIR VLC_LIB)
+ 
+--- obs-studio.orig/deps/w32-pthreads/pthread_attr_getstackaddr.c
++++ obs-studio/deps/w32-pthreads/pthread_attr_getstackaddr.c
+@@ -72,7 +72,7 @@
+       *                      address..
+       *
+       * RESULTS
+-      *              0               successfully retreived stack address,
++      *              0               successfully retrieved stack address,
+       *              EINVAL          'attr' is invalid
+       *              ENOSYS          function not supported
+       *
+--- obs-studio.orig/plugins/linux-alsa/alsa-input.c
++++ obs-studio/plugins/linux-alsa/alsa-input.c
+@@ -457,7 +457,7 @@
+ 	}
+ #undef FORMAT_SIZE
+ 	if (!format_found) {
+-		blog(LOG_ERROR, "device doesnt support any OBS formats");
++		blog(LOG_ERROR, "device doesn't support any OBS formats");
+ 		return false;
+ 	}
+ 	snd_pcm_hw_params_set_format(data->handle, hwparams, data->format);
+--- obs-studio.orig/websocket/src/forms/ConnectInfo.cpp
++++ obs-studio/websocket/src/forms/ConnectInfo.cpp
+@@ -51,7 +51,7 @@
+ {
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[ConnectInfo::showEvent] Unable to retreive config!");
++		blog(LOG_ERROR, "[ConnectInfo::showEvent] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+--- obs-studio.orig/websocket/src/forms/SettingsDialog.cpp
++++ obs-studio/websocket/src/forms/SettingsDialog.cpp
+@@ -74,7 +74,7 @@
+ {
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[SettingsDialog::showEvent] Unable to retreive config!");
++		blog(LOG_ERROR, "[SettingsDialog::showEvent] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+@@ -114,7 +114,7 @@
+ {
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[SettingsDialog::RefreshData] Unable to retreive config!");
++		blog(LOG_ERROR, "[SettingsDialog::RefreshData] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+@@ -144,7 +144,7 @@
+ {
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[SettingsDialog::SaveFormData] Unable to retreive config!");
++		blog(LOG_ERROR, "[SettingsDialog::SaveFormData] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+--- obs-studio.orig/websocket/src/websocketserver/WebSocketServer.cpp
++++ obs-studio/websocket/src/websocketserver/WebSocketServer.cpp
+@@ -85,7 +85,7 @@
+ 
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[WebSocketServer::Start] Unable to retreive config!");
++		blog(LOG_ERROR, "[WebSocketServer::Start] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+@@ -209,7 +209,7 @@
+ {
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[WebSocketServer::onObsLoaded] Unable to retreive config!");
++		blog(LOG_ERROR, "[WebSocketServer::onObsLoaded] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+@@ -240,7 +240,7 @@
+ 
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[WebSocketServer::onOpen] Unable to retreive config!");
++		blog(LOG_ERROR, "[WebSocketServer::onOpen] Unable to retrieve config!");
+ 		return;
+ 	}
+ 
+@@ -350,7 +350,7 @@
+ 	// Get config for tray notification
+ 	auto conf = GetConfig();
+ 	if (!conf) {
+-		blog(LOG_ERROR, "[WebSocketServer::onClose] Unable to retreive config!");
++		blog(LOG_ERROR, "[WebSocketServer::onClose] Unable to retrieve config!");
+ 		return;
+ 	}
+ 

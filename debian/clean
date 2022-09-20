@@ -1,2 +1,4 @@
 debian/shlibs.local
 debian/obs.1
+plugins/obs-websocket/
+cmake/.CMakeBuildNumber

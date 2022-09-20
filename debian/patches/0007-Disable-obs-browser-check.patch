@@ -1,0 +1,19 @@
+From: Sebastian Ramacher <sramacher@debian.org>
+Date: Sat, 3 Sep 2022 20:08:34 +0200
+Subject: Disable obs-browser check
+
+---
+ plugins/CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+--- obs-studio.orig/plugins/CMakeLists.txt
++++ obs-studio/plugins/CMakeLists.txt
+@@ -60,8 +60,6 @@
+   add_subdirectory(vlc-video)
+   add_subdirectory(sndio)
+   add_subdirectory(obs-vst)
+-
+-  check_obs_browser()
+ elseif(OS_FREEBSD)
+   add_subdirectory(linux-capture)
+   add_subdirectory(linux-pulseaudio)

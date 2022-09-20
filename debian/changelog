@@ -1,3 +1,55 @@
+obs-studio (28.0.1+dfsg1-1) unstable; urgency=medium
+
+  * Team upload.
+
+  * New upstream version 28.0.1+dfsg1
+    (Closes: #1017166)
+
+  [ Sebastian Ramacher ]
+  * New upstream version 28.0.0+dfsg1
+    * Refresh patches
+  * Remove cmake/bundle
+  * Exclude mac plugins and a copy of AMF
+  * Add BD on libffmpeg-nvenc-dev
+  * Add BD on libxcb-composite0-dev
+  * Disable browser check
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Refresh patches (again)
+  * Additional networking related B-Ds
+  * Drop the '+dfsg' from the VERSION_OVERRIDE
+  * Set build options
+    + Explicitly enable JACK
+    + Explicitly disable sndio modules (Closes: #993458)
+    + Disable AJA
+  * Use reproducible build-date.
+    Thanks to Vagrant Cascadian <vagrant@reproducible-builds.org>
+    (Closes: #975504)
+  * Add another patch to make build reproducible
+  * Add patch to fix spelling errors
+  * Add patch to build obs-websocket against system libraries
+  * Use 'target_compile_options()' to inject "-fvisibility=hidden"
+  * Fix install paths to plugins
+  * Install pipewire plugin
+  * Make sure that PEM files are non-executable
+  * Use d/clean to cleanup temporary files
+  * Do not embed RPATH/RUNPATH into binaries
+  * Update d/*.symbols
+  * Update description of obs-plugins (Closes: #993600)
+  * d/watch
+    - Switch to new github location
+    - Import Multi-Upstream-Tarballs
+  * Add verbatim copy of Nayuki's Qr-Code-Generator
+  * Add salsa-ci configuration
+  * Apply 'wrap-and-sort -ast'
+  * Update d/copyright
+    * Drop superfluous file-patterns
+    * Add 'licensecheck' target
+    * Generate d/copyright_hints
+  * Bump standards version to 4.6.1
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 20 Sep 2022 23:44:10 +0200
+
 obs-studio (27.2.4+dfsg1-2) unstable; urgency=medium
 
   [ Debian Janitor ]

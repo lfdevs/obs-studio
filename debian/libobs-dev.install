@@ -1,4 +1,5 @@
 usr/include/*
 usr/lib/*/*.so
-usr/lib/*/cmake/LibObs/*
+usr/lib/*/cmake/libobs/*
+usr/lib/*/cmake/obs-frontend-api/*
 usr/lib/*/pkgconfig

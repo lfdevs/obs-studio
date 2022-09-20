@@ -11,19 +11,28 @@ export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 	dh $@
 
 override_dh_auto_configure:
+	cp -r websocket plugins/obs-websocket
+	mkdir -p plugins/obs-websocket/deps
+	cp -r debian/extra/qr plugins/obs-websocket/deps/
 	dh_auto_configure -- \
 		-DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH) \
 		-DUNIX_STRUCTURE=TRUE \
+		-DCMAKE_SKIP_RPATH=TRUE \
 		-DDISABLE_UPDATE_MODULE=TRUE \
-		-DBUILD_BROWSER=OFF \
 		-DBUILD_VST=OFF \
-		-DOBS_VERSION_OVERRIDE=${DEB_VERSION}
+		-DENABLE_AJA=OFF \
+		-DENABLE_SNDIO=OFF \
+		-DENABLE_JACK=TRUE \
+		-DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION)) \
+		-DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d') \
+		$(empty)
 
 execute_after_dh_auto_build:
 	rst2man debian/obs.rst > debian/obs.1
 
 override_dh_install:
 	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg
+	-find debian/tmp -type f -name "*.pem" -exec chmod a-x {} +
 	mv debian/tmp/usr/bin/obs-ffmpeg-mux \
 		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux
 	dh_install
@@ -38,3 +47,13 @@ override_dh_python3:
 
 override_dh_gencontrol:
 	dh_gencontrol -- -Vsimde:Built-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W "libsimde-dev")"
+
+################################################################
+DEB_COPYRIGHT_CHECK_IGNORE_REGEX = \
+	(.*\.ttf|.*\.png|debian/copyright.*)
+licensecheck:
+	licensecheck --check '.*' --recursive --deb-machine --lines 0 * \
+		-i "^$(DEB_COPYRIGHT_CHECK_IGNORE_REGEX)$$" \
+		> debian/copyright_newhints
+	cmp debian/copyright_hints debian/copyright_newhints \
+		&& rm debian/copyright_newhints

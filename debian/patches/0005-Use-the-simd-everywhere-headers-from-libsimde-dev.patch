@@ -1,0 +1,44 @@
+From: "Michael R. Crusoe" <michael.crusoe@gmail.com>
+Date: Mon, 27 Jul 2020 12:46:48 +0200
+Subject: Use the simd everywhere headers from libsimde-dev
+
+---
+ libobs/CMakeLists.txt    | 17 -----------------
+ libobs/util/sse-intrin.h |  2 +-
+ 2 files changed, 1 insertion(+), 18 deletions(-)
+
+--- obs-studio.orig/libobs/CMakeLists.txt
++++ obs-studio/libobs/CMakeLists.txt
+@@ -70,23 +70,6 @@
+ 
+ target_sources(
+   libobs
+-  PRIVATE util/simde/check.h
+-          util/simde/debug-trap.h
+-          util/simde/hedley.h
+-          util/simde/simde-align.h
+-          util/simde/simde-arch.h
+-          util/simde/simde-common.h
+-          util/simde/simde-constify.h
+-          util/simde/simde-detect-clang.h
+-          util/simde/simde-diagnostic.h
+-          util/simde/simde-features.h
+-          util/simde/simde-math.h
+-          util/simde/x86/mmx.h
+-          util/simde/x86/sse2.h
+-          util/simde/x86/sse.h)
+-
+-target_sources(
+-  libobs
+   PRIVATE callback/calldata.c
+           callback/calldata.h
+           callback/decl.c
+--- obs-studio.orig/libobs/util/sse-intrin.h
++++ obs-studio/libobs/util/sse-intrin.h
+@@ -25,5 +25,5 @@
+ #define WIN32_LEAN_AND_MEAN
+ #endif
+ #define SIMDE_ENABLE_NATIVE_ALIASES
+-#include "simde/x86/sse2.h"
++#include <simde/x86/sse2.h>
+ #endif

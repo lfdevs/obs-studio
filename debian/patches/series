@@ -1,6 +1,10 @@
 0001-Use-common-license.patch
 0002-Hide-internal-symbols.patch
 0003-Use-path-in-usr-lib.patch
-0004-Add-SONAME.patch
-0005-Do-not-build-with-SSE2-enabled-on-i386.patch
-0006-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
+0004-Do-not-build-with-SSE2-enabled-on-i386.patch
+0005-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
+0006-Do-not-build-unused-blake2-dependency.patch
+0007-Disable-obs-browser-check.patch
+obs-websocket_use_system_libs.patch
+fix-spelling.patch
+reproducible.patch

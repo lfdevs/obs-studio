@@ -1,0 +1,35 @@
+Description: Use system-libraries when building obs-websocket
+Author: IOhannes m zmölnig
+Origin: Debian
+Forwarded: not-needed
+Last-Update: 2022-09-20
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- obs-studio.orig/websocket/CMakeLists.txt
++++ obs-studio/websocket/CMakeLists.txt
+@@ -14,7 +14,7 @@
+     AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/websocketpp/CMakeLists.txt
+     AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/qr/cpp/QrCode.hpp
+     AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/asio/asio/include/asio.hpp))
+-  obs_status(FATAL_ERROR "obs-websocket submodule deps not available.")
++    obs_status(INFO "obs-websocket submodule deps not available.")
+ endif()
+ 
+ # Plugin tests flag
+@@ -34,7 +34,6 @@
+ set(JSON_BuildTests
+     OFF
+     CACHE INTERNAL "")
+-add_subdirectory(deps/json)
+ 
+ # Tell websocketpp not to use system boost
+ add_definitions(-DASIO_STANDALONE)
+@@ -142,7 +141,7 @@
+           Qt::Widgets
+           Qt::Svg
+           Qt::Network
+-          nlohmann_json::nlohmann_json)
++          )
+ 
+ target_compile_features(obs-websocket PRIVATE cxx_std_17)
+ 
