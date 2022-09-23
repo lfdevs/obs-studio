@@ -1,13 +1,20 @@
-Description: Use system-libraries when building obs-websocket
-Author: IOhannes m zmölnig
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Fri, 23 Sep 2022 20:40:26 +0200
+Subject: Use system-libraries when building obs-websocket
+
 Origin: Debian
 Forwarded: not-needed
 Last-Update: 2022-09-20
 ---
-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
---- obs-studio.orig/websocket/CMakeLists.txt
-+++ obs-studio/websocket/CMakeLists.txt
-@@ -14,7 +14,7 @@
+ websocket/CMakeLists.txt | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/websocket/CMakeLists.txt b/websocket/CMakeLists.txt
+index 66fa0da..b647171 100644
+--- a/websocket/CMakeLists.txt
++++ b/websocket/CMakeLists.txt
+@@ -14,7 +14,7 @@ if(NOT
      AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/websocketpp/CMakeLists.txt
      AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/qr/cpp/QrCode.hpp
      AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/deps/asio/asio/include/asio.hpp))
@@ -16,7 +23,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  endif()
  
  # Plugin tests flag
-@@ -34,7 +34,6 @@
+@@ -34,7 +34,6 @@ find_qt(COMPONENTS Core Widgets Svg Network)
  set(JSON_BuildTests
      OFF
      CACHE INTERNAL "")
@@ -24,7 +31,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
  
  # Tell websocketpp not to use system boost
  add_definitions(-DASIO_STANDALONE)
-@@ -142,7 +141,7 @@
+@@ -142,7 +141,7 @@ target_link_libraries(
            Qt::Widgets
            Qt::Svg
            Qt::Network

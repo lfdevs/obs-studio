@@ -81,6 +81,8 @@ Recommends:
 Suggests:
  policykit-1,
  v4l2loopback-dkms,
+Breaks: obs-websocket (<< 4.9.0-2.1~)
+Replaces: obs-websocket (<< 4.9.0-2.1~)
 Description: recorder and streamer for live video content
  OBS Studio is designed for efficiently recording and streaming live video
  content. It supports live RTP streaming to various streaming sites.

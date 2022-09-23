@@ -7,12 +7,16 @@ Subject: Use the simd everywhere headers from libsimde-dev
  libobs/util/sse-intrin.h |  2 +-
  2 files changed, 1 insertion(+), 18 deletions(-)
 
---- obs-studio.orig/libobs/CMakeLists.txt
-+++ obs-studio/libobs/CMakeLists.txt
-@@ -70,23 +70,6 @@
+diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
+index b5527ee..8bc49d4 100644
+--- a/libobs/CMakeLists.txt
++++ b/libobs/CMakeLists.txt
+@@ -68,23 +68,6 @@ target_sources(
+           obs-view.c
+           obs-config.h)
  
- target_sources(
-   libobs
+-target_sources(
+-  libobs
 -  PRIVATE util/simde/check.h
 -          util/simde/debug-trap.h
 -          util/simde/hedley.h
@@ -28,13 +32,13 @@ Subject: Use the simd everywhere headers from libsimde-dev
 -          util/simde/x86/sse2.h
 -          util/simde/x86/sse.h)
 -
--target_sources(
--  libobs
+ target_sources(
+   libobs
    PRIVATE callback/calldata.c
-           callback/calldata.h
-           callback/decl.c
---- obs-studio.orig/libobs/util/sse-intrin.h
-+++ obs-studio/libobs/util/sse-intrin.h
+diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
+index 6441e80..677a40c 100644
+--- a/libobs/util/sse-intrin.h
++++ b/libobs/util/sse-intrin.h
 @@ -25,5 +25,5 @@
  #define WIN32_LEAN_AND_MEAN
  #endif
