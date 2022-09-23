@@ -1,3 +1,9 @@
+obs-studio (28.0.1+dfsg1-3) unstable; urgency=medium
+
+  * debian/rules: Disable lua plugin on ppc64el
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Fri, 23 Sep 2022 23:25:15 +0200
+
 obs-studio (28.0.1+dfsg1-2) unstable; urgency=medium
 
   * debian/patches: Refresh patch to drop ISA flags

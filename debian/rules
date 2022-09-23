@@ -7,6 +7,21 @@ export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIA
 export DEB_CFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3
 
+confflags  = -DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH)
+confflags += -DUNIX_STRUCTURE=TRUE
+confflags += -DCMAKE_SKIP_RPATH=TRUE
+confflags += -DDISABLE_UPDATE_MODULE=TRUE
+confflags += -DBUILD_VST=OFF
+confflags += -DENABLE_AJA=OFF
+confflags += -DENABLE_SNDIO=OFF
+confflags += -DENABLE_JACK=TRUE
+confflags += -DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION))
+confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d')
+
+ifeq (ppc64el,$(DEB_HOST_ARCH))
+confflags += -DENABLE_SCRIPTING_LUA=OFF
+endif
+
 %:
 	dh $@
 
@@ -14,18 +29,7 @@ override_dh_auto_configure:
 	cp -r websocket plugins/obs-websocket
 	mkdir -p plugins/obs-websocket/deps
 	cp -r debian/extra/qr plugins/obs-websocket/deps/
-	dh_auto_configure -- \
-		-DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH) \
-		-DUNIX_STRUCTURE=TRUE \
-		-DCMAKE_SKIP_RPATH=TRUE \
-		-DDISABLE_UPDATE_MODULE=TRUE \
-		-DBUILD_VST=OFF \
-		-DENABLE_AJA=OFF \
-		-DENABLE_SNDIO=OFF \
-		-DENABLE_JACK=TRUE \
-		-DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION)) \
-		-DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d') \
-		$(empty)
+	dh_auto_configure -- $(confflags)
 
 execute_after_dh_auto_build:
 	rst2man debian/obs.rst > debian/obs.1
