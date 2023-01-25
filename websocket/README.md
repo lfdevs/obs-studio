@@ -31,21 +31,30 @@ It is **highly recommended** to keep obs-websocket protected with a password aga
 
 ### Client software
 
+- [Macro Deck](https://www.macrodeck.org/)
 - [Touch Portal](https://www.touch-portal.com/)
 - [Twitchat](https://twitchat.fr/)
 - [OBS-web](https://github.com/Niek/obs-web) - hosted client at [obs-web.niek.tv/](http://obs-web.niek.tv/)
+- [Streamer.bot](https://streamer.bot/)
+- [Deckboard](https://deckboard.app/)
+- [OBS Blade](https://github.com/Kounex/obs_blade)
+- [Aitum](https://aitum.tv/)
+- [Kruiz Control](https://github.com/Kruiser8/Kruiz-Control)
+- [Bitfocus Companion Module](https://bitfocus.io/companion/)
 
 ### Client libraries (for developers)
 
 Here's a list of available language APIs for obs-websocket:
 
 - Python 3.7+ (Asyncio): [simpleobsws](https://github.com/IRLToolkit/simpleobsws/tree/master) by IRLToolkit
+- Python 3.10+ (Non-Asyncio): [obsws-python](https://pypi.org/project/obsws-python) by aatikturk and onyx-and-iris
 - Rust: [obws](https://github.com/dnaka91/obws) by dnaka91
 - Godot 3.4.x: [obs-websocket-gd](https://github.com/you-win/obs-websocket-gd) by you-win
 - Javascript (Node and web): [obs-websocket-js](https://github.com/obs-websocket-community-projects/obs-websocket-js) by OBS Websocket Community
   - C (uses obs-websocket-js): [v8-libwebsocket-obs-websocket](https://github.com/dgatwood/v8-libwebsocket-obs-websocket)
 - Go: [goobs](https://github.com/andreykaipov/goobs) by andreykaipov
 - Dart/Flutter (can target all supported platforms): [obs_websocket](https://github.com/faithoflifedev/obs_websocket) by faithoflifedev
+- Java: [obs-websocket-java](https://github.com/obs-websocket-community-projects/obs-websocket-java) by OBS Websocket Community
 
 The 5.x server is a typical WebSocket server running by default on port 4455 (the port number can be changed in the Settings dialog under `Tools`).
 The protocol we use is documented in [PROTOCOL.md](docs/generated/protocol.md).

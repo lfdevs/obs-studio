@@ -55,7 +55,7 @@ index 6a113b0..4e2db56 100644
  	}
  	snd_pcm_hw_params_set_format(data->handle, hwparams, data->format);
 diff --git a/websocket/src/forms/ConnectInfo.cpp b/websocket/src/forms/ConnectInfo.cpp
-index b3b77ed..fe8a8e6 100644
+index ddb979d..a45daaf 100644
 --- a/websocket/src/forms/ConnectInfo.cpp
 +++ b/websocket/src/forms/ConnectInfo.cpp
 @@ -51,7 +51,7 @@ void ConnectInfo::RefreshData()

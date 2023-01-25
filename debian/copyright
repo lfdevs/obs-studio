@@ -21,7 +21,7 @@ Copyright: 2013-2017, Hugh Bailey <obs.jim@gmail.com>
            2014, Leonhard Oelke <leonhard@in-verted.de>
            2017, Fabio Madia <admshao@gmail.com>
            2017, Quinn Damerell <qdamere@microsoft.com>
-           2013-2022, The OBS Developers (see AUTHORS for a full list)
+           2013-2023, The OBS Developers (see AUTHORS for a full list)
 License: GPL-2+
 
 Files: deps/ipc-util/ipc-util/*
@@ -78,7 +78,7 @@ License: BSD-3-clause
 Files: debian/*
 Copyright: 2015, Carl Fürstenberg <azatoth@gmail.com>
            2016-2022, Sebastian Ramacher <sramacher@debian.org>
-           2022, IOhannes m zmölnig <umlaeute@debian.org>
+           2022-2023, IOhannes m zmölnig <umlaeute@debian.org>
 License: GPL-2+
 
 Files: debian/extra/qr/*
@@ -116,6 +116,10 @@ Files: plugins/decklink/linux/decklink-sdk/*
        plugins/decklink/win/decklink-sdk/*
 Copyright: 2009-2016, Blackmagic Design
 License: BSL
+
+Files: plugins/obs-ffmpeg/vaapi-utils.*
+Copyright: 2022, tytan652 <tytan652@tytanium.xyz>
+License: GPL-2+
 
 Files: plugins/obs-outputs/librtmp/*
 Copyright: 2008-2009, Andrej Stepanchuk

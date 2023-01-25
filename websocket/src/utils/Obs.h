@@ -67,22 +67,105 @@ template<typename T> T *GetCalldataPointer(const calldata_t *data, const char *n
 }
 
 enum ObsOutputState {
+	/**
+	* Unknown state.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_UNKNOWN
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_UNKNOWN,
+	/**
+	* The output is starting.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_STARTING
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_STARTING,
+	/**
+	* The input has started.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_STARTED
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_STARTED,
+	/**
+	* The output is stopping.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_STOPPING
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_STOPPING,
+	/**
+	* The output has stopped.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_STOPPED
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_STOPPED,
+	/**
+	* The output has disconnected and is reconnecting.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_RECONNECTING
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_RECONNECTING,
+	/**
+	* The output has reconnected successfully.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_RECONNECTED
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.1.0
+	* @api enums
+	*/
+	OBS_WEBSOCKET_OUTPUT_RECONNECTED,
+	/**
+	* The output is now paused.
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_PAUSED
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.1.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_PAUSED,
+	/**
+	* The output has been resumed (unpaused).
+	*
+	* @enumIdentifier OBS_WEBSOCKET_OUTPUT_RESUMED
+	* @enumType ObsOutputState
+	* @rpcVersion 1
+	* @initialVersion 5.0.0
+	* @api enums
+	*/
 	OBS_WEBSOCKET_OUTPUT_RESUMED,
 };
-
 NLOHMANN_JSON_SERIALIZE_ENUM(ObsOutputState, {
 						     {OBS_WEBSOCKET_OUTPUT_UNKNOWN, "OBS_WEBSOCKET_OUTPUT_UNKNOWN"},
 						     {OBS_WEBSOCKET_OUTPUT_STARTING, "OBS_WEBSOCKET_OUTPUT_STARTING"},
 						     {OBS_WEBSOCKET_OUTPUT_STARTED, "OBS_WEBSOCKET_OUTPUT_STARTED"},
 						     {OBS_WEBSOCKET_OUTPUT_STOPPING, "OBS_WEBSOCKET_OUTPUT_STOPPING"},
 						     {OBS_WEBSOCKET_OUTPUT_STOPPED, "OBS_WEBSOCKET_OUTPUT_STOPPED"},
+						     {OBS_WEBSOCKET_OUTPUT_RECONNECTING, "OBS_WEBSOCKET_OUTPUT_RECONNECTING"},
+						     {OBS_WEBSOCKET_OUTPUT_RECONNECTED, "OBS_WEBSOCKET_OUTPUT_RECONNECTED"},
 						     {OBS_WEBSOCKET_OUTPUT_PAUSED, "OBS_WEBSOCKET_OUTPUT_PAUSED"},
 						     {OBS_WEBSOCKET_OUTPUT_RESUMED, "OBS_WEBSOCKET_OUTPUT_RESUMED"},
 					     })
@@ -159,7 +242,6 @@ enum ObsMediaInputAction {
 	*/
 	OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PREVIOUS,
 };
-
 NLOHMANN_JSON_SERIALIZE_ENUM(ObsMediaInputAction,
 			     {
 				     {OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NONE, "OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NONE"},
@@ -181,6 +263,7 @@ namespace Utils {
 			std::string GetCurrentRecordOutputPath();
 			std::string GetLastRecordFileName();
 			std::string GetLastReplayBufferFileName();
+			std::string GetLastScreenshotFileName();
 			std::string DurationToTimecode(uint64_t);
 		}
 

@@ -1,3 +1,29 @@
+obs-studio (29.0.0+dfsg1-1) unstable; urgency=medium
+
+  * New upstream version 29.0.0+dfsg1
+    (Closes: #1023964)
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints. + obs-plugins: Add Multi-Arch: same.
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Refresh patches with 'gbp pq'
+  * Suggest 'pkexec' instead of 'policykit-1' (Closes: #1025594)
+  * Replace obsolete B-Ds with their modern counterparts
+  * Add 'libva-dev' to the B-Ds
+  * Update d/libobs0.symbols
+  * Add myself to uploaders
+  * Update d/copyright
+    + Modernize 'licensecheck' target
+    + Re-generate d/copyright_hints
+  * Update d/watch
+    + Properly handle pre-releases
+    + Drop repack-count (for future imports)
+  * Apply 'wrap-and-sort -ast'
+  * Bump standards version to 4.6.2
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 25 Jan 2023 17:07:16 +0100
+
 obs-studio (28.0.1+dfsg1-3) unstable; urgency=medium
 
   * debian/rules: Disable lua plugin on ppc64el

@@ -61,6 +61,8 @@ private:
 
 	// Signal handler: frontend
 	static void OnFrontendEvent(enum obs_frontend_event event, void *private_data);
+	void FrontendFinishedLoadingMultiHandler();
+	void FrontendExitMultiHandler();
 
 	// Signal handler: libobs
 	static void SourceCreatedMultiHandler(void *param, calldata_t *data);
@@ -76,9 +78,12 @@ private:
 	static void SourceMediaNextMultiHandler(void *param, calldata_t *data);
 	static void SourceMediaPreviousMultiHandler(void *param, calldata_t *data);
 
+	// Signal handler: output
+	static void StreamOutputReconnectHandler(void *param, calldata_t *data);
+	static void StreamOutputReconnectSuccessHandler(void *param, calldata_t *data);
+
 	// General
 	void HandleExitStarted();
-	void HandleStudioModeStateChanged(bool enabled);
 
 	// Config
 	void HandleCurrentSceneCollectionChanging();
@@ -170,4 +175,8 @@ private:
 	static void HandleMediaInputPlaybackEnded(void *param,
 						  calldata_t *data); // Direct callback
 	void HandleMediaInputActionTriggered(obs_source_t *source, ObsMediaInputAction action);
+
+	// Ui
+	void HandleStudioModeStateChanged(bool enabled);
+	void HandleScreenshotSaved();
 };

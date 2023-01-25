@@ -94,20 +94,18 @@ std::string Utils::Obs::StringHelper::GetLastRecordFileName()
 
 std::string Utils::Obs::StringHelper::GetLastReplayBufferFileName()
 {
-	OBSOutputAutoRelease output = obs_frontend_get_replay_buffer_output();
-	if (!output)
-		return "";
+	char *replayBufferPath = obs_frontend_get_last_replay();
+	std::string ret = replayBufferPath;
+	bfree(replayBufferPath);
+	return ret;
+}
 
-	calldata_t cd = {0};
-	proc_handler_t *ph = obs_output_get_proc_handler(output);
-	proc_handler_call(ph, "get_last_replay", &cd);
-	const char *savedReplayPath = calldata_string(&cd, "path");
-	calldata_free(&cd);
-
-	if (!savedReplayPath)
-		return "";
-
-	return savedReplayPath;
+std::string Utils::Obs::StringHelper::GetLastScreenshotFileName()
+{
+	char *screenshotPath = obs_frontend_get_last_screenshot();
+	std::string ret = screenshotPath;
+	bfree(screenshotPath);
+	return ret;
 }
 
 std::string Utils::Obs::StringHelper::DurationToTimecode(uint64_t ms)

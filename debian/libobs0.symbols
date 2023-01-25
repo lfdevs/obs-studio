@@ -22,6 +22,9 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_current_scene_collection@Base 18.0.1
  obs_frontend_get_current_transition@Base 18.0.1
  obs_frontend_get_global_config@Base 18.0.1
+ obs_frontend_get_last_recording@Base 29.0.0
+ obs_frontend_get_last_replay@Base 29.0.0
+ obs_frontend_get_last_screenshot@Base 29.0.0
  obs_frontend_get_locale_string@Base 28.0.1
  obs_frontend_get_main_window@Base 18.0.1
  obs_frontend_get_main_window_handle@Base 18.0.1
@@ -39,6 +42,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_get_transition_duration@Base 23.2.1
  obs_frontend_get_transitions@Base 18.0.1
  obs_frontend_get_virtualcam_output@Base 27.0.1
+ obs_frontend_is_theme_dark@Base 29.0.0
  obs_frontend_open_projector@Base 25.0.3
  obs_frontend_open_source_filters@Base 27.1.1
  obs_frontend_open_source_interaction@Base 27.2.0
@@ -277,6 +281,7 @@ libobs-scripting.so.1 libobs0 #MINVER#
  obs_scripting_load_python@Base 28.0.1
  obs_scripting_python_loaded@Base 28.0.1
  obs_scripting_python_runtime_linked@Base 28.0.1
+ obs_scripting_python_version@Base 29.0.0
  obs_scripting_set_log_callback@Base 28.0.1
  obs_scripting_supported_formats@Base 28.0.1
  obs_scripting_unload@Base 28.0.1
@@ -358,8 +363,6 @@ libobs.so.0 libobs0 #MINVER#
  caption_frame_decode_preamble@Base 26.0.0
  caption_frame_decode_text@Base 26.0.0
  caption_frame_delete_to_end_of_row@Base 26.0.0
- caption_frame_dump@Base 26.0.0
- caption_frame_dump_buffer@Base 26.0.0
  caption_frame_end@Base 26.0.0
  caption_frame_from_text@Base 26.0.0
  caption_frame_init@Base 26.0.0
@@ -975,6 +978,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_encoder_get_id@Base 0.13.2
  obs_encoder_get_last_error@Base 25.0.8
  obs_encoder_get_name@Base 0.13.2
+ obs_encoder_get_pause_offset@Base 29.0.0
  obs_encoder_get_preferred_video_format@Base 0.13.2
  obs_encoder_get_ref@Base 0.13.2
  obs_encoder_get_sample_rate@Base 0.13.2
@@ -1692,6 +1696,7 @@ libobs.so.0 libobs0 #MINVER#
  obs_transition_video_render_direct@Base 21.0.2
  obs_video_active@Base 23.2.1
  obs_video_encoder_create@Base 0.13.2
+ obs_view_add2@Base 29.0.0
  obs_view_add@Base 28.0.1
  obs_view_create@Base 0.13.2
  obs_view_destroy@Base 0.13.2
@@ -1777,6 +1782,7 @@ libobs.so.0 libobs0 #MINVER#
  os_get_program_data_path@Base 0.15.4
  os_get_program_data_path_ptr@Base 0.15.4
  os_get_sys_free_size@Base 21.0.2
+ os_get_sys_total_size@Base 29.0.0
  os_getcwd@Base 0.13.2
  os_gettime_ns@Base 0.13.2
  os_glob@Base 0.13.2

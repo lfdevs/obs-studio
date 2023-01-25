@@ -11,7 +11,7 @@ Last-Update: 2022-09-20
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/websocket/CMakeLists.txt b/websocket/CMakeLists.txt
-index 66fa0da..b647171 100644
+index a900288..e5023fd 100644
 --- a/websocket/CMakeLists.txt
 +++ b/websocket/CMakeLists.txt
 @@ -14,7 +14,7 @@ if(NOT

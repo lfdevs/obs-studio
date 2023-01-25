@@ -32,6 +32,7 @@ Files: AUTHORS
  CI/macos/02_build_obs.sh
  CI/macos/03_package_obs.sh
  CI/steam/obs_build.vdf
+ CI/steam/obs_playtest_build.vdf
  CI/steam/scripts_macos/launch.sh
  CI/steam/scripts_windows/install.bat
  CI/steam/scripts_windows/installscript.vdf
@@ -411,6 +412,7 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/data/locale/sv-SE.ini
  UI/frontend-plugins/aja-output-ui/data/locale/tr-TR.ini
  UI/frontend-plugins/aja-output-ui/data/locale/uk-UA.ini
+ UI/frontend-plugins/aja-output-ui/data/locale/ur-PK.ini
  UI/frontend-plugins/aja-output-ui/data/locale/vi-VN.ini
  UI/frontend-plugins/aja-output-ui/data/locale/zh-CN.ini
  UI/frontend-plugins/aja-output-ui/data/locale/zh-TW.ini
@@ -658,6 +660,7 @@ Files: AUTHORS
  cmake/Modules/FindLibspeexdsp.cmake
  cmake/Modules/FindLibsrt.cmake
  cmake/Modules/FindLibv4l2.cmake
+ cmake/Modules/FindLibva.cmake
  cmake/Modules/FindLibx264.cmake
  cmake/Modules/FindLuajit.cmake
  cmake/Modules/FindMbedTLS.cmake
@@ -679,32 +682,6 @@ Files: AUTHORS
  cmake/Modules/ObsHelpers_macOS.cmake
  cmake/Modules/VersionConfig.cmake
  cmake/external/ObsPluginHelpers.cmake
- debian/.gitignore
- debian/README.Debian
- debian/clean
- debian/control
- debian/gbp.conf
- debian/libobs-dev.install
- debian/libobs0.install
- debian/libobs0.symbols
- debian/obs-plugins.install
- debian/obs-studio.install
- debian/obs-studio.manpages
- debian/obs.rst
- debian/patches/0001-Use-common-license.patch
- debian/patches/0002-Hide-internal-symbols.patch
- debian/patches/0003-Use-path-in-usr-lib.patch
- debian/patches/0004-Do-not-build-with-SSE2-enabled-on-i386.patch
- debian/patches/0005-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
- debian/patches/0006-Do-not-build-unused-blake2-dependency.patch
- debian/patches/0007-Disable-obs-browser-check.patch
- debian/patches/obs-websocket_use_system_libs.patch
- debian/patches/series
- debian/rules
- debian/salsa-ci.yml
- debian/source/format
- debian/upstream/metadata
- debian/watch
  deps/CMakeLists.txt
  deps/file-updater/CMakeLists.txt
  deps/file-updater/file-updater/file-updater.c
@@ -919,6 +896,8 @@ Files: AUTHORS
  libobs/util/profiler.hpp
  libobs/util/task.c
  libobs/util/task.h
+ libobs/util/windows/device-enum.c
+ libobs/util/windows/device-enum.h
  libobs/util/windows/obfuscate.c
  libobs/util/windows/obfuscate.h
  libobs/util/windows/window-helpers.c
@@ -986,6 +965,7 @@ Files: AUTHORS
  plugins/aja/data/locale/th-TH.ini
  plugins/aja/data/locale/tr-TR.ini
  plugins/aja/data/locale/uk-UA.ini
+ plugins/aja/data/locale/ur-PK.ini
  plugins/aja/data/locale/vi-VN.ini
  plugins/aja/data/locale/zh-CN.ini
  plugins/aja/data/locale/zh-TW.ini
@@ -1048,6 +1028,7 @@ Files: AUTHORS
  plugins/coreaudio-encoder/data/locale/tl-PH.ini
  plugins/coreaudio-encoder/data/locale/tr-TR.ini
  plugins/coreaudio-encoder/data/locale/uk-UA.ini
+ plugins/coreaudio-encoder/data/locale/ur-PK.ini
  plugins/coreaudio-encoder/data/locale/vi-VN.ini
  plugins/coreaudio-encoder/data/locale/zh-CN.ini
  plugins/coreaudio-encoder/data/locale/zh-TW.ini
@@ -1125,6 +1106,7 @@ Files: AUTHORS
  plugins/decklink/data/locale/tl-PH.ini
  plugins/decklink/data/locale/tr-TR.ini
  plugins/decklink/data/locale/uk-UA.ini
+ plugins/decklink/data/locale/ur-PK.ini
  plugins/decklink/data/locale/vi-VN.ini
  plugins/decklink/data/locale/zh-CN.ini
  plugins/decklink/data/locale/zh-TW.ini
@@ -1611,6 +1593,7 @@ Files: AUTHORS
  plugins/obs-ffmpeg/data/locale/zh-TW.ini
  plugins/obs-ffmpeg/ffmpeg-mux/CMakeLists.txt
  plugins/obs-ffmpeg/jim-nvenc-helpers.c
+ plugins/obs-ffmpeg/jim-nvenc-ver.h
  plugins/obs-ffmpeg/jim-nvenc.c
  plugins/obs-ffmpeg/jim-nvenc.h
  plugins/obs-ffmpeg/obs-amf-test/CMakeLists.txt
@@ -1626,6 +1609,8 @@ Files: AUTHORS
  plugins/obs-ffmpeg/obs-ffmpeg-video-encoders.c
  plugins/obs-ffmpeg/obs-ffmpeg-video-encoders.h
  plugins/obs-ffmpeg/obs-ffmpeg.c
+ plugins/obs-ffmpeg/obs-nvenc-test/CMakeLists.txt
+ plugins/obs-ffmpeg/obs-nvenc-test/jim-nvenc-test.c
  plugins/obs-ffmpeg/texture-amf-opts.hpp
  plugins/obs-ffmpeg/texture-amf.cpp
  plugins/obs-filters/CMakeLists.txt
@@ -1712,6 +1697,7 @@ Files: AUTHORS
  plugins/obs-filters/data/mask_color_filter.effect
  plugins/obs-filters/data/rtx_greenscreen.effect
  plugins/obs-filters/data/sharpness.effect
+ plugins/obs-filters/eq-filter.c
  plugins/obs-filters/expander-filter.c
  plugins/obs-filters/gain-filter.c
  plugins/obs-filters/gpu-delay.c
@@ -1858,7 +1844,6 @@ Files: AUTHORS
  plugins/obs-outputs/data/locale/zh-TW.ini
  plugins/obs-outputs/librtmp/.clang-format
  plugins/obs-outputs/obs-output-ver.h
- plugins/obs-outputs/obs-outputs-config.h.in
  plugins/obs-outputs/obs-outputs.c
  plugins/obs-outputs/rtmp-stream.h
  plugins/obs-outputs/rtmp-windows.c
@@ -2223,7 +2208,7 @@ Files: AUTHORS
  plugins/rtmp-services/data/locale/zh-TW.ini
  plugins/rtmp-services/data/package.json
  plugins/rtmp-services/data/schema/package-schema.json
- plugins/rtmp-services/data/schema/service-schema-v3.json
+ plugins/rtmp-services/data/schema/service-schema-v4.json
  plugins/rtmp-services/data/services.json
  plugins/rtmp-services/lookup-config.h.in
  plugins/rtmp-services/rtmp-common.c
@@ -2477,6 +2462,7 @@ Files: AUTHORS
  websocket/data/locale/sv-SE.ini
  websocket/data/locale/tr-TR.ini
  websocket/data/locale/uk-UA.ini
+ websocket/data/locale/vi-VN.ini
  websocket/data/locale/zh-CN.ini
  websocket/data/locale/zh-TW.ini
  websocket/docs/README.md
@@ -3630,6 +3616,12 @@ Copyright: 2003-2004, Mark Borgerding
 License: BSD-2-clause
  FIXME
 
+Files: plugins/obs-ffmpeg/vaapi-utils.c
+ plugins/obs-ffmpeg/vaapi-utils.h
+Copyright: 2022, tytan652 <tytan652@tytanium.xyz>
+License: GPL-2
+ FIXME
+
 Files: deps/obs-scripting/obs-scripting-python.c
  deps/obs-scripting/obs-scripting-python.h
 Copyright: 2015, Andrew Skinner <obs@theandyroid.com>
@@ -3707,12 +3699,6 @@ Copyright: 2009-2010, Howard Chu
 License: LGPL-2.1+
  FIXME
 
-Files: debian/extra/qr/cpp/QrCode.cpp
- debian/extra/qr/cpp/QrCode.hpp
-Copyright: Project Nayuki. (MIT License)
-License: UNKNOWN
- FIXME
-
 Files: plugins/obs-outputs/librtmp/cencode.c
  plugins/obs-outputs/librtmp/cencode.h
 Copyright: NONE
@@ -3780,11 +3766,6 @@ Copyright: 2003, James Bursa <bursa@users.sourceforge.net>
   2004, John Tytgat <John.Tytgat@aaug.net>
   2004, Richard Wilson <richard.wilson@netsurf-browser.org>
   2008, Sean Fox <dyntryx@gmail.com>
-License: Expat
- FIXME
-
-Files: debian/extra/qr/Readme.markdown
-Copyright: 2020, Project Nayuki. (MIT License)
 License: Expat
  FIXME
 
@@ -3908,19 +3889,6 @@ Files: plugins/obs-outputs/librtmp/http.h
 Copyright: 2010, Antti Ajanki
   2010, Howard Chu
 License: LGPL-2.1+
- FIXME
-
-Files: debian/changelog
-Copyright: (http -> https)
-  Document Blackmagic Design copyright.
-  Document simde
-  Filter scripts for building the macOS app
-  Update Files-Excluded for new upstream version.
-  Update copyright information
-  Update using decopy.
-  Use https protocol in Format field.
-  exclude libobs/util/simde as we will use the files from libsimde-dev
-License: UNKNOWN
  FIXME
 
 Files: cmake/Modules/FindPipeWire.cmake

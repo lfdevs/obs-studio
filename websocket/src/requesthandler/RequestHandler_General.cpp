@@ -103,6 +103,20 @@ RequestResult RequestHandler::GetStats(const Request &)
 }
 
 /**
+ * Custom event emitted by `BroadcastCustomEvent`.
+ * 
+ * @dataField eventData | Object | Custom event data
+ *
+ * @eventType CustomEvent
+ * @eventSubscription General
+ * @complexity 1
+ * @rpcVersion -1
+ * @initialVersion 5.0.0
+ * @category general
+ * @api events
+ */
+
+/**
  * Broadcasts a `CustomEvent` to all WebSocket clients. Receivers are clients which are identified and subscribed.
  *
  * @requestField eventData | Object | Data payload to emit to all receivers
@@ -311,8 +325,8 @@ RequestResult RequestHandler::TriggerHotkeyByKeySequence(const Request &request)
 /**
  * Sleeps for a time duration or number of frames. Only available in request batches with types `SERIAL_REALTIME` or `SERIAL_FRAME`.
  *
- * @requestField sleepMillis | Number | Number of milliseconds to sleep for (if `SERIAL_REALTIME` mode) | >= 0, <= 50000
- * @requestField sleepFrames | Number | Number of frames to sleep for (if `SERIAL_FRAME` mode) | >= 0, <= 10000
+ * @requestField ?sleepMillis | Number | Number of milliseconds to sleep for (if `SERIAL_REALTIME` mode) | >= 0, <= 50000
+ * @requestField ?sleepFrames | Number | Number of frames to sleep for (if `SERIAL_FRAME` mode) | >= 0, <= 10000
  *
  * @requestType Sleep
  * @complexity 2

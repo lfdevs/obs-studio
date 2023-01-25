@@ -54,10 +54,13 @@ override_dh_gencontrol:
 
 ################################################################
 DEB_COPYRIGHT_CHECK_IGNORE_REGEX = \
-	(.*\.ttf|.*\.png|debian/copyright.*)
+	debian/.*|.*\.ttf|.*\.png
+# licensecheck v1
+.PHONY: licensecheck
 licensecheck:
-	licensecheck --check '.*' --recursive --deb-machine --lines 0 * \
-		-i "^$(DEB_COPYRIGHT_CHECK_IGNORE_REGEX)$$" \
+	LANG=C.UTF-8 licensecheck \
+		-i "^($(DEB_COPYRIGHT_CHECK_IGNORE_REGEX))$$" \
+		--check '.*' --recursive --deb-machine --lines 0 * \
 		> debian/copyright_newhints
 	cmp debian/copyright_hints debian/copyright_newhints \
 		&& rm debian/copyright_newhints

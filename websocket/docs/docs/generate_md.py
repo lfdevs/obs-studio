@@ -9,7 +9,9 @@ enumTypeOrder = [
     'WebSocketCloseCode',
     'RequestBatchExecutionType',
     'RequestStatus',
-    'EventSubscription'
+    'EventSubscription',
+    'ObsMediaInputAction',
+    'ObsOutputState'
 ]
 
 categoryOrder = [

@@ -21,6 +21,9 @@
   - [RequestResponse (OpCode 7)](#requestresponse-opcode-7)
   - [RequestBatch (OpCode 8)](#requestbatch-opcode-8)
   - [RequestBatchResponse (OpCode 9)](#requestbatchresponse-opcode-9)
+- [Enumerations](#enums)
+- [Events](#events)
+- [Requests](#requests)
 
 ## General Intro
 
@@ -512,6 +515,24 @@ These are enumeration declarations, which are referenced throughout obs-websocke
   - [EventSubscription::InputActiveStateChanged](#eventsubscriptioninputactivestatechanged)
   - [EventSubscription::InputShowStateChanged](#eventsubscriptioninputshowstatechanged)
   - [EventSubscription::SceneItemTransformChanged](#eventsubscriptionsceneitemtransformchanged)
+- [ObsMediaInputAction](#obsmediainputaction)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NONE](#obsmediainputactionobs_websocket_media_input_action_none)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PLAY](#obsmediainputactionobs_websocket_media_input_action_play)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PAUSE](#obsmediainputactionobs_websocket_media_input_action_pause)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_STOP](#obsmediainputactionobs_websocket_media_input_action_stop)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART](#obsmediainputactionobs_websocket_media_input_action_restart)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NEXT](#obsmediainputactionobs_websocket_media_input_action_next)
+  - [ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PREVIOUS](#obsmediainputactionobs_websocket_media_input_action_previous)
+- [ObsOutputState](#obsoutputstate)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_UNKNOWN](#obsoutputstateobs_websocket_output_unknown)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_STARTING](#obsoutputstateobs_websocket_output_starting)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_STARTED](#obsoutputstateobs_websocket_output_started)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_STOPPING](#obsoutputstateobs_websocket_output_stopping)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_STOPPED](#obsoutputstateobs_websocket_output_stopped)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_RECONNECTING](#obsoutputstateobs_websocket_output_reconnecting)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_RECONNECTED](#obsoutputstateobs_websocket_output_reconnected)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_PAUSED](#obsoutputstateobs_websocket_output_paused)
+  - [ObsOutputState::OBS_WEBSOCKET_OUTPUT_RESUMED](#obsoutputstateobs_websocket_output_resumed)
 
 ## WebSocketOpCode
 
@@ -1294,6 +1315,182 @@ Subscription value to receive the `SceneItemTransformChanged` high-volume event.
 - Latest Supported RPC Version: `1`
 - Added in v5.0.0
 
+## ObsMediaInputAction
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NONE
+
+No action.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NONE`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PLAY
+
+Play the media input.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PLAY`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PAUSE
+
+Pause the media input.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PAUSE`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_STOP
+
+Stop the media input.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_STOP`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART
+
+Restart the media input.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_RESTART`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NEXT
+
+Go to the next playlist item.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_NEXT`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsMediaInputAction::OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PREVIOUS
+
+Go to the previous playlist item.
+
+- Identifier Value: `OBS_WEBSOCKET_MEDIA_INPUT_ACTION_PREVIOUS`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+## ObsOutputState
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_UNKNOWN
+
+Unknown state.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_UNKNOWN`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_STARTING
+
+The output is starting.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_STARTING`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_STARTED
+
+The input has started.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_STARTED`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_STOPPING
+
+The output is stopping.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_STOPPING`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_STOPPED
+
+The output has stopped.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_STOPPED`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_RECONNECTING
+
+The output has disconnected and is reconnecting.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_RECONNECTING`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_RECONNECTED
+
+The output has reconnected successfully.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_RECONNECTED`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.1.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_PAUSED
+
+The output is now paused.
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_PAUSED`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.1.0
+
+---
+
+### ObsOutputState::OBS_WEBSOCKET_OUTPUT_RESUMED
+
+The output has been resumed (unpaused).
+
+- Identifier Value: `OBS_WEBSOCKET_OUTPUT_RESUMED`
+- Latest Supported RPC Version: `1`
+- **⚠️ Deprecated. ⚠️**
+- Added in v5.0.0
+
 # Events
 
 ## Events Table of Contents
@@ -1301,6 +1498,7 @@ Subscription value to receive the `SceneItemTransformChanged` high-volume event.
 - [General Events](#general-events)
   - [ExitStarted](#exitstarted)
   - [VendorEvent](#vendorevent)
+  - [CustomEvent](#customevent)
 - [Config Events](#config-events)
   - [CurrentSceneCollectionChanging](#currentscenecollectionchanging)
   - [CurrentSceneCollectionChanged](#currentscenecollectionchanged)
@@ -1360,6 +1558,7 @@ Subscription value to receive the `SceneItemTransformChanged` high-volume event.
   - [MediaInputActionTriggered](#mediainputactiontriggered)
 - [Ui Events](#ui-events)
   - [StudioModeStateChanged](#studiomodestatechanged)
+  - [ScreenshotSaved](#screenshotsaved)
 
 ## General Events
 
@@ -1391,6 +1590,22 @@ If a plugin or script implements vendor requests or events, documentation is exp
 | vendorName | String | Name of the vendor emitting the event |
 | eventType | String | Vendor-provided event typedef |
 | eventData | Object | Vendor-provided event data. {} if event does not provide any data |
+
+---
+
+### CustomEvent
+
+Custom event emitted by `BroadcastCustomEvent`.
+
+- Complexity Rating: `1/5`
+- Latest Supported RPC Version: `1`
+- Added in v5.0.0
+
+**Data Fields:**
+
+| Name | Type  | Description |
+| ---- | :---: | ----------- |
+| eventData | Object | Custom event data |
 
 ## Config Events
 
@@ -1717,7 +1932,7 @@ An input's volume level has changed.
 | Name | Type  | Description |
 | ---- | :---: | ----------- |
 | inputName | String | Name of the input |
-| inputVolumeMul | Number | New volume level in multimap |
+| inputVolumeMul | Number | New volume level multiplier |
 | inputVolumeDb | Number | New volume level in dB |
 
 ---
@@ -2265,6 +2480,26 @@ Studio mode has been enabled or disabled.
 | ---- | :---: | ----------- |
 | studioModeEnabled | Boolean | True == Enabled, False == Disabled |
 
+---
+
+### ScreenshotSaved
+
+A screenshot has been saved.
+
+Note: Triggered for the screenshot feature available in `Settings -> Hotkeys -> Screenshot Output` ONLY.
+Applications using `Get/SaveSourceScreenshot` should implement a `CustomEvent` if this kind of inter-client
+communication is desired.
+
+- Complexity Rating: `2/5`
+- Latest Supported RPC Version: `1`
+- Added in v5.1.0
+
+**Data Fields:**
+
+| Name | Type  | Description |
+| ---- | :---: | ----------- |
+| savedScreenshotPath | String | Path of the saved image file |
+
 # Requests
 
 ## Requests Table of Contents
@@ -2580,8 +2815,8 @@ Sleeps for a time duration or number of frames. Only available in request batche
 
 | Name | Type  | Description | Value Restrictions | ?Default Behavior |
 | ---- | :---: | ----------- | :----------------: | ----------------- |
-| sleepMillis | Number | Number of milliseconds to sleep for (if `SERIAL_REALTIME` mode) | >= 0, <= 50000 | N/A |
-| sleepFrames | Number | Number of frames to sleep for (if `SERIAL_FRAME` mode) | >= 0, <= 10000 | N/A |
+| ?sleepMillis | Number | Number of milliseconds to sleep for (if `SERIAL_REALTIME` mode) | >= 0, <= 50000 | Unknown |
+| ?sleepFrames | Number | Number of frames to sleep for (if `SERIAL_FRAME` mode) | >= 0, <= 10000 | Unknown |
 
 ## Config Requests
 
@@ -3652,6 +3887,10 @@ Note: Use this in cases where an input provides a dynamic, selectable list of it
 
 Presses a button in the properties of an input.
 
+Some known `propertyName` values are:
+
+- `refreshnocache` - Browser source reload button
+
 Note: Use this in cases where there is a button in the properties of an input that cannot be accessed in any other way. For example, browser sources, where there is a refresh button.
 
 - Complexity Rating: `4/5`
@@ -4029,7 +4268,7 @@ Scenes only
 
 Basically GetSceneItemList, but for groups.
 
-Using groups at all in OBS is discouraged, as they are very broken under the hood.
+Using groups at all in OBS is discouraged, as they are very broken under the hood. Please use nested scenes instead.
 
 Groups only
 
@@ -4521,6 +4760,12 @@ Gets the list of available outputs.
 - Latest Supported RPC Version: `1`
 - Added in v5.0.0
 
+**Response Fields:**
+
+| Name | Type  | Description |
+| ---- | :---: | ----------- |
+| outputs | Array&lt;Object&gt; | Array of outputs |
+
 ---
 
 ### GetOutputStatus
@@ -4733,7 +4978,7 @@ Gets the status of the record output.
 | Name | Type  | Description |
 | ---- | :---: | ----------- |
 | outputActive | Boolean | Whether the output is active |
-| ouputPaused | Boolean | Whether the output is paused |
+| outputPaused | Boolean | Whether the output is paused |
 | outputTimecode | String | Current formatted timecode string for the output |
 | outputDuration | Number | Current duration in milliseconds for the output |
 | outputBytes | Number | Number of bytes sent by the output |

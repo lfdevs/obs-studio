@@ -20,7 +20,7 @@ index a919514..14a7655 100644
  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/swig)
  
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 790583c..b5527ee 100644
+index 5b91b4b..2bbb721 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
 @@ -268,7 +268,7 @@ target_compile_options(

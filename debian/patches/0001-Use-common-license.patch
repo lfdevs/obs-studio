@@ -9,10 +9,10 @@ copy
  1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/UI/window-basic-about.cpp b/UI/window-basic-about.cpp
-index f8eb14b..2397760 100644
+index 2bbc216..5dc4901 100644
 --- a/UI/window-basic-about.cpp
 +++ b/UI/window-basic-about.cpp
-@@ -154,15 +154,10 @@ void OBSAbout::ShowAuthors()
+@@ -159,15 +159,10 @@ void OBSAbout::ShowAuthors()
  
  void OBSAbout::ShowLicense()
  {

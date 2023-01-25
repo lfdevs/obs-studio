@@ -8,10 +8,10 @@ Subject: Do not build with SSE2 enabled on i386
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/Modules/CompilerConfig.cmake b/cmake/Modules/CompilerConfig.cmake
-index c939146..df6dcc5 100644
+index 9497fc0..09afa07 100644
 --- a/cmake/Modules/CompilerConfig.cmake
 +++ b/cmake/Modules/CompilerConfig.cmake
-@@ -120,7 +120,7 @@ else()
+@@ -121,7 +121,7 @@ else()
  endif()
  
  if(LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES
