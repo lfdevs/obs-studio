@@ -13,6 +13,8 @@ Files-Excluded:
  plugins/obs-ffmpeg/external
  plugins/obs-qsv11/*
  plugins/win-*
+ .git*
+ */.git*
 
 Files: *
 Copyright: 2013-2017, Hugh Bailey <obs.jim@gmail.com>

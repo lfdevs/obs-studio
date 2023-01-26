@@ -25,21 +25,23 @@ endif
 %:
 	dh $@
 
-override_dh_auto_configure:
+execute_before_dh_auto_configure:
 	cp -r websocket plugins/obs-websocket
 	mkdir -p plugins/obs-websocket/deps
 	cp -r debian/extra/qr plugins/obs-websocket/deps/
+	-find plugins/obs-websocket/ -name ".git*" -exec rm -rf {} +
+override_dh_auto_configure:
 	dh_auto_configure -- $(confflags)
 
 execute_after_dh_auto_build:
 	rst2man debian/obs.rst > debian/obs.1
 
-override_dh_install:
-	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg
+execute_after_dh_auto_install:
 	-find debian/tmp -type f -name "*.pem" -exec chmod a-x {} +
+	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg
 	mv debian/tmp/usr/bin/obs-ffmpeg-mux \
 		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux
-	dh_install
+execute_after_dh_install:
 	rm -rf debian/obs-studio/usr/share/obs/obs-studio/license
 
 execute_before_dh_shlibdeps:

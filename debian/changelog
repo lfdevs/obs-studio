@@ -1,3 +1,11 @@
+obs-studio (29.0.0+dfsg1-2) unstable; urgency=medium
+
+  * B-D on libopengl-dev rather than libgl-dev
+  * Restructure d/rules with execute_(before,after)_dh_*
+  * Filter out '.git*' files and directories (for future imports)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 26 Jan 2023 11:08:02 +0100
+
 obs-studio (29.0.0+dfsg1-1) unstable; urgency=medium
 
   * New upstream version 29.0.0+dfsg1
