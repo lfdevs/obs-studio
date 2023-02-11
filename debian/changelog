@@ -1,3 +1,10 @@
+obs-studio (29.0.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 29.0.2+dfsg
+  * Re-generated d/copyright_hints
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sat, 11 Feb 2023 15:55:47 +0100
+
 obs-studio (29.0.0+dfsg1-2) unstable; urgency=medium
 
   * B-D on libopengl-dev rather than libgl-dev

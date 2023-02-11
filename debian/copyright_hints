@@ -386,6 +386,7 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/data/locale/eu-ES.ini
  UI/frontend-plugins/aja-output-ui/data/locale/fa-IR.ini
  UI/frontend-plugins/aja-output-ui/data/locale/fi-FI.ini
+ UI/frontend-plugins/aja-output-ui/data/locale/fil-PH.ini
  UI/frontend-plugins/aja-output-ui/data/locale/fr-FR.ini
  UI/frontend-plugins/aja-output-ui/data/locale/gl-ES.ini
  UI/frontend-plugins/aja-output-ui/data/locale/he-IL.ini
@@ -975,6 +976,7 @@ Files: AUTHORS
  plugins/coreaudio-encoder/data/locale/ar-SA.ini
  plugins/coreaudio-encoder/data/locale/az-AZ.ini
  plugins/coreaudio-encoder/data/locale/ba-RU.ini
+ plugins/coreaudio-encoder/data/locale/be-BY.ini
  plugins/coreaudio-encoder/data/locale/bg-BG.ini
  plugins/coreaudio-encoder/data/locale/bn-BD.ini
  plugins/coreaudio-encoder/data/locale/ca-ES.ini
@@ -1322,6 +1324,7 @@ Files: AUTHORS
  plugins/linux-jack/data/locale/ar-SA.ini
  plugins/linux-jack/data/locale/az-AZ.ini
  plugins/linux-jack/data/locale/ba-RU.ini
+ plugins/linux-jack/data/locale/be-BY.ini
  plugins/linux-jack/data/locale/bg-BG.ini
  plugins/linux-jack/data/locale/bn-BD.ini
  plugins/linux-jack/data/locale/ca-ES.ini
@@ -1375,6 +1378,7 @@ Files: AUTHORS
  plugins/linux-jack/data/locale/zh-TW.ini
  plugins/linux-pipewire/CMakeLists.txt
  plugins/linux-pipewire/data/locale/ar-SA.ini
+ plugins/linux-pipewire/data/locale/bn-BD.ini
  plugins/linux-pipewire/data/locale/ca-ES.ini
  plugins/linux-pipewire/data/locale/cs-CZ.ini
  plugins/linux-pipewire/data/locale/da-DK.ini
@@ -1386,6 +1390,7 @@ Files: AUTHORS
  plugins/linux-pipewire/data/locale/eu-ES.ini
  plugins/linux-pipewire/data/locale/fa-IR.ini
  plugins/linux-pipewire/data/locale/fi-FI.ini
+ plugins/linux-pipewire/data/locale/fil-PH.ini
  plugins/linux-pipewire/data/locale/fr-FR.ini
  plugins/linux-pipewire/data/locale/gl-ES.ini
  plugins/linux-pipewire/data/locale/he-IL.ini
@@ -2423,6 +2428,15 @@ Files: AUTHORS
  websocket/.clang-format
  websocket/.cmake-format.json
  websocket/.editorconfig
+ websocket/.github/FUNDING.yml
+ websocket/.github/ISSUE_TEMPLATE/bug_report.yaml
+ websocket/.github/ISSUE_TEMPLATE/config.yml
+ websocket/.github/ISSUE_TEMPLATE/feature_request.yaml
+ websocket/.github/pull_request_template.md
+ websocket/.github/workflows/generate_docs.yml
+ websocket/.github/workflows/lint.yml
+ websocket/.gitignore
+ websocket/.gitmodules
  websocket/.markdownlintignore
  websocket/.markdownlintrc
  websocket/CI/generate-docs.sh
@@ -2465,8 +2479,10 @@ Files: AUTHORS
  websocket/data/locale/vi-VN.ini
  websocket/data/locale/zh-CN.ini
  websocket/data/locale/zh-TW.ini
+ websocket/docs/.gitignore
  websocket/docs/README.md
  websocket/docs/build_docs.sh
+ websocket/docs/comments/.gitignore
  websocket/docs/comments/.npmrc
  websocket/docs/comments/comments.js
  websocket/docs/comments/config.json
