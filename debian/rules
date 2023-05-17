@@ -56,7 +56,7 @@ override_dh_gencontrol:
 
 ################################################################
 DEB_COPYRIGHT_CHECK_IGNORE_REGEX = \
-	debian/.*|.*\.ttf|.*\.png
+	debian/.*|.*\.ttf|.*\.png|cmake/macos/resources/AppIcon.icns|cmake/macos/resources/background.tiff
 # licensecheck v1
 .PHONY: licensecheck
 licensecheck:
