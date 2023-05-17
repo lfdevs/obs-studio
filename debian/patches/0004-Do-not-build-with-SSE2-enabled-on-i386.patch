@@ -8,28 +8,28 @@ Subject: Do not build with SSE2 enabled on i386
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/Modules/CompilerConfig.cmake b/cmake/Modules/CompilerConfig.cmake
-index 9497fc0..09afa07 100644
+index 849d19d..63b2b15 100644
 --- a/cmake/Modules/CompilerConfig.cmake
 +++ b/cmake/Modules/CompilerConfig.cmake
-@@ -121,7 +121,7 @@ else()
+@@ -151,7 +151,7 @@ else()
+   string(TOLOWER ${CMAKE_SYSTEM_PROCESSOR} LOWERCASE_CMAKE_SYSTEM_PROCESSOR)
  endif()
  
- if(LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES
--   "(i[3-6]86|x86|x64|x86_64|amd64|e2k)")
-+   "(x86_64|amd64|e2k)")
+-if(LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "(i[3-6]86|x86|x64|x86_64|amd64|e2k)")
++if(LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "(x86_64|amd64|e2k)")
    if(NOT MSVC AND NOT CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
      set(ARCH_SIMD_FLAGS -mmmx -msse -msse2)
    endif()
 diff --git a/cmake/external/ObsPluginHelpers.cmake b/cmake/external/ObsPluginHelpers.cmake
-index da2cdee..70e688d 100644
+index 811c4aa..981db1f 100644
 --- a/cmake/external/ObsPluginHelpers.cmake
 +++ b/cmake/external/ObsPluginHelpers.cmake
-@@ -254,7 +254,7 @@ else()
+@@ -231,7 +231,7 @@ else()
    string(TOLOWER ${CMAKE_SYSTEM_PROCESSOR} _HOST_ARCH)
  endif()
  
--if(_HOST_ARCH MATCHES "i[3-6]86|x86|x64|x86_64|amd64"
-+if(_HOST_ARCH MATCHES "x86_64|amd64"
-    AND NOT CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
-   # Enable MMX, SSE and SSE2 on compatible host systems (assuming no
-   # cross-compile)
+-if(_HOST_ARCH MATCHES "i[3-6]86|x86|x64|x86_64|amd64" AND NOT CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
++if(_HOST_ARCH MATCHES "x86_64|amd64" AND NOT CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
+   # Enable MMX, SSE and SSE2 on compatible host systems (assuming no cross-compile)
+   set(ARCH_SIMD_FLAGS -mmmx -msse -msse2)
+ elseif(_HOST_ARCH MATCHES "arm64|arm64e|aarch64")

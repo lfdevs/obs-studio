@@ -3,32 +3,34 @@ Date: Wed, 19 Apr 2017 21:45:40 +0200
 Subject: Hide internal symbols
 
 ---
- deps/obs-scripting/CMakeLists.txt | 1 +
- libobs/CMakeLists.txt             | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ deps/obs-scripting/CMakeLists.txt | 3 +++
+ libobs/CMakeLists.txt             | 2 ++
+ 2 files changed, 5 insertions(+)
 
 diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
-index a919514..14a7655 100644
+index e437b27..dccb4a5 100644
 --- a/deps/obs-scripting/CMakeLists.txt
 +++ b/deps/obs-scripting/CMakeLists.txt
-@@ -87,6 +87,7 @@ set_target_properties(
-   PROPERTIES FOLDER "scripting"
-              VERSION "${OBS_VERSION_MAJOR}"
-              SOVERSION "1")
-+target_compile_options(obs-scripting PRIVATE "-fvisibility=hidden")
+@@ -37,6 +37,9 @@ target_sources(
+ target_compile_definitions(obs-scripting PRIVATE SCRIPT_DIR="${OBS_SCRIPT_PLUGIN_PATH}"
+                                                  $<$<BOOL:${ENABLE_UI}>:ENABLE_UI>)
+ target_compile_features(obs-scripting PRIVATE cxx_auto_type)
++set_target_properties(obs-scripting PROPERTIES CXX_VISIBILITY_PRESET hidden)
++set_target_properties(obs-scripting PROPERTIES C_VISIBILITY_PRESET hidden)
++
+ target_include_directories(obs-scripting PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
  
- file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/swig)
- 
+ target_link_libraries(obs-scripting PRIVATE OBS::libobs OBS::cstrcache $<$<BOOL:${ENABLE_UI}>:OBS::frontend-api>
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 5b91b4b..2bbb721 100644
+index c5c0aac..1d16df0 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -268,7 +268,7 @@ target_compile_options(
-   libobs
-   PUBLIC ${ARCH_SIMD_FLAGS}
-   PRIVATE
--    $<$<OR:$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:GNU>>:-Wno-switch>
-+    $<$<OR:$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:GNU>>:-Wno-switch> "-fvisibility=hidden"
- )
+@@ -216,6 +216,8 @@ target_sources(
  
- target_include_directories(
+ target_compile_features(libobs PUBLIC $<INSTALL_INTERFACE:cxx_std_17>)
+ target_compile_options(libobs PUBLIC ${ARCH_SIMD_FLAGS})
++set_target_properties(libobs PROPERTIES CXX_VISIBILITY_PRESET hidden)
++set_target_properties(libobs PROPERTIES C_VISIBILITY_PRESET hidden)
+ target_compile_definitions(
+   libobs
+   PRIVATE IS_LIBOBS

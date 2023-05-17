@@ -3,21 +3,22 @@ Date: Mon, 27 Jul 2020 12:46:48 +0200
 Subject: Use the simd everywhere headers from libsimde-dev
 
 ---
- libobs/CMakeLists.txt    | 17 -----------------
+ libobs/CMakeLists.txt    | 18 ------------------
  libobs/util/sse-intrin.h |  2 +-
- 2 files changed, 1 insertion(+), 18 deletions(-)
+ 2 files changed, 1 insertion(+), 19 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 2bbb721..b43d6b4 100644
+index 1d16df0..d0fe2cf 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
-@@ -68,23 +68,6 @@ target_sources(
-           obs-view.c
-           obs-config.h)
+@@ -116,24 +116,6 @@ target_sources(
+           util/util_uint128.h
+           util/util_uint64.h)
  
 -target_sources(
 -  libobs
--  PRIVATE util/simde/check.h
+-  PRIVATE # cmake-format: sortable
+-          util/simde/check.h
 -          util/simde/debug-trap.h
 -          util/simde/hedley.h
 -          util/simde/simde-align.h
@@ -29,12 +30,12 @@ index 2bbb721..b43d6b4 100644
 -          util/simde/simde-features.h
 -          util/simde/simde-math.h
 -          util/simde/x86/mmx.h
--          util/simde/x86/sse2.h
--          util/simde/x86/sse.h)
+-          util/simde/x86/sse.h
+-          util/simde/x86/sse2.h)
 -
  target_sources(
    libobs
-   PRIVATE callback/calldata.c
+   PRIVATE # cmake-format: sortable
 diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
 index 6441e80..677a40c 100644
 --- a/libobs/util/sse-intrin.h

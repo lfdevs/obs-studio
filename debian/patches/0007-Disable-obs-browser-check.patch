@@ -7,10 +7,10 @@ Subject: Disable obs-browser check
  1 file changed, 2 deletions(-)
 
 diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt
-index d20bce1..84123b6 100644
+index f928f77..74b1976 100644
 --- a/plugins/CMakeLists.txt
 +++ b/plugins/CMakeLists.txt
-@@ -60,8 +60,6 @@ elseif(OS_LINUX)
+@@ -152,8 +152,6 @@ elseif(OS_LINUX)
    add_subdirectory(vlc-video)
    add_subdirectory(sndio)
    add_subdirectory(obs-vst)
@@ -18,4 +18,4 @@ index d20bce1..84123b6 100644
 -  check_obs_browser()
  elseif(OS_FREEBSD)
    add_subdirectory(linux-capture)
-   add_subdirectory(linux-pulseaudio)
+   add_subdirectory(linux-pipewire)
