@@ -31,6 +31,8 @@ Files: AUTHORS
  CI/macos/01_install_dependencies.sh
  CI/macos/02_build_obs.sh
  CI/macos/03_package_obs.sh
+ CI/macos/appcast_convert.py
+ CI/macos/appcast_download.py
  CI/steam/obs_build.vdf
  CI/steam/obs_playtest_build.vdf
  CI/steam/scripts_macos/launch.sh
@@ -41,6 +43,7 @@ Files: AUTHORS
  CI/windows/02_build_obs.ps1
  CI/windows/03_package_obs.ps1
  CMakeLists.txt
+ CMakePresets.json
  COC.rst
  COMMITMENT
  CONTRIBUTING.rst
@@ -65,10 +68,34 @@ Files: AUTHORS
  UI/auth-youtube.hpp
  UI/balance-slider.hpp
  UI/clickable-label.hpp
+ UI/cmake/feature-browserpanels.cmake
+ UI/cmake/feature-importers.cmake
+ UI/cmake/feature-macos-update.cmake
+ UI/cmake/feature-restream.cmake
+ UI/cmake/feature-sparkle.cmake
+ UI/cmake/feature-twitch.cmake
+ UI/cmake/feature-whatsnew.cmake
+ UI/cmake/feature-youtube.cmake
+ UI/cmake/legacy.cmake
+ UI/cmake/linux/com.obsproject.Studio.appdata.xml.in
+ UI/cmake/linux/com.obsproject.Studio.desktop
+ UI/cmake/linux/icons/obs-logo-scalable.svg
+ UI/cmake/macos/Assets.xcassets/AppIcon.appiconset/Contents.json
+ UI/cmake/macos/Assets.xcassets/Contents.json
+ UI/cmake/macos/Info.plist.in
+ UI/cmake/macos/entitlements.plist
+ UI/cmake/macos/exportOptions-extension.plist.in
+ UI/cmake/macos/exportOptions.plist.in
+ UI/cmake/macos/qt.conf
+ UI/cmake/os-freebsd.cmake
+ UI/cmake/os-linux.cmake
+ UI/cmake/os-macos.cmake
+ UI/cmake/os-windows.cmake
+ UI/cmake/ui-elements.cmake
+ UI/cmake/ui-qt.cmake
+ UI/cmake/ui-windows.cmake
  UI/context-bar-controls.cpp
  UI/context-bar-controls.hpp
- UI/crash-report.cpp
- UI/crash-report.hpp
  UI/data/OBSPublicRSAKey.pem
  UI/data/locale.ini
  UI/data/locale/an-ES.ini
@@ -193,6 +220,7 @@ Files: AUTHORS
  UI/data/themes/Dark/sources/window.svg
  UI/data/themes/Dark/sources/windowaudio.svg
  UI/data/themes/Dark/trash.svg
+ UI/data/themes/Dark/unassigned.svg
  UI/data/themes/Dark/up.svg
  UI/data/themes/Dark/updown.svg
  UI/data/themes/Dark/visible.svg
@@ -373,6 +401,9 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/CMakeLists.txt
  UI/frontend-plugins/aja-output-ui/aja-ui-main.cpp
  UI/frontend-plugins/aja-output-ui/aja-ui-main.h
+ UI/frontend-plugins/aja-output-ui/cmake/legacy.cmake
+ UI/frontend-plugins/aja-output-ui/cmake/macos/Info.plist.in
+ UI/frontend-plugins/aja-output-ui/cmake/windows/obs-module.rc.in
  UI/frontend-plugins/aja-output-ui/data/locale/ar-SA.ini
  UI/frontend-plugins/aja-output-ui/data/locale/be-BY.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ca-ES.ini
@@ -419,12 +450,18 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/data/locale/zh-TW.ini
  UI/frontend-plugins/aja-output-ui/forms/output.ui
  UI/frontend-plugins/decklink-captions/CMakeLists.txt
+ UI/frontend-plugins/decklink-captions/cmake/legacy.cmake
+ UI/frontend-plugins/decklink-captions/cmake/macos/Info.plist.in
+ UI/frontend-plugins/decklink-captions/cmake/windows/obs-module.rc.in
  UI/frontend-plugins/decklink-captions/decklink-captions.cpp
  UI/frontend-plugins/decklink-captions/decklink-captions.h
  UI/frontend-plugins/decklink-captions/forms/captions.ui
  UI/frontend-plugins/decklink-output-ui/CMakeLists.txt
  UI/frontend-plugins/decklink-output-ui/DecklinkOutputUI.cpp
  UI/frontend-plugins/decklink-output-ui/DecklinkOutputUI.h
+ UI/frontend-plugins/decklink-output-ui/cmake/legacy.cmake
+ UI/frontend-plugins/decklink-output-ui/cmake/macos/Info.plist.in
+ UI/frontend-plugins/decklink-output-ui/cmake/windows/obs-module.rc.in
  UI/frontend-plugins/decklink-output-ui/decklink-ui-main.cpp
  UI/frontend-plugins/decklink-output-ui/decklink-ui-main.h
  UI/frontend-plugins/decklink-output-ui/forms/output.ui
@@ -442,10 +479,14 @@ Files: AUTHORS
  UI/frontend-plugins/frontend-tools/captions-mssapi.hpp
  UI/frontend-plugins/frontend-tools/captions.cpp
  UI/frontend-plugins/frontend-tools/captions.hpp
+ UI/frontend-plugins/frontend-tools/cmake/legacy.cmake
+ UI/frontend-plugins/frontend-tools/cmake/macos/Info.plist.in
+ UI/frontend-plugins/frontend-tools/cmake/windows/obs-module.rc.in
  UI/frontend-plugins/frontend-tools/data/locale/an-ES.ini
  UI/frontend-plugins/frontend-tools/data/locale/ar-SA.ini
  UI/frontend-plugins/frontend-tools/data/locale/az-AZ.ini
  UI/frontend-plugins/frontend-tools/data/locale/ba-RU.ini
+ UI/frontend-plugins/frontend-tools/data/locale/be-BY.ini
  UI/frontend-plugins/frontend-tools/data/locale/bg-BG.ini
  UI/frontend-plugins/frontend-tools/data/locale/bn-BD.ini
  UI/frontend-plugins/frontend-tools/data/locale/ca-ES.ini
@@ -482,6 +523,7 @@ Files: AUTHORS
  UI/frontend-plugins/frontend-tools/data/locale/ms-MY.ini
  UI/frontend-plugins/frontend-tools/data/locale/nb-NO.ini
  UI/frontend-plugins/frontend-tools/data/locale/nl-NL.ini
+ UI/frontend-plugins/frontend-tools/data/locale/nn-NO.ini
  UI/frontend-plugins/frontend-tools/data/locale/oc-FR.ini
  UI/frontend-plugins/frontend-tools/data/locale/pl-PL.ini
  UI/frontend-plugins/frontend-tools/data/locale/pt-BR.ini
@@ -522,9 +564,6 @@ Files: AUTHORS
  UI/frontend-plugins/frontend-tools/tool-helpers.hpp
  UI/horizontal-scroll-area.cpp
  UI/horizontal-scroll-area.hpp
- UI/installer/OBSBanner.bmp
- UI/installer/OBSHeader.bmp
- UI/installer/mp-installer.nsi
  UI/lineedit-autoresize.cpp
  UI/lineedit-autoresize.hpp
  UI/locked-checkbox.cpp
@@ -540,17 +579,12 @@ Files: AUTHORS
  UI/multiview.cpp
  UI/multiview.hpp
  UI/mute-checkbox.hpp
- UI/nix-update/crypto-helpers-mac.mm
- UI/nix-update/crypto-helpers-mbedtls.cpp
- UI/nix-update/crypto-helpers.hpp
- UI/nix-update/nix-update-helpers.cpp
- UI/nix-update/nix-update-helpers.hpp
- UI/nix-update/nix-update.cpp
- UI/nix-update/nix-update.hpp
  UI/obf.c
  UI/obf.h
  UI/obs-frontend-api/CMakeLists.txt
+ UI/obs-frontend-api/cmake/legacy.cmake
  UI/obs-frontend-api/cmake/obs-frontend-apiConfig.cmake.in
+ UI/obs-frontend-api/cmake/windows/obs-module.rc.in
  UI/obs-frontend-api/obs-frontend-api.cpp
  UI/obs-frontend-api/obs-frontend-api.h
  UI/obs-frontend-api/obs-frontend-internal.hpp
@@ -575,7 +609,6 @@ Files: AUTHORS
  UI/slider-ignorewheel.hpp
  UI/source-tree.cpp
  UI/source-tree.hpp
- UI/sparkle-updater.mm
  UI/spinbox-ignorewheel.cpp
  UI/spinbox-ignorewheel.hpp
  UI/ui-config.h.in
@@ -583,6 +616,20 @@ Files: AUTHORS
  UI/ui-validation.hpp
  UI/undo-stack-obs.cpp
  UI/undo-stack-obs.hpp
+ UI/update/crypto-helpers-mac.mm
+ UI/update/crypto-helpers-mbedtls.cpp
+ UI/update/crypto-helpers.hpp
+ UI/update/mac-update.cpp
+ UI/update/mac-update.hpp
+ UI/update/shared-update.cpp
+ UI/update/shared-update.hpp
+ UI/update/sparkle-updater.mm
+ UI/update/update-helpers.cpp
+ UI/update/update-helpers.hpp
+ UI/update/update-window.cpp
+ UI/update/update-window.hpp
+ UI/update/win-update.cpp
+ UI/update/win-update.hpp
  UI/url-push-button.cpp
  UI/url-push-button.hpp
  UI/vertical-scroll-area.cpp
@@ -593,16 +640,13 @@ Files: AUTHORS
  UI/visibility-item-widget.hpp
  UI/volume-control.cpp
  UI/volume-control.hpp
- UI/win-update/update-window.cpp
- UI/win-update/update-window.hpp
  UI/win-update/updater/CMakeLists.txt
+ UI/win-update/updater/cmake/legacy.cmake
+ UI/win-update/updater/helpers.cpp
+ UI/win-update/updater/helpers.hpp
  UI/win-update/updater/init-hook-files.c
  UI/win-update/updater/resource.h
  UI/win-update/updater/updater.manifest
- UI/win-update/win-update-helpers.cpp
- UI/win-update/win-update-helpers.hpp
- UI/win-update/win-update.cpp
- UI/win-update/win-update.hpp
  UI/window-basic-about.cpp
  UI/window-basic-about.hpp
  UI/window-basic-adv-audio.cpp
@@ -626,6 +670,7 @@ Files: AUTHORS
  UI/window-basic-transform.hpp
  UI/window-basic-vcam-config.cpp
  UI/window-basic-vcam-config.hpp
+ UI/window-basic-vcam.hpp
  UI/window-dock-browser.cpp
  UI/window-dock-browser.hpp
  UI/window-dock.cpp
@@ -643,15 +688,19 @@ Files: AUTHORS
  UI/xdg-data/icons/obs-logo-scalable.svg
  UI/youtube-api-wrappers.cpp
  UI/youtube-api-wrappers.hpp
+ buildspec.json
  cmake/Modules/CompilerConfig.cmake
  cmake/Modules/CopyMSVCBins.cmake
  cmake/Modules/DeprecationHelpers.cmake
+ cmake/Modules/FindAMF.cmake
+ cmake/Modules/FindAsio.cmake
  cmake/Modules/FindCEF.cmake
  cmake/Modules/FindDetours.cmake
  cmake/Modules/FindFFmpeg.cmake
  cmake/Modules/FindGio.cmake
  cmake/Modules/FindJansson.cmake
  cmake/Modules/FindLibAJANTV2.cmake
+ cmake/Modules/FindLibUUID.cmake
  cmake/Modules/FindLibVLC.cmake
  cmake/Modules/FindLibdrm.cmake
  cmake/Modules/FindLibfdk.cmake
@@ -667,11 +716,11 @@ Files: AUTHORS
  cmake/Modules/FindMbedTLS.cmake
  cmake/Modules/FindOSS.cmake
  cmake/Modules/FindPythonWindows.cmake
- cmake/Modules/FindRSSDK.cmake
  cmake/Modules/FindSndio.cmake
  cmake/Modules/FindSwigWindows.cmake
  cmake/Modules/FindSysinfo.cmake
  cmake/Modules/FindUdev.cmake
+ cmake/Modules/FindWebsocketpp.cmake
  cmake/Modules/FindXkbcommon.cmake
  cmake/Modules/IDLFileHelper.cmake
  cmake/Modules/ObsDefaults_Linux.cmake
@@ -682,7 +731,40 @@ Files: AUTHORS
  cmake/Modules/ObsHelpers_Windows.cmake
  cmake/Modules/ObsHelpers_macOS.cmake
  cmake/Modules/VersionConfig.cmake
+ cmake/common/.cmake-format.json
+ cmake/common/bootstrap.cmake
+ cmake/common/buildnumber.cmake
+ cmake/common/ccache.cmake
+ cmake/common/compiler_common.cmake
+ cmake/common/cpackconfig_common.cmake
+ cmake/common/helpers_common.cmake
+ cmake/common/osconfig.cmake
+ cmake/common/versionconfig.cmake
  cmake/external/ObsPluginHelpers.cmake
+ cmake/finders/FindAsio.cmake
+ cmake/finders/FindCEF.cmake
+ cmake/finders/FindFFmpeg.cmake
+ cmake/finders/FindLibAJANTV2.cmake
+ cmake/finders/FindLibVLC.cmake
+ cmake/finders/FindLibrist.cmake
+ cmake/finders/FindLibrnnoise.cmake
+ cmake/finders/FindLibspeexdsp.cmake
+ cmake/finders/FindLibsrt.cmake
+ cmake/finders/FindLibx264.cmake
+ cmake/finders/FindLuajit.cmake
+ cmake/finders/FindMbedTLS.cmake
+ cmake/finders/FindWebsocketpp.cmake
+ cmake/finders/Findjansson.cmake
+ cmake/macos/buildspec.cmake
+ cmake/macos/compilerconfig.cmake
+ cmake/macos/cpackconfig.cmake
+ cmake/macos/defaults.cmake
+ cmake/macos/helpers.cmake
+ cmake/macos/resources/ccache-launcher-c.in
+ cmake/macos/resources/ccache-launcher-cxx.in
+ cmake/macos/resources/package.applescript.in
+ cmake/macos/simd.cmake
+ cmake/macos/xcode.cmake
  deps/CMakeLists.txt
  deps/file-updater/CMakeLists.txt
  deps/file-updater/file-updater/file-updater.c
@@ -697,27 +779,37 @@ Files: AUTHORS
  deps/glad/src/glad_wgl.c
  deps/ipc-util/CMakeLists.txt
  deps/json11/.clang-format
+ deps/json11/CMakeLists.txt
  deps/libcaption/.clang-format
  deps/libcaption/CMakeLists.txt
  deps/libcaption/Doxyfile.in
  deps/libcaption/README.md
  deps/libcaption/caption/dvtcc.h
+ deps/libcaption/cmake/legacy.cmake
  deps/libcaption/format.sh
  deps/libcaption/src/dvtcc.c
  deps/libff/.clang-format
  deps/libff/CMakeLists.txt
  deps/media-playback/CMakeLists.txt
  deps/obs-scripting/CMakeLists.txt
+ deps/obs-scripting/cmake/legacy.cmake
+ deps/obs-scripting/cmake/lua.cmake
+ deps/obs-scripting/cmake/python.cmake
+ deps/obs-scripting/cmake/windows/obs-module.rc.in
  deps/obs-scripting/cstrcache.cpp
  deps/obs-scripting/cstrcache.h
  deps/obs-scripting/obs-scripting-config.h.in
  deps/obs-scripting/obslua/CMakeLists.txt
+ deps/obs-scripting/obslua/cmake/legacy.cmake
  deps/obs-scripting/obslua/obslua.i
  deps/obs-scripting/obspython/CMakeLists.txt
+ deps/obs-scripting/obspython/cmake/legacy.cmake
  deps/obs-scripting/obspython/obspython.i
  deps/opts-parser/CMakeLists.txt
  deps/opts-parser/opts-parser.c
  deps/opts-parser/opts-parser.h
+ deps/uthash/.clang-format
+ deps/uthash/CMakeLists.txt
  deps/w32-pthreads/.clang-format
  deps/w32-pthreads/BUGS
  deps/w32-pthreads/Bmakefile
@@ -739,7 +831,9 @@ Files: AUTHORS
  deps/w32-pthreads/TODO
  deps/w32-pthreads/WinCE-PORT
  deps/w32-pthreads/builddmc.bat
+ deps/w32-pthreads/cmake/legacy.cmake
  deps/w32-pthreads/cmake/w32-pthreadsConfig.cmake.in
+ deps/w32-pthreads/cmake/windows/obs-module.rc.in
  deps/w32-pthreads/config.h
  deps/w32-pthreads/libpthreadGC2.a
  deps/w32-pthreads/libpthreadGC2.stamp
@@ -849,6 +943,8 @@ Files: AUTHORS
  libobs-d3d11/CMakeLists.txt
  libobs-d3d11/d3d11-config.h.in
  libobs-opengl/CMakeLists.txt
+ libobs-opengl/cmake/legacy.cmake
+ libobs-opengl/cmake/windows/obs-module.rc.in
  libobs-opengl/gl-egl-common.h
  libobs-winrt/CMakeLists.txt
  libobs-winrt/winrt-capture.cpp
@@ -868,7 +964,16 @@ Files: AUTHORS
  libobs/audio-monitoring/win32/wasapi-monitoring-available.c
  libobs/audio-monitoring/win32/wasapi-output.c
  libobs/audio-monitoring/win32/wasapi-output.h
+ libobs/cmake/32bit-build.cmake
+ libobs/cmake/legacy.cmake
  libobs/cmake/libobsConfig.cmake.in
+ libobs/cmake/macos/Info.plist.in
+ libobs/cmake/macos/entitlements.plist
+ libobs/cmake/os-freebsd.cmake
+ libobs/cmake/os-linux.cmake
+ libobs/cmake/os-macos.cmake
+ libobs/cmake/os-windows.cmake
+ libobs/cmake/windows/obs-module.rc.in
  libobs/data/area.effect
  libobs/data/bicubic_scale.effect
  libobs/data/bilinear_lowres_scale.effect
@@ -925,7 +1030,14 @@ Files: AUTHORS
  plugins/aja/aja-vpid-data.hpp
  plugins/aja/aja-widget-io.cpp
  plugins/aja/aja-widget-io.hpp
+ plugins/aja/audio-repack.c
+ plugins/aja/audio-repack.h
+ plugins/aja/audio-repack.hpp
+ plugins/aja/cmake/legacy.cmake
+ plugins/aja/cmake/macos/Info.plist.in
+ plugins/aja/cmake/windows/obs-module.rc.in
  plugins/aja/data/locale/ar-SA.ini
+ plugins/aja/data/locale/be-BY.ini
  plugins/aja/data/locale/bg-BG.ini
  plugins/aja/data/locale/ca-ES.ini
  plugins/aja/data/locale/cs-CZ.ini
@@ -943,6 +1055,7 @@ Files: AUTHORS
  plugins/aja/data/locale/gl-ES.ini
  plugins/aja/data/locale/he-IL.ini
  plugins/aja/data/locale/hi-IN.ini
+ plugins/aja/data/locale/hr-HR.ini
  plugins/aja/data/locale/hu-HU.ini
  plugins/aja/data/locale/hy-AM.ini
  plugins/aja/data/locale/id-ID.ini
@@ -954,6 +1067,7 @@ Files: AUTHORS
  plugins/aja/data/locale/ms-MY.ini
  plugins/aja/data/locale/nb-NO.ini
  plugins/aja/data/locale/nl-NL.ini
+ plugins/aja/data/locale/nn-NO.ini
  plugins/aja/data/locale/pl-PL.ini
  plugins/aja/data/locale/pt-BR.ini
  plugins/aja/data/locale/pt-PT.ini
@@ -972,6 +1086,9 @@ Files: AUTHORS
  plugins/aja/data/locale/zh-TW.ini
  plugins/aja/main.cpp
  plugins/coreaudio-encoder/CMakeLists.txt
+ plugins/coreaudio-encoder/cmake/legacy.cmake
+ plugins/coreaudio-encoder/cmake/macos/Info.plist.in
+ plugins/coreaudio-encoder/cmake/windows/obs-module.rc.in
  plugins/coreaudio-encoder/data/locale/an-ES.ini
  plugins/coreaudio-encoder/data/locale/ar-SA.ini
  plugins/coreaudio-encoder/data/locale/az-AZ.ini
@@ -1048,6 +1165,9 @@ Files: AUTHORS
  plugins/decklink/audio-repack.c
  plugins/decklink/audio-repack.h
  plugins/decklink/audio-repack.hpp
+ plugins/decklink/cmake/legacy.cmake
+ plugins/decklink/cmake/macos/Info.plist.in
+ plugins/decklink/cmake/windows/obs-module.rc.in
  plugins/decklink/const.h
  plugins/decklink/data/locale/an-ES.ini
  plugins/decklink/data/locale/ar-SA.ini
@@ -1115,7 +1235,6 @@ Files: AUTHORS
  plugins/decklink/decklink-device-discovery.cpp
  plugins/decklink/decklink-device-discovery.hpp
  plugins/decklink/decklink-device-instance.cpp
- plugins/decklink/decklink-device-instance.hpp
  plugins/decklink/decklink-device-mode.cpp
  plugins/decklink/decklink-device-mode.hpp
  plugins/decklink/decklink-device.cpp
@@ -1134,10 +1253,14 @@ Files: AUTHORS
  plugins/decklink/util.hpp
  plugins/decklink/win/platform.cpp
  plugins/image-source/CMakeLists.txt
+ plugins/image-source/cmake/legacy.cmake
+ plugins/image-source/cmake/macos/Info.plist.in
+ plugins/image-source/cmake/windows/obs-module.rc.in
  plugins/image-source/color-source.c
  plugins/image-source/data/locale/ar-SA.ini
  plugins/image-source/data/locale/az-AZ.ini
  plugins/image-source/data/locale/ba-RU.ini
+ plugins/image-source/data/locale/be-BY.ini
  plugins/image-source/data/locale/bg-BG.ini
  plugins/image-source/data/locale/bn-BD.ini
  plugins/image-source/data/locale/ca-ES.ini
@@ -1515,6 +1638,7 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/ms-MY.ini
  plugins/linux-v4l2/data/locale/nb-NO.ini
  plugins/linux-v4l2/data/locale/nl-NL.ini
+ plugins/linux-v4l2/data/locale/nn-NO.ini
  plugins/linux-v4l2/data/locale/oc-FR.ini
  plugins/linux-v4l2/data/locale/pl-PL.ini
  plugins/linux-v4l2/data/locale/pt-BR.ini
@@ -1538,6 +1662,9 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/zh-TW.ini
  plugins/linux-v4l2/v4l2-output.c
  plugins/obs-ffmpeg/CMakeLists.txt
+ plugins/obs-ffmpeg/cmake/legacy.cmake
+ plugins/obs-ffmpeg/cmake/macos/Info.plist.in
+ plugins/obs-ffmpeg/cmake/windows/obs-module.rc.in
  plugins/obs-ffmpeg/data/locale/ar-SA.ini
  plugins/obs-ffmpeg/data/locale/ba-RU.ini
  plugins/obs-ffmpeg/data/locale/bg-BG.ini
@@ -1597,6 +1724,7 @@ Files: AUTHORS
  plugins/obs-ffmpeg/data/locale/zh-CN.ini
  plugins/obs-ffmpeg/data/locale/zh-TW.ini
  plugins/obs-ffmpeg/ffmpeg-mux/CMakeLists.txt
+ plugins/obs-ffmpeg/ffmpeg-mux/cmake/legacy.cmake
  plugins/obs-ffmpeg/jim-nvenc-helpers.c
  plugins/obs-ffmpeg/jim-nvenc-ver.h
  plugins/obs-ffmpeg/jim-nvenc.c
@@ -1621,6 +1749,12 @@ Files: AUTHORS
  plugins/obs-filters/CMakeLists.txt
  plugins/obs-filters/async-delay-filter.c
  plugins/obs-filters/chroma-key-filter.c
+ plugins/obs-filters/cmake/legacy.cmake
+ plugins/obs-filters/cmake/macos/Info.plist.in
+ plugins/obs-filters/cmake/nvidia.cmake
+ plugins/obs-filters/cmake/rnnoise.cmake
+ plugins/obs-filters/cmake/speexdsp.cmake
+ plugins/obs-filters/cmake/windows/obs-module.rc.in
  plugins/obs-filters/color-grade-filter.c
  plugins/obs-filters/color-key-filter.c
  plugins/obs-filters/compressor-filter.c
@@ -1641,6 +1775,7 @@ Files: AUTHORS
  plugins/obs-filters/data/locale/ar-SA.ini
  plugins/obs-filters/data/locale/az-AZ.ini
  plugins/obs-filters/data/locale/ba-RU.ini
+ plugins/obs-filters/data/locale/be-BY.ini
  plugins/obs-filters/data/locale/bg-BG.ini
  plugins/obs-filters/data/locale/bn-BD.ini
  plugins/obs-filters/data/locale/ca-ES.ini
@@ -1789,6 +1924,10 @@ Files: AUTHORS
  plugins/obs-libfdk/data/locale/zh-TW.ini
  plugins/obs-libfdk/obs-libfdk.c
  plugins/obs-outputs/CMakeLists.txt
+ plugins/obs-outputs/cmake/ftl.cmake
+ plugins/obs-outputs/cmake/legacy.cmake
+ plugins/obs-outputs/cmake/macos/Info.plist.in
+ plugins/obs-outputs/cmake/windows/obs-module.rc.in
  plugins/obs-outputs/data/locale/ar-SA.ini
  plugins/obs-outputs/data/locale/ba-RU.ini
  plugins/obs-outputs/data/locale/bg-BG.ini
@@ -1852,10 +1991,12 @@ Files: AUTHORS
  plugins/obs-outputs/obs-outputs.c
  plugins/obs-outputs/rtmp-stream.h
  plugins/obs-outputs/rtmp-windows.c
+ plugins/obs-outputs/utils.h
  plugins/obs-text/CMakeLists.txt
  plugins/obs-text/data/locale/ar-SA.ini
  plugins/obs-text/data/locale/az-AZ.ini
  plugins/obs-text/data/locale/ba-RU.ini
+ plugins/obs-text/data/locale/be-BY.ini
  plugins/obs-text/data/locale/bg-BG.ini
  plugins/obs-text/data/locale/bn-BD.ini
  plugins/obs-text/data/locale/ca-ES.ini
@@ -1905,6 +2046,7 @@ Files: AUTHORS
  plugins/obs-text/data/locale/sr-SP.ini
  plugins/obs-text/data/locale/sv-SE.ini
  plugins/obs-text/data/locale/ta-IN.ini
+ plugins/obs-text/data/locale/th-TH.ini
  plugins/obs-text/data/locale/tl-PH.ini
  plugins/obs-text/data/locale/tr-TR.ini
  plugins/obs-text/data/locale/uk-UA.ini
@@ -1913,6 +2055,9 @@ Files: AUTHORS
  plugins/obs-text/data/locale/zh-TW.ini
  plugins/obs-text/gdiplus/obs-text.cpp
  plugins/obs-transitions/CMakeLists.txt
+ plugins/obs-transitions/cmake/legacy.cmake
+ plugins/obs-transitions/cmake/macos/Info.plist.in
+ plugins/obs-transitions/cmake/windows/obs-module.rc.in
  plugins/obs-transitions/data/fade_to_color_transition.effect
  plugins/obs-transitions/data/fade_transition.effect
  plugins/obs-transitions/data/locale/ar-SA.ini
@@ -1926,6 +2071,7 @@ Files: AUTHORS
  plugins/obs-transitions/data/locale/el-GR.ini
  plugins/obs-transitions/data/locale/en-GB.ini
  plugins/obs-transitions/data/locale/en-US.ini
+ plugins/obs-transitions/data/locale/eo-UY.ini
  plugins/obs-transitions/data/locale/es-ES.ini
  plugins/obs-transitions/data/locale/et-EE.ini
  plugins/obs-transitions/data/locale/eu-ES.ini
@@ -1984,6 +2130,8 @@ Files: AUTHORS
  plugins/obs-transitions/transition-stinger.c
  plugins/obs-transitions/transition-swipe.c
  plugins/obs-vst/CMakeLists.txt
+ plugins/obs-vst/cmake/legacy.cmake
+ plugins/obs-vst/cmake/macos/Info.plist.in
  plugins/obs-vst/data/locale/an-ES.ini
  plugins/obs-vst/data/locale/ar-SA.ini
  plugins/obs-vst/data/locale/be-BY.ini
@@ -2037,6 +2185,10 @@ Files: AUTHORS
  plugins/obs-vst/data/locale/zh-TW.ini
  plugins/obs-vst/vst_header/.clang-format
  plugins/obs-x264/CMakeLists.txt
+ plugins/obs-x264/cmake/legacy.cmake
+ plugins/obs-x264/cmake/macos/Info.plist.in
+ plugins/obs-x264/cmake/windows/obs-module.rc.in
+ plugins/obs-x264/cmake/x264-test.cmake
  plugins/obs-x264/data/locale/ar-SA.ini
  plugins/obs-x264/data/locale/az-AZ.ini
  plugins/obs-x264/data/locale/ba-RU.ini
@@ -2048,6 +2200,7 @@ Files: AUTHORS
  plugins/obs-x264/data/locale/da-DK.ini
  plugins/obs-x264/data/locale/de-DE.ini
  plugins/obs-x264/data/locale/el-GR.ini
+ plugins/obs-x264/data/locale/en-GB.ini
  plugins/obs-x264/data/locale/en-US.ini
  plugins/obs-x264/data/locale/es-ES.ini
  plugins/obs-x264/data/locale/et-EE.ini
@@ -2153,6 +2306,9 @@ Files: AUTHORS
  plugins/oss-audio/data/locale/zh-TW.ini
  plugins/oss-audio/oss-platform.h.in
  plugins/rtmp-services/CMakeLists.txt
+ plugins/rtmp-services/cmake/legacy.cmake
+ plugins/rtmp-services/cmake/macos/Info.plist.in
+ plugins/rtmp-services/cmake/windows/obs-module.rc.in
  plugins/rtmp-services/data/locale/ar-SA.ini
  plugins/rtmp-services/data/locale/ba-RU.ini
  plugins/rtmp-services/data/locale/be-BY.ini
@@ -2213,7 +2369,7 @@ Files: AUTHORS
  plugins/rtmp-services/data/locale/zh-TW.ini
  plugins/rtmp-services/data/package.json
  plugins/rtmp-services/data/schema/package-schema.json
- plugins/rtmp-services/data/schema/service-schema-v4.json
+ plugins/rtmp-services/data/schema/service-schema-v5.json
  plugins/rtmp-services/data/services.json
  plugins/rtmp-services/lookup-config.h.in
  plugins/rtmp-services/rtmp-common.c
@@ -2274,6 +2430,7 @@ Files: AUTHORS
  plugins/sndio/data/locale/sl-SI.ini
  plugins/sndio/data/locale/sv-SE.ini
  plugins/sndio/data/locale/szl-PL.ini
+ plugins/sndio/data/locale/th-TH.ini
  plugins/sndio/data/locale/tr-TR.ini
  plugins/sndio/data/locale/uk-UA.ini
  plugins/sndio/data/locale/vi-VN.ini
@@ -2281,6 +2438,9 @@ Files: AUTHORS
  plugins/sndio/data/locale/zh-TW.ini
  plugins/sndio/sndio-input.h
  plugins/text-freetype2/CMakeLists.txt
+ plugins/text-freetype2/cmake/legacy.cmake
+ plugins/text-freetype2/cmake/macos/Info.plist.in
+ plugins/text-freetype2/cmake/windows/obs-module.rc.in
  plugins/text-freetype2/data/locale/ar-SA.ini
  plugins/text-freetype2/data/locale/ba-RU.ini
  plugins/text-freetype2/data/locale/bg-BG.ini
@@ -2292,6 +2452,7 @@ Files: AUTHORS
  plugins/text-freetype2/data/locale/el-GR.ini
  plugins/text-freetype2/data/locale/en-GB.ini
  plugins/text-freetype2/data/locale/en-US.ini
+ plugins/text-freetype2/data/locale/eo-UY.ini
  plugins/text-freetype2/data/locale/es-ES.ini
  plugins/text-freetype2/data/locale/et-EE.ini
  plugins/text-freetype2/data/locale/eu-ES.ini
@@ -2345,8 +2506,12 @@ Files: AUTHORS
  plugins/text-freetype2/find-font.c
  plugins/text-freetype2/find-font.h
  plugins/vlc-video/CMakeLists.txt
+ plugins/vlc-video/cmake/legacy.cmake
+ plugins/vlc-video/cmake/macos/Info.plist.in
+ plugins/vlc-video/cmake/windows/obs-module.rc.in
  plugins/vlc-video/data/locale/ar-SA.ini
  plugins/vlc-video/data/locale/ba-RU.ini
+ plugins/vlc-video/data/locale/be-BY.ini
  plugins/vlc-video/data/locale/bg-BG.ini
  plugins/vlc-video/data/locale/bn-BD.ini
  plugins/vlc-video/data/locale/ca-ES.ini
@@ -2409,6 +2574,7 @@ Files: AUTHORS
  test/cmocka/CMakeLists.txt
  test/cmocka/test_bitstream.c
  test/cmocka/test_darray.c
+ test/cmocka/test_os_path.c
  test/cmocka/test_serializer.c
  test/osx/CMakeLists.txt
  test/osx/test.mm
@@ -2442,19 +2608,26 @@ Files: AUTHORS
  websocket/CI/generate-docs.sh
  websocket/CMakeLists.txt
  websocket/README.md
+ websocket/cmake/legacy.cmake
+ websocket/cmake/macos/Info.plist.in
  websocket/data/locale/ar-SA.ini
  websocket/data/locale/ca-ES.ini
  websocket/data/locale/cs-CZ.ini
  websocket/data/locale/da-DK.ini
  websocket/data/locale/de-DE.ini
+ websocket/data/locale/el-GR.ini
  websocket/data/locale/en-US.ini
  websocket/data/locale/es-ES.ini
  websocket/data/locale/et-EE.ini
+ websocket/data/locale/eu-ES.ini
  websocket/data/locale/fa-IR.ini
  websocket/data/locale/fi-FI.ini
+ websocket/data/locale/fil-PH.ini
  websocket/data/locale/fr-FR.ini
+ websocket/data/locale/gl-ES.ini
  websocket/data/locale/he-IL.ini
  websocket/data/locale/hi-IN.ini
+ websocket/data/locale/hr-HR.ini
  websocket/data/locale/hu-HU.ini
  websocket/data/locale/hy-AM.ini
  websocket/data/locale/id-ID.ini
@@ -2977,7 +3150,11 @@ Files: UI/display-helpers.hpp
  plugins/obs-outputs/flv-mux.h
  plugins/obs-outputs/flv-output.c
  plugins/obs-outputs/null-output.c
+ plugins/obs-outputs/rtmp-av1.c
+ plugins/obs-outputs/rtmp-av1.h
  plugins/obs-outputs/rtmp-helpers.h
+ plugins/obs-outputs/rtmp-hevc.c
+ plugins/obs-outputs/rtmp-hevc.h
  plugins/obs-outputs/rtmp-stream.c
  plugins/obs-x264/obs-x264.c
 Copyright: 2013, Hugh Bailey <obs.jim@gmail.com>
@@ -2991,6 +3168,7 @@ Copyright: 2013, Hugh Bailey <obs.jim@gmail.com>
   2020, Hugh Bailey <obs.jim@gmail.com>
   2021, Hugh Bailey <obs.jim@gmail.com>
   2022, Hugh Bailey <obs.jim@gmail.com>
+  2023, Hugh Bailey <obs.jim@gmail.com>
 License: GPL-2+
  FIXME
 
@@ -3130,9 +3308,13 @@ Files: UI/win-update/updater/hash.cpp
  deps/libff/libff/ff-compat.h
  deps/libff/libff/ff-threading-posix.c
  deps/libff/libff/ff-threading-windows.c
+ deps/media-playback/media-playback/cache.c
+ deps/media-playback/media-playback/cache.h
  deps/media-playback/media-playback/closest-format.h
  deps/media-playback/media-playback/decode.c
  deps/media-playback/media-playback/decode.h
+ deps/media-playback/media-playback/media-playback.c
+ deps/media-playback/media-playback/media-playback.h
  deps/media-playback/media-playback/media.c
  deps/media-playback/media-playback/media.h
  libobs/callback/calldata.c
@@ -3202,6 +3384,7 @@ Copyright: 2013, Hugh Bailey <obs.jim@gmail.com>
   2017, Hugh Bailey <obs.jim@gmail.com>
   2017-2018, Hugh Bailey <obs.jim@gmail.com>
   2020, Hugh Bailey <obs.jim@gmail.com>
+  2023, Hugh Bailey <obs.jim@gmail.com>
 License: ISC
  FIXME
 
@@ -3610,6 +3793,13 @@ Copyright: 2008-2009, Andrej Stepanchuk
 License: LGPL-2.1+
  FIXME
 
+Files: deps/uthash/uthash/LICENSE
+ deps/uthash/uthash/uthash.h
+Copyright: 2003-2021, Troy D. Hanson http://troydhanson.github.com/uthash/
+  2005-2021, Troy D. Hanson http://troydhanson.github.com/uthash/
+License: BSD-1-Clause
+ FIXME
+
 Files: plugins/obs-filters/rnnoise/src/pitch.c
  plugins/obs-filters/rnnoise/src/pitch.h
 Copyright: 2007-2008, CSIRO
@@ -3732,6 +3922,11 @@ Copyright: 2007-2020, The Khronos Group Inc.
 License: Apache-2.0
  FIXME
 
+Files: plugins/decklink/decklink-device-instance.hpp
+Copyright: 2010-2011, Dmitry Vyukov.
+License: BSD-2-Clause-Views
+ FIXME
+
 Files: plugins/obs-filters/rnnoise/src/arch.h
 Copyright: 2003-2008, Jean-Marc Valin
   2007-2008, CSIRO
@@ -3812,6 +4007,11 @@ Copyright: NONE
 License: GPL-2+
  FIXME
 
+Files: libobs/util/uthash.h
+Copyright: 2023, Dennis Sädtler <dennis@obsproject.com>
+License: GPL-2+
+ FIXME
+
 Files: websocket/LICENSE
 Copyright: 1989, 1991, Free Software Foundation, Inc., <http://fsf.org/>
 License: GPL-2+
@@ -3842,6 +4042,11 @@ License: GPL-2+
 
 Files: plugins/obs-outputs/ftl-stream.c
 Copyright: 2017, Quinn Damerell <qdamere@microsoft.com>
+License: GPL-2+
+ FIXME
+
+Files: UI/win-dll-blocklist.c
+Copyright: 2023, Richard Stanway
 License: GPL-2+
  FIXME
 
@@ -3914,8 +4119,9 @@ License: UNKNOWN
  FIXME
 
 Files: cmake/Modules/FindX11_XCB.cmake
-Copyright: 2007, Matthias Kretz,
-  2011, Fredrik Höglund <fredrik@kde.org> Copyright (c) 2008 Helio
+Copyright: 2007, Matthias Kretz, <kretz@kde.org>
+  2008, Helio Chissini de Castro, <helio@kde.org>
+  2011, Fredrik Höglund <fredrik@kde.org>
 License: UNKNOWN
  FIXME
 
