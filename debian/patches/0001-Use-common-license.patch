@@ -8,18 +8,17 @@ copy
  UI/window-basic-about.cpp | 7 +------
  1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/UI/window-basic-about.cpp b/UI/window-basic-about.cpp
-index 2bbc216..5dc4901 100644
---- a/UI/window-basic-about.cpp
-+++ b/UI/window-basic-about.cpp
-@@ -159,15 +159,10 @@ void OBSAbout::ShowAuthors()
+--- obs-studio.orig/UI/window-basic-about.cpp
++++ obs-studio/UI/window-basic-about.cpp
+@@ -160,16 +160,11 @@
  
  void OBSAbout::ShowLicense()
  {
 -	std::string path;
-+	std::string path("/usr/share/common-licenses/GPL-2");
- 	QString error = "Error! File could not be read.\n\n \
- 		Go to: https://github.com/obsproject/obs-studio/blob/master/COPYING";
+++	std::string path("/usr/share/common-licenses/GPL-2");
+ 	QString error =
+ 		QTStr("About.Error")
+ 			.arg("https://github.com/obsproject/obs-studio/blob/master/COPYING");
  
 -	if (!GetDataFilePath("license/gplv2.txt", path)) {
 -		ui->textBrowser->setPlainText(error);
