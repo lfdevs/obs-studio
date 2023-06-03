@@ -1,12 +1,12 @@
-obs-studio (29.1.1+dfsg-1) UNRELEASED; urgency=medium
+obs-studio (29.1.2+dfsg-1) UNRELEASED; urgency=medium
 
-  * New upstream version 29.1.1+dfsg
+  * New upstream version 29.1.2+dfsg
     + Refresh patches
   * Update d/copyright
     + Refresh licensecheck exclusion rules
     + Re-generate d/copyright_hints
 
- -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 17 May 2023 22:09:44 +0200
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Sat, 03 Jun 2023 21:50:24 +0200
 
 obs-studio (29.0.2+dfsg-1) unstable; urgency=medium
 
