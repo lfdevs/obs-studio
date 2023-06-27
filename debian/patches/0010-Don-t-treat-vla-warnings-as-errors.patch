@@ -3,9 +3,7 @@ From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
 Date: Tue, 27 Jun 2023 12:57:58 +0200
 Subject: Don't treat vla-warnings as errors
 
-
 Bug: https://github.com/obsproject/obs-studio/issues/9160
-
 ---
  cmake/Modules/CompilerConfig.cmake | 1 +
  1 file changed, 1 insertion(+)
