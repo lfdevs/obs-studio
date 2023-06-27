@@ -2637,6 +2637,7 @@ Files: AUTHORS
  websocket/data/locale/kmr-TR.ini
  websocket/data/locale/ko-KR.ini
  websocket/data/locale/ms-MY.ini
+ websocket/data/locale/nb-NO.ini
  websocket/data/locale/nl-NL.ini
  websocket/data/locale/pl-PL.ini
  websocket/data/locale/pt-BR.ini
