@@ -8,4 +8,4 @@
 0009-Fix-spelling-mistakes.patch
 0010-Drop-code-that-makes-build-unreproducible.patch
 0010-Don-t-treat-vla-warnings-as-errors.patch
-0011-Fix-format-error-FTBFS-on-i386.patch
+0011-Fix-FTBFS-on-32bit-archs.patch
