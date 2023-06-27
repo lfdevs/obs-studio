@@ -22,7 +22,7 @@ index e437b27..dccb4a5 100644
  
  target_link_libraries(obs-scripting PRIVATE OBS::libobs OBS::cstrcache $<$<BOOL:${ENABLE_UI}>:OBS::frontend-api>
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index c5c0aac..1d16df0 100644
+index d2e2671..15da29e 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
 @@ -216,6 +216,8 @@ target_sources(
