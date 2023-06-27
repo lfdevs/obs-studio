@@ -15,7 +15,7 @@ copy
  void OBSAbout::ShowLicense()
  {
 -	std::string path;
-++	std::string path("/usr/share/common-licenses/GPL-2");
++	std::string path("/usr/share/common-licenses/GPL-2");
  	QString error =
  		QTStr("About.Error")
  			.arg("https://github.com/obsproject/obs-studio/blob/master/COPYING");
