@@ -1,0 +1,24 @@
+From: =?utf-8?q?=22IOhannes_m_zm=C3=B6lnig_=28Debian/GNU=29=22?=
+ <umlaeute@debian.org>
+Date: Tue, 27 Jun 2023 12:57:58 +0200
+Subject: Don't treat vla-warnings as errors
+
+
+Bug: https://github.com/obsproject/obs-studio/issues/9160
+
+---
+ cmake/Modules/CompilerConfig.cmake | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cmake/Modules/CompilerConfig.cmake b/cmake/Modules/CompilerConfig.cmake
+index 63b2b15..11bfa37 100644
+--- a/cmake/Modules/CompilerConfig.cmake
++++ b/cmake/Modules/CompilerConfig.cmake
+@@ -111,6 +111,7 @@ else()
+     -Werror
+     -Wextra
+     -Wvla
++    -Wno-error=vla
+     -Wswitch
+     -Wno-error=switch
+     -Wformat
