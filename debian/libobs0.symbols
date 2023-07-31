@@ -1901,7 +1901,7 @@ libobs.so.0 libobs0 #MINVER#
  wstrcmpi@Base 0.13.2
  wstrcmpi_n@Base 0.13.2
  wstrstri@Base 0.13.2
- # yikes: spill-over from obs-private.h
+# yikes: spill-over from obs-private.h
  (optional)obs@Base 29.1.3
  (optional)obs_context_data_free@Base 29.1.3
  (optional)obs_context_data_init@Base 29.1.3
