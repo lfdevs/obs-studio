@@ -1,36 +1,12 @@
-From: Sebastian Ramacher <sramacher@debian.org>
-Date: Wed, 19 Apr 2017 21:45:40 +0200
-Subject: Hide internal symbols
-
----
- deps/obs-scripting/CMakeLists.txt | 3 +++
- libobs/CMakeLists.txt             | 2 ++
- 2 files changed, 5 insertions(+)
-
-diff --git a/deps/obs-scripting/CMakeLists.txt b/deps/obs-scripting/CMakeLists.txt
-index e437b27..dccb4a5 100644
---- a/deps/obs-scripting/CMakeLists.txt
-+++ b/deps/obs-scripting/CMakeLists.txt
-@@ -37,6 +37,9 @@ target_sources(
- target_compile_definitions(obs-scripting PRIVATE SCRIPT_DIR="${OBS_SCRIPT_PLUGIN_PATH}"
-                                                  $<$<BOOL:${ENABLE_UI}>:ENABLE_UI>)
- target_compile_features(obs-scripting PRIVATE cxx_auto_type)
-+set_target_properties(obs-scripting PROPERTIES CXX_VISIBILITY_PRESET hidden)
-+set_target_properties(obs-scripting PROPERTIES C_VISIBILITY_PRESET hidden)
-+
- target_include_directories(obs-scripting PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+--- obs-studio.orig/libobs/obs.c
++++ obs-studio/libobs/obs.c
+@@ -21,7 +21,9 @@
+ #include "callback/calldata.h"
  
- target_link_libraries(obs-scripting PRIVATE OBS::libobs OBS::cstrcache $<$<BOOL:${ENABLE_UI}>:OBS::frontend-api>
-diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index d2e2671..15da29e 100644
---- a/libobs/CMakeLists.txt
-+++ b/libobs/CMakeLists.txt
-@@ -216,6 +216,8 @@ target_sources(
+ #include "obs.h"
++#pragma GCC visibility push(default)
+ #include "obs-internal.h"
++#pragma GCC visibility pop
  
- target_compile_features(libobs PUBLIC $<INSTALL_INTERFACE:cxx_std_17>)
- target_compile_options(libobs PUBLIC ${ARCH_SIMD_FLAGS})
-+set_target_properties(libobs PROPERTIES CXX_VISIBILITY_PRESET hidden)
-+set_target_properties(libobs PROPERTIES C_VISIBILITY_PRESET hidden)
- target_compile_definitions(
-   libobs
-   PRIVATE IS_LIBOBS
+ struct obs_core *obs = NULL;
+ 
