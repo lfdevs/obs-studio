@@ -1,13 +1,20 @@
-obs-studio (29.1.3+dfsg-1) UNRELEASED; urgency=medium
+obs-studio (29.1.3+dfsg-1) unstable; urgency=medium
 
   * New upstream version 29.1.3+dfsg
     + Refresh patches
-  * Refresh simde patch
+  * Update simde patch
+  * Fix FTBFS due to overzealous warnings
+  * Fix format-error FTBFS on 32bit archs
+  * Add patch to prevent underlinking
+  * Globally apply "-fvisibility=hidden"
+    + Drop symbols removed with visibility=hidden
+    + Add new symbols
+  * Add lintian-overrides for half-excluded files
   * Update d/copyright
     + Refresh licensecheck exclusion rules
     + Re-generate d/copyright_hints
 
- -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 27 Jun 2023 12:29:06 +0200
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 31 Jul 2023 14:10:09 +0200
 
 obs-studio (29.0.2+dfsg-1) unstable; urgency=medium
 
