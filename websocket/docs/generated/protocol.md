@@ -1,7 +1,7 @@
 <!-- This file was automatically generated. Do not edit directly! -->
 <!-- markdownlint-disable no-bare-urls -->
 
-# obs-websocket 5.0.1 Protocol
+# obs-websocket 5.1.0 Protocol
 
 ## Main Table of Contents
 
@@ -63,7 +63,7 @@ These steps should be followed precisely. Failure to connect to the server as in
 
 - The server receives and processes the `Identify` sent by the client.
   - If authentication is required and the `Identify` message data does not contain an `authentication` string, or the string is not correct, the connection is closed with `WebSocketCloseCode::AuthenticationFailed`
-  - If the client has requested an `rpcVersion` which the server cannot use, the connection is closed with `WebSocketCloseCode::UnsupportedRpcVersion`. This system allows both the server and client to have seamless backwards compatability.
+  - If the client has requested an `rpcVersion` which the server cannot use, the connection is closed with `WebSocketCloseCode::UnsupportedRpcVersion`. This system allows both the server and client to have seamless backwards compatibility.
   - If any other parameters are malformed (invalid type, etc), the connection is closed with an appropriate close code.
 
 - Once identification is processed on the server, the server responds to the client with an [OpCode 2 `Identified`](#identified-opcode-2).
@@ -148,7 +148,7 @@ Authentication is required
 {
   "op": 0,
   "d": {
-    "obsWebSocketVersion": "5.0.1",
+    "obsWebSocketVersion": "5.1.0",
     "rpcVersion": 1,
     "authentication": {
       "challenge": "+IxH4CnCiqpX1rM9scsNynZzbOe4KhDeYcTNS3PDaeY=",
@@ -164,7 +164,7 @@ Authentication is not required
 {
   "op": 0,
   "d": {
-    "obsWebSocketVersion": "5.0.1",
+    "obsWebSocketVersion": "5.1.0",
     "rpcVersion": 1
   }
 }
@@ -471,6 +471,7 @@ These are enumeration declarations, which are referenced throughout obs-websocke
   - [RequestStatus::UnknownRequestType](#requeststatusunknownrequesttype)
   - [RequestStatus::GenericError](#requeststatusgenericerror)
   - [RequestStatus::UnsupportedRequestBatchExecutionType](#requeststatusunsupportedrequestbatchexecutiontype)
+  - [RequestStatus::NotReady](#requeststatusnotready)
   - [RequestStatus::MissingRequestField](#requeststatusmissingrequestfield)
   - [RequestStatus::MissingRequestData](#requeststatusmissingrequestdata)
   - [RequestStatus::InvalidRequestField](#requeststatusinvalidrequestfield)
@@ -876,6 +877,18 @@ The request batch execution type is not supported.
 - Identifier Value: `206`
 - Latest Supported RPC Version: `1`
 - Added in v5.0.0
+
+---
+
+### RequestStatus::NotReady
+
+The server is not ready to handle the request.
+
+Note: This usually occurs during OBS scene collection change or exit. Requests may be tried again after a delay if this code is given.
+
+- Identifier Value: `207`
+- Latest Supported RPC Version: `1`
+- Added in v5.3.0
 
 ---
 

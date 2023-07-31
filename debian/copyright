@@ -17,7 +17,7 @@ Files-Excluded:
  */.git*
 
 Files: *
-Copyright: 2013-2017, Hugh Bailey <obs.jim@gmail.com>
+Copyright: 2013-2023, Hugh Bailey <obs.jim@gmail.com>
            2017, Joel Bethke <joel.bethke@gmail.com>
            2015, Andrew Skinner <obs@theandyroid.com>
            2014, Leonhard Oelke <leonhard@in-verted.de>
@@ -56,10 +56,26 @@ Files: plugins/obs-ffmpeg/obs-ffmpeg-rist.h
 Copyright: 2022, pkv@obsproject.com
 License: ISC
 
+Files: plugins/decklink/decklink-device-instance.hpp
+Copyright: 2010-2011, Dmitry Vyukov.
+License: BSD-2-Clause-Views
+
 Files: websocket/*
 Copyright: 2016-2021, Stephane Lepin <stephane.lepin@gmail.com>
   2014, Leonhard Oelke <leonhard@in-verted.de>
   2020-2022, Kyle Manning <tt2468@gmail.com>
+License: GPL-2+
+
+Files: deps/uthash/uthash/*
+Copyright: 2003-2021, Troy D. Hanson
+License: BSD-1-Clause
+
+Files: UI/win-dll-blocklist.c
+Copyright: 2023, Richard Stanway
+License: GPL-2+
+
+Files: libobs/util/uthash.h
+Copyright: 2023, Dennis Sädtler <dennis@obsproject.com>
 License: GPL-2+
 
 Files: cmake/Modules/FindJack.cmake
@@ -146,6 +162,52 @@ License: public-domain
  modification, are permitted.
  .
  There's ABSOLUTELY NO WARRANTY, express or implied.
+
+License: BSD-1-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE HOLDERS OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-2-Clause-Views
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE HOLDERS OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ .
+ The views and conclusions contained in the software and documentation are
+ those of the authors and should not be interpreted as representing official
+ policies, either expressed or implied, of the copyright holders or
+ contributors.
 
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without

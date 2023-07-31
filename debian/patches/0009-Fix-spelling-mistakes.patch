@@ -16,10 +16,10 @@ Last-Update: 2022-09-20
  6 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/cmake/Modules/FindLibVLC.cmake b/cmake/Modules/FindLibVLC.cmake
-index 38791cf..0e42907 100644
+index 63fbd64..668491f 100644
 --- a/cmake/Modules/FindLibVLC.cmake
 +++ b/cmake/Modules/FindLibVLC.cmake
-@@ -43,7 +43,7 @@ find_library(
+@@ -41,7 +41,7 @@ find_library(
      ../bin)
  
  include(FindPackageHandleStandardArgs)
