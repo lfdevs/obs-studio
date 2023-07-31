@@ -8,11 +8,9 @@ Subject: Fix FTBFS on 32bit archs
  libobs/obs.c                  | 2 +-
  2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/libobs-opengl/gl-egl-common.c b/libobs-opengl/gl-egl-common.c
-index f06cd19..60e3e64 100644
---- a/libobs-opengl/gl-egl-common.c
-+++ b/libobs-opengl/gl-egl-common.c
-@@ -368,16 +368,18 @@ bool gl_egl_query_dmabuf_modifiers_for_format(EGLDisplay egl_display,
+--- obs-studio.orig/libobs-opengl/gl-egl-common.c
++++ obs-studio/libobs-opengl/gl-egl-common.c
+@@ -368,16 +368,18 @@
  					      uint64_t **modifiers,
  					      size_t *n_modifiers)
  {
@@ -32,11 +30,9 @@ index f06cd19..60e3e64 100644
  	return true;
  }
  
-diff --git a/libobs/obs.c b/libobs/obs.c
-index a19b933..927b70d 100644
---- a/libobs/obs.c
-+++ b/libobs/obs.c
-@@ -873,7 +873,7 @@ static void obs_free_video(void)
+--- obs-studio.orig/libobs/obs.c
++++ obs-studio/libobs/obs.c
+@@ -875,7 +875,7 @@
  		obs->video.mixes.array[i] = NULL;
  	}
  	if (num_views > 0)
