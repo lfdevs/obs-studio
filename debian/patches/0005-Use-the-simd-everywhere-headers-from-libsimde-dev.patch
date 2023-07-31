@@ -9,7 +9,7 @@ Subject: Use the simd everywhere headers from libsimde-dev
  3 files changed, 1 insertion(+), 36 deletions(-)
 
 diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 15da29e..5247341 100644
+index d2e2671..220a72c 100644
 --- a/libobs/CMakeLists.txt
 +++ b/libobs/CMakeLists.txt
 @@ -116,24 +116,6 @@ target_sources(
