@@ -9,3 +9,4 @@
 0010-Drop-code-that-makes-build-unreproducible.patch
 0010-Don-t-treat-vla-warnings-as-errors.patch
 0011-Fix-FTBFS-on-32bit-archs.patch
+0012-Prevent-underlinking.patch
