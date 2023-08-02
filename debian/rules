@@ -24,6 +24,8 @@ endif
 
 ifeq ($(DEB_HOST_ARCH_CPU), i386)
 confflags += -DENABLE_SIMD=OFF
+DEB_CFLAGS_MAINT_APPEND+=-Wno-error=psabi
+DEB_CPPFLAGS_MAINT_APPEND+=-Wno-error=psabi
 endif
 
 
