@@ -1,3 +1,13 @@
+obs-studio (29.1.3+dfsg-2) unstable; urgency=medium
+
+  * Generalize the prevention of SIMD-builds
+    + Disable SIMD on i386 (and ignore up psABI warnings)
+      (Fixes FTBFS on i386)
+  * Add patch to fix out-of-type-limits comparison if (char)==(unsigned char)
+    (Fixes FTBFS on armel, armhf, ppc64el, s390x)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 02 Aug 2023 13:39:19 +0200
+
 obs-studio (29.1.3+dfsg-1) unstable; urgency=medium
 
   * New upstream version 29.1.3+dfsg

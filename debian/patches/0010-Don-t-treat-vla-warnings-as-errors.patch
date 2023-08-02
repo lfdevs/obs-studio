@@ -9,7 +9,7 @@ Bug: https://github.com/obsproject/obs-studio/issues/9160
  1 file changed, 1 insertion(+)
 
 diff --git a/cmake/Modules/CompilerConfig.cmake b/cmake/Modules/CompilerConfig.cmake
-index 63b2b15..11bfa37 100644
+index 7963ee8..e04b3da 100644
 --- a/cmake/Modules/CompilerConfig.cmake
 +++ b/cmake/Modules/CompilerConfig.cmake
 @@ -111,6 +111,7 @@ else()
