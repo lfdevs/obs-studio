@@ -6,7 +6,8 @@ Subject: Fix comparision if (char) is unsigned
 Bug: https://github.com/obsproject/obs-studio/pull/9184
 ---
  deps/libcaption/src/utf8.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ libobs/util/utf8.c         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/deps/libcaption/src/utf8.c b/deps/libcaption/src/utf8.c
 index 41c6de4..b10bedc 100644
@@ -21,3 +22,16 @@ index 41c6de4..b10bedc 100644
          return 1;
      }
  
+diff --git a/libobs/util/utf8.c b/libobs/util/utf8.c
+index a90618a..9e88584 100644
+--- a/libobs/util/utf8.c
++++ b/libobs/util/utf8.c
+@@ -289,7 +289,7 @@ size_t wchar_to_utf8(const wchar_t *in, size_t insize, char *out,
+ 		if (*w == _BOM && (flags & UTF8_SKIP_BOM) != 0)
+ 			continue;
+ 
+-		if (*w < 0) {
++		if ((signed char)*w < 0) {
+ 			if ((flags & UTF8_IGNORE_ERROR) == 0)
+ 				return 0;
+ 			continue;
