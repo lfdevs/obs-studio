@@ -22,6 +22,11 @@ ifeq (ppc64el,$(DEB_HOST_ARCH))
 confflags += -DENABLE_SCRIPTING_LUA=OFF
 endif
 
+ifeq ($(DEB_HOST_ARCH_CPU), i386)
+confflags += -DENABLE_SIMD=OFF
+endif
+
+
 %:
 	dh $@
 
