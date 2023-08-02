@@ -10,3 +10,4 @@
 0010-Don-t-treat-vla-warnings-as-errors.patch
 0011-Fix-FTBFS-on-32bit-archs.patch
 0012-Prevent-underlinking.patch
+0013-Fix-comparision-if-char-is-unsigned.patch
