@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 add_library(caption STATIC EXCLUDE_FROM_ALL )
 add_library(OBS::caption ALIAS caption)
@@ -25,7 +25,9 @@ target_sources(
 
 target_compile_definitions(caption PRIVATE __STDC_CONSTANT_MACROS $<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>)
 
-target_compile_options(caption PRIVATE $<$<CXX_COMPILER_ID:Clang,AppleClang,GNU>:-Wno-unused-but-set-parameter>)
+target_compile_options(
+  caption
+  PRIVATE "$<$<CXX_COMPILER_ID:Clang,AppleClang,GNU>:-Wno-unused-but-set-parameter;-Wno-comma;-Wno-strict-prototypes>")
 
 target_include_directories(
   caption

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Hugh Bailey <obs.jim@gmail.com>
+ * Copyright (c) 2023 Lain Bailey <lain@obsproject.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,7 +16,7 @@
 
 #include "obsconfig.h"
 
-#if !defined(__APPLE__) && OBS_QT_VERSION == 6
+#if !defined(__APPLE__)
 #define _GNU_SOURCE
 #include <link.h>
 #include <stdlib.h>
@@ -83,7 +83,13 @@ void *os_dlopen(const char *path)
 		dstr_cat(&dylib_name, ".so");
 
 #ifdef __APPLE__
-	void *res = dlopen(dylib_name.array, RTLD_LAZY | RTLD_FIRST);
+	int dlopen_flags = RTLD_LAZY | RTLD_FIRST;
+	if (dstr_find(&dylib_name, "Python")) {
+		dlopen_flags = dlopen_flags | RTLD_GLOBAL;
+	} else {
+		dlopen_flags = dlopen_flags | RTLD_LOCAL;
+	}
+	void *res = dlopen(dylib_name.array, dlopen_flags);
 #else
 	void *res = dlopen(dylib_name.array, RTLD_LAZY);
 #endif
@@ -106,7 +112,7 @@ void os_dlclose(void *module)
 		dlclose(module);
 }
 
-#if !defined(__APPLE__) && OBS_QT_VERSION == 6
+#if !defined(__APPLE__)
 int module_has_qt5_check(const char *path)
 {
 	void *mod = os_dlopen(path);
@@ -147,7 +153,7 @@ void get_plugin_info(const char *path, bool *is_obs_plugin, bool *can_load)
 {
 	*is_obs_plugin = true;
 	*can_load = true;
-#if !defined(__APPLE__) && OBS_QT_VERSION == 6
+#if !defined(__APPLE__)
 	*can_load = !has_qt5_dependency(path);
 #endif
 	UNUSED_PARAMETER(path);

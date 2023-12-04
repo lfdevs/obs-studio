@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Hugh Bailey <obs.jim@gmail.com>
+ * Copyright (c) 2023 Lain Bailey <lain@obsproject.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -483,7 +483,7 @@ void mp_media_next_video(mp_media_t *m, bool preload)
 	frame->height = f->height;
 	frame->max_luminance = d->max_luminance;
 	frame->flip = flip;
-	frame->flags |= m->is_linear_alpha ? OBS_SOURCE_FRAME_LINEAR_ALPHA : 0;
+	frame->flags = m->is_linear_alpha ? OBS_SOURCE_FRAME_LINEAR_ALPHA : 0;
 	switch (f->color_trc) {
 	case AVCOL_TRC_BT709:
 	case AVCOL_TRC_GAMMA22:
@@ -938,10 +938,6 @@ bool mp_media_init(mp_media_t *media, const struct mp_media_info *info)
 
 	static bool initialized = false;
 	if (!initialized) {
-#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(58, 9, 100)
-		av_register_all();
-		avcodec_register_all();
-#endif
 		avdevice_register_all();
 		avformat_network_init();
 		initialized = true;

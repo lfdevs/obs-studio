@@ -1,5 +1,5 @@
 /******************************************************************************
-    Copyright (C) 2014 by Hugh Bailey <obs.jim@gmail.com>
+    Copyright (C) 2023 by Lain Bailey <lain@obsproject.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -225,13 +225,6 @@ static void rtmp_stream_stop(void *data, uint64_t ts)
 	} else {
 		obs_output_signal_stop(stream->output, OBS_OUTPUT_SUCCESS);
 	}
-}
-
-static inline void set_rtmp_str(AVal *val, const char *str)
-{
-	bool valid = (str && *str);
-	val->av_val = valid ? (char *)str : NULL;
-	val->av_len = valid ? (int)strlen(str) : 0;
 }
 
 static inline void set_rtmp_dstr(AVal *val, struct dstr *str)
@@ -528,6 +521,12 @@ static void set_output_error(struct rtmp_stream *stream)
 	case WSAEADDRNOTAVAIL:
 		msg = obs_module_text("AddressNotAvailable");
 		break;
+	case WSAEINVAL:
+		msg = obs_module_text("InvalidParameter");
+		break;
+	case WSAEHOSTUNREACH:
+		msg = obs_module_text("NoRoute");
+		break;
 	}
 #else
 	switch (stream->rtmp.last_error_code) {
@@ -551,6 +550,12 @@ static void set_output_error(struct rtmp_stream *stream)
 		break;
 	case EADDRNOTAVAIL:
 		msg = obs_module_text("AddressNotAvailable");
+		break;
+	case EINVAL:
+		msg = obs_module_text("InvalidParameter");
+		break;
+	case EHOSTUNREACH:
+		msg = obs_module_text("NoRoute");
 		break;
 	}
 #endif
@@ -795,8 +800,9 @@ static bool send_video_header(struct rtmp_stream *stream)
 	uint8_t *header;
 	size_t size;
 
-	struct encoder_packet packet = {
-		.type = OBS_ENCODER_VIDEO, .timebase_den = 1, .keyframe = true};
+	struct encoder_packet packet = {.type = OBS_ENCODER_VIDEO,
+					.timebase_den = 1,
+					.keyframe = true};
 
 	if (!obs_encoder_get_extra_data(vencoder, &header, &size))
 		return false;
@@ -1031,13 +1037,12 @@ static int init_send(struct rtmp_stream *stream)
 		stream->write_buf_size = ideal_buffer_size;
 		stream->write_buf = bmalloc(ideal_buffer_size);
 
-#ifdef _WIN32
-		ret = pthread_create(&stream->socket_thread, NULL,
-				     socket_thread_windows, stream);
-#else
+#ifndef _WIN32
 		warn("New socket loop not supported on this platform");
 		return OBS_OUTPUT_ERROR;
-#endif
+#else
+		ret = pthread_create(&stream->socket_thread, NULL,
+				     socket_thread_windows, stream);
 
 		if (ret != 0) {
 			RTMP_Close(&stream->rtmp);
@@ -1049,6 +1054,7 @@ static int init_send(struct rtmp_stream *stream)
 		stream->rtmp.m_bCustomSend = true;
 		stream->rtmp.m_customSendFunc = socket_queue_data;
 		stream->rtmp.m_customSendParam = stream;
+#endif
 	}
 
 	os_atomic_set_bool(&stream->active, true);
@@ -1194,6 +1200,10 @@ static int try_connect(struct rtmp_stream *stream)
 		}
 	}
 
+	// Only use the IPv4 / IPv6 hint if a binding address isn't specified.
+	if (stream->rtmp.m_bindIP.addrLen == 0)
+		stream->rtmp.m_bindIP.addrLen = stream->addrlen_hint;
+
 	RTMP_AddStream(&stream->rtmp, stream->key.array);
 
 	stream->rtmp.m_outChunkSize = 4096;
@@ -1212,7 +1222,11 @@ static int try_connect(struct rtmp_stream *stream)
 	if (!RTMP_ConnectStream(&stream->rtmp, 0))
 		return OBS_OUTPUT_INVALID_STREAM;
 
-	info("Connection to %s successful", stream->path.array);
+	char ip_address[INET6_ADDRSTRLEN] = {0};
+	netif_addr_to_str(&stream->rtmp.m_sb.sb_addr, ip_address,
+			  INET6_ADDRSTRLEN);
+	info("Connection to %s (%s) successful", stream->path.array,
+	     ip_address);
 
 	return init_send(stream);
 }
@@ -1222,6 +1236,7 @@ static bool init_connect(struct rtmp_stream *stream)
 	obs_service_t *service;
 	obs_data_t *settings;
 	const char *bind_ip;
+	const char *ip_family;
 	int64_t drop_p;
 	int64_t drop_b;
 	uint32_t caps;
@@ -1307,6 +1322,18 @@ static bool init_connect(struct rtmp_stream *stream)
 
 	bind_ip = obs_data_get_string(settings, OPT_BIND_IP);
 	dstr_copy(&stream->bind_ip, bind_ip);
+
+	// Check that we have an IP Family set and that the setting length
+	// is 4 characters long so we don't capture ie. IPv4+IPv6
+	ip_family = obs_data_get_string(settings, OPT_IP_FAMILY);
+	if (ip_family != NULL && strlen(ip_family) == 4) {
+		socklen_t len = 0;
+		if (strncmp(ip_family, "IPv6", 4) == 0)
+			len = sizeof(struct sockaddr_in6);
+		else if (strncmp(ip_family, "IPv4", 4) == 0)
+			len = sizeof(struct sockaddr_in);
+		stream->addrlen_hint = len;
+	}
 
 #ifdef _WIN32
 	stream->new_socket_loop =
@@ -1720,6 +1747,18 @@ static obs_properties_t *rtmp_stream_properties(void *unused)
 				   obs_module_text("RTMPStream.DropThreshold"),
 				   200, 10000, 100);
 	obs_property_int_set_suffix(p, " ms");
+
+	p = obs_properties_add_list(props, OPT_IP_FAMILY,
+				    obs_module_text("IPFamily"),
+				    OBS_COMBO_TYPE_LIST,
+				    OBS_COMBO_FORMAT_STRING);
+
+	obs_property_list_add_string(p, obs_module_text("IPFamily.Both"),
+				     "IPv4+IPv6");
+	obs_property_list_add_string(p, obs_module_text("IPFamily.V4Only"),
+				     "IPv4");
+	obs_property_list_add_string(p, obs_module_text("IPFamily.V6Only"),
+				     "IPv6");
 
 	p = obs_properties_add_list(props, OPT_BIND_IP,
 				    obs_module_text("RTMPStream.BindIP"),

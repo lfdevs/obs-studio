@@ -30,37 +30,47 @@ static OBSSceneItem FindASelectedItem(obs_scene_t *scene)
 	return item;
 }
 
-void OBSBasicTransform::HookWidget(QWidget *widget, const char *signal,
-				   const char *slot)
-{
-	QObject::connect(widget, signal, this, slot);
-}
-
-#define COMBO_CHANGED SIGNAL(currentIndexChanged(int))
-#define ISCROLL_CHANGED SIGNAL(valueChanged(int))
-#define DSCROLL_CHANGED SIGNAL(valueChanged(double))
+#define COMBO_CHANGED &QComboBox::currentIndexChanged
+#define ISCROLL_CHANGED &QSpinBox::valueChanged
+#define DSCROLL_CHANGED &QDoubleSpinBox::valueChanged
 
 OBSBasicTransform::OBSBasicTransform(OBSSceneItem item, OBSBasic *parent)
-	: QDialog(parent), ui(new Ui::OBSBasicTransform), main(parent)
+	: QDialog(parent),
+	  ui(new Ui::OBSBasicTransform),
+	  main(parent)
 {
 	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
 	ui->setupUi(this);
 
-	HookWidget(ui->positionX, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->positionY, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->rotation, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->sizeX, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->sizeY, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->align, COMBO_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->boundsType, COMBO_CHANGED, SLOT(OnBoundsType(int)));
-	HookWidget(ui->boundsAlign, COMBO_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->boundsWidth, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->boundsHeight, DSCROLL_CHANGED, SLOT(OnControlChanged()));
-	HookWidget(ui->cropLeft, ISCROLL_CHANGED, SLOT(OnCropChanged()));
-	HookWidget(ui->cropRight, ISCROLL_CHANGED, SLOT(OnCropChanged()));
-	HookWidget(ui->cropTop, ISCROLL_CHANGED, SLOT(OnCropChanged()));
-	HookWidget(ui->cropBottom, ISCROLL_CHANGED, SLOT(OnCropChanged()));
+	HookWidget(ui->positionX, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->positionY, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->rotation, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->sizeX, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->sizeY, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->align, COMBO_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->boundsType, COMBO_CHANGED,
+		   &OBSBasicTransform::OnBoundsType);
+	HookWidget(ui->boundsAlign, COMBO_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->boundsWidth, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->boundsHeight, DSCROLL_CHANGED,
+		   &OBSBasicTransform::OnControlChanged);
+	HookWidget(ui->cropLeft, ISCROLL_CHANGED,
+		   &OBSBasicTransform::OnCropChanged);
+	HookWidget(ui->cropRight, ISCROLL_CHANGED,
+		   &OBSBasicTransform::OnCropChanged);
+	HookWidget(ui->cropTop, ISCROLL_CHANGED,
+		   &OBSBasicTransform::OnCropChanged);
+	HookWidget(ui->cropBottom, ISCROLL_CHANGED,
+		   &OBSBasicTransform::OnCropChanged);
 
 	ui->buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
@@ -93,8 +103,8 @@ OBSBasicTransform::~OBSBasicTransform()
 	auto undo_redo = [](const std::string &data) {
 		OBSDataAutoRelease dat =
 			obs_data_create_from_json(data.c_str());
-		OBSSourceAutoRelease source = obs_get_source_by_name(
-			obs_data_get_string(dat, "scene_name"));
+		OBSSourceAutoRelease source = obs_get_source_by_uuid(
+			obs_data_get_string(dat, "scene_uuid"));
 		reinterpret_cast<OBSBasic *>(App()->GetMainWindow())
 			->SetCurrentScene(source.Get(), true);
 		obs_scene_load_transform_states(data.c_str());
