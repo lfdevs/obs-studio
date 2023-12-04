@@ -1,3 +1,15 @@
+obs-studio (30.0.0+dfsg-1) UNRELEASED; urgency=medium
+
+  * New upstream version 30.0.0+dfsg
+    + Refresh patches
+  * Fix d/watch
+  * Update copyright information
+    + Update d/copyright
+    + Exclude obs-studio.ico from licensecheck
+    + Re-generate d/copyright
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Mon, 04 Dec 2023 20:55:37 +0100
+
 obs-studio (29.1.3+dfsg-2) unstable; urgency=medium
 
   * Generalize the prevention of SIMD-builds
