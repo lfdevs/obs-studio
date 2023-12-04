@@ -1,5 +1,5 @@
 /******************************************************************************
-    Copyright (C) 2014 by Hugh Bailey <obs.jim@gmail.com>
+    Copyright (C) 2023 by Lain Bailey <lain@obsproject.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -107,8 +107,9 @@ static bool get_audio_headers(struct ffmpeg_output *stream,
 	AVCodecParameters *par = data->audio_infos[idx].stream->codecpar;
 	obs_encoder_t *aencoder =
 		obs_output_get_audio_encoder(stream->output, idx);
-	struct encoder_packet packet = {
-		.type = OBS_ENCODER_AUDIO, .timebase_den = 1, .track_idx = idx};
+	struct encoder_packet packet = {.type = OBS_ENCODER_AUDIO,
+					.timebase_den = 1,
+					.track_idx = idx};
 
 	if (obs_encoder_get_extra_data(aencoder, &packet.data, &packet.size)) {
 		par->extradata = av_memdup(packet.data, packet.size);
@@ -625,14 +626,6 @@ void ffmpeg_mpegts_data_free(struct ffmpeg_output *stream,
 	memset(data, 0, sizeof(struct ffmpeg_data));
 }
 
-static inline const char *safe_str(const char *s)
-{
-	if (s == NULL)
-		return "(NULL)";
-	else
-		return s;
-}
-
 bool ffmpeg_mpegts_data_init(struct ffmpeg_output *stream,
 			     struct ffmpeg_data *data,
 			     struct ffmpeg_cfg *config)
@@ -645,9 +638,6 @@ bool ffmpeg_mpegts_data_init(struct ffmpeg_output *stream,
 	if (!config->url || !*config->url)
 		return false;
 
-#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(58, 9, 100)
-	av_register_all();
-#endif
 	avformat_network_init();
 
 #if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(59, 0, 100)
@@ -895,8 +885,23 @@ static bool set_config(struct ffmpeg_output *stream)
 	config.format_mime_type = "video/M2PT";
 
 	/* 2. video settings */
-	// 2.a) set video format from obs to FFmpeg
-	video_t *video = obs_output_video(stream->output);
+
+	// 2.a) set width & height
+	config.width = (int)obs_output_get_width(stream->output);
+	config.height = (int)obs_output_get_height(stream->output);
+	config.scale_width = config.width;
+	config.scale_height = config.height;
+
+	// 2.b) set video codec & ID from video encoder
+	obs_encoder_t *vencoder = obs_output_get_video_encoder(stream->output);
+	config.video_encoder = obs_encoder_get_codec(vencoder);
+	if (strcmp(config.video_encoder, "h264") == 0)
+		config.video_encoder_id = AV_CODEC_ID_H264;
+	else
+		config.video_encoder_id = AV_CODEC_ID_AV1;
+
+	// 2.c) set video format from OBS to FFmpeg
+	video_t *video = obs_encoder_video(vencoder);
 	config.format =
 		obs_to_ffmpeg_video_format(video_output_get_format(video));
 
@@ -906,7 +911,7 @@ static bool set_config(struct ffmpeg_output *stream)
 		return false;
 	}
 
-	// 2.b) set colorspace, color_range & transfer characteristic (from voi)
+	// 2.d) set colorspace, color_range & transfer characteristic (from voi)
 	const struct video_output_info *voi = video_output_get_info(video);
 	config.color_range = voi->range == VIDEO_RANGE_FULL ? AVCOL_RANGE_JPEG
 							    : AVCOL_RANGE_MPEG;
@@ -939,21 +944,6 @@ static bool set_config(struct ffmpeg_output *stream)
 		config.color_trc = AVCOL_TRC_ARIB_STD_B67;
 		config.colorspace = AVCOL_SPC_BT2020_NCL;
 	}
-
-	// 2.c) set width & height
-	config.width = (int)obs_output_get_width(stream->output);
-	config.height = (int)obs_output_get_height(stream->output);
-	config.scale_width = config.width;
-	config.scale_height = config.height;
-
-	// 2.d) set video codec & id from video encoder
-	obs_encoder_t *vencoder = obs_output_get_video_encoder(stream->output);
-	config.video_encoder = obs_encoder_get_codec(vencoder);
-	if (strcmp(config.video_encoder, "h264") == 0)
-		config.video_encoder_id = AV_CODEC_ID_H264;
-	else
-		config.video_encoder_id = AV_CODEC_ID_AV1;
-
 	// 2.e)  set video bitrate & gop through video encoder settings
 	obs_data_t *settings = obs_encoder_get_settings(vencoder);
 	config.video_bitrate = (int)obs_data_get_int(settings, "bitrate");

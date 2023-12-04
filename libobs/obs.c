@@ -1,5 +1,5 @@
 /******************************************************************************
-    Copyright (C) 2013-2014 by Hugh Bailey <obs.jim@gmail.com>
+    Copyright (C) 2023 by Lain Bailey <lain@obsproject.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -540,6 +540,8 @@ gs_effect_t *obs_load_effect(gs_effect_t **effect, const char *file)
 	return *effect;
 }
 
+static const char *shader_comp_name = "shader compilation";
+static const char *obs_init_graphics_name = "obs_init_graphics";
 static int obs_init_graphics(struct obs_video_info *ovi)
 {
 	struct obs_core_video *video = &obs->video;
@@ -549,9 +551,13 @@ static int obs_init_graphics(struct obs_video_info *ovi)
 	bool success = true;
 	int errorcode;
 
+	profile_start(obs_init_graphics_name);
+
 	errorcode =
 		gs_create(&video->graphics, ovi->graphics_module, ovi->adapter);
 	if (errorcode != GS_SUCCESS) {
+		profile_end(obs_init_graphics_name);
+
 		switch (errorcode) {
 		case GS_ERROR_MODULE_NOT_FOUND:
 			return OBS_VIDEO_MODULE_NOT_FOUND;
@@ -562,6 +568,7 @@ static int obs_init_graphics(struct obs_video_info *ovi)
 		}
 	}
 
+	profile_start(shader_comp_name);
 	gs_enter_context(video->graphics);
 
 	char *filename = obs_find_data_file("default.effect");
@@ -639,6 +646,9 @@ static int obs_init_graphics(struct obs_video_info *ovi)
 		success = false;
 
 	gs_leave_context();
+	profile_end(shader_comp_name);
+	profile_end(obs_init_graphics_name);
+
 	return success ? OBS_VIDEO_SUCCESS : OBS_VIDEO_FAIL;
 }
 
@@ -1440,6 +1450,10 @@ void obs_shutdown(void)
 	for (size_t i = 0; i < obs->module_paths.num; i++)
 		free_module_path(obs->module_paths.array + i);
 	da_free(obs->module_paths);
+
+	for (size_t i = 0; i < obs->safe_modules.num; i++)
+		bfree(obs->safe_modules.array[i]);
+	da_free(obs->safe_modules);
 
 	if (obs->name_store_owned)
 		profiler_name_store_free(obs->name_store);
@@ -3132,13 +3146,15 @@ struct obs_core_video_mix *get_mix_for_video(video_t *v)
 }
 
 void start_raw_video(video_t *v, const struct video_scale_info *conversion,
+		     uint32_t frame_rate_divisor,
 		     void (*callback)(void *param, struct video_data *frame),
 		     void *param)
 {
 	struct obs_core_video_mix *video = get_mix_for_video(v);
 	if (video)
 		os_atomic_inc_long(&video->raw_active);
-	video_output_connect(v, conversion, callback, param);
+	video_output_connect2(v, conversion, frame_rate_divisor, callback,
+			      param);
 }
 
 void stop_raw_video(video_t *v,
@@ -3156,8 +3172,16 @@ void obs_add_raw_video_callback(const struct video_scale_info *conversion,
 						 struct video_data *frame),
 				void *param)
 {
+	obs_add_raw_video_callback2(conversion, 1, callback, param);
+}
+
+void obs_add_raw_video_callback2(
+	const struct video_scale_info *conversion, uint32_t frame_rate_divisor,
+	void (*callback)(void *param, struct video_data *frame), void *param)
+{
 	struct obs_core_video_mix *video = obs->video.main_mix;
-	start_raw_video(video->video, conversion, callback, param);
+	start_raw_video(video->video, conversion, frame_rate_divisor, callback,
+			param);
 }
 
 void obs_remove_raw_video_callback(void (*callback)(void *param,
