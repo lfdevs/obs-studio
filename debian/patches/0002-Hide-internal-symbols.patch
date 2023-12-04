@@ -6,10 +6,8 @@ Subject: Hide-internal-symbols
  libobs/obs.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/libobs/obs.c b/libobs/obs.c
-index a19b933..2c0d1a6 100644
---- a/libobs/obs.c
-+++ b/libobs/obs.c
+--- obs-studio.orig/libobs/obs.c
++++ obs-studio/libobs/obs.c
 @@ -21,7 +21,9 @@
  #include "callback/calldata.h"
  

@@ -12,11 +12,9 @@ Last-Update: 2022-09-20
  libobs/util/base.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/libobs/util/base.h b/libobs/util/base.h
-index b643604..9861781 100644
---- a/libobs/util/base.h
-+++ b/libobs/util/base.h
-@@ -33,7 +33,6 @@ extern "C" {
+--- obs-studio.orig/libobs/util/base.h
++++ obs-studio/libobs/util/base.h
+@@ -33,7 +33,6 @@
  #define S__LINE__ STRINGIFY_(__LINE__)
  
  #define INT_CUR_LINE __LINE__

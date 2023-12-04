@@ -8,17 +8,12 @@ Subject: Use the simd everywhere headers from libsimde-dev
  libobs/util/sse-intrin.h  |  2 +-
  3 files changed, 1 insertion(+), 36 deletions(-)
 
-diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index d2e2671..220a72c 100644
---- a/libobs/CMakeLists.txt
-+++ b/libobs/CMakeLists.txt
-@@ -116,24 +116,6 @@ target_sources(
-           util/util_uint128.h
-           util/util_uint64.h)
- 
--target_sources(
--  libobs
--  PRIVATE # cmake-format: sortable
+--- obs-studio.orig/libobs/CMakeLists.txt
++++ obs-studio/libobs/CMakeLists.txt
+@@ -127,24 +127,6 @@
+ target_sources(
+   libobs
+   PRIVATE # cmake-format: sortable
 -          util/simde/check.h
 -          util/simde/debug-trap.h
 -          util/simde/hedley.h
@@ -34,19 +29,18 @@ index d2e2671..220a72c 100644
 -          util/simde/x86/sse.h
 -          util/simde/x86/sse2.h)
 -
- target_sources(
-   libobs
-   PRIVATE # cmake-format: sortable
-diff --git a/libobs/cmake/legacy.cmake b/libobs/cmake/legacy.cmake
-index fcbacd7..ec956aa 100644
---- a/libobs/cmake/legacy.cmake
-+++ b/libobs/cmake/legacy.cmake
-@@ -68,23 +68,6 @@ target_sources(
-           obs-view.c
-           obs-config.h)
- 
 -target_sources(
 -  libobs
+-  PRIVATE # cmake-format: sortable
+           callback/calldata.c
+           callback/calldata.h
+           callback/decl.c
+--- obs-studio.orig/libobs/cmake/legacy.cmake
++++ obs-studio/libobs/cmake/legacy.cmake
+@@ -74,23 +74,6 @@
+ 
+ target_sources(
+   libobs
 -  PRIVATE util/simde/check.h
 -          util/simde/debug-trap.h
 -          util/simde/hedley.h
@@ -62,17 +56,8 @@ index fcbacd7..ec956aa 100644
 -          util/simde/x86/sse2.h
 -          util/simde/x86/sse.h)
 -
- target_sources(
-   libobs
+-target_sources(
+-  libobs
    PRIVATE callback/calldata.c
-diff --git a/libobs/util/sse-intrin.h b/libobs/util/sse-intrin.h
-index 6441e80..677a40c 100644
---- a/libobs/util/sse-intrin.h
-+++ b/libobs/util/sse-intrin.h
-@@ -25,5 +25,5 @@
- #define WIN32_LEAN_AND_MEAN
- #endif
- #define SIMDE_ENABLE_NATIVE_ALIASES
--#include "simde/x86/sse2.h"
-+#include <simde/x86/sse2.h>
- #endif
+           callback/calldata.h
+           callback/decl.c

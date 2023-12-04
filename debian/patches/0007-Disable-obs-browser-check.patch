@@ -6,16 +6,14 @@ Subject: Disable obs-browser check
  plugins/CMakeLists.txt | 2 --
  1 file changed, 2 deletions(-)
 
-diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt
-index f928f77..74b1976 100644
---- a/plugins/CMakeLists.txt
-+++ b/plugins/CMakeLists.txt
-@@ -152,8 +152,6 @@ elseif(OS_LINUX)
-   add_subdirectory(vlc-video)
-   add_subdirectory(sndio)
-   add_subdirectory(obs-vst)
--
--  check_obs_browser()
- elseif(OS_FREEBSD)
-   add_subdirectory(linux-capture)
-   add_subdirectory(linux-pipewire)
+--- obs-studio.orig/plugins/CMakeLists.txt
++++ obs-studio/plugins/CMakeLists.txt
+@@ -16,7 +16,7 @@
+       if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/obs-browser/cmake/macos/Info.plist.in")
+         add_subdirectory(obs-browser)
+       elseif(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/obs-browser/CMakeLists.txt")
+-        message(FATAL_ERROR "Required submodule 'obs-browser' not available.")
++        message(WARNING "Required submodule 'obs-browser' not available.")
+       endif()
+     endif()
+   endmacro()

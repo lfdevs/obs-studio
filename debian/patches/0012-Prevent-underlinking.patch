@@ -7,11 +7,9 @@ Subject: Prevent underlinking
  libobs/CMakeLists.txt | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/libobs/CMakeLists.txt b/libobs/CMakeLists.txt
-index 220a72c..6b8d1b9 100644
---- a/libobs/CMakeLists.txt
-+++ b/libobs/CMakeLists.txt
-@@ -213,7 +213,9 @@ target_link_libraries(
+--- obs-studio.orig/libobs/CMakeLists.txt
++++ obs-studio/libobs/CMakeLists.txt
+@@ -221,7 +221,9 @@
            FFmpeg::avutil
            FFmpeg::swscale
            FFmpeg::swresample

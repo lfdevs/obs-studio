@@ -8,11 +8,9 @@ copy
  UI/window-basic-about.cpp | 7 +------
  1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/UI/window-basic-about.cpp b/UI/window-basic-about.cpp
-index 90e146d..9eae5eb 100644
---- a/UI/window-basic-about.cpp
-+++ b/UI/window-basic-about.cpp
-@@ -160,16 +160,11 @@ void OBSAbout::ShowAuthors()
+--- obs-studio.orig/UI/window-basic-about.cpp
++++ obs-studio/UI/window-basic-about.cpp
+@@ -161,16 +161,11 @@
  
  void OBSAbout::ShowLicense()
  {

@@ -9,11 +9,9 @@ Bug: https://github.com/obsproject/obs-studio/pull/9184
  libobs/util/utf8.c         | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/deps/libcaption/src/utf8.c b/deps/libcaption/src/utf8.c
-index 41c6de4..b10bedc 100644
---- a/deps/libcaption/src/utf8.c
-+++ b/deps/libcaption/src/utf8.c
-@@ -51,7 +51,7 @@ size_t utf8_char_length(const utf8_char_t* c)
+--- obs-studio.orig/deps/libcaption/src/utf8.c
++++ obs-studio/deps/libcaption/src/utf8.c
+@@ -51,7 +51,7 @@
  int utf8_char_whitespace(const utf8_char_t* c)
  {
      // 0x7F is DEL
@@ -22,11 +20,9 @@ index 41c6de4..b10bedc 100644
          return 1;
      }
  
-diff --git a/libobs/util/utf8.c b/libobs/util/utf8.c
-index a90618a..9e88584 100644
---- a/libobs/util/utf8.c
-+++ b/libobs/util/utf8.c
-@@ -289,7 +289,7 @@ size_t wchar_to_utf8(const wchar_t *in, size_t insize, char *out,
+--- obs-studio.orig/libobs/util/utf8.c
++++ obs-studio/libobs/util/utf8.c
+@@ -289,7 +289,7 @@
  		if (*w == _BOM && (flags & UTF8_SKIP_BOM) != 0)
  			continue;
  
