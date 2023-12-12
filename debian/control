@@ -48,7 +48,7 @@ Build-Depends:
  libv4l-dev,
  libva-dev,
  libvlc-dev,
- libvpl-dev,
+ libvpl-dev [amd64],
  libwayland-dev,
  libwebsocketpp-dev,
  libx11-dev,
