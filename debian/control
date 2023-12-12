@@ -34,8 +34,6 @@ Build-Depends:
  libpipewire-0.3-dev,
  libpulse-dev,
  libqrcodegen-dev,
- libqt5svg5-dev,
- libqt5x11extras5-dev,
  librist-dev,
  libsimde-dev,
  libspeexdsp-dev,
@@ -63,8 +61,8 @@ Build-Depends:
  python3-dev,
  python3-docutils,
  python3-gi-cairo,
- qtbase5-dev,
- qtbase5-private-dev,
+ qt6-base-dev,
+ qt6-svg-dev,
  swig,
 Standards-Version: 4.6.2
 Homepage: https://obsproject.com
