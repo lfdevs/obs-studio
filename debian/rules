@@ -5,6 +5,7 @@ include /usr/share/dpkg/pkg-info.mk
 
 export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux\"
 deb_cflags+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3 -fvisibility=hidden
+deb_cflags+=-Wno-error=deprecated-declarations
 
 confflags  = -DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH)
 confflags += -DUNIX_STRUCTURE=TRUE
