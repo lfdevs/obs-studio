@@ -24,7 +24,6 @@ Build-Depends:
  libdbus-1-dev,
  libdrm-dev,
  libegl-dev,
- libfdk-aac-dev,
  libffmpeg-nvenc-dev,
  libfontconfig-dev,
  libfreetype-dev,
