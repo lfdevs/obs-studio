@@ -4,8 +4,7 @@ include /usr/share/dpkg/architecture.mk
 include /usr/share/dpkg/pkg-info.mk
 
 export DEB_CPPFLAGS_MAINT_APPEND=-DFFMPEG_MUX_FIXED=\"/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux\"
-export DEB_CFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3 -fvisibility=hidden
-export DEB_CXXFLAGS_MAINT_APPEND+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3 -fvisibility=hidden
+deb_cflags+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3 -fvisibility=hidden
 
 confflags  = -DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH)
 confflags += -DUNIX_STRUCTURE=TRUE
@@ -25,9 +24,10 @@ endif
 
 ifeq ($(DEB_HOST_ARCH_CPU), i386)
 confflags += -DENABLE_SIMD=OFF
-DEB_CFLAGS_MAINT_APPEND+=-Wno-error=psabi
-DEB_CPPFLAGS_MAINT_APPEND+=-Wno-error=psabi
+deb_cflags+=-Wno-error=psabi
 endif
+DEB_CFLAGS_MAINT_APPEND+=$(deb_cflags)
+DEB_CPPFLAGS_MAINT_APPEND+=$(deb_cflags)
 
 
 %:
