@@ -1578,6 +1578,7 @@ Files: AUTHORS
  plugins/linux-pipewire/data/locale/gl-ES.ini
  plugins/linux-pipewire/data/locale/he-IL.ini
  plugins/linux-pipewire/data/locale/hi-IN.ini
+ plugins/linux-pipewire/data/locale/hr-HR.ini
  plugins/linux-pipewire/data/locale/hu-HU.ini
  plugins/linux-pipewire/data/locale/hy-AM.ini
  plugins/linux-pipewire/data/locale/id-ID.ini
@@ -1587,6 +1588,7 @@ Files: AUTHORS
  plugins/linux-pipewire/data/locale/kmr-TR.ini
  plugins/linux-pipewire/data/locale/ko-KR.ini
  plugins/linux-pipewire/data/locale/ms-MY.ini
+ plugins/linux-pipewire/data/locale/nb-NO.ini
  plugins/linux-pipewire/data/locale/nl-NL.ini
  plugins/linux-pipewire/data/locale/pl-PL.ini
  plugins/linux-pipewire/data/locale/pt-BR.ini
@@ -1670,6 +1672,7 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/ar-SA.ini
  plugins/linux-v4l2/data/locale/az-AZ.ini
  plugins/linux-v4l2/data/locale/ba-RU.ini
+ plugins/linux-v4l2/data/locale/be-BY.ini
  plugins/linux-v4l2/data/locale/bg-BG.ini
  plugins/linux-v4l2/data/locale/bn-BD.ini
  plugins/linux-v4l2/data/locale/ca-ES.ini
@@ -1934,6 +1937,7 @@ Files: AUTHORS
  plugins/obs-filters/scroll-filter.c
  plugins/obs-filters/sharpness-filter.c
  plugins/obs-libfdk/CMakeLists.txt
+ plugins/obs-libfdk/data/locale/af-ZA.ini
  plugins/obs-libfdk/data/locale/ar-SA.ini
  plugins/obs-libfdk/data/locale/ba-RU.ini
  plugins/obs-libfdk/data/locale/be-BY.ini
@@ -2268,10 +2272,12 @@ Files: AUTHORS
  plugins/obs-webrtc/data/locale/ca-ES.ini
  plugins/obs-webrtc/data/locale/cs-CZ.ini
  plugins/obs-webrtc/data/locale/de-DE.ini
+ plugins/obs-webrtc/data/locale/el-GR.ini
  plugins/obs-webrtc/data/locale/en-GB.ini
  plugins/obs-webrtc/data/locale/en-US.ini
  plugins/obs-webrtc/data/locale/es-ES.ini
  plugins/obs-webrtc/data/locale/et-EE.ini
+ plugins/obs-webrtc/data/locale/fa-IR.ini
  plugins/obs-webrtc/data/locale/fi-FI.ini
  plugins/obs-webrtc/data/locale/fr-FR.ini
  plugins/obs-webrtc/data/locale/he-IL.ini
@@ -2284,6 +2290,8 @@ Files: AUTHORS
  plugins/obs-webrtc/data/locale/ja-JP.ini
  plugins/obs-webrtc/data/locale/ka-GE.ini
  plugins/obs-webrtc/data/locale/ko-KR.ini
+ plugins/obs-webrtc/data/locale/ms-MY.ini
+ plugins/obs-webrtc/data/locale/nb-NO.ini
  plugins/obs-webrtc/data/locale/nl-NL.ini
  plugins/obs-webrtc/data/locale/pl-PL.ini
  plugins/obs-webrtc/data/locale/pt-BR.ini
@@ -2569,6 +2577,7 @@ Files: AUTHORS
  plugins/text-freetype2/data/locale/af-ZA.ini
  plugins/text-freetype2/data/locale/ar-SA.ini
  plugins/text-freetype2/data/locale/ba-RU.ini
+ plugins/text-freetype2/data/locale/be-BY.ini
  plugins/text-freetype2/data/locale/bg-BG.ini
  plugins/text-freetype2/data/locale/bn-BD.ini
  plugins/text-freetype2/data/locale/ca-ES.ini
