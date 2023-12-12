@@ -17,6 +17,7 @@ confflags += -DENABLE_SNDIO=OFF
 confflags += -DENABLE_JACK=TRUE
 confflags += -DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION))
 confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d')
+confflags += -DENABLE_WEBRTC=OFF
 
 ifeq (ppc64el,$(DEB_HOST_ARCH))
 confflags += -DENABLE_SCRIPTING_LUA=OFF
