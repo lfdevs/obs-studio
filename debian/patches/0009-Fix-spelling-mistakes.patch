@@ -90,7 +90,7 @@ Last-Update: 2022-09-20
  
 --- obs-studio.orig/websocket/src/websocketserver/WebSocketServer.cpp
 +++ obs-studio/websocket/src/websocketserver/WebSocketServer.cpp
-@@ -85,7 +85,7 @@
+@@ -92,7 +92,7 @@
  
  	auto conf = GetConfig();
  	if (!conf) {
@@ -99,7 +99,7 @@ Last-Update: 2022-09-20
  		return;
  	}
  
-@@ -234,7 +234,7 @@
+@@ -241,7 +241,7 @@
  
  	auto conf = GetConfig();
  	if (!conf) {
@@ -108,7 +108,7 @@ Last-Update: 2022-09-20
  		return;
  	}
  
-@@ -344,7 +344,7 @@
+@@ -351,7 +351,7 @@
  	// Get config for tray notification
  	auto conf = GetConfig();
  	if (!conf) {
