@@ -45,6 +45,9 @@ execute_before_dh_auto_configure:
 override_dh_auto_configure:
 	dh_auto_configure -- $(confflags)
 
+execute_before_dh_auto_build:
+	@echo 'blhc: ignore-line-regexp: .* -c /usr/share/cmake-[0-9.]*/Modules/CMakeCXXCompilerABI\.cpp .*'
+
 execute_after_dh_auto_build:
 	rst2man debian/obs.rst > debian/obs.1
 
