@@ -13,7 +13,7 @@ obs-studio (30.0.2+dfsg-1) UNRELEASED; urgency=medium
     + Ensure that testsuite sees the local libraries
     + Mark test-files as not-installed
   * Switch buildsystem to Ninja
-  * Dont't treat deprecated-declarations as errors
+  * Don't treat deprecated-declarations as errors
     (Closes: #1057587)
   * Update symbols file for libobs0
     + Add new symbols
