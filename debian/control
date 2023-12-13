@@ -10,7 +10,7 @@ Build-Depends:
  cmake,
  debhelper-compat (= 13),
  dh-sequence-python3,
- dh-sequence-scour:native,
+ dh-sequence-scour,
  gir1.2-rsvg-2.0,
  libasio-dev,
  libasound2-dev,
