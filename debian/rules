@@ -10,17 +10,17 @@ deb_cflags+=-Wno-error=deprecated-declarations
 confflags  =
 #confflags += -G Ninja
 confflags += -DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH)
+confflags += -DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION))
+confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d')
 confflags += -DUNIX_STRUCTURE=TRUE
 confflags += -DCMAKE_SKIP_RPATH=TRUE
 confflags += -DDISABLE_UPDATE_MODULE=TRUE
-confflags += -DBUILD_VST=OFF
 confflags += -DENABLE_AJA=OFF
-confflags += -DENABLE_SNDIO=OFF
 confflags += -DENABLE_JACK=TRUE
 confflags += -DENABLE_PIPEWIRE=TRUE
+confflags += -DENABLE_SNDIO=OFF
+confflags += -DENABLE_VST=OFF
 confflags += -DENABLE_WEBRTC=OFF
-confflags += -DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION))
-confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d')
 
 ifeq (ppc64el,$(DEB_HOST_ARCH))
 confflags += -DENABLE_SCRIPTING_LUA=OFF
