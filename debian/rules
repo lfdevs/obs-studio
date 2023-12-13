@@ -10,7 +10,7 @@ deb_cflags+=-DSIMDE_ENABLE_OPENMP -fopenmp-simd -O3 -fvisibility=hidden
 deb_cflags+=-Wno-error=deprecated-declarations
 
 confflags  =
-#confflags += -G Ninja
+confflags += -G Ninja
 confflags += -DOBS_MULTIARCH_SUFFIX=/$(DEB_HOST_MULTIARCH)
 confflags += -DOBS_VERSION_OVERRIDE=$(subst +dfsg,.1,$(DEB_VERSION))
 confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EPOCH} +'%Y-%m-%d')
