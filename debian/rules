@@ -15,6 +15,7 @@ confflags += -DAPPDATA_RELEASE_DATE=$(shell date --utc --date=@$${SOURCE_DATE_EP
 confflags += -DUNIX_STRUCTURE=TRUE
 confflags += -DCMAKE_SKIP_RPATH=TRUE
 confflags += -DDISABLE_UPDATE_MODULE=TRUE
+confflags += -DBUILD_TESTS=TRUE -DENABLE_UNIT_TESTS=TRUE
 confflags += -DENABLE_AJA=FALSE
 confflags += -DENABLE_JACK=TRUE
 confflags += -DENABLE_PIPEWIRE=TRUE
