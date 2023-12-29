@@ -1,6 +1,14 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 legacy_check()
+
+# cmake-format: off
+add_library(libobs-version STATIC EXCLUDE_FROM_ALL)
+add_library(OBS::libobs-version ALIAS libobs-version)
+# cmake-format: on
+configure_file(obsversion.c.in obsversion.c @ONLY)
+target_sources(libobs-version PRIVATE obsversion.c obsversion.h)
+set_property(TARGET libobs-version PROPERTY FOLDER core)
 
 add_library(libobs SHARED)
 add_library(OBS::libobs ALIAS libobs)
@@ -214,18 +222,18 @@ target_sources(
           graphics/vec4.c
           graphics/vec4.h)
 
-target_compile_features(libobs PUBLIC $<INSTALL_INTERFACE:cxx_std_17>)
-target_compile_options(libobs PUBLIC ${ARCH_SIMD_FLAGS})
+target_compile_features(libobs PUBLIC cxx_std_17)
 target_compile_definitions(
   libobs
   PRIVATE IS_LIBOBS
-  PUBLIC ${ARCH_SIMD_DEFINES} $<BUILD_INTERFACE:$<$<BOOL:${ENABLE_HEVC}>:ENABLE_HEVC>>
+  PUBLIC $<BUILD_INTERFACE:$<$<BOOL:${ENABLE_HEVC}>:ENABLE_HEVC>>
          $<BUILD_INTERFACE:$<$<BOOL:${ENABLE_FFMPEG_MUX_DEBUG}>:SHOW_SUBPROCESSES>>)
 
 target_link_libraries(
   libobs
   PRIVATE OBS::caption
           OBS::uthash
+          OBS::libobs-version
           FFmpeg::avcodec
           FFmpeg::avformat
           FFmpeg::avutil
@@ -253,20 +261,40 @@ target_compile_definitions(libobs PUBLIC HAVE_OBSCONFIG_H)
 set(public_headers
     # cmake-format: sortable
     callback/calldata.h
+    callback/decl.h
     callback/proc.h
     callback/signal.h
+    graphics/axisang.h
+    graphics/bounds.h
+    graphics/effect-parser.h
+    graphics/effect.h
     graphics/graphics.h
+    graphics/image-file.h
     graphics/input.h
+    graphics/libnsgif/libnsgif.h
     graphics/math-defs.h
+    graphics/math-extra.h
+    graphics/matrix3.h
+    graphics/matrix4.h
+    graphics/plane.h
+    graphics/quat.h
+    graphics/shader-parser.h
     graphics/srgb.h
     graphics/vec2.h
     graphics/vec3.h
     graphics/vec4.h
     media-io/audio-io.h
+    media-io/audio-math.h
+    media-io/audio-resampler.h
+    media-io/format-conversion.h
     media-io/frame-rate.h
     media-io/media-io-defs.h
+    media-io/media-remux.h
+    media-io/video-frame.h
     media-io/video-io.h
+    media-io/video-scaler.h
     obs-audio-controls.h
+    obs-avc.h
     obs-config.h
     obs-data.h
     obs-defs.h
@@ -274,9 +302,10 @@ set(public_headers
     obs-hotkey.h
     obs-hotkeys.h
     obs-interaction.h
-    obs-internal.h
     obs-missing-files.h
     obs-module.h
+    obs-nal.h
+    obs-nix-platform.h
     obs-output.h
     obs-properties.h
     obs-service.h
@@ -284,48 +313,73 @@ set(public_headers
     obs-ui.h
     obs.h
     obs.hpp
+    util/AlignedNew.hpp
+    util/apple/cfstring-utils.h
+    util/array-serializer.h
     util/base.h
+    util/bitstream.h
     util/bmem.h
     util/c99defs.h
+    util/cf-lexer.h
+    util/cf-parser.h
+    util/circlebuf.h
+    util/config-file.h
+    util/crc32.h
     util/darray.h
+    util/dstr.h
+    util/dstr.hpp
+    util/file-serializer.h
+    util/lexer.h
+    util/pipe.h
+    util/platform.h
     util/profiler.h
+    util/profiler.hpp
+    util/serializer.h
+    util/simde/check.h
+    util/simde/debug-trap.h
+    util/simde/hedley.h
+    util/simde/simde-align.h
+    util/simde/simde-arch.h
+    util/simde/simde-common.h
+    util/simde/simde-constify.h
+    util/simde/simde-detect-clang.h
+    util/simde/simde-diagnostic.h
+    util/simde/simde-features.h
+    util/simde/simde-math.h
+    util/simde/x86/mmx.h
+    util/simde/x86/sse.h
+    util/simde/x86/sse2.h
     util/sse-intrin.h
+    util/task.h
     util/text-lookup.h
-    util/util_uint64.h)
+    util/threading-posix.h
+    util/threading-windows.h
+    util/threading.h
+    util/uthash.h
+    util/util.hpp
+    util/util_uint128.h
+    util/util_uint64.h
+    util/windows/ComPtr.hpp
+    util/windows/CoTaskMemPtr.hpp
+    util/windows/device-enum.h
+    util/windows/HRError.hpp
+    util/windows/win-registry.h
+    util/windows/win-version.h
+    util/windows/window-helpers.h
+    util/windows/WinHandle.hpp)
 
 if(ENABLE_HEVC)
   list(APPEND public_headers obs-hevc.h)
 endif()
 
-if(ARCH_SIMD_FLAGS)
-  set(public_headers
-      # cmake-format: sortable
-      ${public_headers}
-      util/simde/check.h
-      util/simde/debug-trap.h
-      util/simde/hedley.h
-      util/simde/simde-align.h
-      util/simde/simde-arch.h
-      util/simde/simde-common.h
-      util/simde/simde-constify.h
-      util/simde/simde-detect-clang.h
-      util/simde/simde-diagnostic.h
-      util/simde/simde-features.h
-      util/simde/simde-math.h
-      util/simde/x86/mmx.h
-      util/simde/x86/sse.h
-      util/simde/x86/sse2.h)
-endif()
-
-set_property(
-  TARGET libobs
-  APPEND
-  PROPERTY OBS_PUBLIC_HEADERS ${public_headers})
+# cmake-format: off
+set_property(TARGET libobs APPEND PROPERTY OBS_PUBLIC_HEADERS ${public_headers})
 
 set_target_properties_obs(
   libobs
   PROPERTIES FOLDER core
              VERSION 0
              SOVERSION "${OBS_VERSION_MAJOR}")
+# cmake-format: on
 
 target_export(libobs)

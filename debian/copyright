@@ -17,7 +17,7 @@ Files-Excluded:
  */.git*
 
 Files: *
-Copyright: 2013-2023, Hugh Bailey <obs.jim@gmail.com>
+Copyright: 2013-2023, Lain Bailey <lain@obsproject.com>
            2017, Joel Bethke <joel.bethke@gmail.com>
            2015, Andrew Skinner <obs@theandyroid.com>
            2014, Leonhard Oelke <leonhard@in-verted.de>
@@ -27,7 +27,6 @@ Copyright: 2013-2023, Hugh Bailey <obs.jim@gmail.com>
 License: GPL-2+
 
 Files: deps/ipc-util/ipc-util/*
-       deps/libff/*
        deps/media-playback/media-playback/*
        libobs/callback/*
        libobs/data/deinterlace_base.effect
@@ -47,7 +46,7 @@ Copyright: 2007, Alexey Vatchenko <av@bsdua.org>
            1986, Gary S. Brown
            2013-2017, Hugh Bailey <obs.jim@gmail.com>
            2015, John R. Bradley <jrb@turrettech.com>
-           2013-2016, Ruwen Hahn <palana@stunned.de>
+           2013-2023, Ruwen Hahn <palana@stunned.de>
            2017, Ryan Foster <RytoEX@gmail.com>
 License: ISC
 
@@ -63,7 +62,7 @@ License: BSD-2-Clause-Views
 Files: websocket/*
 Copyright: 2016-2021, Stephane Lepin <stephane.lepin@gmail.com>
   2014, Leonhard Oelke <leonhard@in-verted.de>
-  2020-2022, Kyle Manning <tt2468@gmail.com>
+  2020-2023, Kyle Manning <tt2468@gmail.com>
 License: GPL-2+
 
 Files: deps/uthash/uthash/*
@@ -75,8 +74,22 @@ Copyright: 2023, Richard Stanway
 License: GPL-2+
 
 Files: libobs/util/uthash.h
+ UI/ffmpeg-utils.?pp
 Copyright: 2023, Dennis Sädtler <dennis@obsproject.com>
 License: GPL-2+
+
+Files: libobs/graphics/libnsgif/*
+Copyright: 2003, James Bursa <bursa@users.sourceforge.net>
+  2004, John Tytgat <John.Tytgat@aaug.net>
+  2004, Richard Wilson <richard.wilson@netsurf-browser.org>
+  2008, Sean Fox <dyntryx@gmail.com>
+License: Expat
+
+Files: UI/update/models/branches.hpp
+ UI/update/models/whatsnew.hpp
+ UI/win-update/updater/manifest.hpp
+Copyright: 2023, Dennis Sädtler <dennis@obsproject.com>
+License: ISC
 
 Files: cmake/Modules/FindJack.cmake
        cmake/Modules/FindX11_XCB.cmake
@@ -134,6 +147,10 @@ Files: plugins/decklink/linux/decklink-sdk/*
        plugins/decklink/win/decklink-sdk/*
 Copyright: 2009-2016, Blackmagic Design
 License: BSL
+
+Files: deps/happy-eyeballs/*
+Copyright: 2023, Twitch Interactive, Inc.
+License: Expat
 
 Files: plugins/obs-ffmpeg/vaapi-utils.*
 Copyright: 2022, tytan652 <tytan652@tytanium.xyz>

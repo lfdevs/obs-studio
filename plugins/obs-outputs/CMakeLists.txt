@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 legacy_check()
 
@@ -44,7 +44,11 @@ target_sources(
           "$<$<BOOL:${ENABLE_HEVC}>:rtmp-hevc.c>"
           "$<$<BOOL:${ENABLE_HEVC}>:rtmp-hevc.h>")
 
-target_link_libraries(obs-outputs PRIVATE OBS::libobs MbedTLS::MbedTLS ZLIB::ZLIB)
+if(NOT TARGET happy-eyeballs)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/deps/happy-eyeballs" "${CMAKE_BINARY_DIR}/deps/happy-eyeballs")
+endif()
+
+target_link_libraries(obs-outputs PRIVATE OBS::libobs OBS::happy-eyeballs MbedTLS::MbedTLS ZLIB::ZLIB)
 
 target_compile_definitions(obs-outputs PRIVATE USE_MBEDTLS CRYPTO)
 
@@ -56,11 +60,13 @@ if(OS_WINDOWS)
 
   target_sources(obs-outputs PRIVATE obs-outputs.rc)
 elseif(OS_MACOS)
-  find_library(FOUNDATION_FRAMEWORK Foundation)
-  find_library(SECURITY_FRAMEWORK Security)
-  mark_as_advanced(FOUNDATION_FRAMEWORK SECURITY_FRAMEWORK)
-
-  target_link_libraries(obs-outputs PRIVATE ${FOUNDATION_FRAMEWORK} ${SECURITY_FRAMEWORK})
+  target_compile_options(obs-outputs PRIVATE -Wno-comma)
+  # cmake-format: off
+  target_link_libraries(
+    obs-outputs
+    PRIVATE "$<LINK_LIBRARY:FRAMEWORK,Foundation.framework>"
+            "$<LINK_LIBRARY:FRAMEWORK,Security.framework>")
+  # cmake-format: on
 endif()
 
 include(cmake/ftl.cmake)

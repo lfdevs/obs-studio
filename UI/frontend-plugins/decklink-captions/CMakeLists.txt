@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 legacy_check()
 
@@ -24,9 +24,8 @@ if(OS_WINDOWS)
     APPEND
     PROPERTY AUTORCC_OPTIONS --format-version 1)
 elseif(OS_MACOS)
-  find_library(COCOA Cocoa)
-  mark_as_advanced(COCOA)
-  target_link_libraries(decklink-captions PRIVATE ${COCOA})
+  target_compile_options(decklink-captions PRIVATE -Wno-quoted-include-in-framework-header -Wno-comma)
+  target_link_libraries(decklink-captions PRIVATE "$<LINK_LIBRARY:FRAMEWORK,Cocoa.framework>")
 elseif(OS_LINUX OR OS_FREEBSD)
   find_package(X11 REQUIRED)
   mark_as_advanced(X11)

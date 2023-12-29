@@ -1,5 +1,5 @@
 /******************************************************************************
-    Copyright (C) 2013-2014 by Hugh Bailey <obs.jim@gmail.com>
+    Copyright (C) 2023 by Lain Bailey <lain@obsproject.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -787,6 +787,7 @@ static void set_gpu_converted_data(struct video_frame *output,
 	case VIDEO_FORMAT_YA2L:
 	case VIDEO_FORMAT_AYUV:
 	case VIDEO_FORMAT_V210:
+	case VIDEO_FORMAT_R10L:
 		/* unimplemented */
 		;
 	}

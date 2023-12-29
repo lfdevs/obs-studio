@@ -167,8 +167,11 @@ static void OBSStopVirtualCam(void *data, calldata_t *params)
 	os_atomic_set_bool(&virtualcam_active, false);
 	QMetaObject::invokeMethod(output->main, "OnVirtualCamStop",
 				  Q_ARG(int, code));
+}
 
-	obs_output_set_media(output->virtualCam, nullptr, nullptr);
+static void OBSDeactivateVirtualCam(void *data, calldata_t * /* params */)
+{
+	BasicOutputHandler *output = static_cast<BasicOutputHandler *>(data);
 	output->DestroyVirtualCamView();
 }
 
@@ -293,21 +296,29 @@ inline BasicOutputHandler::BasicOutputHandler(OBSBasic *main_) : main(main_)
 		startVirtualCam.Connect(signal, "start", OBSStartVirtualCam,
 					this);
 		stopVirtualCam.Connect(signal, "stop", OBSStopVirtualCam, this);
+		deactivateVirtualCam.Connect(signal, "deactivate",
+					     OBSDeactivateVirtualCam, this);
 	}
 }
+
+extern void log_vcam_changed(const VCamConfig &config, bool starting);
 
 bool BasicOutputHandler::StartVirtualCam()
 {
 	if (!main->vcamEnabled)
 		return false;
 
-	if (!virtualCamView)
+	bool typeIsProgram = main->vcamConfig.type ==
+			     VCamOutputType::ProgramView;
+
+	if (!virtualCamView && !typeIsProgram)
 		virtualCamView = obs_view_create();
 
 	UpdateVirtualCamOutputSource();
 
 	if (!virtualCamVideo) {
-		virtualCamVideo = obs_view_add(virtualCamView);
+		virtualCamVideo = typeIsProgram ? obs_get_video()
+						: obs_view_add(virtualCamView);
 
 		if (!virtualCamVideo)
 			return false;
@@ -318,8 +329,24 @@ bool BasicOutputHandler::StartVirtualCam()
 		SetupOutputs();
 
 	bool success = obs_output_start(virtualCam);
-	if (!success)
+	if (!success) {
+		QString errorReason;
+
+		const char *error = obs_output_get_last_error(virtualCam);
+		if (error) {
+			errorReason = QT_UTF8(error);
+		} else {
+			errorReason = QTStr("Output.StartFailedGeneric");
+		}
+
+		QMessageBox::critical(main,
+				      QTStr("Output.StartVirtualCamFailed"),
+				      errorReason);
+
 		DestroyVirtualCamView();
+	}
+
+	log_vcam_changed(main->vcamConfig, true);
 
 	return success;
 }
@@ -347,19 +374,17 @@ void BasicOutputHandler::UpdateVirtualCamOutputSource()
 	OBSSourceAutoRelease source;
 
 	switch (main->vcamConfig.type) {
-	case VCamOutputType::InternalOutput:
+	case VCamOutputType::Invalid:
+	case VCamOutputType::ProgramView:
 		DestroyVirtualCameraScene();
-		switch (main->vcamConfig.internal) {
-		case VCamInternalType::Default:
-			source = obs_get_output_source(0);
-			break;
-		case VCamInternalType::Preview:
-			OBSSource s = main->GetCurrentSceneSource();
-			obs_source_get_ref(s);
-			source = s.Get();
-			break;
-		}
+		return;
+	case VCamOutputType::PreviewOutput: {
+		DestroyVirtualCameraScene();
+		OBSSource s = main->GetCurrentSceneSource();
+		obs_source_get_ref(s);
+		source = s.Get();
 		break;
+	}
 	case VCamOutputType::SceneOutput:
 		DestroyVirtualCameraScene();
 		source = obs_get_source_by_name(main->vcamConfig.scene.c_str());
@@ -404,6 +429,11 @@ void BasicOutputHandler::UpdateVirtualCamOutputSource()
 
 void BasicOutputHandler::DestroyVirtualCamView()
 {
+	if (main->vcamConfig.type == VCamOutputType::ProgramView) {
+		virtualCamVideo = nullptr;
+		return;
+	}
+
 	obs_view_remove(virtualCamView);
 	obs_view_set_source(virtualCamView, 0, nullptr);
 	virtualCamVideo = nullptr;
@@ -796,6 +826,7 @@ void SimpleOutput::Update()
 					   audioSettings);
 
 	if (!enforceBitrate) {
+		blog(LOG_INFO, "User is ignoring service bitrate limits.");
 		obs_data_set_int(videoSettings, "bitrate", videoBitrate);
 		obs_data_set_int(audioSettings, "bitrate", audioBitrate);
 	}
@@ -988,6 +1019,9 @@ void SimpleOutput::UpdateRecordingSettings()
 		UpdateRecordingSettings_amd_cqp(crf);
 #endif
 
+	} else if (videoEncoder == SIMPLE_ENCODER_AMD_AV1) {
+		UpdateRecordingSettings_amd_cqp(crf);
+
 	} else if (videoEncoder == SIMPLE_ENCODER_NVENC) {
 		UpdateRecordingSettings_nvenc(crf);
 
@@ -1172,6 +1206,8 @@ bool SimpleOutput::StartStreaming(obs_service_t *service)
 		config_get_bool(main->Config(), "Output", "DelayPreserve");
 	const char *bindIP =
 		config_get_string(main->Config(), "Output", "BindIP");
+	const char *ipFamily =
+		config_get_string(main->Config(), "Output", "IPFamily");
 #ifdef _WIN32
 	bool enableNewSocketLoop = config_get_bool(main->Config(), "Output",
 						   "NewSocketLoopEnable");
@@ -1183,6 +1219,7 @@ bool SimpleOutput::StartStreaming(obs_service_t *service)
 
 	OBSDataAutoRelease settings = obs_data_create();
 	obs_data_set_string(settings, "bind_ip", bindIP);
+	obs_data_set_string(settings, "ip_family", ipFamily);
 #ifdef _WIN32
 	obs_data_set_bool(settings, "new_socket_loop_enabled",
 			  enableNewSocketLoop);
@@ -1304,6 +1341,7 @@ bool SimpleOutput::ConfigureRecording(bool updateReplayBuffer)
 		config_get_int(main->Config(), "SimpleOutput", "RecTracks");
 
 	bool is_fragmented = strncmp(format, "fragmented", 10) == 0;
+	bool is_lossless = videoQuality == "Lossless";
 
 	string f;
 
@@ -1330,7 +1368,8 @@ bool SimpleOutput::ConfigureRecording(bool updateReplayBuffer)
 	}
 
 	// Use fragmented MOV/MP4 if user has not already specified custom movflags
-	if (is_fragmented && (!mux || strstr(mux, "movflags") == NULL)) {
+	if (is_fragmented && !is_lossless &&
+	    (!mux || strstr(mux, "movflags") == NULL)) {
 		string mux_frag =
 			"movflags=frag_keyframe+empty_moov+delay_moov";
 		if (mux) {
@@ -1340,7 +1379,7 @@ bool SimpleOutput::ConfigureRecording(bool updateReplayBuffer)
 		obs_data_set_string(settings, "muxer_settings",
 				    mux_frag.c_str());
 	} else {
-		if (is_fragmented)
+		if (is_fragmented && !is_lossless)
 			blog(LOG_WARNING,
 			     "User enabled fragmented recording, "
 			     "but custom muxer settings contained movflags.");
@@ -1683,13 +1722,18 @@ void AdvancedOutput::UpdateStreamSettings()
 		int keyint_sec = (int)obs_data_get_int(settings, "keyint_sec");
 		obs_service_apply_encoder_settings(main->GetService(), settings,
 						   nullptr);
-		if (!enforceBitrate)
+		if (!enforceBitrate) {
+			blog(LOG_INFO,
+			     "User is ignoring service bitrate limits.");
 			obs_data_set_int(settings, "bitrate", bitrate);
+		}
 
 		int enforced_keyint_sec =
 			(int)obs_data_get_int(settings, "keyint_sec");
 		if (keyint_sec != 0 && keyint_sec < enforced_keyint_sec)
 			obs_data_set_int(settings, "keyint_sec", keyint_sec);
+	} else {
+		blog(LOG_WARNING, "User is ignoring service settings.");
 	}
 
 	if (dynBitrate && astrcmpi(streamEncoder, "jim_nvenc") == 0)
@@ -2122,6 +2166,8 @@ bool AdvancedOutput::StartStreaming(obs_service_t *service)
 		config_get_bool(main->Config(), "Output", "DelayPreserve");
 	const char *bindIP =
 		config_get_string(main->Config(), "Output", "BindIP");
+	const char *ipFamily =
+		config_get_string(main->Config(), "Output", "IPFamily");
 #ifdef _WIN32
 	bool enableNewSocketLoop = config_get_bool(main->Config(), "Output",
 						   "NewSocketLoopEnable");
@@ -2133,6 +2179,7 @@ bool AdvancedOutput::StartStreaming(obs_service_t *service)
 
 	OBSDataAutoRelease settings = obs_data_create();
 	obs_data_set_string(settings, "bind_ip", bindIP);
+	obs_data_set_string(settings, "ip_family", ipFamily);
 #ifdef _WIN32
 	obs_data_set_bool(settings, "new_socket_loop_enabled",
 			  enableNewSocketLoop);

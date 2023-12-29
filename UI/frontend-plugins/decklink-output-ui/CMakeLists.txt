@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 legacy_check()
 
@@ -51,6 +51,7 @@ elseif(OS_MACOS)
   mark_as_advanced(COCOA)
 
   target_link_libraries(decklink-output-ui PRIVATE ${COCOA})
+  target_compile_options(decklink-output-ui PRIVATE -Wno-quoted-include-in-framework-header)
 elseif(OS_LINUX OR OS_FREEBSD)
   find_package(X11 REQUIRED)
   target_link_libraries(decklink-output-ui PRIVATE X11::X11 Qt::GuiPrivate)

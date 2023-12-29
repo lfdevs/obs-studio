@@ -6,11 +6,9 @@ Subject: Do not build unused blake2 dependency
  deps/CMakeLists.txt | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
-index 9e92bb1..992a51d 100644
---- a/deps/CMakeLists.txt
-+++ b/deps/CMakeLists.txt
-@@ -9,7 +9,6 @@ if(OS_WINDOWS)
+--- obs-studio.orig/deps/CMakeLists.txt
++++ obs-studio/deps/CMakeLists.txt
+@@ -5,7 +5,6 @@
    add_subdirectory(ipc-util)
  endif()
  

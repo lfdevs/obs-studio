@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 legacy_check()
 
@@ -51,7 +51,7 @@ if(OS_WINDOWS)
 elseif(OS_MACOS)
   get_target_property(_python_include_directory Python::Python INTERFACE_INCLUDE_DIRECTORIES)
   target_include_directories(obspython PRIVATE ${_python_include_directory})
-  target_compile_options(obspython PRIVATE -Wno-unused-parameter -Wno-error=macro-redefined)
+  target_compile_options(obspython PRIVATE -Wno-unused-parameter -Wno-macro-redefined -Wno-unreachable-code)
   target_link_options(obspython PUBLIC LINKER:-undefined,dynamic_lookup)
 
   set_property(TARGET obspython PROPERTY XCODE_ATTRIBUTE_STRIP_STYLE non-global)

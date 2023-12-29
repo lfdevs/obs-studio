@@ -31,7 +31,7 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 #include "../utils/Platform.h"
 #include "../utils/Compat.h"
 
-WebSocketServer::WebSocketServer() : QObject(nullptr), _sessions()
+WebSocketServer::WebSocketServer() : QObject(nullptr)
 {
 	_server.get_alog().clear_channels(websocketpp::log::alevel::all);
 	_server.get_elog().clear_channels(websocketpp::log::elevel::all);
@@ -49,14 +49,21 @@ WebSocketServer::WebSocketServer() : QObject(nullptr), _sessions()
 							   websocketpp::lib::placeholders::_2));
 
 	auto eventHandler = GetEventHandler();
-	eventHandler->SetBroadcastCallback(std::bind(&WebSocketServer::BroadcastEvent, this, std::placeholders::_1,
-						     std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
-
-	eventHandler->SetObsLoadedCallback(std::bind(&WebSocketServer::onObsLoaded, this));
+	if (eventHandler) {
+		eventHandler->SetBroadcastCallback(std::bind(&WebSocketServer::BroadcastEvent, this, std::placeholders::_1,
+							     std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+		eventHandler->SetObsReadyCallback(std::bind(&WebSocketServer::onObsReady, this, std::placeholders::_1));
+	}
 }
 
 WebSocketServer::~WebSocketServer()
 {
+	auto eventHandler = GetEventHandler();
+	if (eventHandler) {
+		eventHandler->SetObsReadyCallback(nullptr);
+		eventHandler->SetBroadcastCallback(nullptr);
+	}
+
 	if (_server.is_listening())
 		Stop();
 }
@@ -113,6 +120,10 @@ void WebSocketServer::Start()
 	} else {
 		blog(LOG_INFO, "[WebSocketServer::Start] Not locked to IPv4 bindings");
 		_server.listen(conf->ServerPort, errorCode);
+		if (errorCode && errorCode == websocketpp::lib::asio::error::address_family_not_supported) {
+			blog(LOG_INFO, "[WebSocketServer::Start] IPv6 address family not supported, binding only to IPv4");
+			_server.listen(websocketpp::lib::asio::ip::tcp::v4(), conf->ServerPort, errorCode);
+		}
 	}
 
 	if (errorCode) {
@@ -158,9 +169,8 @@ void WebSocketServer::Stop()
 	_threadPool.waitForDone();
 
 	// This can delay the thread that it is running on. Bad but kinda required.
-	while (_sessions.size() > 0) {
+	while (_sessions.size() > 0)
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	}
 
 	_serverThread.join();
 
@@ -205,18 +215,9 @@ std::vector<WebSocketServer::WebSocketSessionState> WebSocketServer::GetWebSocke
 	return webSocketSessions;
 }
 
-void WebSocketServer::onObsLoaded()
+void WebSocketServer::onObsReady(bool ready)
 {
-	auto conf = GetConfig();
-	if (!conf) {
-		blog(LOG_ERROR, "[WebSocketServer::onObsLoaded] Unable to retreive config!");
-		return;
-	}
-
-	if (conf->ServerEnabled) {
-		blog(LOG_INFO, "[WebSocketServer::onObsLoaded] WebSocket server is enabled, starting...");
-		Start();
-	}
+	_obsReady = ready;
 }
 
 bool WebSocketServer::onValidate(websocketpp::connection_hdl hdl)
@@ -266,7 +267,7 @@ void WebSocketServer::onOpen(websocketpp::connection_hdl hdl)
 	json helloMessageData;
 	helloMessageData["obsWebSocketVersion"] = OBS_WEBSOCKET_VERSION;
 	helloMessageData["rpcVersion"] = OBS_WEBSOCKET_RPC_VERSION;
-	if (conf->AuthRequired) {
+	if (session->AuthenticationRequired()) {
 		session->SetSecret(_authenticationSecret);
 		std::string sessionChallenge = Utils::Crypto::GenerateSalt();
 		session->SetChallenge(sessionChallenge);

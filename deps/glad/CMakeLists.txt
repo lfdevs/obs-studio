@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.22...3.25)
 
 find_package(OpenGL REQUIRED)
 
@@ -17,6 +17,8 @@ target_link_libraries(obsglad PUBLIC OpenGL::GL)
 
 if(OS_WINDOWS)
   target_sources(obsglad PRIVATE src/glad_wgl.c include/glad/glad_wgl.h)
+elseif(OS_MACOS)
+  target_compile_options(obsglad PRIVATE -Wno-strict-prototypes)
 elseif(OS_LINUX OR OS_FREEBSD)
   if(TARGET OpenGL::EGL)
     target_sources(obsglad PRIVATE src/glad_egl.c include/EGL/eglplatform.h include/glad/glad_egl.h)

@@ -109,8 +109,6 @@ struct ftl_stream {
 	frame_of_nalus_t coded_pic_buffer;
 };
 
-static void log_libftl_messages(ftl_log_severity_t log_level,
-				const char *message);
 static int init_connect(struct ftl_stream *stream);
 static void *connect_thread(void *data);
 static void *status_thread(void *data);
@@ -120,12 +118,6 @@ static const char *ftl_stream_getname(void *unused)
 {
 	UNUSED_PARAMETER(unused);
 	return obs_module_text("FTLStream");
-}
-
-static void log_ftl(int level, const char *format, va_list args)
-{
-	blogva(LOG_INFO, format, args);
-	UNUSED_PARAMETER(level);
 }
 
 static inline size_t num_buffered_packets(struct ftl_stream *stream);
@@ -1012,13 +1004,6 @@ static void *connect_thread(void *data)
 	return NULL;
 }
 
-static void log_libftl_messages(ftl_log_severity_t log_level,
-				const char *message)
-{
-	UNUSED_PARAMETER(log_level);
-	blog(LOG_WARNING, "[libftl] %s", message);
-}
-
 static int init_connect(struct ftl_stream *stream)
 {
 	obs_service_t *service;
@@ -1074,7 +1059,7 @@ static int init_connect(struct ftl_stream *stream)
 	stream->params.audio_codec = FTL_AUDIO_OPUS;
 	stream->params.ingest_hostname = stream->path.array;
 	stream->params.vendor_name = "OBS Studio";
-	stream->params.vendor_version = OBS_VERSION;
+	stream->params.vendor_version = obs_get_version_string();
 	stream->params.peak_kbps = stream->peak_kbps < 0 ? 0
 							 : stream->peak_kbps;
 
