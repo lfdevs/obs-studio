@@ -1,3 +1,13 @@
+obs-studio (30.0.2+dfsg-2) unstable; urgency=medium
+
+  * d/rules: use $() for make variables
+    (Closes: #1059799)
+  * Add Unconditional B-D on luajit
+    (dropping support for ppc64el)
+    (Closes: #1051931)
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 09 Jan 2024 09:21:26 +0100
+
 obs-studio (30.0.2+dfsg-1) unstable; urgency=medium
 
   * New upstream version 30.0.2+dfsg
