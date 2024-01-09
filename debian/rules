@@ -25,10 +25,6 @@ confflags += -DENABLE_SNDIO=FALSE
 confflags += -DENABLE_VST=FALSE
 confflags += -DENABLE_WEBRTC=FALSE
 
-ifeq (ppc64el,$(DEB_HOST_ARCH))
-confflags += -DENABLE_SCRIPTING_LUA=FALSE
-endif
-
 ifeq ($(DEB_HOST_ARCH_CPU), i386)
 confflags += -DENABLE_SIMD=FALSE
 deb_cflags+=-Wno-error=psabi
