@@ -1,4 +1,4 @@
-libobs-frontend-api.so.0 libobs0 #MINVER#
+libobs-frontend-api.so.0 libobs0t64 #MINVER#
 * Build-Depends-Package: libobs-dev
  (c++|regex|optional)".*obs_frontend_set_callbacks_internal.*" 18.0.1
  (c++|regex|optional)".*obs_frontend_callbacks.*" 18.0.1
@@ -93,7 +93,7 @@ libobs-frontend-api.so.0 libobs0 #MINVER#
  obs_frontend_take_screenshot@Base 26.0.0
  obs_frontend_take_source_screenshot@Base 26.0.0
  obs_frontend_virtualcam_active@Base 27.0.1
-libobs-opengl.so.1 libobs0 #MINVER#
+libobs-opengl.so.1 libobs0t64 #MINVER#
 * Build-Depends-Package: libobs-dev
  device_begin_frame@Base 28.0.1
  device_begin_scene@Base 28.0.1
@@ -241,7 +241,7 @@ libobs-opengl.so.1 libobs0 #MINVER#
  gs_voltexture_get_height@Base 28.0.1
  gs_voltexture_get_width@Base 28.0.1
  gs_zstencil_destroy@Base 28.0.1
-libobs-scripting.so.1 libobs0 #MINVER#
+libobs-scripting.so.1 libobs0t64 #MINVER#
 * Build-Depends-Package: libobs-dev
  (c++|regex|optional=templinst)"^std::.*@Base" 28.0.1
  obs_script_create@Base 28.0.1
@@ -264,7 +264,7 @@ libobs-scripting.so.1 libobs0 #MINVER#
  obs_scripting_set_log_callback@Base 28.0.1
  obs_scripting_supported_formats@Base 28.0.1
  obs_scripting_unload@Base 28.0.1
-libobs.so.0 libobs0 #MINVER#
+libobs.so.0 libobs0t64 #MINVER#
 * Build-Depends-Package: libobs-dev
  array_output_serializer_free@Base 0.13.2
  array_output_serializer_init@Base 0.13.2
