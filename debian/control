@@ -6,7 +6,7 @@ Uploaders:
  Carl Fürstenberg <azatoth@gmail.com>,
  Sebastian Ramacher <sramacher@debian.org>,
  IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
-Build-Depends:
+Build-Depends: dpkg-dev (>= 1.22.5),
  cmake,
  debhelper-compat (= 13),
  dh-sequence-python3,
@@ -126,7 +126,10 @@ Description: recorder and streamer for live video content (plugins)
  This package contains some extra plugins (ALSA, JACK, PipeWire, DeckLink,
  VLC).
 
-Package: libobs0
+Package: libobs0t64
+Provides: ${t64:Provides}
+Replaces: libobs0
+Breaks: libobs0 (<< ${source:Version})
 Multi-Arch: same
 Section: libs
 Architecture: any
@@ -145,7 +148,7 @@ Package: libobs-dev
 Section: libdevel
 Architecture: any
 Depends:
- libobs0 (= ${binary:Version}),
+ libobs0t64 (= ${binary:Version}),
  libsimde-dev,
  libx11-dev,
  ${misc:Depends},
