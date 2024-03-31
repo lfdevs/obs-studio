@@ -1,3 +1,14 @@
+obs-studio (30.0.2+dfsg-3) unstable; urgency=medium
+
+  * Team upload.
+  * Fix build on 32bit time64_t archs. Thanks to Gianfranco Costamagna.
+    (Closes: #1067494)
+  * linux-v4l2: Save device by ID or path to make webcam ordering persistent
+    (to support having multiple in the system). Fixes upstream bug 3003.
+  * Add simple autopkgtest that just calls obs --help and --version
+
+ -- Benjamin Drung <bdrung@debian.org>  Sun, 31 Mar 2024 15:13:19 +0200
+
 obs-studio (30.0.2+dfsg-2.1) unstable; urgency=medium
 
   * Non-maintainer upload.
