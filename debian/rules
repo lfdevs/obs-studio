@@ -64,7 +64,7 @@ execute_after_dh_install:
 	rm -rf debian/obs-studio/usr/share/obs/obs-studio/license
 
 execute_before_dh_shlibdeps:
-	echo "libobs 0 libobs0 (= $(DEB_VERSION))" > debian/shlibs.local
+	echo "libobs 0 libobs0t64 (= $(DEB_VERSION))" > debian/shlibs.local
 
 override_dh_python3:
 	dh_python3 -p obs-studio usr/share/obs/obs-plugins/frontend-tools/scripts
