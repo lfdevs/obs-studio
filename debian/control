@@ -6,11 +6,12 @@ Uploaders:
  Carl Fürstenberg <azatoth@gmail.com>,
  Sebastian Ramacher <sramacher@debian.org>,
  IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
-Build-Depends: dpkg-dev (>= 1.22.5),
+Build-Depends:
  cmake,
  debhelper-compat (= 13),
  dh-sequence-python3,
  dh-sequence-scour,
+ dpkg-dev (>= 1.22.5),
  gir1.2-rsvg-2.0,
  libasio-dev,
  libasound2-dev,
@@ -127,9 +128,12 @@ Description: recorder and streamer for live video content (plugins)
  VLC).
 
 Package: libobs0t64
-Provides: ${t64:Provides}
-Replaces: libobs0
-Breaks: libobs0 (<< ${source:Version})
+Provides:
+ ${t64:Provides},
+Replaces:
+ libobs0,
+Breaks:
+ libobs0 (<< ${source:Version}),
 Multi-Arch: same
 Section: libs
 Architecture: any
