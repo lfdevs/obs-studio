@@ -13,3 +13,4 @@
 0013-Fix-comparision-if-char-is-unsigned.patch
 0014-disable-dropped-modules.patch
 Use-time64_t-everywhere.patch
+linux-v4l2-Save-device-by-id-or-path.patch
