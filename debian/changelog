@@ -2,13 +2,14 @@ obs-studio (30.1.2+dfsg-1) UNRELEASED; urgency=medium
 
   * New upstream version 30.1.2+dfsg
     + Refresh patches
-  * Fix unsigned char comparision patch (Closes: #1051418)
+  * Fix unsigned char comparison patch (Closes: #1051418)
+  * Update d/libobs0t64.symbols
   * Add missing entries to d/changelog for 30.0.2+dfsg-3 
   * Update d/copyright
     + Bump d/copyright dates
     + Re-generate d/copyright_hints
 
- -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Wed, 01 May 2024 22:35:06 +0200
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Thu, 02 May 2024 00:20:59 +0200
 
 obs-studio (30.0.2+dfsg-3) unstable; urgency=medium
 
