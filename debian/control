@@ -74,7 +74,7 @@ Build-Depends:
  qt6-base-private-dev,
  qt6-svg-dev,
  swig,
-Standards-Version: 4.6.2
+Standards-Version: 4.7.0
 Homepage: https://obsproject.com
 Vcs-Browser: https://salsa.debian.org/multimedia-team/obs-studio
 Vcs-Git: https://salsa.debian.org/multimedia-team/obs-studio.git
