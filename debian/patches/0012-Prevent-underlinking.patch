@@ -9,7 +9,7 @@ Subject: Prevent underlinking
 
 --- obs-studio.orig/libobs/CMakeLists.txt
 +++ obs-studio/libobs/CMakeLists.txt
-@@ -221,7 +221,9 @@
+@@ -239,7 +239,9 @@
            FFmpeg::avutil
            FFmpeg::swscale
            FFmpeg::swresample

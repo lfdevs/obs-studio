@@ -106,6 +106,7 @@ Files: AUTHORS
  UI/data/locale/it-IT.ini
  UI/data/locale/ja-JP.ini
  UI/data/locale/ka-GE.ini
+ UI/data/locale/kaa.ini
  UI/data/locale/kab-KAB.ini
  UI/data/locale/kmr-TR.ini
  UI/data/locale/ko-KR.ini
@@ -137,6 +138,7 @@ Files: AUTHORS
  UI/data/locale/th-TH.ini
  UI/data/locale/tl-PH.ini
  UI/data/locale/tr-TR.ini
+ UI/data/locale/ug-CN.ini
  UI/data/locale/uk-UA.ini
  UI/data/locale/ur-PK.ini
  UI/data/locale/vi-VN.ini
@@ -415,6 +417,7 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/data/locale/it-IT.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ja-JP.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ka-GE.ini
+ UI/frontend-plugins/aja-output-ui/data/locale/kaa.ini
  UI/frontend-plugins/aja-output-ui/data/locale/kmr-TR.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ko-KR.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ms-MY.ini
@@ -429,7 +432,9 @@ Files: AUTHORS
  UI/frontend-plugins/aja-output-ui/data/locale/sk-SK.ini
  UI/frontend-plugins/aja-output-ui/data/locale/sl-SI.ini
  UI/frontend-plugins/aja-output-ui/data/locale/sv-SE.ini
+ UI/frontend-plugins/aja-output-ui/data/locale/th-TH.ini
  UI/frontend-plugins/aja-output-ui/data/locale/tr-TR.ini
+ UI/frontend-plugins/aja-output-ui/data/locale/ug-CN.ini
  UI/frontend-plugins/aja-output-ui/data/locale/uk-UA.ini
  UI/frontend-plugins/aja-output-ui/data/locale/ur-PK.ini
  UI/frontend-plugins/aja-output-ui/data/locale/vi-VN.ini
@@ -501,6 +506,7 @@ Files: AUTHORS
  UI/frontend-plugins/frontend-tools/data/locale/it-IT.ini
  UI/frontend-plugins/frontend-tools/data/locale/ja-JP.ini
  UI/frontend-plugins/frontend-tools/data/locale/ka-GE.ini
+ UI/frontend-plugins/frontend-tools/data/locale/kaa.ini
  UI/frontend-plugins/frontend-tools/data/locale/kab-KAB.ini
  UI/frontend-plugins/frontend-tools/data/locale/kmr-TR.ini
  UI/frontend-plugins/frontend-tools/data/locale/ko-KR.ini
@@ -529,6 +535,7 @@ Files: AUTHORS
  UI/frontend-plugins/frontend-tools/data/locale/th-TH.ini
  UI/frontend-plugins/frontend-tools/data/locale/tl-PH.ini
  UI/frontend-plugins/frontend-tools/data/locale/tr-TR.ini
+ UI/frontend-plugins/frontend-tools/data/locale/ug-CN.ini
  UI/frontend-plugins/frontend-tools/data/locale/uk-UA.ini
  UI/frontend-plugins/frontend-tools/data/locale/vi-VN.ini
  UI/frontend-plugins/frontend-tools/data/locale/zh-CN.ini
@@ -553,8 +560,6 @@ Files: AUTHORS
  UI/horizontal-scroll-area.hpp
  UI/lineedit-autoresize.cpp
  UI/lineedit-autoresize.hpp
- UI/locked-checkbox.cpp
- UI/locked-checkbox.hpp
  UI/log-viewer.cpp
  UI/log-viewer.hpp
  UI/media-controls.cpp
@@ -621,8 +626,6 @@ Files: AUTHORS
  UI/url-push-button.hpp
  UI/vertical-scroll-area.cpp
  UI/vertical-scroll-area.hpp
- UI/visibility-checkbox.cpp
- UI/visibility-checkbox.hpp
  UI/visibility-item-widget.cpp
  UI/visibility-item-widget.hpp
  UI/volume-control.cpp
@@ -672,8 +675,8 @@ Files: AUTHORS
  UI/window-youtube-actions.cpp
  UI/window-youtube-actions.hpp
  UI/xdg-data/CMakeLists.txt
- UI/xdg-data/com.obsproject.Studio.appdata.xml.in
  UI/xdg-data/com.obsproject.Studio.desktop
+ UI/xdg-data/com.obsproject.Studio.metainfo.xml.in
  UI/xdg-data/icons/obs-logo-scalable.svg
  UI/youtube-api-wrappers.cpp
  UI/youtube-api-wrappers.hpp
@@ -704,10 +707,10 @@ Files: AUTHORS
  build-aux/modules/50-jansson.json
  build-aux/modules/50-libdatachannel.json
  build-aux/modules/50-libqrcodegencpp.json
+ build-aux/modules/50-libvpl.json
  build-aux/modules/50-ntv2.json
  build-aux/modules/50-onevpl-intel-gpu.json
- build-aux/modules/50-onevpl.json
- build-aux/modules/50-pipewire.json
+ build-aux/modules/50-pipewire.json.disabled
  build-aux/modules/50-rnnoise.json
  build-aux/modules/50-swig.json
  build-aux/modules/50-v4l-utils.json
@@ -715,6 +718,8 @@ Files: AUTHORS
  build-aux/modules/90-nlohmann-json.json
  build-aux/modules/90-websocketpp.json
  build-aux/modules/99-cef.json
+ build-aux/modules/patches/intel-media-sdk/010-intel-media-sdk-fix-reproducible-build.patch
+ build-aux/modules/patches/intel-media-sdk/020-intel-media-sdk-gcc13-fix.patch
  build-aux/steam/obs_build.vdf
  build-aux/steam/obs_playtest_build.vdf
  build-aux/steam/scripts_macos/launch.sh
@@ -776,6 +781,7 @@ Files: AUTHORS
  cmake/common/cpackconfig_common.cmake
  cmake/common/helpers_common.cmake
  cmake/common/osconfig.cmake
+ cmake/common/policies.cmake
  cmake/common/versionconfig.cmake
  cmake/finders/FindAMF.cmake
  cmake/finders/FindAsio.cmake
@@ -837,6 +843,7 @@ Files: AUTHORS
  deps/libcaption/src/dvtcc.c
  deps/media-playback/CMakeLists.txt
  deps/obs-scripting/CMakeLists.txt
+ deps/obs-scripting/cmake/cstrcache.cmake
  deps/obs-scripting/cmake/legacy.cmake
  deps/obs-scripting/cmake/lua.cmake
  deps/obs-scripting/cmake/python.cmake
@@ -969,6 +976,7 @@ Files: AUTHORS
  docs/sphinx/reference-libobs-util-circlebuf.rst
  docs/sphinx/reference-libobs-util-config-file.rst
  docs/sphinx/reference-libobs-util-darray.rst
+ docs/sphinx/reference-libobs-util-deque.rst
  docs/sphinx/reference-libobs-util-dstr.rst
  docs/sphinx/reference-libobs-util-platform.rst
  docs/sphinx/reference-libobs-util-profiler.rst
@@ -1015,6 +1023,7 @@ Files: AUTHORS
  libobs/cmake/legacy.cmake
  libobs/cmake/libobsConfig.cmake.in
  libobs/cmake/macos/entitlements.plist
+ libobs/cmake/obs-version.cmake
  libobs/cmake/os-freebsd.cmake
  libobs/cmake/os-linux.cmake
  libobs/cmake/os-macos.cmake
@@ -1087,6 +1096,7 @@ Files: AUTHORS
  plugins/aja/data/locale/ar-SA.ini
  plugins/aja/data/locale/be-BY.ini
  plugins/aja/data/locale/bg-BG.ini
+ plugins/aja/data/locale/bn-BD.ini
  plugins/aja/data/locale/ca-ES.ini
  plugins/aja/data/locale/cs-CZ.ini
  plugins/aja/data/locale/da-DK.ini
@@ -1111,6 +1121,7 @@ Files: AUTHORS
  plugins/aja/data/locale/it-IT.ini
  plugins/aja/data/locale/ja-JP.ini
  plugins/aja/data/locale/ka-GE.ini
+ plugins/aja/data/locale/kaa.ini
  plugins/aja/data/locale/kmr-TR.ini
  plugins/aja/data/locale/ko-KR.ini
  plugins/aja/data/locale/ms-MY.ini
@@ -1128,6 +1139,7 @@ Files: AUTHORS
  plugins/aja/data/locale/sv-SE.ini
  plugins/aja/data/locale/th-TH.ini
  plugins/aja/data/locale/tr-TR.ini
+ plugins/aja/data/locale/ug-CN.ini
  plugins/aja/data/locale/uk-UA.ini
  plugins/aja/data/locale/ur-PK.ini
  plugins/aja/data/locale/vi-VN.ini
@@ -1196,6 +1208,7 @@ Files: AUTHORS
  plugins/coreaudio-encoder/data/locale/th-TH.ini
  plugins/coreaudio-encoder/data/locale/tl-PH.ini
  plugins/coreaudio-encoder/data/locale/tr-TR.ini
+ plugins/coreaudio-encoder/data/locale/ug-CN.ini
  plugins/coreaudio-encoder/data/locale/uk-UA.ini
  plugins/coreaudio-encoder/data/locale/ur-PK.ini
  plugins/coreaudio-encoder/data/locale/vi-VN.ini
@@ -1223,6 +1236,7 @@ Files: AUTHORS
  plugins/decklink/data/locale/ar-SA.ini
  plugins/decklink/data/locale/az-AZ.ini
  plugins/decklink/data/locale/ba-RU.ini
+ plugins/decklink/data/locale/be-BY.ini
  plugins/decklink/data/locale/bg-BG.ini
  plugins/decklink/data/locale/bn-BD.ini
  plugins/decklink/data/locale/ca-ES.ini
@@ -1251,6 +1265,7 @@ Files: AUTHORS
  plugins/decklink/data/locale/it-IT.ini
  plugins/decklink/data/locale/ja-JP.ini
  plugins/decklink/data/locale/ka-GE.ini
+ plugins/decklink/data/locale/kaa.ini
  plugins/decklink/data/locale/kab-KAB.ini
  plugins/decklink/data/locale/kmr-TR.ini
  plugins/decklink/data/locale/ko-KR.ini
@@ -1277,6 +1292,7 @@ Files: AUTHORS
  plugins/decklink/data/locale/th-TH.ini
  plugins/decklink/data/locale/tl-PH.ini
  plugins/decklink/data/locale/tr-TR.ini
+ plugins/decklink/data/locale/ug-CN.ini
  plugins/decklink/data/locale/uk-UA.ini
  plugins/decklink/data/locale/ur-PK.ini
  plugins/decklink/data/locale/vi-VN.ini
@@ -1338,6 +1354,7 @@ Files: AUTHORS
  plugins/image-source/data/locale/it-IT.ini
  plugins/image-source/data/locale/ja-JP.ini
  plugins/image-source/data/locale/ka-GE.ini
+ plugins/image-source/data/locale/kaa.ini
  plugins/image-source/data/locale/kab-KAB.ini
  plugins/image-source/data/locale/kmr-TR.ini
  plugins/image-source/data/locale/ko-KR.ini
@@ -1365,12 +1382,14 @@ Files: AUTHORS
  plugins/image-source/data/locale/th-TH.ini
  plugins/image-source/data/locale/tl-PH.ini
  plugins/image-source/data/locale/tr-TR.ini
+ plugins/image-source/data/locale/ug-CN.ini
  plugins/image-source/data/locale/uk-UA.ini
  plugins/image-source/data/locale/ur-PK.ini
  plugins/image-source/data/locale/vi-VN.ini
  plugins/image-source/data/locale/zh-CN.ini
  plugins/image-source/data/locale/zh-TW.ini
  plugins/image-source/image-source.c
+ plugins/image-source/obs-slideshow-mk2.c
  plugins/image-source/obs-slideshow.c
  plugins/linux-alsa/CMakeLists.txt
  plugins/linux-alsa/data/locale/af-ZA.ini
@@ -1407,6 +1426,7 @@ Files: AUTHORS
  plugins/linux-alsa/data/locale/it-IT.ini
  plugins/linux-alsa/data/locale/ja-JP.ini
  plugins/linux-alsa/data/locale/ka-GE.ini
+ plugins/linux-alsa/data/locale/kaa.ini
  plugins/linux-alsa/data/locale/kab-KAB.ini
  plugins/linux-alsa/data/locale/kmr-TR.ini
  plugins/linux-alsa/data/locale/ko-KR.ini
@@ -1431,6 +1451,7 @@ Files: AUTHORS
  plugins/linux-alsa/data/locale/th-TH.ini
  plugins/linux-alsa/data/locale/tl-PH.ini
  plugins/linux-alsa/data/locale/tr-TR.ini
+ plugins/linux-alsa/data/locale/ug-CN.ini
  plugins/linux-alsa/data/locale/uk-UA.ini
  plugins/linux-alsa/data/locale/ur-PK.ini
  plugins/linux-alsa/data/locale/vi-VN.ini
@@ -1470,6 +1491,7 @@ Files: AUTHORS
  plugins/linux-capture/data/locale/it-IT.ini
  plugins/linux-capture/data/locale/ja-JP.ini
  plugins/linux-capture/data/locale/ka-GE.ini
+ plugins/linux-capture/data/locale/kaa.ini
  plugins/linux-capture/data/locale/kab-KAB.ini
  plugins/linux-capture/data/locale/kmr-TR.ini
  plugins/linux-capture/data/locale/ko-KR.ini
@@ -1493,6 +1515,7 @@ Files: AUTHORS
  plugins/linux-capture/data/locale/ta-IN.ini
  plugins/linux-capture/data/locale/tl-PH.ini
  plugins/linux-capture/data/locale/tr-TR.ini
+ plugins/linux-capture/data/locale/ug-CN.ini
  plugins/linux-capture/data/locale/uk-UA.ini
  plugins/linux-capture/data/locale/vi-VN.ini
  plugins/linux-capture/data/locale/zh-CN.ini
@@ -1532,6 +1555,7 @@ Files: AUTHORS
  plugins/linux-jack/data/locale/it-IT.ini
  plugins/linux-jack/data/locale/ja-JP.ini
  plugins/linux-jack/data/locale/ka-GE.ini
+ plugins/linux-jack/data/locale/kaa.ini
  plugins/linux-jack/data/locale/kab-KAB.ini
  plugins/linux-jack/data/locale/kmr-TR.ini
  plugins/linux-jack/data/locale/ko-KR.ini
@@ -1552,6 +1576,7 @@ Files: AUTHORS
  plugins/linux-jack/data/locale/sv-SE.ini
  plugins/linux-jack/data/locale/szl-PL.ini
  plugins/linux-jack/data/locale/tr-TR.ini
+ plugins/linux-jack/data/locale/ug-CN.ini
  plugins/linux-jack/data/locale/uk-UA.ini
  plugins/linux-jack/data/locale/ur-PK.ini
  plugins/linux-jack/data/locale/vi-VN.ini
@@ -1585,6 +1610,7 @@ Files: AUTHORS
  plugins/linux-pipewire/data/locale/it-IT.ini
  plugins/linux-pipewire/data/locale/ja-JP.ini
  plugins/linux-pipewire/data/locale/ka-GE.ini
+ plugins/linux-pipewire/data/locale/kaa.ini
  plugins/linux-pipewire/data/locale/kmr-TR.ini
  plugins/linux-pipewire/data/locale/ko-KR.ini
  plugins/linux-pipewire/data/locale/ms-MY.ini
@@ -1601,6 +1627,7 @@ Files: AUTHORS
  plugins/linux-pipewire/data/locale/sv-SE.ini
  plugins/linux-pipewire/data/locale/ta-IN.ini
  plugins/linux-pipewire/data/locale/tr-TR.ini
+ plugins/linux-pipewire/data/locale/ug-CN.ini
  plugins/linux-pipewire/data/locale/uk-UA.ini
  plugins/linux-pipewire/data/locale/vi-VN.ini
  plugins/linux-pipewire/data/locale/zh-CN.ini
@@ -1639,6 +1666,7 @@ Files: AUTHORS
  plugins/linux-pulseaudio/data/locale/it-IT.ini
  plugins/linux-pulseaudio/data/locale/ja-JP.ini
  plugins/linux-pulseaudio/data/locale/ka-GE.ini
+ plugins/linux-pulseaudio/data/locale/kaa.ini
  plugins/linux-pulseaudio/data/locale/kab-KAB.ini
  plugins/linux-pulseaudio/data/locale/kmr-TR.ini
  plugins/linux-pulseaudio/data/locale/ko-KR.ini
@@ -1662,6 +1690,7 @@ Files: AUTHORS
  plugins/linux-pulseaudio/data/locale/ta-IN.ini
  plugins/linux-pulseaudio/data/locale/th-TH.ini
  plugins/linux-pulseaudio/data/locale/tr-TR.ini
+ plugins/linux-pulseaudio/data/locale/ug-CN.ini
  plugins/linux-pulseaudio/data/locale/uk-UA.ini
  plugins/linux-pulseaudio/data/locale/ur-PK.ini
  plugins/linux-pulseaudio/data/locale/vi-VN.ini
@@ -1700,6 +1729,7 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/it-IT.ini
  plugins/linux-v4l2/data/locale/ja-JP.ini
  plugins/linux-v4l2/data/locale/ka-GE.ini
+ plugins/linux-v4l2/data/locale/kaa.ini
  plugins/linux-v4l2/data/locale/kab-KAB.ini
  plugins/linux-v4l2/data/locale/kmr-TR.ini
  plugins/linux-v4l2/data/locale/ko-KR.ini
@@ -1723,6 +1753,7 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/ta-IN.ini
  plugins/linux-v4l2/data/locale/tl-PH.ini
  plugins/linux-v4l2/data/locale/tr-TR.ini
+ plugins/linux-v4l2/data/locale/ug-CN.ini
  plugins/linux-v4l2/data/locale/uk-UA.ini
  plugins/linux-v4l2/data/locale/ur-PK.ini
  plugins/linux-v4l2/data/locale/vi-VN.ini
@@ -1730,11 +1761,13 @@ Files: AUTHORS
  plugins/linux-v4l2/data/locale/zh-TW.ini
  plugins/linux-v4l2/v4l2-output.c
  plugins/obs-ffmpeg/CMakeLists.txt
+ plugins/obs-ffmpeg/cmake/dependencies.cmake
  plugins/obs-ffmpeg/cmake/legacy.cmake
  plugins/obs-ffmpeg/cmake/windows/obs-module.rc.in
  plugins/obs-ffmpeg/data/locale/af-ZA.ini
  plugins/obs-ffmpeg/data/locale/ar-SA.ini
  plugins/obs-ffmpeg/data/locale/ba-RU.ini
+ plugins/obs-ffmpeg/data/locale/be-BY.ini
  plugins/obs-ffmpeg/data/locale/bg-BG.ini
  plugins/obs-ffmpeg/data/locale/bn-BD.ini
  plugins/obs-ffmpeg/data/locale/ca-ES.ini
@@ -1763,6 +1796,7 @@ Files: AUTHORS
  plugins/obs-ffmpeg/data/locale/it-IT.ini
  plugins/obs-ffmpeg/data/locale/ja-JP.ini
  plugins/obs-ffmpeg/data/locale/ka-GE.ini
+ plugins/obs-ffmpeg/data/locale/kaa.ini
  plugins/obs-ffmpeg/data/locale/kab-KAB.ini
  plugins/obs-ffmpeg/data/locale/kmr-TR.ini
  plugins/obs-ffmpeg/data/locale/ko-KR.ini
@@ -1787,6 +1821,7 @@ Files: AUTHORS
  plugins/obs-ffmpeg/data/locale/th-TH.ini
  plugins/obs-ffmpeg/data/locale/tl-PH.ini
  plugins/obs-ffmpeg/data/locale/tr-TR.ini
+ plugins/obs-ffmpeg/data/locale/ug-CN.ini
  plugins/obs-ffmpeg/data/locale/uk-UA.ini
  plugins/obs-ffmpeg/data/locale/ur-PK.ini
  plugins/obs-ffmpeg/data/locale/vi-VN.ini
@@ -1875,6 +1910,7 @@ Files: AUTHORS
  plugins/obs-filters/data/locale/it-IT.ini
  plugins/obs-filters/data/locale/ja-JP.ini
  plugins/obs-filters/data/locale/ka-GE.ini
+ plugins/obs-filters/data/locale/kaa.ini
  plugins/obs-filters/data/locale/kab-KAB.ini
  plugins/obs-filters/data/locale/kmr-TR.ini
  plugins/obs-filters/data/locale/ko-KR.ini
@@ -1898,6 +1934,7 @@ Files: AUTHORS
  plugins/obs-filters/data/locale/th-TH.ini
  plugins/obs-filters/data/locale/tl-PH.ini
  plugins/obs-filters/data/locale/tr-TR.ini
+ plugins/obs-filters/data/locale/ug-CN.ini
  plugins/obs-filters/data/locale/uk-UA.ini
  plugins/obs-filters/data/locale/vi-VN.ini
  plugins/obs-filters/data/locale/zh-CN.ini
@@ -1968,6 +2005,7 @@ Files: AUTHORS
  plugins/obs-libfdk/data/locale/it-IT.ini
  plugins/obs-libfdk/data/locale/ja-JP.ini
  plugins/obs-libfdk/data/locale/ka-GE.ini
+ plugins/obs-libfdk/data/locale/kaa.ini
  plugins/obs-libfdk/data/locale/kab-KAB.ini
  plugins/obs-libfdk/data/locale/kmr-TR.ini
  plugins/obs-libfdk/data/locale/ko-KR.ini
@@ -1990,6 +2028,7 @@ Files: AUTHORS
  plugins/obs-libfdk/data/locale/th-TH.ini
  plugins/obs-libfdk/data/locale/tl-PH.ini
  plugins/obs-libfdk/data/locale/tr-TR.ini
+ plugins/obs-libfdk/data/locale/ug-CN.ini
  plugins/obs-libfdk/data/locale/uk-UA.ini
  plugins/obs-libfdk/data/locale/ur-PK.ini
  plugins/obs-libfdk/data/locale/vi-VN.ini
@@ -2003,6 +2042,7 @@ Files: AUTHORS
  plugins/obs-outputs/data/locale/af-ZA.ini
  plugins/obs-outputs/data/locale/ar-SA.ini
  plugins/obs-outputs/data/locale/ba-RU.ini
+ plugins/obs-outputs/data/locale/be-BY.ini
  plugins/obs-outputs/data/locale/bg-BG.ini
  plugins/obs-outputs/data/locale/bn-BD.ini
  plugins/obs-outputs/data/locale/ca-ES.ini
@@ -2031,6 +2071,7 @@ Files: AUTHORS
  plugins/obs-outputs/data/locale/it-IT.ini
  plugins/obs-outputs/data/locale/ja-JP.ini
  plugins/obs-outputs/data/locale/ka-GE.ini
+ plugins/obs-outputs/data/locale/kaa.ini
  plugins/obs-outputs/data/locale/kab-KAB.ini
  plugins/obs-outputs/data/locale/kmr-TR.ini
  plugins/obs-outputs/data/locale/ko-KR.ini
@@ -2055,6 +2096,7 @@ Files: AUTHORS
  plugins/obs-outputs/data/locale/th-TH.ini
  plugins/obs-outputs/data/locale/tl-PH.ini
  plugins/obs-outputs/data/locale/tr-TR.ini
+ plugins/obs-outputs/data/locale/ug-CN.ini
  plugins/obs-outputs/data/locale/uk-UA.ini
  plugins/obs-outputs/data/locale/ur-PK.ini
  plugins/obs-outputs/data/locale/vi-VN.ini
@@ -2101,6 +2143,7 @@ Files: AUTHORS
  plugins/obs-text/data/locale/it-IT.ini
  plugins/obs-text/data/locale/ja-JP.ini
  plugins/obs-text/data/locale/ka-GE.ini
+ plugins/obs-text/data/locale/kaa.ini
  plugins/obs-text/data/locale/kab-KAB.ini
  plugins/obs-text/data/locale/kmr-TR.ini
  plugins/obs-text/data/locale/ko-KR.ini
@@ -2126,6 +2169,7 @@ Files: AUTHORS
  plugins/obs-text/data/locale/th-TH.ini
  plugins/obs-text/data/locale/tl-PH.ini
  plugins/obs-text/data/locale/tr-TR.ini
+ plugins/obs-text/data/locale/ug-CN.ini
  plugins/obs-text/data/locale/uk-UA.ini
  plugins/obs-text/data/locale/vi-VN.ini
  plugins/obs-text/data/locale/zh-CN.ini
@@ -2139,6 +2183,7 @@ Files: AUTHORS
  plugins/obs-transitions/data/locale/af-ZA.ini
  plugins/obs-transitions/data/locale/ar-SA.ini
  plugins/obs-transitions/data/locale/ba-RU.ini
+ plugins/obs-transitions/data/locale/be-BY.ini
  plugins/obs-transitions/data/locale/bg-BG.ini
  plugins/obs-transitions/data/locale/bn-BD.ini
  plugins/obs-transitions/data/locale/ca-ES.ini
@@ -2167,6 +2212,7 @@ Files: AUTHORS
  plugins/obs-transitions/data/locale/it-IT.ini
  plugins/obs-transitions/data/locale/ja-JP.ini
  plugins/obs-transitions/data/locale/ka-GE.ini
+ plugins/obs-transitions/data/locale/kaa.ini
  plugins/obs-transitions/data/locale/kab-KAB.ini
  plugins/obs-transitions/data/locale/kmr-TR.ini
  plugins/obs-transitions/data/locale/ko-KR.ini
@@ -2188,6 +2234,7 @@ Files: AUTHORS
  plugins/obs-transitions/data/locale/ta-IN.ini
  plugins/obs-transitions/data/locale/tl-PH.ini
  plugins/obs-transitions/data/locale/tr-TR.ini
+ plugins/obs-transitions/data/locale/ug-CN.ini
  plugins/obs-transitions/data/locale/uk-UA.ini
  plugins/obs-transitions/data/locale/vi-VN.ini
  plugins/obs-transitions/data/locale/zh-CN.ini
@@ -2238,6 +2285,7 @@ Files: AUTHORS
  plugins/obs-vst/data/locale/it-IT.ini
  plugins/obs-vst/data/locale/ja-JP.ini
  plugins/obs-vst/data/locale/ka-GE.ini
+ plugins/obs-vst/data/locale/kaa.ini
  plugins/obs-vst/data/locale/kab-KAB.ini
  plugins/obs-vst/data/locale/kmr-TR.ini
  plugins/obs-vst/data/locale/ko-KR.ini
@@ -2258,6 +2306,7 @@ Files: AUTHORS
  plugins/obs-vst/data/locale/szl-PL.ini
  plugins/obs-vst/data/locale/tl-PH.ini
  plugins/obs-vst/data/locale/tr-TR.ini
+ plugins/obs-vst/data/locale/ug-CN.ini
  plugins/obs-vst/data/locale/uk-UA.ini
  plugins/obs-vst/data/locale/vi-VN.ini
  plugins/obs-vst/data/locale/zh-CN.ini
@@ -2265,12 +2314,13 @@ Files: AUTHORS
  plugins/obs-vst/vst_header/.clang-format
  plugins/obs-webrtc/CMakeLists.txt
  plugins/obs-webrtc/cmake/legacy.cmake
- plugins/obs-webrtc/cmake/macos/Info.plist.in
  plugins/obs-webrtc/cmake/windows/obs-module.rc.in
  plugins/obs-webrtc/data/locale/af-ZA.ini
+ plugins/obs-webrtc/data/locale/be-BY.ini
  plugins/obs-webrtc/data/locale/bg-BG.ini
  plugins/obs-webrtc/data/locale/ca-ES.ini
  plugins/obs-webrtc/data/locale/cs-CZ.ini
+ plugins/obs-webrtc/data/locale/da-DK.ini
  plugins/obs-webrtc/data/locale/de-DE.ini
  plugins/obs-webrtc/data/locale/el-GR.ini
  plugins/obs-webrtc/data/locale/en-GB.ini
@@ -2289,6 +2339,7 @@ Files: AUTHORS
  plugins/obs-webrtc/data/locale/it-IT.ini
  plugins/obs-webrtc/data/locale/ja-JP.ini
  plugins/obs-webrtc/data/locale/ka-GE.ini
+ plugins/obs-webrtc/data/locale/kaa.ini
  plugins/obs-webrtc/data/locale/ko-KR.ini
  plugins/obs-webrtc/data/locale/ms-MY.ini
  plugins/obs-webrtc/data/locale/nb-NO.ini
@@ -2302,6 +2353,7 @@ Files: AUTHORS
  plugins/obs-webrtc/data/locale/sl-SI.ini
  plugins/obs-webrtc/data/locale/sv-SE.ini
  plugins/obs-webrtc/data/locale/tr-TR.ini
+ plugins/obs-webrtc/data/locale/ug-CN.ini
  plugins/obs-webrtc/data/locale/uk-UA.ini
  plugins/obs-webrtc/data/locale/vi-VN.ini
  plugins/obs-webrtc/data/locale/zh-CN.ini
@@ -2348,6 +2400,7 @@ Files: AUTHORS
  plugins/obs-x264/data/locale/it-IT.ini
  plugins/obs-x264/data/locale/ja-JP.ini
  plugins/obs-x264/data/locale/ka-GE.ini
+ plugins/obs-x264/data/locale/kaa.ini
  plugins/obs-x264/data/locale/kab-KAB.ini
  plugins/obs-x264/data/locale/kmr-TR.ini
  plugins/obs-x264/data/locale/ko-KR.ini
@@ -2374,6 +2427,7 @@ Files: AUTHORS
  plugins/obs-x264/data/locale/th-TH.ini
  plugins/obs-x264/data/locale/tl-PH.ini
  plugins/obs-x264/data/locale/tr-TR.ini
+ plugins/obs-x264/data/locale/ug-CN.ini
  plugins/obs-x264/data/locale/uk-UA.ini
  plugins/obs-x264/data/locale/ur-PK.ini
  plugins/obs-x264/data/locale/vi-VN.ini
@@ -2411,6 +2465,7 @@ Files: AUTHORS
  plugins/oss-audio/data/locale/it-IT.ini
  plugins/oss-audio/data/locale/ja-JP.ini
  plugins/oss-audio/data/locale/ka-GE.ini
+ plugins/oss-audio/data/locale/kaa.ini
  plugins/oss-audio/data/locale/kab-KAB.ini
  plugins/oss-audio/data/locale/kmr-TR.ini
  plugins/oss-audio/data/locale/ko-KR.ini
@@ -2429,6 +2484,7 @@ Files: AUTHORS
  plugins/oss-audio/data/locale/sv-SE.ini
  plugins/oss-audio/data/locale/ta-IN.ini
  plugins/oss-audio/data/locale/tr-TR.ini
+ plugins/oss-audio/data/locale/ug-CN.ini
  plugins/oss-audio/data/locale/uk-UA.ini
  plugins/oss-audio/data/locale/ur-PK.ini
  plugins/oss-audio/data/locale/vi-VN.ini
@@ -2470,6 +2526,7 @@ Files: AUTHORS
  plugins/rtmp-services/data/locale/it-IT.ini
  plugins/rtmp-services/data/locale/ja-JP.ini
  plugins/rtmp-services/data/locale/ka-GE.ini
+ plugins/rtmp-services/data/locale/kaa.ini
  plugins/rtmp-services/data/locale/kab-KAB.ini
  plugins/rtmp-services/data/locale/kmr-TR.ini
  plugins/rtmp-services/data/locale/ko-KR.ini
@@ -2494,6 +2551,7 @@ Files: AUTHORS
  plugins/rtmp-services/data/locale/th-TH.ini
  plugins/rtmp-services/data/locale/tl-PH.ini
  plugins/rtmp-services/data/locale/tr-TR.ini
+ plugins/rtmp-services/data/locale/ug-CN.ini
  plugins/rtmp-services/data/locale/uk-UA.ini
  plugins/rtmp-services/data/locale/ur-PK.ini
  plugins/rtmp-services/data/locale/vi-VN.ini
@@ -2547,6 +2605,7 @@ Files: AUTHORS
  plugins/sndio/data/locale/it-IT.ini
  plugins/sndio/data/locale/ja-JP.ini
  plugins/sndio/data/locale/ka-GE.ini
+ plugins/sndio/data/locale/kaa.ini
  plugins/sndio/data/locale/kab-KAB.ini
  plugins/sndio/data/locale/kmr-TR.ini
  plugins/sndio/data/locale/ko-KR.ini
@@ -2566,6 +2625,7 @@ Files: AUTHORS
  plugins/sndio/data/locale/szl-PL.ini
  plugins/sndio/data/locale/th-TH.ini
  plugins/sndio/data/locale/tr-TR.ini
+ plugins/sndio/data/locale/ug-CN.ini
  plugins/sndio/data/locale/uk-UA.ini
  plugins/sndio/data/locale/vi-VN.ini
  plugins/sndio/data/locale/zh-CN.ini
@@ -2606,6 +2666,7 @@ Files: AUTHORS
  plugins/text-freetype2/data/locale/it-IT.ini
  plugins/text-freetype2/data/locale/ja-JP.ini
  plugins/text-freetype2/data/locale/ka-GE.ini
+ plugins/text-freetype2/data/locale/kaa.ini
  plugins/text-freetype2/data/locale/kab-KAB.ini
  plugins/text-freetype2/data/locale/kmr-TR.ini
  plugins/text-freetype2/data/locale/ko-KR.ini
@@ -2630,6 +2691,7 @@ Files: AUTHORS
  plugins/text-freetype2/data/locale/th-TH.ini
  plugins/text-freetype2/data/locale/tl-PH.ini
  plugins/text-freetype2/data/locale/tr-TR.ini
+ plugins/text-freetype2/data/locale/ug-CN.ini
  plugins/text-freetype2/data/locale/uk-UA.ini
  plugins/text-freetype2/data/locale/vi-VN.ini
  plugins/text-freetype2/data/locale/zh-CN.ini
@@ -2674,6 +2736,7 @@ Files: AUTHORS
  plugins/vlc-video/data/locale/it-IT.ini
  plugins/vlc-video/data/locale/ja-JP.ini
  plugins/vlc-video/data/locale/ka-GE.ini
+ plugins/vlc-video/data/locale/kaa.ini
  plugins/vlc-video/data/locale/kab-KAB.ini
  plugins/vlc-video/data/locale/kmr-TR.ini
  plugins/vlc-video/data/locale/ko-KR.ini
@@ -2698,6 +2761,7 @@ Files: AUTHORS
  plugins/vlc-video/data/locale/ta-IN.ini
  plugins/vlc-video/data/locale/tl-PH.ini
  plugins/vlc-video/data/locale/tr-TR.ini
+ plugins/vlc-video/data/locale/ug-CN.ini
  plugins/vlc-video/data/locale/uk-UA.ini
  plugins/vlc-video/data/locale/vi-VN.ini
  plugins/vlc-video/data/locale/zh-CN.ini
@@ -2787,6 +2851,7 @@ Files: AUTHORS
  websocket/data/locale/sl-SI.ini
  websocket/data/locale/sv-SE.ini
  websocket/data/locale/tr-TR.ini
+ websocket/data/locale/ug-CN.ini
  websocket/data/locale/uk-UA.ini
  websocket/data/locale/vi-VN.ini
  websocket/data/locale/zh-CN.ini
@@ -3280,7 +3345,6 @@ Files: UI/display-helpers.hpp
  libobs/obs-source-transition.c
  libobs/obs-source.c
  libobs/obs-source.h
- libobs/obs-ui.h
  libobs/obs-video-gpu-encode.c
  libobs/obs-video.c
  libobs/obs-view.c
@@ -3463,7 +3527,6 @@ Files: UI/win-update/updater/hash.cpp
  libobs/callback/proc.h
  libobs/callback/signal.c
  libobs/callback/signal.h
- libobs/util/AlignedNew.hpp
  libobs/util/array-serializer.c
  libobs/util/array-serializer.h
  libobs/util/base.c
@@ -3481,6 +3544,7 @@ Files: UI/win-update/updater/hash.cpp
  libobs/util/crc32.h
  libobs/util/curl/curl-helper.h
  libobs/util/darray.h
+ libobs/util/deque.h
  libobs/util/dstr.c
  libobs/util/dstr.h
  libobs/util/dstr.hpp
@@ -3708,6 +3772,25 @@ Copyright: 2019, Dillon Pentz <dillon@vodbox.io>
 License: GPL-2+
  FIXME
 
+Files: libobs-opengl/gl-egl-common.c
+ libobs/obs-nix.h
+ plugins/linux-pipewire/camera-portal.c
+ plugins/linux-pipewire/camera-portal.h
+ plugins/linux-pipewire/formats.c
+ plugins/linux-pipewire/formats.h
+ plugins/linux-pipewire/pipewire.c
+ plugins/linux-pipewire/pipewire.h
+ plugins/linux-pipewire/portal.c
+ plugins/linux-pipewire/portal.h
+ plugins/linux-pipewire/screencast-portal.c
+ plugins/linux-pipewire/screencast-portal.h
+Copyright: 2020, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+  2021, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+  2022, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+  2023, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+License: GPL-2+
+ FIXME
+
 Files: libobs/data/deinterlace_base.effect
  libobs/data/deinterlace_blend.effect
  libobs/data/deinterlace_blend_2x.effect
@@ -3759,20 +3842,6 @@ Files: plugins/obs-vst/EditorWidget.cpp
  plugins/obs-vst/win/VSTPlugin-win.cpp
 Copyright: 2016-2017, Colin Edwards.
   2016-2017, c3r1c3 <c3r1c3@nevermindonline.com>
-License: GPL-2+
- FIXME
-
-Files: libobs-opengl/gl-egl-common.c
- libobs/obs-nix.h
- plugins/linux-pipewire/pipewire.c
- plugins/linux-pipewire/pipewire.h
- plugins/linux-pipewire/portal.c
- plugins/linux-pipewire/portal.h
- plugins/linux-pipewire/screencast-portal.c
- plugins/linux-pipewire/screencast-portal.h
-Copyright: 2020, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
-  2021, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
-  2022, Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
 License: GPL-2+
  FIXME
 
@@ -3937,6 +4006,12 @@ Files: deps/happy-eyeballs/happy-eyeballs.c
  deps/happy-eyeballs/happy-eyeballs.h
 Copyright: 2023, Twitch Interactive, Inc.
 License: Expat
+ FIXME
+
+Files: libobs/obs-av1.c
+ libobs/obs-av1.h
+Copyright: 2023, David Rosca <nowrep@gmail.com>
+License: GPL-2
  FIXME
 
 Files: plugins/obs-ffmpeg/vaapi-utils.c

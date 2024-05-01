@@ -23,7 +23,7 @@ Copyright: 2013-2023, Lain Bailey <lain@obsproject.com>
            2014, Leonhard Oelke <leonhard@in-verted.de>
            2017, Fabio Madia <admshao@gmail.com>
            2017, Quinn Damerell <qdamere@microsoft.com>
-           2013-2023, The OBS Developers (see AUTHORS for a full list)
+           2013-2024, The OBS Developers (see AUTHORS for a full list)
 License: GPL-2+
 
 Files: deps/ipc-util/ipc-util/*
@@ -109,7 +109,7 @@ License: BSD-3-clause
 Files: debian/*
 Copyright: 2015, Carl Fürstenberg <azatoth@gmail.com>
            2016-2022, Sebastian Ramacher <sramacher@debian.org>
-           2022-2023, IOhannes m zmölnig <umlaeute@debian.org>
+           2022-2024, IOhannes m zmölnig <umlaeute@debian.org>
 License: GPL-2+
 
 Files: debian/extra/qr/*

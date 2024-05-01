@@ -118,6 +118,7 @@ libobs-opengl.so.1 libobs0t64 #MINVER#
  device_enable_stencil_write@Base 28.0.1
  device_end_scene@Base 28.0.1
  device_enter_context@Base 28.0.1
+ device_enum_adapters@Base 30.1.2~
  device_flush@Base 28.0.1
  device_framebuffer_srgb_enabled@Base 28.0.1
  device_frustum@Base 28.0.1
@@ -182,6 +183,7 @@ libobs-opengl.so.1 libobs0t64 #MINVER#
  gs_cubetexture_destroy@Base 28.0.1
  gs_cubetexture_get_color_format@Base 28.0.1
  gs_cubetexture_get_size@Base 28.0.1
+ gs_get_adapter_count@Base 30.1.2~
  gs_indexbuffer_destroy@Base 28.0.1
  gs_indexbuffer_flush@Base 28.0.1
  gs_indexbuffer_flush_direct@Base 28.0.1
@@ -487,6 +489,7 @@ libobs.so.0 libobs0t64 #MINVER#
  gs_flush@Base 0.13.2
  gs_framebuffer_srgb_enabled@Base 27.0.1
  gs_frustum@Base 0.13.2
+ gs_get_adapter_count@Base 30.1.2~
  gs_get_color_space@Base 28.0.1
  gs_get_context@Base 0.13.2
  gs_get_cull_mode@Base 0.13.2
@@ -636,6 +639,8 @@ libobs.so.0 libobs0t64 #MINVER#
  gs_texture_create_from_dmabuf@Base 27.0.1
  gs_texture_create_from_file@Base 0.13.2
  gs_texture_create_from_pixmap@Base 28.0.1
+ gs_texture_create_nv12@Base 30.1.2~
+ gs_texture_create_p010@Base 30.1.2~
  gs_texture_destroy@Base 0.13.2
  gs_texture_get_color_format@Base 0.13.2
  gs_texture_get_height@Base 0.13.2
@@ -723,9 +728,9 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_apply_private_data@Base 22.0.3
  obs_audio_encoder_create@Base 0.13.2
  obs_audio_monitoring_available@Base 27.2.0
+ obs_av1_keyframe@Base 30.1.2~
  obs_avc_find_startcode@Base 0.13.2
  obs_avc_keyframe@Base 0.13.2
- obs_create_ui@Base 0.13.2
  obs_data_addref@Base 0.13.2
  obs_data_apply@Base 0.13.2
  obs_data_array_addref@Base 0.13.2
@@ -845,6 +850,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_data_save_json_pretty_safe@Base 29.1.3
  obs_data_save_json_safe@Base 0.13.2
  obs_data_set_array@Base 0.13.2
+ obs_data_set_autoselect_array@Base 30.1.2~
  obs_data_set_autoselect_bool@Base 0.13.2
  obs_data_set_autoselect_double@Base 0.13.2
  obs_data_set_autoselect_frames_per_second@Base 0.13.2
@@ -893,10 +899,13 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_duplicate_encoder_packet@Base 0.13.2
  obs_enable_source_type@Base 21.0.2
  obs_encoder_active@Base 0.13.2
+ obs_encoder_add_roi@Base 30.1.2~
  obs_encoder_addref@Base 0.13.2
  obs_encoder_audio@Base 0.13.2
+ obs_encoder_clear_roi@Base 30.1.2~
  obs_encoder_create_rerouted@Base 23.2.1
  obs_encoder_defaults@Base 0.13.2
+ obs_encoder_enum_roi@Base 30.1.2~
  obs_encoder_get_caps@Base 23.2.1
  obs_encoder_get_codec@Base 0.13.2
  obs_encoder_get_defaults@Base 22.0.3
@@ -911,6 +920,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_encoder_get_pause_offset@Base 29.0.0
  obs_encoder_get_preferred_video_format@Base 0.13.2
  obs_encoder_get_ref@Base 0.13.2
+ obs_encoder_get_roi_increment@Base 30.1.2~
  obs_encoder_get_sample_rate@Base 0.13.2
  obs_encoder_get_scale_type@Base 30.0.2~
  obs_encoder_get_settings@Base 0.13.2
@@ -919,6 +929,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_encoder_get_weak_encoder@Base 0.13.2
  obs_encoder_get_width@Base 0.13.2
  obs_encoder_gpu_scaling_enabled@Base 30.0.2~
+ obs_encoder_has_roi@Base 30.1.2~
  obs_encoder_packet_ref@Base 18.0.1
  obs_encoder_packet_release@Base 18.0.1
  obs_encoder_paused@Base 24.0.1
@@ -956,7 +967,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_enum_source_types@Base 0.13.2
  obs_enum_sources@Base 0.13.2
  obs_enum_transition_types@Base 0.13.2
- obs_exec_ui@Base 0.13.2
+ obs_extract_av1_headers@Base 30.1.2~
  obs_extract_avc_headers@Base 0.14.2
  obs_extract_hevc_headers@Base 28.0.1
  obs_fader_add_callback@Base 0.13.2
@@ -1335,6 +1346,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_render_main_view@Base 0.13.2
  obs_reset_audio2@Base 28.0.1
  obs_reset_audio@Base 0.13.2
+ obs_reset_audio_monitoring@Base 30.1.2~
  obs_reset_source_uuids@Base 29.1.3
  obs_reset_video@Base 0.13.2
  obs_save_source@Base 0.13.2
@@ -1378,6 +1390,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_sceneitem_get_blending_mode@Base 27.2.0
  obs_sceneitem_get_bounds@Base 0.13.2
  obs_sceneitem_get_bounds_alignment@Base 0.13.2
+ obs_sceneitem_get_bounds_crop@Base 30.1.2~
  obs_sceneitem_get_bounds_type@Base 0.13.2
  obs_sceneitem_get_box_scale@Base 23.2.1
  obs_sceneitem_get_box_transform@Base 0.13.2
@@ -1387,6 +1400,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_sceneitem_get_hide_transition@Base 27.0.1
  obs_sceneitem_get_hide_transition_duration@Base 27.0.1
  obs_sceneitem_get_id@Base 19.0.3
+ obs_sceneitem_get_info2@Base 30.1.2~
  obs_sceneitem_get_info@Base 0.13.2
  obs_sceneitem_get_order_position@Base 27.0.1
  obs_sceneitem_get_pos@Base 0.13.2
@@ -1418,11 +1432,13 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_sceneitem_set_blending_mode@Base 27.2.0
  obs_sceneitem_set_bounds@Base 0.13.2
  obs_sceneitem_set_bounds_alignment@Base 0.13.2
+ obs_sceneitem_set_bounds_crop@Base 30.1.2~
  obs_sceneitem_set_bounds_type@Base 0.13.2
  obs_sceneitem_set_crop@Base 0.14.2
  obs_sceneitem_set_hide_transition@Base 27.0.1
  obs_sceneitem_set_hide_transition_duration@Base 27.0.1
  obs_sceneitem_set_id@Base 27.0.1
+ obs_sceneitem_set_info2@Base 30.1.2~
  obs_sceneitem_set_info@Base 0.13.2
  obs_sceneitem_set_locked@Base 21.0.2
  obs_sceneitem_set_order@Base 0.13.2
@@ -1663,6 +1679,7 @@ libobs.so.0 libobs0t64 #MINVER#
  obs_view_add@Base 28.0.1
  obs_view_create@Base 0.13.2
  obs_view_destroy@Base 0.13.2
+ obs_view_enum_video_info@Base 30.1.2~
  obs_view_get_source@Base 0.13.2
  obs_view_get_video_info@Base 29.1.3
  obs_view_remove@Base 28.0.1
@@ -1942,7 +1959,9 @@ libobs.so.0 libobs0t64 #MINVER#
  (optional)obs_context_data_setname_ht@Base 29.1.3
  (optional)obs_context_init_control@Base 29.1.3
  (optional)obs_context_wait@Base 29.1.3
+ (optional)obs_create_ui@Base 0.13.2
  (optional)obs_create_video_mix@Base 29.1.3
+ (optional)obs_exec_ui@Base 0.13.2
  (optional)obs_free_video_mix@Base 29.1.3
  (optional)obs_load_effect@Base 29.1.3
  (optional)start_gpu_encode@Base 29.1.3

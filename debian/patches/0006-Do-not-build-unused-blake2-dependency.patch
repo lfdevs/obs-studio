@@ -8,11 +8,11 @@ Subject: Do not build unused blake2 dependency
 
 --- obs-studio.orig/deps/CMakeLists.txt
 +++ obs-studio/deps/CMakeLists.txt
-@@ -5,7 +5,6 @@
-   add_subdirectory(ipc-util)
+@@ -3,7 +3,6 @@
+   add_subdirectory(w32-pthreads)
  endif()
  
 -add_subdirectory(blake2)
- add_subdirectory(glad)
- add_subdirectory(media-playback)
  add_subdirectory(file-updater)
+ add_subdirectory(glad)
+ add_subdirectory(happy-eyeballs)
