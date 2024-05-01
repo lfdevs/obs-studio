@@ -6,11 +6,9 @@ Subject: Use time64_t everywhere
  plugins/linux-v4l2/v4l2-input.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/plugins/linux-v4l2/v4l2-input.c b/plugins/linux-v4l2/v4l2-input.c
-index 3ba95cc..a9ba8fe 100644
---- a/plugins/linux-v4l2/v4l2-input.c
-+++ b/plugins/linux-v4l2/v4l2-input.c
-@@ -260,7 +260,11 @@ static void *v4l2_thread(void *vptr)
+--- obs-studio.orig/plugins/linux-v4l2/v4l2-input.c
++++ obs-studio/plugins/linux-v4l2/v4l2-input.c
+@@ -260,7 +260,11 @@
  		}
  
  		blog(LOG_DEBUG,

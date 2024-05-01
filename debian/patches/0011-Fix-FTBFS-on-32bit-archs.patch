@@ -10,7 +10,7 @@ Subject: Fix FTBFS on 32bit archs
 
 --- obs-studio.orig/libobs-opengl/gl-egl-common.c
 +++ obs-studio/libobs-opengl/gl-egl-common.c
-@@ -368,16 +368,18 @@
+@@ -415,16 +415,18 @@
  					      uint64_t **modifiers,
  					      size_t *n_modifiers)
  {
@@ -32,7 +32,7 @@ Subject: Fix FTBFS on 32bit archs
  
 --- obs-studio.orig/libobs/obs.c
 +++ obs-studio/libobs/obs.c
-@@ -885,7 +885,7 @@
+@@ -879,7 +879,7 @@
  		obs->video.mixes.array[i] = NULL;
  	}
  	if (num_views > 0)

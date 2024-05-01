@@ -10,11 +10,9 @@ Origin: https://github.com/obsproject/obs-studio/pull/6493
  plugins/linux-v4l2/v4l2-input.c   | 382 ++++++++++++++++++++++++++++++--------
  3 files changed, 327 insertions(+), 76 deletions(-)
 
-diff --git a/plugins/linux-v4l2/v4l2-helpers.c b/plugins/linux-v4l2/v4l2-helpers.c
-index a40b132..cc8600f 100644
---- a/plugins/linux-v4l2/v4l2-helpers.c
-+++ b/plugins/linux-v4l2/v4l2-helpers.c
-@@ -318,3 +318,15 @@ int_fast32_t v4l2_set_dv_timing(int_fast32_t dev, int *timing)
+--- obs-studio.orig/plugins/linux-v4l2/v4l2-helpers.c
++++ obs-studio/plugins/linux-v4l2/v4l2-helpers.c
+@@ -318,3 +318,15 @@
  
  	return 0;
  }
@@ -30,11 +28,9 @@ index a40b132..cc8600f 100644
 +		return bstrdup(link_path);
 +	}
 +}
-diff --git a/plugins/linux-v4l2/v4l2-helpers.h b/plugins/linux-v4l2/v4l2-helpers.h
-index a53bf17..dcc5ca8 100644
---- a/plugins/linux-v4l2/v4l2-helpers.h
-+++ b/plugins/linux-v4l2/v4l2-helpers.h
-@@ -328,6 +328,15 @@ int_fast32_t v4l2_enum_dv_timing(int_fast32_t dev, struct v4l2_dv_timings *dvt,
+--- obs-studio.orig/plugins/linux-v4l2/v4l2-helpers.h
++++ obs-studio/plugins/linux-v4l2/v4l2-helpers.h
+@@ -328,6 +328,15 @@
   */
  int_fast32_t v4l2_set_dv_timing(int_fast32_t dev, int *timing);
  
@@ -50,11 +46,9 @@ index a53bf17..dcc5ca8 100644
  #ifdef __cplusplus
  }
  #endif
-diff --git a/plugins/linux-v4l2/v4l2-input.c b/plugins/linux-v4l2/v4l2-input.c
-index a9ba8fe..92eb2be 100644
---- a/plugins/linux-v4l2/v4l2-input.c
-+++ b/plugins/linux-v4l2/v4l2-input.c
-@@ -70,7 +70,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--- obs-studio.orig/plugins/linux-v4l2/v4l2-input.c
++++ obs-studio/plugins/linux-v4l2/v4l2-input.c
+@@ -70,7 +70,8 @@
   */
  struct v4l2_data {
  	/* settings */
@@ -64,7 +58,7 @@ index a9ba8fe..92eb2be 100644
  	int input;
  	int pixfmt;
  	int standard;
-@@ -97,6 +98,16 @@ struct v4l2_data {
+@@ -97,6 +98,16 @@
  	int timeout_frames;
  };
  
@@ -81,7 +75,7 @@ index a9ba8fe..92eb2be 100644
  /* forward declarations */
  static void v4l2_init(struct v4l2_data *data);
  static void v4l2_terminate(struct v4l2_data *data);
-@@ -351,96 +362,237 @@ static void v4l2_props_set_enabled(obs_properties_t *props,
+@@ -351,96 +362,237 @@
  }
  
  /*
@@ -302,7 +296,9 @@ index a9ba8fe..92eb2be 100644
  		}
 +		obs_property_list_add_string(prop, current_device->label.array,
 +					     current_device->device_id.array);
-+
+ 
+-#ifndef V4L2_CAP_DEVICE_CAPS
+-		caps = video_cap.capabilities;
 +		dstr_free(&current_device->label);
 +		dstr_free(&current_device->device_id);
 +		dstr_free(&current_device->real_path);
@@ -313,9 +309,7 @@ index a9ba8fe..92eb2be 100644
 +		list_empty = false;
 +	}
 +}
- 
--#ifndef V4L2_CAP_DEVICE_CAPS
--		caps = video_cap.capabilities;
++
 +/*
 + * List available devices
 + */
@@ -351,9 +345,7 @@ index a9ba8fe..92eb2be 100644
 -			v4l2_close(fd);
 -			continue;
 -		}
-+	cur_device_found = false;
-+	cur_device_name = obs_data_get_string(settings, "device_id");
- 
+-
 -		/* make sure device names are unique */
 -		char unique_device_name[68];
 -		int ret = snprintf(unique_device_name,
@@ -368,7 +360,9 @@ index a9ba8fe..92eb2be 100644
 -					     device.array);
 -		blog(LOG_INFO, "Found device '%s' at %s", video_cap.card,
 -		     device.array);
--
++	cur_device_found = false;
++	cur_device_name = obs_data_get_string(settings, "device_id");
+ 
 -		/* check if this is the currently used device */
 -		if (cur_device_name && !strcmp(cur_device_name, device.array))
 +	size_t listidx = 0;
@@ -384,7 +378,7 @@ index a9ba8fe..92eb2be 100644
  	}
  
  	/* add currently selected device if not present, but disable it ... */
-@@ -449,9 +601,6 @@ static void v4l2_device_list(obs_property_t *prop, obs_data_t *settings)
+@@ -449,9 +601,6 @@
  			prop, cur_device_name, cur_device_name);
  		obs_property_list_item_disable(prop, cur_device_index, true);
  	}
@@ -394,11 +388,10 @@ index a9ba8fe..92eb2be 100644
  }
  
  /*
-@@ -795,6 +944,59 @@ static bool resolution_selected(obs_properties_t *props, obs_property_t *p,
- }
+@@ -796,6 +945,59 @@
  
  #if HAVE_UDEV
-+/**
+ /**
 + * Converts /dev/video0 to /dev/v4l/by-id/usb-046d_Logitech_BRIO_0D26FE7B-video-index0
 + *
 + * If not found returns NULL
@@ -451,10 +444,11 @@ index a9ba8fe..92eb2be 100644
 +	return ret_val;
 +}
 +
- /**
++/**
   * Device added callback
   *
-@@ -807,15 +1009,34 @@ static void device_added(void *vptr, calldata_t *calldata)
+  * If everything went fine we can start capturing again when the device is
+@@ -807,15 +1009,34 @@
  
  	obs_source_update_properties(data->source);
  
@@ -494,7 +488,7 @@ index a9ba8fe..92eb2be 100644
  }
  /**
   * Device removed callback
-@@ -831,10 +1052,11 @@ static void device_removed(void *vptr, calldata_t *calldata)
+@@ -831,10 +1052,11 @@
  	const char *dev;
  	calldata_get_string(calldata, "device", &dev);
  
@@ -508,7 +502,7 @@ index a9ba8fe..92eb2be 100644
  
  	v4l2_terminate(data);
  }
-@@ -952,6 +1174,9 @@ static void v4l2_destroy(void *vptr)
+@@ -952,6 +1174,9 @@
  	if (data->device_id)
  		bfree(data->device_id);
  
@@ -518,7 +512,7 @@ index a9ba8fe..92eb2be 100644
  #if HAVE_UDEV
  	signal_handler_t *sh = v4l2_get_udev_signalhandler();
  
-@@ -1155,6 +1380,9 @@ static void v4l2_update(void *vptr, obs_data_t *settings)
+@@ -1155,6 +1380,9 @@
  	if (data->device_id)
  		bfree(data->device_id);
  
@@ -528,7 +522,7 @@ index a9ba8fe..92eb2be 100644
  	data->device_id = bstrdup(obs_data_get_string(settings, "device_id"));
  	data->input = obs_data_get_int(settings, "input");
  	data->pixfmt = obs_data_get_int(settings, "pixelformat");
-@@ -1166,6 +1394,8 @@ static void v4l2_update(void *vptr, obs_data_t *settings)
+@@ -1166,6 +1394,8 @@
  	data->auto_reset = obs_data_get_bool(settings, "auto_reset");
  	data->timeout_frames = obs_data_get_int(settings, "timeout_frames");
  
