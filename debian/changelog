@@ -3,6 +3,7 @@ obs-studio (30.1.2+dfsg-1) UNRELEASED; urgency=medium
   * New upstream version 30.1.2+dfsg
     + Refresh patches
   * Fix unsigned char comparision patch (Closes: #1051418)
+  * Add missing entries to d/changelog for 30.0.2+dfsg-3 
   * Update d/copyright
     + Bump d/copyright dates
     + Re-generate d/copyright_hints
@@ -12,11 +13,17 @@ obs-studio (30.1.2+dfsg-1) UNRELEASED; urgency=medium
 obs-studio (30.0.2+dfsg-3) unstable; urgency=medium
 
   * Team upload.
+
+  [ Benjamin Drung ]
   * Fix build on 32bit time64_t archs. Thanks to Gianfranco Costamagna.
     (Closes: #1067494)
   * linux-v4l2: Save device by ID or path to make webcam ordering persistent
     (to support having multiple in the system). Fixes upstream bug 3003.
   * Add simple autopkgtest that just calls obs --help and --version
+
+  [ IOhannes m zmölnig (Debian/GNU) ]
+  * Drop debian/.gitignore (as it hides leftover files)
+  * Apply 'wrap-and-sort -ast'
 
  -- Benjamin Drung <bdrung@debian.org>  Sun, 31 Mar 2024 15:13:19 +0200
 
