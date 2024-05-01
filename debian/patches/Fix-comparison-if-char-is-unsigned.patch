@@ -16,7 +16,7 @@ Bug: https://github.com/obsproject/obs-studio/pull/9184
  			continue;
  
 -		if (*w < 0) {
-+		if ((signed char)*w < 0) {
++		if ((long int)*w < 0) {
  			if ((flags & UTF8_IGNORE_ERROR) == 0)
  				return 0;
  			continue;

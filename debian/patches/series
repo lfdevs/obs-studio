@@ -10,7 +10,7 @@
 0010-Don-t-treat-vla-warnings-as-errors.patch
 0011-Fix-FTBFS-on-32bit-archs.patch
 0012-Prevent-underlinking.patch
-0013-Fix-comparision-if-char-is-unsigned.patch
+Fix-comparison-if-char-is-unsigned.patch
 0014-disable-dropped-modules.patch
 Use-time64_t-everywhere.patch
 linux-v4l2-Save-device-by-id-or-path.patch
