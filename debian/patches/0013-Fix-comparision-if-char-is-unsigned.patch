@@ -9,17 +9,6 @@ Bug: https://github.com/obsproject/obs-studio/pull/9184
  libobs/util/utf8.c         | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
---- obs-studio.orig/deps/libcaption/src/utf8.c
-+++ obs-studio/deps/libcaption/src/utf8.c
-@@ -51,7 +51,7 @@
- int utf8_char_whitespace(const utf8_char_t* c)
- {
-     // 0x7F is DEL
--    if (!c || (c[0] >= 0 && c[0] <= ' ') || c[0] == 0x7F) {
-+    if (!c || ((signed char)c[0] >= 0 && c[0] <= ' ') || c[0] == 0x7F) {
-         return 1;
-     }
- 
 --- obs-studio.orig/libobs/util/utf8.c
 +++ obs-studio/libobs/util/utf8.c
 @@ -289,7 +289,7 @@
