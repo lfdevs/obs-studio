@@ -746,6 +746,8 @@ static int obs_init_video(struct obs_video_info *ovi)
 
 	if (pthread_mutex_init(&video->task_mutex, NULL) < 0)
 		return OBS_VIDEO_FAIL;
+	if (pthread_mutex_init(&video->encoder_group_mutex, NULL) < 0)
+		return OBS_VIDEO_FAIL;
 	if (pthread_mutex_init(&video->mixes_mutex, NULL) < 0)
 		return OBS_VIDEO_FAIL;
 
@@ -876,13 +878,22 @@ static void obs_free_video(void)
 		obs_free_video_mix(video);
 		obs->video.mixes.array[i] = NULL;
 	}
+	da_free(obs->video.mixes);
 	if (num_views > 0)
 		blog(LOG_WARNING, "Number of remaining views: %ld", num_views);
 	pthread_mutex_unlock(&obs->video.mixes_mutex);
 
 	pthread_mutex_destroy(&obs->video.mixes_mutex);
 	pthread_mutex_init_value(&obs->video.mixes_mutex);
-	da_free(obs->video.mixes);
+
+	for (size_t i = 0; i < obs->video.ready_encoder_groups.num; i++) {
+		obs_weak_encoder_release(
+			obs->video.ready_encoder_groups.array[i]);
+	}
+	da_free(obs->video.ready_encoder_groups);
+
+	pthread_mutex_destroy(&obs->video.encoder_group_mutex);
+	pthread_mutex_init_value(&obs->video.encoder_group_mutex);
 
 	pthread_mutex_destroy(&obs->video.task_mutex);
 	pthread_mutex_init_value(&obs->video.task_mutex);
@@ -1106,6 +1117,8 @@ static const char *obs_signals[] = {
 	"void source_hide(ptr source)",
 	"void source_audio_activate(ptr source)",
 	"void source_audio_deactivate(ptr source)",
+	"void source_filter_add(ptr source, ptr filter)",
+	"void source_filter_remove(ptr source, ptr filter)",
 	"void source_rename(ptr source, string new_name, string prev_name)",
 	"void source_volume(ptr source, in out float volume)",
 	"void source_volume_level(ptr source, float level, float magnitude, "
@@ -1236,6 +1249,7 @@ static bool obs_init(const char *locale, const char *module_config_path,
 	pthread_mutex_init_value(&obs->audio.monitoring_mutex);
 	pthread_mutex_init_value(&obs->audio.task_mutex);
 	pthread_mutex_init_value(&obs->video.task_mutex);
+	pthread_mutex_init_value(&obs->video.encoder_group_mutex);
 	pthread_mutex_init_value(&obs->video.mixes_mutex);
 
 	obs->name_store_owned = !store;
