@@ -39,7 +39,7 @@ Last-Update: 2022-09-20
        *
 --- obs-studio.orig/plugins/linux-alsa/alsa-input.c
 +++ obs-studio/plugins/linux-alsa/alsa-input.c
-@@ -459,7 +459,7 @@
+@@ -468,7 +468,7 @@
  	}
  #undef FORMAT_SIZE
  	if (!format_found) {
@@ -48,49 +48,9 @@ Last-Update: 2022-09-20
  		return false;
  	}
  	snd_pcm_hw_params_set_format(data->handle, hwparams, data->format);
---- obs-studio.orig/websocket/src/forms/ConnectInfo.cpp
-+++ obs-studio/websocket/src/forms/ConnectInfo.cpp
-@@ -51,7 +51,7 @@
- {
- 	auto conf = GetConfig();
- 	if (!conf) {
--		blog(LOG_ERROR, "[ConnectInfo::showEvent] Unable to retreive config!");
-+		blog(LOG_ERROR, "[ConnectInfo::showEvent] Unable to retrieve config!");
- 		return;
- 	}
- 
---- obs-studio.orig/websocket/src/forms/SettingsDialog.cpp
-+++ obs-studio/websocket/src/forms/SettingsDialog.cpp
-@@ -74,7 +74,7 @@
- {
- 	auto conf = GetConfig();
- 	if (!conf) {
--		blog(LOG_ERROR, "[SettingsDialog::showEvent] Unable to retreive config!");
-+		blog(LOG_ERROR, "[SettingsDialog::showEvent] Unable to retrieve config!");
- 		return;
- 	}
- 
-@@ -114,7 +114,7 @@
- {
- 	auto conf = GetConfig();
- 	if (!conf) {
--		blog(LOG_ERROR, "[SettingsDialog::RefreshData] Unable to retreive config!");
-+		blog(LOG_ERROR, "[SettingsDialog::RefreshData] Unable to retrieve config!");
- 		return;
- 	}
- 
-@@ -144,7 +144,7 @@
- {
- 	auto conf = GetConfig();
- 	if (!conf) {
--		blog(LOG_ERROR, "[SettingsDialog::SaveFormData] Unable to retreive config!");
-+		blog(LOG_ERROR, "[SettingsDialog::SaveFormData] Unable to retrieve config!");
- 		return;
- 	}
- 
---- obs-studio.orig/websocket/src/websocketserver/WebSocketServer.cpp
-+++ obs-studio/websocket/src/websocketserver/WebSocketServer.cpp
-@@ -92,7 +92,7 @@
+--- obs-studio.orig/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp
++++ obs-studio/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp
+@@ -78,7 +78,7 @@
  
  	auto conf = GetConfig();
  	if (!conf) {
@@ -99,7 +59,7 @@ Last-Update: 2022-09-20
  		return;
  	}
  
-@@ -241,7 +241,7 @@
+@@ -222,7 +222,7 @@
  
  	auto conf = GetConfig();
  	if (!conf) {
@@ -108,7 +68,7 @@ Last-Update: 2022-09-20
  		return;
  	}
  
-@@ -351,7 +351,7 @@
+@@ -330,7 +330,7 @@
  	// Get config for tray notification
  	auto conf = GetConfig();
  	if (!conf) {
