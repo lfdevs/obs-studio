@@ -4,7 +4,7 @@ Date: Fri, 23 Sep 2022 20:40:26 +0200
 Subject: Fix spelling mistakes
 
 Origin: Debian
-Forwarded: no
+Bug: https://github.com/obsproject/obs-studio/issues/11160
 Last-Update: 2022-09-20
 ---
  cmake/Modules/FindLibVLC.cmake                    | 2 +-
