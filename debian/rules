@@ -19,6 +19,7 @@ confflags += -DCMAKE_SKIP_RPATH=TRUE
 confflags += -DDISABLE_UPDATE_MODULE=TRUE
 confflags += -DBUILD_TESTS=TRUE -DENABLE_UNIT_TESTS=TRUE
 confflags += -DENABLE_AJA=FALSE
+confflags += -DENABLE_BROWSER=FALSE
 confflags += -DENABLE_JACK=TRUE
 confflags += -DENABLE_PIPEWIRE=TRUE
 confflags += -DENABLE_SNDIO=FALSE
@@ -37,11 +38,6 @@ BUILDDIR=$(CURDIR)/obj-$(DEB_HOST_GNU_TYPE)
 %:
 	dh $@ --builddirectory=$(BUILDDIR)
 
-execute_before_dh_auto_configure:
-	cp -r websocket plugins/obs-websocket
-	mkdir -p plugins/obs-websocket/deps
-	cp -r debian/extra/qr plugins/obs-websocket/deps/
-	-find plugins/obs-websocket/ -name ".git*" -exec rm -rf {} +
 override_dh_auto_configure:
 	dh_auto_configure -- $(confflags)
 

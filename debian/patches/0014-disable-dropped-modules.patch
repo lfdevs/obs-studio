@@ -8,7 +8,7 @@ Last-Update: 2023-12-04
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- obs-studio.orig/plugins/CMakeLists.txt
 +++ obs-studio/plugins/CMakeLists.txt
-@@ -103,7 +103,7 @@
+@@ -86,7 +86,7 @@
    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/obs-browser/CMakeLists.txt)
      add_subdirectory(obs-browser)
    else()
@@ -17,7 +17,7 @@ This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
    endif()
  endfunction()
  
-@@ -144,7 +144,7 @@
+@@ -127,7 +127,7 @@
    add_subdirectory(vlc-video)
    add_subdirectory(sndio)
    add_subdirectory(obs-vst)

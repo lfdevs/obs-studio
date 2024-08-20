@@ -10,7 +10,7 @@ Subject: Use the simd everywhere headers from libsimde-dev
 
 --- obs-studio.orig/libobs/CMakeLists.txt
 +++ obs-studio/libobs/CMakeLists.txt
-@@ -144,24 +144,6 @@
+@@ -145,24 +145,6 @@
  target_sources(
    libobs
    PRIVATE # cmake-format: sortable
@@ -37,7 +37,7 @@ Subject: Use the simd everywhere headers from libsimde-dev
            callback/decl.c
 --- obs-studio.orig/libobs/cmake/legacy.cmake
 +++ obs-studio/libobs/cmake/legacy.cmake
-@@ -75,23 +75,6 @@
+@@ -76,23 +76,6 @@
  
  target_sources(
    libobs

@@ -32,9 +32,9 @@ Subject: Fix FTBFS on 32bit archs
  
 --- obs-studio.orig/libobs/obs.c
 +++ obs-studio/libobs/obs.c
-@@ -879,7 +879,7 @@
- 		obs->video.mixes.array[i] = NULL;
+@@ -882,7 +882,7 @@
  	}
+ 	da_free(obs->video.mixes);
  	if (num_views > 0)
 -		blog(LOG_WARNING, "Number of remaining views: %ld", num_views);
 +		blog(LOG_WARNING, "Number of remaining views: %ld", (long int)num_views);
