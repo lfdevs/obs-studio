@@ -6,7 +6,7 @@
 0007-Disable-obs-browser-check.patch
 0009-Fix-spelling-mistakes.patch
 0010-Drop-code-that-makes-build-unreproducible.patch
-0010-Don-t-treat-vla-warnings-as-errors.patch
+0010-Don-t-treat-warnings-as-errors.patch
 0011-Fix-FTBFS-on-32bit-archs.patch
 0012-Prevent-underlinking.patch
 Fix-comparison-if-char-is-unsigned.patch
