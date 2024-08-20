@@ -1,6 +1,7 @@
-obs-studio (30.2.3+dfsg-1) UNRELEASED; urgency=medium
+obs-studio (30.2.3+dfsg-1) unstable; urgency=medium
 
   * New upstream version 30.2.3+dfsg
+    (Closes: #1072439, #1075327)
 
   [ Sebastian Ramacher ]
   * Remove myself from Uploaders
@@ -22,8 +23,12 @@ obs-studio (30.2.3+dfsg-1) UNRELEASED; urgency=medium
     + Update d/copyright
     + Remove obsolete Files-Excluded stanzas
     + Re-generate d/copyright_hints
+  * Update lintian-overrides
+  * Drop copyright for excluded uthash
+  * fix more spelling errors:
+  * Forward spelling error patch
 
- -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 20 Aug 2024 11:15:12 +0200
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Tue, 20 Aug 2024 16:17:53 +0200
 
 obs-studio (30.1.2+dfsg-1) unstable; urgency=medium
 
