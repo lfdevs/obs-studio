@@ -6,7 +6,6 @@ Files-Excluded:
  deps/blake2/*
  deps/w32-pthreads/need_errno.h
  libobs/util/simde/*
- plugins/coreaudio-encoder/*
  plugins/mac-*
  plugins/obs-qsv11/*
  plugins/win-*
