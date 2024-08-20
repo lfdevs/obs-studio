@@ -1,6 +1,16 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: obs-studio
 Source: https://obsproject.com
+Files-Excluded:
+ cmake/bundle/*
+ deps/blake2/*
+ deps/w32-pthreads/need_errno.h
+ libobs/util/simde/*
+ plugins/obs-outputs/ftl-sdk/libcurl/*
+ plugins/obs-outputs/ftl-sdk/libjansson/*
+ plugins/obs-qsv11/*
+ plugins/mac-*
+ plugins/win-*
 
 Files: *
 Copyright: 2013-2023, Lain Bailey <lain@obsproject.com>
