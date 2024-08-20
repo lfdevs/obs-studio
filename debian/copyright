@@ -59,10 +59,6 @@ Copyright: 2016-2021, Stephane Lepin <stephane.lepin@gmail.com>
   2020-2023, Kyle Manning <tt2468@gmail.com>
 License: GPL-2+
 
-Files: deps/uthash/uthash/*
-Copyright: 2003-2021, Troy D. Hanson
-License: BSD-1-Clause
-
 Files: UI/win-dll-blocklist.c
 Copyright: 2023, Richard Stanway
 License: GPL-2+
