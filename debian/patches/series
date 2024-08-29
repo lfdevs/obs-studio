@@ -1,5 +1,6 @@
 0001-Use-common-license.patch
 0002-Hide-internal-symbols.patch
+0003-Use-path-in-usr-lib.patch
 0004-Add-flag-to-prevent-building-with-SIMD.patch
 0005-Use-the-simd-everywhere-headers-from-libsimde-dev.patch
 0006-Do-not-build-unused-blake2-dependency.patch
