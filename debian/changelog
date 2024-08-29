@@ -1,3 +1,11 @@
+obs-studio (30.2.3+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  * Revert "Drop patches obsoleted by upstream"
+  * Fix obs-ffmpeg-mux patch (Closes: #1079732)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Thu, 29 Aug 2024 07:56:20 +0200
+
 obs-studio (30.2.3+dfsg-1) unstable; urgency=medium
 
   * New upstream version 30.2.3+dfsg
