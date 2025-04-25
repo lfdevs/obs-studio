@@ -1,3 +1,14 @@
+obs-studio (30.2.3+dfsg-3) unstable; urgency=medium
+
+  * Backport stephematician's patch for v4l2loopback-0.14 compat.
+    Thanks to Joao Eriberto Mota Filho <eriberto@debian.org>
+    (Closes: #1101728, #1101351)
+  * Make debian/latest the default packaging branch
+  * Apply 'wrap-and-sort -ast'
+  * Bump standards version to 4.7.2
+
+ -- IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>  Fri, 25 Apr 2025 20:49:45 +0200
+
 obs-studio (30.2.3+dfsg-2) unstable; urgency=medium
 
   * Team upload.
