@@ -6,11 +6,11 @@ Uploaders:
  Carl Fürstenberg <azatoth@gmail.com>,
  IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
 Build-Depends:
- cmake,
  debhelper-compat (= 13),
  dh-sequence-python3,
  dh-sequence-scour,
  dpkg-dev (>= 1.22.5),
+ cmake,
  gir1.2-rsvg-2.0,
  libasio-dev,
  libasound2-dev,
