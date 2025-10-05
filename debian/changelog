@@ -1,3 +1,10 @@
+obs-studio (30.2.3+dfsg-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Backport upstream fix for FTBFS with GCC 15. (Closes: #1097496)
+
+ -- Adrian Bunk <bunk@debian.org>  Sun, 05 Oct 2025 20:35:32 +0300
+
 obs-studio (30.2.3+dfsg-3) unstable; urgency=medium
 
   * Backport stephematician's patch for v4l2loopback-0.14 compat.
