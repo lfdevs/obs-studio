@@ -1,3 +1,11 @@
+obs-studio (32.0.2-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release
+  * Completely redo all relevant patches, removing old ones
+  * Disable tests until we can figure out where they moved to
+
+ -- Erich Eickmeyer <eeickmeyer@ubuntu.com>  Wed, 12 Nov 2025 08:49:32 -0800
+
 obs-studio (30.2.3+dfsg-3.1) unstable; urgency=medium
 
   * Non-maintainer upload.

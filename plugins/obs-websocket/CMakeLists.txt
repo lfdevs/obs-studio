@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 3.16...3.25)
+cmake_minimum_required(VERSION 3.28...3.30)
 
-legacy_check()
-
-set(obs-websocket_VERSION 5.5.2)
+set(obs-websocket_VERSION 5.6.3)
 set(OBS_WEBSOCKET_RPC_VERSION 1)
 
 include(cmake/obs-websocket-api.cmake)
@@ -17,7 +15,7 @@ endif()
 find_package(Qt6 REQUIRED Core Widgets Svg Network)
 
 # Find nlohmann JSON
-find_package(nlohmann_json 3 REQUIRED)
+find_package(nlohmann_json 3.11 REQUIRED)
 
 # Find qrcodegencpp
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)
@@ -138,12 +136,14 @@ target_compile_definitions(
 target_compile_options(
   obs-websocket
   PRIVATE $<$<PLATFORM_ID:Windows>:/wd4267>
+          $<$<PLATFORM_ID:Windows>:/wd4996>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU,AppleClang,Clang>:-Wall>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU,AppleClang,Clang>:-Wno-error=float-conversion>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU,AppleClang,Clang>:-Wno-error=shadow>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wno-error=format-overflow>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wno-error=int-conversion>
           $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wno-error=comment>
+          $<$<COMPILE_LANG_AND_ID:CXX,GNU>:-Wno-error=deprecated-declarations>
           $<$<COMPILE_LANG_AND_ID:CXX,AppleClang,Clang>:-Wno-error=null-pointer-subtraction>
           $<$<COMPILE_LANG_AND_ID:CXX,AppleClang,Clang>:-Wno-error=deprecated-declarations>
           $<$<COMPILE_LANG_AND_ID:CXX,AppleClang,Clang>:-Wno-error=implicit-int-conversion>

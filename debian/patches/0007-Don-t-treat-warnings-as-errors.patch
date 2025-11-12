@@ -1,0 +1,28 @@
+From 1bfafc44b92ab9a6983951d7b80b1ca2f6f69f6e Mon Sep 17 00:00:00 2001
+Message-ID: <1bfafc44b92ab9a6983951d7b80b1ca2f6f69f6e.1762983576.git.erich@ericheickmeyer.com>
+In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 12:43:17 -0800
+Subject: [PATCH 07/10] Don't treat warnings as errors
+
+---
+ cmake/linux/compilerconfig.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/linux/compilerconfig.cmake b/cmake/linux/compilerconfig.cmake
+index 3f4d45e..76410fe 100644
+--- a/cmake/linux/compilerconfig.cmake
++++ b/cmake/linux/compilerconfig.cmake
+@@ -55,7 +55,7 @@ add_compile_options(
+ # CMake switch for warnings as errors to CMake < 3.24
+ if(CMAKE_VERSION VERSION_LESS 3.24.0)
+   if(CMAKE_COMPILE_WARNING_AS_ERROR)
+-    add_compile_options(-Werror)
++#   add_compile_options(-Werror)
+   endif()
+ endif()
+ 
+-- 
+2.51.0
+

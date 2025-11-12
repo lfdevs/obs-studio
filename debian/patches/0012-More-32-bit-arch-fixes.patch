@@ -1,0 +1,41 @@
+From 935dc45b79f4ea00f25429e9886e823e04e0c4ba Mon Sep 17 00:00:00 2001
+Message-ID: <935dc45b79f4ea00f25429e9886e823e04e0c4ba.1762991098.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 15:44:48 -0800
+Subject: [PATCH] More 32-bit arch fixes
+
+---
+ libobs/obs-output.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/libobs/obs-output.c b/libobs/obs-output.c
+index c4a1955..b0cc00d 100644
+--- a/libobs/obs-output.c
++++ b/libobs/obs-output.c
+@@ -1528,7 +1528,7 @@ static bool add_caption(struct obs_output *output, struct encoder_packet *out)
+ 
+ 	struct caption_track_data *ctrack = output->caption_tracks[out->track_idx];
+ 	if (!ctrack) {
+-		blog(LOG_DEBUG, "Caption track for index: %lu has not been initialized", out->track_idx);
++		blog(LOG_DEBUG, "Caption track for index: %lu has not been initialized", (long int)out->track_idx);
+ 		return false;
+ 	}
+ 
+@@ -1731,12 +1731,12 @@ static inline void send_interleaved(struct obs_output *output)
+ 			}
+ 			if (found_ept == false) {
+ 				blog(LOG_DEBUG, "%s: Track %lu encoder packet timing for PTS%" PRId64 " not found.",
+-				     __FUNCTION__, out.track_idx, out.pts);
++				     __FUNCTION__, (long int)out.track_idx, out.pts);
+ 			}
+ 		} else {
+ 			// encoder_packet_times should not be empty; log if so.
+ 			blog(LOG_DEBUG, "%s: Track %lu encoder packet timing array empty.", __FUNCTION__,
+-			     out.track_idx);
++			     (long int)out.track_idx);
+ 		}
+ 	}
+ 
+-- 
+2.51.0
+

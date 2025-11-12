@@ -1,2 +1,3 @@
 /usr/lib/${DEB_HOST_MULTIARCH}/obs-plugins/test-input.so
 /usr/share/obs/obs-plugins/test-input/
+/usr/bin/obs-nvenc-test

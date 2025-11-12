@@ -1,0 +1,28 @@
+From f84088ce5eb7fb59ca91f56d2ee34ff91a82e821 Mon Sep 17 00:00:00 2001
+Message-ID: <f84088ce5eb7fb59ca91f56d2ee34ff91a82e821.1762983576.git.erich@ericheickmeyer.com>
+In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 12:44:39 -0800
+Subject: [PATCH 10/10] Fix comparision if char is unsigned
+
+---
+ libobs/util/utf8.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libobs/util/utf8.c b/libobs/util/utf8.c
+index afcb903..34d9728 100644
+--- a/libobs/util/utf8.c
++++ b/libobs/util/utf8.c
+@@ -284,7 +284,7 @@ size_t wchar_to_utf8(const wchar_t *in, size_t insize, char *out, size_t outsize
+ 		if (*w == _BOM && (flags & UTF8_SKIP_BOM) != 0)
+ 			continue;
+ 
+-		if (*w < 0) {
++		if ((long int)*w < 0) {
+ 			if ((flags & UTF8_IGNORE_ERROR) == 0)
+ 				return 0;
+ 			continue;
+-- 
+2.51.0
+

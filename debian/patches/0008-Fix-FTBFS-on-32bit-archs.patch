@@ -1,0 +1,52 @@
+From 02a4a4369bc70aae831a3568e9bf10e6e5a2cf93 Mon Sep 17 00:00:00 2001
+Message-ID: <02a4a4369bc70aae831a3568e9bf10e6e5a2cf93.1762983576.git.erich@ericheickmeyer.com>
+In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 12:43:50 -0800
+Subject: [PATCH 08/10] Fix FTBFS on 32bit archs
+
+---
+ libobs-opengl/gl-egl-common.c | 4 +++-
+ libobs/obs.c                  | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/libobs-opengl/gl-egl-common.c b/libobs-opengl/gl-egl-common.c
+index b3ff73f..acc4655 100644
+--- a/libobs-opengl/gl-egl-common.c
++++ b/libobs-opengl/gl-egl-common.c
+@@ -383,15 +383,17 @@ static inline bool query_dmabuf_modifiers(EGLDisplay egl_display, EGLint drm_for
+ bool gl_egl_query_dmabuf_modifiers_for_format(EGLDisplay egl_display, uint32_t drm_format, uint64_t **modifiers,
+ 					      size_t *n_modifiers)
+ {
++	EGLuint64KHR n_modifiers_egl = *n_modifiers;
+ 	if (!glad_eglQueryDmaBufModifiersEXT) {
+ 		blog(LOG_ERROR, "Unable to load eglQueryDmaBufModifiersEXT");
+ 		return false;
+ 	}
+-	if (!query_dmabuf_modifiers(egl_display, drm_format, modifiers, n_modifiers)) {
++	if (!query_dmabuf_modifiers(egl_display, drm_format, modifiers, &n_modifiers_egl)) {
+ 		*n_modifiers = 0;
+ 		*modifiers = NULL;
+ 		return false;
+ 	}
++	*n_modifiers = n_modifiers_egl;
+ 	return true;
+ }
+ 
+diff --git a/libobs/obs.c b/libobs/obs.c
+index 2409cfe..4583f0b 100644
+--- a/libobs/obs.c
++++ b/libobs/obs.c
+@@ -833,7 +833,7 @@ static void obs_free_video(void)
+ 	}
+ 	da_free(obs->video.mixes);
+ 	if (num_views > 0)
+-		blog(LOG_WARNING, "Number of remaining views: %ld", num_views);
++		blog(LOG_WARNING, "Number of remaining views: %ld", (long int)num_views);
+ 	pthread_mutex_unlock(&obs->video.mixes_mutex);
+ 
+ 	pthread_mutex_destroy(&obs->video.mixes_mutex);
+-- 
+2.51.0
+

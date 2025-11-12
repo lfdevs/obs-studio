@@ -1,24 +1,24 @@
-From: =?utf-8?q?Carl_F=C3=BCrstenberg?= <azatoth@gmail.com>
-Date: Tue, 6 Jan 2015 23:12:30 +0100
-Subject: Use common license
+From 46f2441008458f16ec6bb81cf0d12b4c0747aff0 Mon Sep 17 00:00:00 2001
+Message-ID: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 12:38:21 -0800
+Subject: [PATCH 01/10] Use common license
 
-use common license at /usr/share/common-licenses instead of the shipped
-copy
 ---
- UI/window-basic-about.cpp | 7 +------
+ frontend/dialogs/OBSAbout.cpp | 7 +------
  1 file changed, 1 insertion(+), 6 deletions(-)
 
---- obs-studio.orig/UI/window-basic-about.cpp
-+++ obs-studio/UI/window-basic-about.cpp
-@@ -161,16 +161,11 @@
+diff --git a/frontend/dialogs/OBSAbout.cpp b/frontend/dialogs/OBSAbout.cpp
+index f0a1b82..124b338 100644
+--- a/frontend/dialogs/OBSAbout.cpp
++++ b/frontend/dialogs/OBSAbout.cpp
+@@ -150,14 +150,9 @@ void OBSAbout::ShowAuthors()
  
  void OBSAbout::ShowLicense()
  {
 -	std::string path;
 +	std::string path("/usr/share/common-licenses/GPL-2");
- 	QString error =
- 		QTStr("About.Error")
- 			.arg("https://github.com/obsproject/obs-studio/blob/master/COPYING");
+ 	QString error = QTStr("About.Error").arg("https://github.com/obsproject/obs-studio/blob/master/COPYING");
  
 -	if (!GetDataFilePath("license/gplv2.txt", path)) {
 -		ui->textBrowser->setPlainText(error);
@@ -28,3 +28,6 @@ copy
  	BPtr<char> text = os_quick_read_utf8_file(path.c_str());
  
  	if (!text || !*text) {
+-- 
+2.51.0
+

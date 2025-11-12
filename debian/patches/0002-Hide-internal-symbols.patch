@@ -1,13 +1,19 @@
-From: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
-Date: Mon, 31 Jul 2023 13:04:55 +0200
-Subject: Hide-internal-symbols
+From 05b0778010e85e12b7723f28a2a9f43a4b920196 Mon Sep 17 00:00:00 2001
+Message-ID: <05b0778010e85e12b7723f28a2a9f43a4b920196.1762983576.git.erich@ericheickmeyer.com>
+In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
+From: Erich Eickmeyer <erich@ericheickmeyer.com>
+Date: Wed, 12 Nov 2025 12:38:37 -0800
+Subject: [PATCH 02/10] Hide internal symbols
 
 ---
  libobs/obs.c | 2 ++
  1 file changed, 2 insertions(+)
 
---- obs-studio.orig/libobs/obs.c
-+++ obs-studio/libobs/obs.c
+diff --git a/libobs/obs.c b/libobs/obs.c
+index 6ea83a2..2409cfe 100644
+--- a/libobs/obs.c
++++ b/libobs/obs.c
 @@ -21,7 +21,9 @@
  #include "callback/calldata.h"
  
@@ -18,3 +24,6 @@ Subject: Hide-internal-symbols
  
  struct obs_core *obs = NULL;
  
+-- 
+2.51.0
+
