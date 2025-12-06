@@ -1,3 +1,10 @@
+obs-studio (32.0.3-0ubuntu1) resolute; urgency=medium
+
+  * New upstream release.
+  * d/control: Only build for supported architectures
+
+ -- Erich Eickmeyer <eeickmeyer@ubuntu.com>  Fri, 05 Dec 2025 17:02:38 -0800
+
 obs-studio (32.0.2-0ubuntu1) resolute; urgency=medium
 
   * New upstream release
