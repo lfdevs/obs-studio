@@ -85,7 +85,7 @@ Vcs-Git: https://salsa.debian.org/multimedia-team/obs-studio.git
 Rules-Requires-Root: no
 
 Package: obs-studio
-Architecture: amd64 arm64 riscv64 s390x
+Architecture: amd64 amd64v3 arm64 riscv64 s390x
 Depends:
  qt6-image-formats-plugins,
  qt6-wayland,
@@ -115,7 +115,7 @@ Description: recorder and streamer for live video content
  Note that OBS Studio requires an OpenGL 3.2 compatible video card.
 
 Package: obs-plugins
-Architecture: amd64 arm64 riscv64 s390x
+Architecture: amd64 amd64v3 arm64 riscv64 s390x
 Built-Using:
  ${simde:Built-Using},
 Depends:
@@ -140,7 +140,7 @@ Breaks:
  libobs0 (<< ${source:Version}),
 Multi-Arch: same
 Section: libs
-Architecture: amd64 arm64 riscv64 s390x
+Architecture: amd64 amd64v3 arm64 riscv64 s390x
 Built-Using:
  ${simde:Built-Using},
 Depends:
@@ -154,7 +154,7 @@ Description: recorder and streamer for live video content (shared library)
 
 Package: libobs-dev
 Section: libdevel
-Architecture: amd64 arm64 riscv64 s390x
+Architecture: amd64 amd64v3 arm64 riscv64 s390x
 Depends:
  libobs0t64 (= ${binary:Version}),
  libsimde-dev,
