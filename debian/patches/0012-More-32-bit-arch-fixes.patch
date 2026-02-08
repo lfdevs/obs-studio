@@ -1,5 +1,3 @@
-From 935dc45b79f4ea00f25429e9886e823e04e0c4ba Mon Sep 17 00:00:00 2001
-Message-ID: <935dc45b79f4ea00f25429e9886e823e04e0c4ba.1762991098.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 15:44:48 -0800
 Subject: [PATCH] More 32-bit arch fixes
@@ -8,20 +6,20 @@ Subject: [PATCH] More 32-bit arch fixes
  libobs/obs-output.c | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/libobs/obs-output.c b/libobs/obs-output.c
-index c4a1955..b0cc00d 100644
---- a/libobs/obs-output.c
-+++ b/libobs/obs-output.c
-@@ -1528,7 +1528,7 @@ static bool add_caption(struct obs_output *output, struct encoder_packet *out)
- 
+Index: obs-studio/libobs/obs-output.c
+===================================================================
+--- obs-studio.orig/libobs/obs-output.c
++++ obs-studio/libobs/obs-output.c
+@@ -1528,7 +1528,7 @@ static bool add_caption(struct obs_outpu
+
  	struct caption_track_data *ctrack = output->caption_tracks[out->track_idx];
  	if (!ctrack) {
 -		blog(LOG_DEBUG, "Caption track for index: %lu has not been initialized", out->track_idx);
 +		blog(LOG_DEBUG, "Caption track for index: %lu has not been initialized", (long int)out->track_idx);
  		return false;
  	}
- 
-@@ -1731,12 +1731,12 @@ static inline void send_interleaved(struct obs_output *output)
+
+@@ -1731,12 +1731,12 @@ static inline void send_interleaved(stru
  			}
  			if (found_ept == false) {
  				blog(LOG_DEBUG, "%s: Track %lu encoder packet timing for PTS%" PRId64 " not found.",
@@ -35,7 +33,126 @@ index c4a1955..b0cc00d 100644
 +			     (long int)out.track_idx);
  		}
  	}
- 
--- 
-2.51.0
 
+Index: obs-studio/shared/bpm/bpm.c
+===================================================================
+--- obs-studio.orig/shared/bpm/bpm.c
++++ obs-studio/shared/bpm/bpm.c
+@@ -22,7 +22,7 @@ static bool update_metrics(obs_output_t
+ 	}
+
+ 	if (!output || !ept || !m_track) {
+-		blog(LOG_DEBUG, "%s: Null arguments for track %lu", __FUNCTION__, pkt->track_idx);
++		blog(LOG_DEBUG, "%s: Null arguments for track %zu", __FUNCTION__, pkt->track_idx);
+ 		return false;
+ 	}
+
+@@ -123,7 +123,7 @@ static bool update_metrics(obs_output_t
+ 	 * with "--verbose" and "--unfiltered_log".
+ 	 */
+ 	blog(LOG_DEBUG,
+-	     "BPM: %s, trk %lu: [CTS|FER-CTS|FERC-FER|PIR-CTS]:[%" PRIu64 " ms|%" PRIu64 " ms|%" PRIu64 " us|%" PRIu64
++	     "BPM: %s, trk %zu: [CTS|FER-CTS|FERC-FER|PIR-CTS]:[%" PRIu64 " ms|%" PRIu64 " ms|%" PRIu64 " us|%" PRIu64
+ 	     " ms], [dts|pts]:[%" PRId64 "|%" PRId64 "], S[R:O:D:L],R[I:S:O]:%d:%d:%d:%d:%d:%d:%d",
+ 	     obs_encoder_get_name(pkt->encoder), pkt->track_idx, ept->cts / 1000000, (ept->fer - ept->cts) / 1000000,
+ 	     (ept->ferc - ept->fer) / 1000, (ept->pir - ept->cts) / 1000000, pkt->dts, pkt->pts,
+@@ -328,14 +328,14 @@ static bool process_metrics(obs_output_t
+ 	bool av1 = false;
+
+ 	if (!m_track) {
+-		blog(LOG_DEBUG, "Metrics track for index: %lu had not be initialized", out->track_idx);
++		blog(LOG_DEBUG, "Metrics track for index: %zu had not be initialized", out->track_idx);
+ 		return false;
+ 	}
+
+ 	// Update the metrics for this track
+ 	if (!update_metrics(output, out, ept, m_track)) {
+ 		// Something went wrong; log it and return
+-		blog(LOG_DEBUG, "update_metrics() for track index: %lu failed", out->track_idx);
++		blog(LOG_DEBUG, "update_metrics() for track index: %zu failed", out->track_idx);
+ 		return false;
+ 	}
+
+@@ -574,7 +574,7 @@ void bpm_inject(obs_output_t *output, st
+ 	if (pkt->type == OBS_ENCODER_VIDEO && pkt->keyframe) {
+ 		/* Video packet must have pkt_timing supplied for BPM */
+ 		if (!pkt_time) {
+-			blog(LOG_DEBUG, "%s: Packet timing missing for track %ld, PTS %" PRId64, __FUNCTION__,
++			blog(LOG_DEBUG, "%s: Packet timing missing for track %zu, PTS %" PRId64, __FUNCTION__,
+ 			     pkt->track_idx, pkt->pts);
+ 			return;
+ 		}
+Index: obs-studio/plugins/obs-websocket/src/WebSocketApi.cpp
+===================================================================
+--- obs-studio.orig/plugins/obs-websocket/src/WebSocketApi.cpp
++++ obs-studio/plugins/obs-websocket/src/WebSocketApi.cpp
+@@ -77,7 +77,7 @@ WebSocketApi::~WebSocketApi()
+
+ 	size_t numEventCallbacks = _eventCallbacks.size();
+ 	_eventCallbacks.clear();
+-	blog_debug("[WebSocketApi::~WebSocketApi] Deleted %ld event callbacks", numEventCallbacks);
++	blog_debug("[WebSocketApi::~WebSocketApi] Deleted %zu event callbacks", numEventCallbacks);
+
+ 	for (auto vendor : _vendors) {
+ 		blog_debug("[WebSocketApi::~WebSocketApi] Deleting vendor: %s", vendor.first.c_str());
+Index: obs-studio/frontend/OBSApp_Themes.cpp
+===================================================================
+--- obs-studio.orig/frontend/OBSApp_Themes.cpp
++++ obs-studio/frontend/OBSApp_Themes.cpp
+@@ -592,7 +592,7 @@ static QString EvalMath(const QHash<QStr
+ 	}
+
+ 	if (args.length() != 3) {
+-		blog(LOG_ERROR, "Math parse had invalid number of arguments: %lld (%s)", args.length(),
++		blog(LOG_ERROR, "Math parse had invalid number of arguments: %lld (%s)", (long long)args.length(),
+ 		     QT_TO_UTF8(args.join(", ")));
+ 		return "'Invalid expression'";
+ 	}
+Index: obs-studio/frontend/utility/system-info-posix.cpp
+===================================================================
+--- obs-studio.orig/frontend/utility/system-info-posix.cpp
++++ obs-studio/frontend/utility/system-info-posix.cpp
+@@ -1,6 +1,7 @@
+ #include "system-info.hpp"
+ #include "util/dstr.hpp"
+ #include "util/platform.h"
++#include <cinttypes>
+ #include <sys/utsname.h>
+ #include <unistd.h>
+ #include <string>
+@@ -372,7 +373,7 @@ void get_drm_cards(std::vector<drm_card_
+ 				if (!file_str) {
+ 					dci.dedicated_vram_total = 0;
+ 				} else {
+-					sscanf(file_str, "%lu", &dci.dedicated_vram_total);
++					sscanf(file_str, "%" SCNu64, &dci.dedicated_vram_total);
+ 					bfree(file_str);
+ 				}
+
+@@ -383,7 +384,7 @@ void get_drm_cards(std::vector<drm_card_
+ 				if (!file_str) {
+ 					dci.shared_system_memory_total = 0;
+ 				} else {
+-					sscanf(file_str, "%lu", &dci.shared_system_memory_total);
++					sscanf(file_str, "%" SCNu64, &dci.shared_system_memory_total);
+ 					bfree(file_str);
+ 				}
+
+@@ -391,7 +392,7 @@ void get_drm_cards(std::vector<drm_card_
+ 				blog(LOG_DEBUG,
+ 				     "%s: drm_adapter_info: PCI B:D:S:F: %s, device_id:0x%x,"
+ 				     "vendor_id:0x%x, sub_device:0x%x, sub_vendor:0x%x,"
+-				     "vram_total: %lu, sys_memory: %lu",
++				     "vram_total: %" PRIu64 ", sys_memory: %" PRIu64,
+ 				     __FUNCTION__, dci.dbsf.c_str(), dci.device_id, dci.vendor_id, dci.subsystem_device,
+ 				     dci.subsystem_vendor, dci.dedicated_vram_total, dci.shared_system_memory_total);
+ 			} else {
+@@ -468,7 +469,7 @@ std::optional<std::vector<GoLiveApi::Gpu
+
+ 	// Discover the set of DRM render-capable GPUs
+ 	get_drm_cards(drm_cards);
+-	blog(LOG_DEBUG, "Number of GPUs detected: %lu", drm_cards.size());
++	blog(LOG_DEBUG, "Number of GPUs detected: %zu", drm_cards.size());
+
+ 	// Iterate through drm_cards to get the device and vendor names via libpci
+ 	for (auto card = begin(drm_cards); card != end(drm_cards); ++card) {

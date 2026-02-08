@@ -1,7 +1,3 @@
-From 1bfafc44b92ab9a6983951d7b80b1ca2f6f69f6e Mon Sep 17 00:00:00 2001
-Message-ID: <1bfafc44b92ab9a6983951d7b80b1ca2f6f69f6e.1762983576.git.erich@ericheickmeyer.com>
-In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
-References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:43:17 -0800
 Subject: [PATCH 07/10] Don't treat warnings as errors
@@ -22,7 +18,7 @@ index 3f4d45e..76410fe 100644
 +#   add_compile_options(-Werror)
    endif()
  endif()
- 
--- 
+
+--
 2.51.0
 

@@ -1,7 +1,3 @@
-From 84c3e0ae335e13aa32ef0d8ea389305aa90fb7a3 Mon Sep 17 00:00:00 2001
-Message-ID: <84c3e0ae335e13aa32ef0d8ea389305aa90fb7a3.1762983576.git.erich@ericheickmeyer.com>
-In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
-References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:40:41 -0800
 Subject: [PATCH 03/10] Use path in usr lib
@@ -17,7 +13,7 @@ index 8a03c04..35ad7da 100644
 @@ -278,7 +278,12 @@ static void build_command_line(struct ffmpeg_muxer *stream, os_process_args_t **
  		num_tracks++;
  	}
- 
+
 +#ifdef FFMPEG_MUX_FIXED
 +	char *exe = bstrdup(FFMPEG_MUX_FIXED);
 +#else
@@ -26,7 +22,7 @@ index 8a03c04..35ad7da 100644
 +
  	*args = os_process_args_create(exe);
  	bfree(exe);
- 
--- 
+
+--
 2.51.0
 

@@ -30,6 +30,9 @@ ifeq ($(DEB_HOST_ARCH_CPU), i386)
 confflags += -DENABLE_SIMD=FALSE
 deb_cflags+=-Wno-error=psabi
 endif
+ifeq ($(DEB_HOST_ARCH), armhf)
+deb_cflags+=-Wno-error=sign-compare
+endif
 DEB_CFLAGS_MAINT_APPEND+=$(deb_cflags)
 DEB_CPPFLAGS_MAINT_APPEND+=$(deb_cflags)
 

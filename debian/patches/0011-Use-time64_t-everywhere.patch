@@ -1,7 +1,3 @@
-From b77ac038f71222bf6c2213356dddd7c15a04da14 Mon Sep 17 00:00:00 2001
-Message-ID: <b77ac038f71222bf6c2213356dddd7c15a04da14.1762983593.git.erich@ericheickmeyer.com>
-In-Reply-To: <18f53e7e5a974ab0dc31d2440cc02b54412ccb6d.1762983593.git.erich@ericheickmeyer.com>
-References: <18f53e7e5a974ab0dc31d2440cc02b54412ccb6d.1762983593.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:59:43 -0800
 Subject: [PATCH 2/3] Use time64_t everywhere
@@ -17,7 +13,7 @@ index 56e92b9..cf422a3 100644
 @@ -243,8 +243,13 @@ static void *v4l2_thread(void *vptr)
  			break;
  		}
- 
+
 -		blog(LOG_DEBUG, "%s: ts: %06ld buf id #%d, flags 0x%08X, seq #%d, len %d, used %d", data->device_id,
 -		     buf.timestamp.tv_usec, buf.index, buf.flags, buf.sequence, buf.length, buf.bytesused);
 +		blog(LOG_DEBUG,
@@ -27,9 +23,9 @@ index 56e92b9..cf422a3 100644
 +		"%s: ts: %06lld buf id #%d, flags 0x%08X, seq #%d, len %d, used %d",
 +#endif
 +		      data->device_id, buf.timestamp.tv_usec, buf.index, buf.flags, buf.sequence, buf.length, buf.bytesused);
- 
+
  		if (buf.flags & V4L2_BUF_FLAG_ERROR) {
  			blog(LOG_DEBUG, "skipping decoding of buffer with recoverable error-flag set");
--- 
+--
 2.51.0
 

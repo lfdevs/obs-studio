@@ -1,7 +1,3 @@
-From 05b0778010e85e12b7723f28a2a9f43a4b920196 Mon Sep 17 00:00:00 2001
-Message-ID: <05b0778010e85e12b7723f28a2a9f43a4b920196.1762983576.git.erich@ericheickmeyer.com>
-In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
-References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:38:37 -0800
 Subject: [PATCH 02/10] Hide internal symbols
@@ -16,14 +12,14 @@ index 6ea83a2..2409cfe 100644
 +++ b/libobs/obs.c
 @@ -21,7 +21,9 @@
  #include "callback/calldata.h"
- 
+
  #include "obs.h"
 +#pragma GCC visibility push(default)
  #include "obs-internal.h"
 +#pragma GCC visibility pop
- 
+
  struct obs_core *obs = NULL;
- 
--- 
+
+--
 2.51.0
 

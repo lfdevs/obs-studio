@@ -1,7 +1,3 @@
-From f27caaf231ab91ec4a6eab5ba59895acce045504 Mon Sep 17 00:00:00 2001
-Message-ID: <f27caaf231ab91ec4a6eab5ba59895acce045504.1762983576.git.erich@ericheickmeyer.com>
-In-Reply-To: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
-References: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:42:07 -0800
 Subject: [PATCH 05/10] Fix spelling mistakes
@@ -46,7 +42,7 @@ index c1b8d90..439d28e 100644
 --- a/plugins/obs-outputs/librtmp/rtmp.h
 +++ b/plugins/obs-outputs/librtmp/rtmp.h
 @@ -36,7 +36,7 @@
- 
+
  #ifdef _WIN32
  #ifdef _MSC_VER
 -#pragma warning(disable:4996) //depricated warnings
@@ -66,7 +62,7 @@ index 06507a6..5e6add9 100644
 +		blog(LOG_ERROR, "[ConnectInfo::showEvent] Unable to retrieve config!");
  		return;
  	}
- 
+
 diff --git a/plugins/obs-websocket/src/forms/SettingsDialog.cpp b/plugins/obs-websocket/src/forms/SettingsDialog.cpp
 index eaf2027..30fc5fc 100644
 --- a/plugins/obs-websocket/src/forms/SettingsDialog.cpp
@@ -79,7 +75,7 @@ index eaf2027..30fc5fc 100644
 +		blog(LOG_ERROR, "[SettingsDialog::showEvent] Unable to retrieve config!");
  		return;
  	}
- 
+
 @@ -119,7 +119,7 @@ void SettingsDialog::RefreshData()
  {
  	auto conf = GetConfig();
@@ -88,7 +84,7 @@ index eaf2027..30fc5fc 100644
 +		blog(LOG_ERROR, "[SettingsDialog::RefreshData] Unable to retrieve config!");
  		return;
  	}
- 
+
 @@ -149,7 +149,7 @@ void SettingsDialog::SaveFormData()
  {
  	auto conf = GetConfig();
@@ -97,29 +93,29 @@ index eaf2027..30fc5fc 100644
 +		blog(LOG_ERROR, "[SettingsDialog::SaveFormData] Unable to retrieve config!");
  		return;
  	}
- 
+
 diff --git a/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp b/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp
 index d2c2674..62cb47e 100644
 --- a/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp
 +++ b/plugins/obs-websocket/src/websocketserver/WebSocketServer.cpp
 @@ -78,7 +78,7 @@ void WebSocketServer::Start()
- 
+
  	auto conf = GetConfig();
  	if (!conf) {
 -		blog(LOG_ERROR, "[WebSocketServer::Start] Unable to retreive config!");
 +		blog(LOG_ERROR, "[WebSocketServer::Start] Unable to retrieve config!");
  		return;
  	}
- 
+
 @@ -222,7 +222,7 @@ void WebSocketServer::onOpen(websocketpp::connection_hdl hdl)
- 
+
  	auto conf = GetConfig();
  	if (!conf) {
 -		blog(LOG_ERROR, "[WebSocketServer::onOpen] Unable to retreive config!");
 +		blog(LOG_ERROR, "[WebSocketServer::onOpen] Unable to retrieve config!");
  		return;
  	}
- 
+
 @@ -331,7 +331,7 @@ void WebSocketServer::onClose(websocketpp::connection_hdl hdl)
  	// Get config for tray notification
  	auto conf = GetConfig();
@@ -128,7 +124,7 @@ index d2c2674..62cb47e 100644
 +		blog(LOG_ERROR, "[WebSocketServer::onClose] Unable to retrieve config!");
  		return;
  	}
- 
--- 
+
+--
 2.51.0
 

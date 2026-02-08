@@ -1,5 +1,3 @@
-From 46f2441008458f16ec6bb81cf0d12b4c0747aff0 Mon Sep 17 00:00:00 2001
-Message-ID: <46f2441008458f16ec6bb81cf0d12b4c0747aff0.1762983576.git.erich@ericheickmeyer.com>
 From: Erich Eickmeyer <erich@ericheickmeyer.com>
 Date: Wed, 12 Nov 2025 12:38:21 -0800
 Subject: [PATCH 01/10] Use common license
@@ -13,21 +11,21 @@ index f0a1b82..124b338 100644
 --- a/frontend/dialogs/OBSAbout.cpp
 +++ b/frontend/dialogs/OBSAbout.cpp
 @@ -150,14 +150,9 @@ void OBSAbout::ShowAuthors()
- 
+
  void OBSAbout::ShowLicense()
  {
 -	std::string path;
 +	std::string path("/usr/share/common-licenses/GPL-2");
  	QString error = QTStr("About.Error").arg("https://github.com/obsproject/obs-studio/blob/master/COPYING");
- 
+
 -	if (!GetDataFilePath("license/gplv2.txt", path)) {
 -		ui->textBrowser->setPlainText(error);
 -		return;
 -	}
 -
  	BPtr<char> text = os_quick_read_utf8_file(path.c_str());
- 
+
  	if (!text || !*text) {
--- 
+--
 2.51.0
 
