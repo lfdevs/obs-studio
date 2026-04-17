@@ -1,3 +1,9 @@
+obs-studio (32.1.0-0ubuntu2) resolute; urgency=medium
+
+  * Package obs-nvenc-test to support NVENC. (LP: #2139679)
+
+ -- Charles <charles05@canonical.com>  Fri, 17 Apr 2026 19:17:21 +0100
+
 obs-studio (32.1.0-0ubuntu1) resolute; urgency=medium
 
   * New upstream release (non-rc)
