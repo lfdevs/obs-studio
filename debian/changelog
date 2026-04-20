@@ -1,3 +1,11 @@
+obs-studio (32.1.0-0ubuntu3) resolute; urgency=medium
+
+  * Fix FTBFS on non-amd64 architectures: obs-nvenc-test is only built on
+    amd64 (x86_64) per upstream CMake config, so install it conditionally.
+    (LP: #2139679)
+
+ -- Erich Eickmeyer <eeickmeyer@ubuntu.com>  Mon, 20 Apr 2026 11:15:49 -0700
+
 obs-studio (32.1.0-0ubuntu2) resolute; urgency=medium
 
   * Package obs-nvenc-test to support NVENC. (LP: #2139679)

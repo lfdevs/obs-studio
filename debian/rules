@@ -60,6 +60,11 @@ execute_after_dh_auto_install:
 	mkdir -p debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg
 	mv debian/tmp/usr/bin/obs-ffmpeg-mux \
 		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/obs-plugins/obs-ffmpeg/obs-ffmpeg-mux
+ifeq ($(DEB_HOST_ARCH),amd64)
+	mkdir -p debian/obs-studio/usr/bin
+	mv debian/tmp/usr/bin/obs-nvenc-test debian/obs-studio/usr/bin/obs-nvenc-test
+endif
+
 execute_after_dh_install:
 	rm -rf debian/obs-studio/usr/share/obs/obs-studio/license
 
