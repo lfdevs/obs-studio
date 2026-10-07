@@ -1,0 +1,223 @@
+From: lfdevs <lfdevs@lfdevs.com>
+Date: Thu, 8 Oct 2026 03:49:48 +0800
+Subject: obs-ffmpeg: support termux-va in DRM-less containers
+
+Share VA-API device selection between media sources and encoder discovery. Honor OBS_VAAPI_DEVICE and select /dev/kgsl-3d0 when the termux-va bridge uses the KGSL backend, while preserving ordinary DRM discovery otherwise.
+
+Expose the selected device in encoder properties and report successful hardware decoder initialization. Route KGSL texture encoders through synchronized CPU readback and VA-API upload: glFlush alone leaves cross-context DMA-BUF reads unsynchronized, causing green startup frames and stale pictures. MediaCodec still performs hardware encoding.
+
+Document setup and the tested AVC, HEVC and VP9 decoding paths, AVC/HEVC recording, and the remaining AV1 media-source limitation.
+
+Validated with a native Arm64 obs-ffmpeg build in Debian 13 PRoot on Xiaomi Pad 6 Pro, real OBS recordings and frame-content comparisons, hardware session logs, and device-selection assertions.
+---
+ deps/media-playback/CMakeLists.txt                |  3 ++-
+ deps/media-playback/media-playback/decode.c       | 12 ++++++++++--
+ deps/media-playback/media-playback/vaapi-device.h | 23 +++++++++++++++++++++++
+ docs/termux-va.md                                 | 22 ++++++++++++++++++++++
+ plugins/obs-ffmpeg/obs-ffmpeg-vaapi.c             | 21 +++++++++++++++++++--
+ plugins/obs-ffmpeg/vaapi-utils.c                  | 13 +++++++++++++
+ 6 files changed, 89 insertions(+), 5 deletions(-)
+ create mode 100644 deps/media-playback/media-playback/vaapi-device.h
+ create mode 100644 docs/termux-va.md
+
+diff --git a/deps/media-playback/CMakeLists.txt b/deps/media-playback/CMakeLists.txt
+index ab3a0fe..3715944 100644
+--- a/deps/media-playback/CMakeLists.txt
++++ b/deps/media-playback/CMakeLists.txt
+@@ -16,7 +16,8 @@ target_sources(
+             media-playback/media-playback.c
+             media-playback/media-playback.h
+             media-playback/media.c
+-            media-playback/media.h)
++            media-playback/media.h
++            media-playback/vaapi-device.h)
+ 
+ target_include_directories(media-playback INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")
+ 
+diff --git a/deps/media-playback/media-playback/decode.c b/deps/media-playback/media-playback/decode.c
+index e159a48..6d958a3 100644
+--- a/deps/media-playback/media-playback/decode.c
++++ b/deps/media-playback/media-playback/decode.c
+@@ -18,6 +18,7 @@
+ 
+ #include "media-playback.h"
+ #include "media.h"
++#include "vaapi-device.h"
+ #include <libavutil/mastering_display_metadata.h>
+ 
+ enum AVHWDeviceType hw_priority[] = {
+@@ -53,10 +54,17 @@ static void init_hw_decoder(struct mp_decode *d, AVCodecContext *c)
+ 
+ 	while (*priority != AV_HWDEVICE_TYPE_NONE) {
+ 		if (has_hw_type(d->codec, *priority, &d->hw_format)) {
++			const char *device = *priority == AV_HWDEVICE_TYPE_VAAPI
++						     ? mp_get_vaapi_device()
++						     : NULL;
+ 			int ret = av_hwdevice_ctx_create(&hw_ctx, *priority,
+-							 NULL, NULL, 0);
+-			if (ret == 0)
++							 device, NULL, 0);
++			if (ret == 0) {
++				blog(LOG_INFO, "MP: Hardware decoder initialized: %s%s%s",
++				     av_hwdevice_get_type_name(*priority),
++				     device ? " on " : "", device ? device : "");
+ 				break;
++			}
+ 		}
+ 
+ 		priority++;
+diff --git a/deps/media-playback/media-playback/vaapi-device.h b/deps/media-playback/media-playback/vaapi-device.h
+new file mode 100644
+index 0000000..a5f1240
+--- /dev/null
++++ b/deps/media-playback/media-playback/vaapi-device.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: MIT */
++#pragma once
++
++#include <stdlib.h>
++#include <string.h>
++
++/* Share the device selection between media sources and VA-API encoders. */
++static inline const char *mp_get_vaapi_device(void)
++{
++	const char *device = getenv("OBS_VAAPI_DEVICE");
++	if (device && *device)
++		return device;
++
++	const char *bridge = getenv("TERMUX_VA_BRIDGE");
++	const char *backend = getenv("TERMUX_VA_GPU_BACKEND");
++	if (bridge && (strcmp(bridge, "1") == 0 ||
++		       strcmp(bridge, "true") == 0 ||
++		       strcmp(bridge, "on") == 0) &&
++	    backend && strcmp(backend, "kgsl") == 0)
++		return "/dev/kgsl-3d0";
++
++	return NULL;
++}
+diff --git a/docs/termux-va.md b/docs/termux-va.md
+new file mode 100644
+index 0000000..4c326b5
+--- /dev/null
++++ b/docs/termux-va.md
+@@ -0,0 +1,22 @@
++# VA-API with termux-va in Android containers
++
++On the tested Xiaomi Pad 6 Pro Debian 13 PRoot Wayland stack, termux-va provides AVC, HEVC and VP9 hardware decoding for OBS media sources, and AVC/HEVC hardware recording through Android MediaCodec. The termux-va daemon must already be running and its socket must be shared with the container. Mesa must include the termux-va bridge and KGSL support.
++
++Launch OBS inside the existing Wayland desktop session:
++
++```sh
++LIBVA_DRIVER_NAME=termuxva \
++TERMUX_VA_BRIDGE=1 TERMUX_VA_GPU_BACKEND=kgsl \
++MESA_LOADER_DRIVER_OVERRIDE=kgsl TURNIP_KMD=kgsl \
++QT_QPA_PLATFORM=wayland obs
++```
++
++Keep the desktop's existing `XDG_RUNTIME_DIR`, `WAYLAND_DISPLAY` and D-Bus environment. OBS uses `/dev/kgsl-3d0` for VA-API when the bridge is enabled with the KGSL backend, without requiring a `/dev/dri/renderD*` node. `OBS_VAAPI_DEVICE` can explicitly override the VA-API device for both media sources and encoder discovery; an empty value leaves the usual selection in effect. Ordinary DRM device discovery remains the default when neither override is active.
++
++For a Media Source, enable hardware decoding. For recording, select Advanced output mode and choose **FFmpeg VAAPI H.264** or **FFmpeg VAAPI HEVC**. Device capabilities determine the available profiles and rate-control modes. The tested recording settings were 1280x720, 30 fps, CBR at 2000 kbit/s, with AVC High/Main or HEVC Main.
++
++KGSL recording automatically uses OBS's synchronized CPU readback and VA-API upload path. Encoding still runs in MediaCodec hardware. The texture path relies on implicit DMA-BUF synchronization: its OpenGL flush submits plane copies without ensuring completion before the bridge reads pixels in another context. On the tested stack that produced green startup frames and occasional older frames. The CPU upload path avoids these errors; ordinary DRM texture encoding is unchanged.
++
++Verify actual hardware use with both OBS and daemon logs. OBS reports `MP: Hardware decoder initialized: vaapi on /dev/kgsl-3d0` and `VAAPI: Using synchronized CPU upload for KGSL hardware encoding`. The daemon must establish the corresponding decoder or encoder session and return frames or packets; merely enabling the checkbox or listing an encoder is insufficient.
++
++AV1 remains on OBS's preferred software decoder on this tested FFmpeg build. Forcing the native VA-API AV1 decoder stalled before the first output frame in the OBS media-source path, so that experimental decoder selection is not enabled. AV1 hardware encoding is not advertised by this device/bridge combination.
+diff --git a/plugins/obs-ffmpeg/obs-ffmpeg-vaapi.c b/plugins/obs-ffmpeg/obs-ffmpeg-vaapi.c
+index 96d08f2..3e695d3 100644
+--- a/plugins/obs-ffmpeg/obs-ffmpeg-vaapi.c
++++ b/plugins/obs-ffmpeg/obs-ffmpeg-vaapi.c
+@@ -46,6 +46,7 @@
+ #include "obs-ffmpeg-formats.h"
+ 
+ #include <va/va_drmcommon.h>
++#include <media-playback/vaapi-device.h>
+ #include <libdrm/drm_fourcc.h>
+ 
+ #define do_log(level, format, ...)                          \
+@@ -595,6 +596,18 @@ static void *vaapi_create_tex_internal(obs_data_t *settings,
+ 				       enum codec_type codec,
+ 				       const char *fallback)
+ {
++	const char *device = obs_data_get_string(settings, "vaapi_device");
++	if (device && strcmp(device, "/dev/kgsl-3d0") == 0) {
++		/* KGSL does not provide the implicit DMA-BUF synchronization the
++		 * texture path needs. glFlush only submits the GPU plane copies,
++		 * while termux-va reads the pixels on the CPU in another context.
++		 * Use OBS's synchronized readback and the existing VA-API upload
++		 * path; MediaCodec still performs the hardware encoding. */
++		blog(LOG_INFO,
++		     "VAAPI: Using synchronized CPU upload for KGSL hardware encoding");
++		return obs_encoder_create_rerouted(encoder, fallback);
++	}
++
+ 	void *enc = vaapi_create_internal(settings, encoder, codec);
+ 	if (!enc) {
+ 		return NULL;
+@@ -1098,7 +1111,11 @@ static obs_properties_t *vaapi_properties_internal(enum codec_type codec)
+ 				       obs_module_text("VAAPI.Device"),
+ 				       OBS_COMBO_TYPE_LIST,
+ 				       OBS_COMBO_FORMAT_STRING);
+-	if (os_file_exists("/dev/dri/by-path")) {
++	const char *device = mp_get_vaapi_device();
++	if (device) {
++		if (vaapi_device_codec_supported(device, codec))
++			obs_property_list_add_string(list, device, device);
++	} else if (os_file_exists("/dev/dri/by-path")) {
+ 		os_dir_t *by_path_dir = os_opendir("/dev/dri/by-path");
+ 		struct pci_access *pacc = pci_alloc();
+ 		struct os_dirent *file;
+@@ -1151,7 +1168,7 @@ static obs_properties_t *vaapi_properties_internal(enum codec_type codec)
+ 		pci_cleanup(pacc);
+ 		os_closedir(by_path_dir);
+ 	}
+-	if (obs_property_list_item_count(list) == 0) {
++	if (!device && obs_property_list_item_count(list) == 0) {
+ 		char path[32];
+ 		for (int i = 28;; i++) {
+ 			snprintf(path, sizeof(path), "/dev/dri/renderD1%d", i);
+diff --git a/plugins/obs-ffmpeg/vaapi-utils.c b/plugins/obs-ffmpeg/vaapi-utils.c
+index 46ac79c..b121412 100644
+--- a/plugins/obs-ffmpeg/vaapi-utils.c
++++ b/plugins/obs-ffmpeg/vaapi-utils.c
+@@ -3,6 +3,7 @@
+ // SPDX-License-Identifier: GPL-2.0-or-later
+ 
+ #include "vaapi-utils.h"
++#include <media-playback/vaapi-device.h>
+ 
+ #include <util/bmem.h>
+ #include <util/dstr.h>
+@@ -271,6 +272,10 @@ bool vaapi_device_h264_supported(const char *device_path)
+ 
+ const char *vaapi_get_h264_default_device()
+ {
++	const char *device = mp_get_vaapi_device();
++	if (device)
++		return vaapi_device_h264_supported(device) ? device : NULL;
++
+ 	static const char *default_h264_device = NULL;
+ 
+ 	if (!default_h264_device) {
+@@ -326,6 +331,10 @@ bool vaapi_device_av1_supported(const char *device_path)
+ 
+ const char *vaapi_get_av1_default_device()
+ {
++	const char *device = mp_get_vaapi_device();
++	if (device)
++		return vaapi_device_av1_supported(device) ? device : NULL;
++
+ 	static const char *default_av1_device = NULL;
+ 
+ 	if (!default_av1_device) {
+@@ -385,6 +394,10 @@ bool vaapi_device_hevc_supported(const char *device_path)
+ 
+ const char *vaapi_get_hevc_default_device()
+ {
++	const char *device = mp_get_vaapi_device();
++	if (device)
++		return vaapi_device_hevc_supported(device) ? device : NULL;
++
+ 	static const char *default_hevc_device = NULL;
+ 
+ 	if (!default_hevc_device) {
