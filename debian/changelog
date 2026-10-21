@@ -1,3 +1,9 @@
+obs-studio (32.1.0-0ubuntu90) resolute; urgency=medium
+
+  * obs-ffmpeg: support termux-va in DRM-less containers
+
+ -- lfdevs <lfdevs@lfdevs.com>  Wed, 21 Oct 2026 17:54:05 +0800
+
 obs-studio (32.1.0-0ubuntu3) resolute; urgency=medium
 
   * Fix FTBFS on non-amd64 architectures: obs-nvenc-test is only built on
