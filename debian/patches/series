@@ -10,3 +10,4 @@
 0010-Fix-comparision-if-char-is-unsigned.patch
 0011-Use-time64_t-everywhere.patch
 0012-More-32-bit-arch-fixes.patch
+0013-obs-ffmpeg-support-termux-va-in-DRM-less-containers.patch
